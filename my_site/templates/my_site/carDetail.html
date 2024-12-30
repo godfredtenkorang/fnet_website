@@ -1,0 +1,162 @@
+{% extends 'my_site/base.html' %} {% load static %} {% block content %}
+
+<!-- bannerr -->
+
+<div class="banner">
+  <img
+    src="{% static 'my_site/img/background2.jpg' %}"
+    alt="background photo"
+  />
+  <div class="banner-text">
+    <h1>Detail of the selected Vehicle</h1>
+  </div>
+</div>
+
+
+
+
+<div class="car-detail-section">
+  <div class="car-detail-image">
+   
+    <div class="car-images">
+      <div class="car-big-img">
+        <img
+          id="bigImage"
+          src="{% static 'my_site/img/background.jpg' %}"
+          alt="Big Image"
+        />
+      </div>
+      <div class="small-img">
+        <img class="small-thumbnail" src="{% static 'my_site/img/car.png' %}" />
+        <img
+          class="small-thumbnail"
+          src="{% static 'my_site/img/background.jpg' %}"
+          alt="Thumbnail 2"
+        />
+        <img
+          class="small-thumbnail"
+          src="{% static 'my_site/img/background.jpg' %}"
+          alt="Thumbnail 3"
+        />
+        <img
+          class="small-thumbnail"
+          src="{% static 'my_site/img/background.jpg' %}"
+          alt="Thumbnail 4"
+        />
+      </div>
+
+      <div class="car-detail">
+        <h4>Decription</h4>
+        <p>
+          The 2015 Toyota Land Cruiser Prado combines luxury, power, and
+          off-road capability. With its bold design and spacious interior, it
+          comfortably seats up to seven passengers, offering advanced tech like
+          a touchscreen infotainment system and flexible cargo space. Powered by
+          a 4.0-liter V6 engine and equipped with 4WD, it handles both city
+          roads and tough terrains with ease. Safety features like Vehicle
+          Stability Control ensure confidence on every drive. Whether you're
+          exploring off-road or commuting in style, the Prado is built for
+          versatility and performance.
+        </p>
+      </div>
+
+      <div class="car-features-container">
+        <h4>Car Features</h4>
+        <div class="car-features">
+          <li><strong>Fuel Type:</strong> Petrol</li>
+          <li><strong>Seats:</strong> 5</li>
+          <li><strong>Transmission:</strong> Automatic</li>
+          <li><strong>Air Conditioning:</strong> Yes</li>
+          <li><strong>Airbag:</strong> Available</li>
+          <li><strong>Mileage:</strong> 15 km/l</li>
+          <li><strong>GPS Navigation:</strong> Included</li>
+          <li><strong>Bluetooth Connectivity:</strong> Yes</li>
+          <li><strong>Color:</strong> Metallic Grey</li>
+        </div>
+       
+      </div>
+    </div>
+   
+  </div>
+  <div class="car-detail-text">
+    <h2 class="car-name">2015 Toyota Prado</h2>
+    <p class="price">
+      <strong>Price</strong>  250 gh per day
+    </p>
+    <ul class="car-details-list">
+        <li><strong>Make:</strong> Toyota</li>
+        <li><strong>Year Manufactured:</strong> 2015</li>
+        <li><strong>Transmission Type:</strong> Automatic</li>
+        <li><strong>Cancellation Terms:</strong> Flexible</li>
+      </ul>
+      <div class="book-btn">
+        <a href=""> Book Now</a>
+      </div>
+</div>
+</div>
+
+<!-- <div class="suggestion">
+  <div class="heading">
+    <h3>You may also like this</h3>
+  </div>
+
+  <div class="featured-cars-grid">
+    <a href="{% url 'carDetail' %}" class="car">
+      <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car" />
+      <div class="car-info">
+        <div class="car-inf-grid">
+          <p class="carName">Hundai Car</p>
+          <p class="carModel">Model: 2022 XYZ</p>
+        </div>
+        <div class="car-inf-grid">
+          <p class="carPrice">Price: $45/day</p>
+          <p class="carFeatures">Features: Air conditioning</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="{% url 'carDetail' %}" class="car">
+      <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car" />
+      <div class="car-info">
+        <div class="car-inf-grid">
+          <p class="carName">Hundai Car</p>
+          <p class="carModel">Model: 2022 XYZ</p>
+        </div>
+        <div class="car-inf-grid">
+          <p class="carPrice">Price: $45/day</p>
+          <p class="carFeatures">Features: Air conditioning</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="{% url 'carDetail' %}" class="car">
+      <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car" />
+      <div class="car-info">
+        <div class="car-inf-grid">
+          <p class="carName">Hundai Car</p>
+          <p class="carModel">Model: 2022 XYZ</p>
+        </div>
+        <div class="car-inf-grid">
+          <p class="carPrice">Price: $45/day</p>
+          <p class="carFeatures">Features: Air conditioning</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="{% url 'carDetail' %}" class="car">
+      <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car" />
+      <div class="car-info">
+        <div class="car-inf-grid">
+          <p class="carName">Hundai Car</p>
+          <p class="carModel">Model: 2022 XYZ</p>
+        </div>
+        <div class="car-inf-grid">
+          <p class="carPrice">Price: $45/day</p>
+          <p class="carFeatures">Features: Air conditioning</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div> -->
+
+{% endblock %}
