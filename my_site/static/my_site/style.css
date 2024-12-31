@@ -575,9 +575,25 @@ nav {
 
 
 
+/* booking */
+.input select{
+    width: 100%;
+    min-height: 7vh;
+    margin: 2% 0;
+    cursor: pointer;
+}
 
 
+.booking-container img{
+    height: 100vh;
+}
 
+.account-container{
+    padding: 2% 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 
@@ -817,5 +833,8 @@ footer {
     }
     .contact-img, .contact-form{
         max-width: none;
+    }
+    .contact-img img{
+        height: auto;
     }
 }
