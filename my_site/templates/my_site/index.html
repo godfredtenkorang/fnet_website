@@ -2,6 +2,293 @@
 {% load static %}
 {% block content %}
 
-<h1>God is good.</h1>
+
+<style>
+  .service-section {
+    width: 100%;
+    min-height: 50vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.7)), url("{% static 'my_site/img/service-background.jpg' %}");
+}
+
+</style>
+
+
+<!-- slide show -->
+<div class="slide-show-container">
+    <div class="slide">
+        <img src="{% static 'my_site/img/background.jpg' %}" alt="background photo">
+        <div class="slide-text">
+            <h1> <span> FREEDOM</span> TO <br> GO PLACES</h1>
+            <p>RENT A CAR IN A FEW CLICKS </p>
+        </div>
+    </div>
+</div>
+
+
+<!-- end of slide show -->
+
+
+<!-- about us -->
+<div class="about-us-container">
+    <div class="about-us-text">
+        <h2>Experience Seamless Car Rentals Today</h2>
+        <p>At <strong>FNET Car Rentals</strong>, we are dedicated to providing reliable and affordable car rental
+            services designed to meet the needs of every traveler. Whether you’re planning a business trip, family
+            vacation, or a weekend getaway, our diverse fleet of vehicles ensures you’ll find the perfect ride. </p>
+        <br>
+        <p>Our mission goes beyond offering cars; we aim to deliver exceptional customer experiences. Based in Kumasi,
+            Ghana, we pride ourselves on providing seamless booking processes, flexible rental options, and 24/7
+            customer support. </p>
+
+        <div class="readMore">
+            <a href="">Read More</a>
+        </div>
+    </div>
+
+    <div class="about-us-img">
+        <img src="{% static 'my_site/img/car.png' %}" alt="background photo">
+    </div>
+</div>
+<!-- end of about us -->
+
+<!-- service -->
+<div class="service-section">
+    
+    <div class="service-grid">
+        <div class="service">
+            <i class="fas fa-briefcase"></i> <!-- Business Rentals icon -->
+            <h4>Business Rentals:</h4>
+            <p>Reliable vehicles for corporate travel. Choose from a fleet of well-maintained cars, equipped for your
+                business meetings, events, or conferences, ensuring you arrive on time and in style.</p>
+        </div>
+        <div class="service">
+            <i class="fas fa-sun"></i> <!-- Vacation Rentals icon -->
+            <h4>Vacation Rentals:</h4>
+            <p>Choose from a variety of cars for your next adventure. Whether you're heading to the beach, mountains, or
+                city, we offer the perfect vehicle to make your trip unforgettable.</p>
+        </div>
+        <div class="service">
+            <i class="fas fa-plane-arrival"></i> <!-- Airport Pickup icon -->
+            <h4>Airport Pickup:</h4>
+            <p>Convenient airport car hire options. Arrive and drive with ease—your vehicle will be ready at the
+                airport, so you can start your journey immediately without any hassle.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- end  of service -->
+
+<!-- featured-cars -->
+<div class="featured-cars">
+    <div class="heading">
+        <h3>Featured Cars</h3>
+    </div>
+    <div class="featured-cars-grid">
+
+        
+        
+
+       
+           <a href="{% url 'carDetail' %}" class="car">
+            
+                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+                <div class="car-info">
+                    <div class="car-inf-grid">
+                        <p class="carName">Hundai Car</p>
+                        <p class="carModel">Model: 2022 XYZ</p>
+                    </div>
+                    <div class="car-inf-grid">
+                        <p class="carPrice">Price: $45/day</p>
+                        <p class="carFeatures">Features: Air conditioning</p>
+                    </div>
+                </div>
+
+            </a>
+       
+       
+           <a href="{% url 'carDetail' %}" class="car">
+                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+                <div class="car-info">
+                    <div class="car-inf-grid">
+                        <p class="carName">Hundai Car</p>
+                        <p class="carModel">Model: 2022 XYZ</p>
+                    </div>
+                    <div class="car-inf-grid">
+                        <p class="carPrice">Price: $45/day</p>
+                        <p class="carFeatures">Features: Air conditioning</p>
+                    </div>
+                </div>
+
+            </a>
+       
+       
+            <a href="{% url 'carDetail' %}" class="car">
+                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+                <div class="car-info">
+                    <div class="car-inf-grid">
+                        <p class="carName">Hundai Car</p>
+                        <p class="carModel">Model: 2022 XYZ</p>
+                    </div>
+                    <div class="car-inf-grid">
+                        <p class="carPrice">Price: $45/day</p>
+                        <p class="carFeatures">Features: Air conditioning</p>
+                    </div>
+                </div>
+
+            </a>
+       
+       
+           <a href="{% url 'carDetail' %}" class="car">
+            
+                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+                <div class="car-info">
+                    <div class="car-inf-grid">
+                        <p class="carName">Hundai Car</p>
+                        <p class="carModel">Model: 2022 XYZ</p>
+                    </div>
+                    <div class="car-inf-grid">
+                        <p class="carPrice">Price: $45/day</p>
+                        <p class="carFeatures">Features: Air conditioning</p>
+                    </div>
+                </div>
+
+            </a>
+           <a href="{% url 'carDetail' %}" class="car">
+            
+                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+                <div class="car-info">
+                    <div class="car-inf-grid">
+                        <p class="carName">Hundai Car</p>
+                        <p class="carModel">Model: 2022 XYZ</p>
+                    </div>
+                    <div class="car-inf-grid">
+                        <p class="carPrice">Price: $45/day</p>
+                        <p class="carFeatures">Features: Air conditioning</p>
+                    </div>
+                </div>
+
+            </a>
+           <a href="{% url 'carDetail' %}" class="car">
+                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+                <div class="car-info">
+                    <div class="car-inf-grid">
+                        <p class="carName">Hundai Car</p>
+                        <p class="carModel">Model: 2022 XYZ</p>
+                    </div>
+                    <div class="car-inf-grid">
+                        <p class="carPrice">Price: $45/day</p>
+                        <p class="carFeatures">Features: Air conditioning</p>
+                    </div>
+                </div>
+
+            </a>
+           <a href="{% url 'carDetail' %}" class="car">
+                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+                <div class="car-info">
+                    <div class="car-inf-grid">
+                        <p class="carName">Hundai Car</p>
+                        <p class="carModel">Model: 2022 XYZ</p>
+                    </div>
+                    <div class="car-inf-grid">
+                        <p class="carPrice">Price: $45/day</p>
+                        <p class="carFeatures">Features: Air conditioning</p>
+                    </div>
+                </div>
+
+            </a>
+           <a href="{% url 'carDetail' %}" class="car">
+                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+                <div class="car-info">
+                    <div class="car-inf-grid">
+                        <p class="carName">Hundai Car</p>
+                        <p class="carModel">Model: 2022 XYZ</p>
+                    </div>
+                    <div class="car-inf-grid">
+                        <p class="carPrice">Price: $45/day</p>
+                        <p class="carFeatures">Features: Air conditioning</p>
+                    </div>
+                </div>
+
+            </a>
+       
+    </div>
+
+</div>
+
+
+
+<!-- why choose us -->
+
+<div class="why-choose-us">
+    <div class="why-container">
+        <h3>WHY CHOOSE US</h3>
+        <p>
+            At FNET Car Rentals, we are committed to providing a seamless and memorable experience for all your travel needs. Whether you're planning a business trip, a vacation, or need a reliable vehicle for airport pick-up, we have a diverse fleet of cars to suit every need. Our vehicles are well-maintained, insured, and regularly checked to ensure your safety and comfort on the road.
+        </p> <br> <br>
+        <p>
+            We offer flexible rental options, competitive pricing, and exceptional customer service. Our easy online booking system allows you to reserve your car in just a few clicks, ensuring a hassle-free process from start to finish. Choose us for your next rental, and experience the difference in service, reliability, and convenience!
+        </p> <br> <br>
+
+        <p class="ready">Ready to ride with us ?? <a href=""> book now</a></p>
+    </div>
+    <div class="why-container-img">
+        <img src="{% static 'my_site/img/service-background.jpg' %}" alt="Hundai Car">
+    </div>
+</div>
+
+
+
+
+<!-- client reviews -->
+ <div class="client-review">
+    <div class="heading">
+        <h3>What Client Say</h3>
+    </div>
+
+    <div class="client-say-grid">
+        <div class="client">
+            <div class="client-detail">
+                <img src="{% static 'my_site/img/service-background.jpg' %}" alt="Hundai Car">
+                <p>Benjamin ohene Asare</p>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero deleniti esse nobis modi totam dolor.</p>
+            
+        </div>
+        <div class="client">
+            <div class="client-detail">
+                <img src="{% static 'my_site/img/service-background.jpg' %}" alt="Hundai Car">
+                <p>Benjamin ohene Asare</p>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero deleniti esse nobis modi totam dolor.</p>
+            
+        </div>
+        <div class="client">
+            <div class="client-detail">
+                <img src="{% static 'my_site/img/service-background.jpg' %}" alt="Hundai Car">
+                <p>Benjamin ohene Asare</p>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero deleniti esse nobis modi totam dolor.</p>
+            
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}
