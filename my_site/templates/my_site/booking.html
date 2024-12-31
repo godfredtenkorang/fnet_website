@@ -1,0 +1,61 @@
+{% extends 'my_site/base.html' %} {% load static %} {% block content %}
+
+<!-- bannerr -->
+
+<div class="banner">
+  <img
+    src="{% static 'my_site/img/background2.jpg' %}"
+    alt="background photo"
+  />
+  <div class="banner-text">
+    <h1>Book Appointment with us</h1>
+  </div>
+</div>
+
+<div class="contact-us-section booking-container">
+  <div class="contact-img">
+    <img src="{% static 'my_site/img/book.jpg' %}" alt="background photo" />
+
+  </div>
+  <div class="contact-form">
+    <p>Fill out the from below to book an Appointment</p>
+    <form action="">
+
+        <div class="input">
+            <label for="">Name </label> <br>
+            <input type="text" name="" id="" required placeholder="Benjamin Ohene Asare">
+        </div>
+
+        <div class="input">
+            <label for="">Number </label> <br>
+            <input type="text" name="" id="" required placeholder="0558156844">
+        </div>
+
+        <div class="input">
+            <label for="">Email </label> <br>
+            <input type="text" name="" id="" placeholder="benjaminoheneasare@gmail.com">
+        </div>
+        <div class="input">
+            <label for="">With a driver ??</label> <br>
+          <select name="" id="">
+            <option value=""> With a driver</option>
+            <option value=""> With a driver</option>
+          </select>
+        </div>
+        <div class="input">
+            <label for="">Pick Up date</label> <br>
+        <input type="date" required>
+        </div>
+        <div class="input">
+            <label for="">Return Date</label> <br>
+        <input type="date" required>
+        </div>
+
+        <button>Submit</button>
+
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

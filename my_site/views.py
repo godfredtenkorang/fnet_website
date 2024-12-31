@@ -18,3 +18,12 @@ def service(request):
 
 def contactUs(request):
     return render(request, 'my_site/contactUs.html')
+
+def booking(request):
+    return render(request, 'my_site/booking.html')
+
+def signUp(request):
+    return render(request, 'my_site/signUp.html')
+
+def login(request):
+    return render(request, 'my_site/login.html')
