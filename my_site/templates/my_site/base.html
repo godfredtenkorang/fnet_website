@@ -6,8 +6,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'my_site/style.css' %}">
     <title>Fnet</title>
+
+    <!-- font awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
-    {% block content %}{% endblock %}
+
+<!-- header -->
+<header>
+    <div class="contact-info">
+        <p><i class="fas fa-phone"></i> 233-246-846846 / +233-205 7503 75</p>
+        <p><i class="fas fa-map-marker-alt"></i> P. O. Box KS 13798, Kumasi Ghana - West Africa</p>
+        <p><i class="fas fa-clock"></i> Open 24hrs Service</p>
+    </div>
+    <nav class="padding">
+        <div class="logo">
+            <a href="">FNET</a>
+        </div>
+
+        <!-- nav links -->
+        <div class="nav">
+            <ul class="nav-links">
+
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'aboutUs' %}">About</a></li>
+                <li><a href="{% url 'service' %}">Service</a></li>
+                <li><a href="{% url 'rentCars' %}">Rent Cars</a></li>
+                <li><a href="{% url 'index' %}">Booking</a></li>
+                <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                <li><a href="{% url 'index' %}">Dashboard</a></li>
+            </ul>
+        </div>
+
+        <!-- menu icon -->
+        <div class="menu-icon">
+            <i class="fas fa-bars menu-icon"></i>
+
+        </div>
+    </nav>
+</header>
+
+
+    {% block content %}
+    
+    
+    
+    
+    
+    
+    
+    {% endblock %}
+
+
+
+
+
+
+    
+
+<footer>
+    <div class="footer-con">
+        <div class="footer contact">
+            <h5>Need help?</h5>
+            <p>Address:Opposite Mapees Enterprise, Inside K-Nyame Building, Off West Fijai Road- Takoradi, </p>
+            
+            <p>Email:Info@ultimatecarrentalsghcarrentalsgh@gmail.com </p>
+         
+                
+          <p>
+            phone:0591447612 // 0203163403
+          </p>
+          <p>
+            Whatsapp:0591447612 // 0203163403
+          </p>
+        </div>
+        <div class="footer">
+            <h5>Company</h5>
+        <div class="footer-links">
+            <a href="">Terms and Condition</a>
+            <a href="">Terms and Condition</a>
+            <a href="">Terms and Condition</a>
+            <a href="">Terms and Condition</a>
+        </div>
+        </div>
+        <div class="footer">
+            <h5>Account</h5>
+            <div class="footer-links">
+                <a href="">Terms and Condition</a>
+                <a href="">Terms and Condition</a>
+                <a href="">Terms and Condition</a>
+                <a href="">Terms and Condition</a>
+            </div>
+        </div>
+        <div class="footer">
+            <h5>Follow Us</h5>
+            <div class="social-media">
+                <a href="https://facebook.com" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            
+              
+            </div>
+            
+        </div>
+    </div>
+ </footer> 
+
+
+
+
+
+
+
+ <script>
+    // Get the big image and all small thumbnails
+const bigImage = document.querySelector('.car-big-img img');
+const thumbnails = document.querySelectorAll('.small-img .small-thumbnail');
+
+// Add a click event listener to each small thumbnail
+thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener('click', function () {
+        // Update the big image's source to match the clicked thumbnail
+        bigImage.src = this.src;
+    });
+});
+
+ </script>
+
+<script>
+    const navlinks = document.querySelector(".nav")
+    const menuicon = document.querySelector(".menu-icon")
+
+    menuicon.addEventListener("click", () => {
+        navlinks.classList.toggle("showNav")
+    })
+
+</script>
+
 </body>
 </html>

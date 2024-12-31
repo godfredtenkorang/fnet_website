@@ -1,0 +1,43 @@
+{% extends 'my_site/base.html' %} {% load static %} {% block content %}
+
+<!-- bannerr -->
+
+<div class="banner">
+  <img
+    src="{% static 'my_site/img/background2.jpg' %}"
+    alt="background photo"
+  />
+  <div class="banner-text">
+    <h1>About Us</h1>
+  </div>
+</div>
+
+
+
+<!-- about us -->
+<div class="about-us-container  d-flex">
+    <div class="about-us-text">
+        <h2>Experience Seamless Car Rentals Today</h2>
+        <p>At <strong>FNET Car Rentals</strong>, we are dedicated to providing reliable and affordable car rental
+            services designed to meet the needs of every traveler. Whether you’re planning a business trip, family
+            vacation, or a weekend getaway, our diverse fleet of vehicles ensures you’ll find the perfect ride. </p>
+        <br>
+        <p>Our mission goes beyond offering cars; we aim to deliver exceptional customer experiences. Based in Kumasi,
+            Ghana, we pride ourselves on providing seamless booking processes, flexible rental options, and 24/7
+            customer support. </p>
+
+        
+    </div>
+
+    <div class="about-us-img">
+        <img src="{% static 'my_site/img/car.png' %}" alt="background photo">
+    </div>
+</div>
+<!-- end of about us -->
+
+
+
+
+
+
+{% endblock %}
