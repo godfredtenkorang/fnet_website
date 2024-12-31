@@ -1,0 +1,47 @@
+{% extends 'my_site/base.html' %} {% load static %} {% block content %}
+
+<!-- bannerr -->
+
+<div class="banner">
+  <img
+    src="{% static 'my_site/img/background2.jpg' %}"
+    alt="background photo"
+  />
+  <div class="banner-text">
+    <h1>Create an account </h1>
+  </div>
+</div>
+
+<div class="account-container">
+  
+  <div class="contact-form">
+    <p>Fill out the form below to create an account with us</p>
+    <form action="">
+
+        <div class="input">
+            <label for="">User Name </label> <br>
+            <input type="text" name="" id="" required placeholder="Benjamin Ohene Asare">
+        </div>
+
+     
+
+        <div class="input">
+            <label for="">Email </label> <br>
+            <input type="email" required name="" id="" placeholder="benjaminoheneasare@gmail.com">
+        </div>
+       
+        <div class="input">
+            <label for="">Password</label> <br>
+        <input type="password" required>
+        </div>
+     
+
+        <button>Submit</button>
+
+
+    </form>
+    <p>Or do you have an account already? the <a href="{% url 'login' %}">Login</a></p>
+  </div>
+</div>
+
+{% endblock %}
