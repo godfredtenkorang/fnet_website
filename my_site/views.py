@@ -27,3 +27,9 @@ def signUp(request):
 
 def login(request):
     return render(request, 'my_site/login.html')
+
+def termsAndCondition(request):
+    return render(request, 'my_site/termsAndCondition.html')
+
+def home(request):
+    return render(request, 'my_site/home.html')
