@@ -21,6 +21,8 @@ def contactUs(request):
 
 def booking(request):
     return render(request, 'my_site/booking.html')
+def bookings(request):
+    return render(request, 'my_site/bookings.html')
 
 def signUp(request):
     return render(request, 'my_site/signUp.html')
