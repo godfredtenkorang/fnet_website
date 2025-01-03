@@ -35,3 +35,10 @@ def termsAndCondition(request):
 
 def home(request):
     return render(request, 'my_site/home.html')
+
+def sendMessage(request):
+    return render(request, 'my_site/sendMessage.html')
+
+
+def contact(request):
+    return render(request, 'my_site/contact.html')

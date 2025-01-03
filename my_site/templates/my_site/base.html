@@ -129,17 +129,36 @@
 
 
  <script>
-    // Get the big image and all small thumbnails
+  // Get the big image and all small thumbnails
 const bigImage = document.querySelector('.car-big-img img');
 const thumbnails = document.querySelectorAll('.small-img .small-thumbnail');
 
+let currentIndex = 0; // To track the current thumbnail index
+
+// Function to update the big image source
+function updateBigImage(index) {
+    const selectedThumbnail = thumbnails[index];
+    bigImage.src = selectedThumbnail.src;
+    thumbnails.forEach((thumbnail) => thumbnail.classList.remove('active'));
+    selectedThumbnail.classList.add('active');
+}
+
 // Add a click event listener to each small thumbnail
-thumbnails.forEach((thumbnail) => {
+thumbnails.forEach((thumbnail, index) => {
     thumbnail.addEventListener('click', function () {
-        // Update the big image's source to match the clicked thumbnail
-        bigImage.src = this.src;
+        currentIndex = index; // Update the current index to the clicked thumbnail
+        updateBigImage(currentIndex);
     });
 });
+
+// Auto-slide function
+function autoSlide() {
+    currentIndex = (currentIndex + 1) % thumbnails.length; // Move to the next thumbnail
+    updateBigImage(currentIndex);
+}
+
+// Start auto-slide every 3 seconds
+setInterval(autoSlide, 3000);
 
  </script>
 
