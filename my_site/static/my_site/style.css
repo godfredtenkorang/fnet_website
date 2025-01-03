@@ -8,6 +8,7 @@
     --blueColor:
         #01133d;
     font-family: Arial, Helvetica, sans-serif;
+    
 }
 
 * {
@@ -16,6 +17,7 @@
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
+   
 }
 
 /* header */
@@ -94,7 +96,7 @@ nav {
     top: 0;
     width: 100%;
     height: 80vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7));
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -269,14 +271,16 @@ nav {
     display: flex;
     padding: 1% 10%;
     gap: 1rem;
+    background-color: var(--blueColor);
+    color: var(--whiteColor);
 }
 
 .why-container {
-    padding: 10px;
+    padding: 10px 15px;
     width: 100%;
     max-width: 100%;
     min-height: 40vh;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.15);
+  
 
 }
 
@@ -292,7 +296,7 @@ nav {
 
 .why-container-img img {
     width: 100%;
-    height: 50vh;
+    height: 77vh;
     object-fit: cover;
 }
 
@@ -377,33 +381,42 @@ nav {
 /*car-detail-section"
 */
 .car-detail-section{
-    margin: 2% 10%;
+    margin: 1% 10%;
     display: flex;
+    flex-direction: column;
+   
     gap: 2rem;
 }
 .car-detail-image{
     width: 100%;
-    max-width: 70%;
+    max-width: 100%;
 }
 
 
 .car-detail-text{
     width: 100%;
-    max-width: 30%;
+    max-width: 100%;
 }
 .car-detail-image img{
     width: 100%;
     max-width: 100%;
-    height: 60vh;
+    height: 80vh;
     object-fit: cover;
 }
 
 
 
 .car-name{
-    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom:5px;
     font-size: 1.2rem;
     color: var(--blueColor);
+  background-color: #e8e8e8;
+width: 100%;
+align-items: center;
+min-height: 7vh;
+padding: 5px;
 }
 
 .small-img{
@@ -414,12 +427,16 @@ nav {
 }
 
 .small-img img{
-    width: 250px;
-    height: 15vh;
+    width: 300px;
+    height: 20vh;
     cursor: pointer;
     border: solid 1px rgba(0, 0, 0, 0.2);
     padding: 2px;
+}.small-img .small-thumbnail.active {
+    border: 2px solid #007bff;
+    opacity: 0.8;
 }
+
 
 .car-detail{
     padding: 3% 0;
@@ -460,14 +477,14 @@ nav {
 .car-detail-text{
     padding: 10px;
     width: 100%;
-    max-width: 30%;
-    height: 35vh;
+    max-width: 100%;
+   min-height: 35vh;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.15);
 
 }
 
 .book-btn{
-    margin: 7% 0;
+    margin: 2% 0;
 }
 .book-btn a{
     background-color: var(--blueColor);
