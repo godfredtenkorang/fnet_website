@@ -21,8 +21,6 @@ def contactUs(request):
 
 def booking(request):
     return render(request, 'my_site/booking.html')
-def bookings(request):
-    return render(request, 'my_site/bookings.html')
 
 def signUp(request):
     return render(request, 'my_site/signUp.html')
@@ -32,13 +30,3 @@ def login(request):
 
 def termsAndCondition(request):
     return render(request, 'my_site/termsAndCondition.html')
-
-def home(request):
-    return render(request, 'my_site/home.html')
-
-def sendMessage(request):
-    return render(request, 'my_site/sendMessage.html')
-
-
-def contact(request):
-    return render(request, 'my_site/contact.html')
