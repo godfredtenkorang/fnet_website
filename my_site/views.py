@@ -66,3 +66,9 @@ def login(request):
 
 def termsAndCondition(request):
     return render(request, 'my_site/termsAndCondition.html')
+
+def sucessPage(request):
+    return render(request, 'my_site/sucessPage.html')
+
+def unsucessPage(request):
+    return render(request, 'my_site/unsucessPage.html')
