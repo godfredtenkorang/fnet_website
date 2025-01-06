@@ -3,36 +3,34 @@
 
 
 <div class="container">
-    <h1>Car Booking Table</h1>
+    <h1>Appointments Table</h1>
     <div class="responsive-table">
         <table>
             <thead>
                 <tr>
-                    <th>Car Name</th>
-                    <th>Car Number</th>
-                    <th>Pick-Up Date</th>
-                    <th>Return Date</th>
+                    <th>Customer Name</th>
+                    <th>Phone Number</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                    <th>status</th>
+                    <th>purpose</th>
+                    
                 </tr>
             </thead>
             <tbody>
+                {% for appointment in all_appointments %}
                 <tr>
-                    <td>Toyota Corolla</td>
-                    <td>GH-1234-AB</td>
-                    <td>2024-12-01</td>
-                    <td>2024-12-05</td>
+                    <td>{{ appointment.customer_name }}</td>
+                    <td>{{ appointment.customer_phone }}</td>
+                    <td>{{ appointment.appointment_date }}</td>
+                    <td>{{ appointment.appointment_time }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td>{{ appointment.purpose }}</td>
+                    
+                    
                 </tr>
-                <tr>
-                    <td>Hyundai Sonata</td>
-                    <td>GH-5678-CD</td>
-                    <td>2024-12-10</td>
-                    <td>2024-12-15</td>
-                </tr>
-                <tr>
-                    <td>Ford Explorer</td>
-                    <td>GH-9012-EF</td>
-                    <td>2024-12-20</td>
-                    <td>2024-12-25</td>
-                </tr>
+                {% endfor %}
+                
             </tbody>
         </table>
     </div>

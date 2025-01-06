@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'my_site',
     'dashboard',
     'rental',
+    'users',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,48 @@
+{% extends 'my_site/base.html' %} 
+{% load static %} 
+{% block content %}
+<style>
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+}
+</style>
+
+<!-- bannerr -->
+
+<div class="banner">
+  <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+  <div class="banner-text">
+    <h1>Login as Admin</h1>
+  </div>
+</div>
+
+<div class="account-container">
+
+  <div class="contact-form">
+
+    <form method="POST">
+
+      {% csrf_token %}
+
+      {{ form.username }}
+      {{ form.password }}
+
+
+      <button type="submit">Submit</button>
+
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
