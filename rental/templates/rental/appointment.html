@@ -18,7 +18,8 @@
     </div>
     <div class="contact-form">
         <p>Fill out the from below to book an Appointment</p>
-        <form action="">
+        <form method="POST">
+            {% csrf_token %}
 
             <div class="input">
                 <label for="">Name </label> <br>
@@ -34,24 +35,24 @@
                 <label for="">Phone </label> <br>
                 <input type="text" name="customer_phone" id="customer_phone" required placeholder="0558156844">
             </div>
-            <div class="input">
+            <!-- <div class="input">
                 <label for="">With a driver ??</label> <br>
                 <select name="" id="">
                     <option value=""> With a driver</option>
                     <option value=""> With a driver</option>
                 </select>
-            </div>
+            </div> -->
             <div class="input">
                 <label for="">Appointment Date</label> <br>
-                <input type="date" required>
+                <input type="date" name="appointment_date" required>
             </div>
             <div class="input">
                 <label for="">Appointment Time</label> <br>
-                <input type="time" required>
+                <input type="time" name="appointment_time" required>
             </div>
             <div class="input">
                 <label for="">Purpose</label> <br>
-                <textarea name="" id="" required placeholder="e.g., Test drive, Car inspection, etc."></textarea>
+                <textarea name="purpose" id="" required placeholder="e.g., Test drive, Car inspection, etc."></textarea>
             </div>
 
             <button>Submit</button>

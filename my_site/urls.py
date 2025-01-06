@@ -10,7 +10,6 @@ urlpatterns = [
     path('contact_us/', views.contactUs, name='contactUs'),
     
     path('signUp/', views.signUp, name='signUp'),
-    path('login/', views.login, name='login'),
     path('sucessPage/', views.sucessPage, name='sucessPage'),
     path('unsucessPage/', views.unsucessPage, name='unsucessPage'),
     path('terms_and_condition/', views.termsAndCondition, name='termsAndCondition'),

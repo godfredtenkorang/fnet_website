@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Car
-from rental.models import Rental
+from rental.models import Rental, Contact
 
 # Create your views here.
 def index(request):
-    return render(request, 'my_site/index.html')
+    cars = Car.objects.filter(availability_status='Available')[:8]
+    return render(request, 'my_site/index.html', {'cars': cars})
 
 
 def rentCars(request):
@@ -55,14 +56,19 @@ def service(request):
     return render(request, 'my_site/service.html')
 
 def contactUs(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        message = request.POST['message']
+        contacts = Contact(name=name, email=email, phone=phone, message=message)
+        contacts.save()
+        return redirect('contactUs')
     return render(request, 'my_site/contactUs.html')
 
 
 def signUp(request):
     return render(request, 'my_site/signUp.html')
-
-def login(request):
-    return render(request, 'my_site/login.html')
 
 def termsAndCondition(request):
     return render(request, 'my_site/termsAndCondition.html')
