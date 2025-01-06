@@ -1,0 +1,67 @@
+{% extends 'my_site/base.html' %} 
+{% load static %} 
+{% block content %}
+
+
+<!-- bannerr -->
+
+<div class="banner">
+    <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+    <div class="banner-text">
+        <h1>Rent Car Now</h1>
+    </div>
+</div>
+
+<div class="contact-us-section booking-container">
+    <div class="contact-img">
+        <img src="{% static 'my_site/img/book.jpg' %}" alt="background photo" />
+
+    </div>
+    <div class="contact-form">
+        <p>Fill out the from below to book for your favourite car</p>
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input">
+                <label for="">Name </label> <br>
+                <input type="text" name="customer_name" id="customer_name" required placeholder="Benjamin Ohene Asare">
+            </div>
+
+            <div class="input">
+                <label for="">Email </label> <br>
+                <input type="text" name="customer_email" id="customer_email" placeholder="benjaminoheneasare@gmail.com">
+            </div>
+            <div class="input">
+                <label for="">Phone </label> <br>
+                <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required placeholder="0558156844">
+            </div>
+
+            <!-- <div class="input">
+                <label for="">With a driver?</label> <br>
+                <select name="" id="">
+                    <option value=""> With a driver</option>
+                    <option value=""> Without a driver</option>
+                </select>
+            </div> -->
+            <div class="input">
+                <label for="">Pick Up date</label> <br>
+                <input type="date" name="rental_date" required>
+            </div>
+            <div class="input">
+                <label for="">Return Date</label> <br>
+                <input type="date" name="return_date" required>
+            </div>
+
+            <div class="input">
+                <label for="">Total Price </label> <br>
+                <input type="text" name="total_price" id="total_price">
+            </div>
+
+            <button type="submit">Submit</button>
+
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

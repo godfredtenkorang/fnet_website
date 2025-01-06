@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'my_site',
     'dashboard',
+    'rental',
 ]
 
 MIDDLEWARE = [
