@@ -16,8 +16,8 @@
 <!-- header -->
 <header>
     <div class="contact-info">
-        <p><i class="fas fa-phone"></i> 233-246-846846 / +233-205 7503 75</p>
-        <p><i class="fas fa-map-marker-alt"></i> P. O. Box KS 13798, Kumasi Ghana - West Africa</p>
+        <p><i class="fas fa-phone"></i> +233 550 222 888</p>
+        <p><i class="fa-solid fa-envelope"></i> taxinetghana@gmail.com</p>
         <p><i class="fas fa-clock"></i> Open 24hrs Service</p>
     </div>
     <nav class="padding">
@@ -70,36 +70,24 @@
     <div class="footer-con">
         <div class="footer contact">
             <h5>Need help?</h5>
-            <p>Address:Opposite Mapees Enterprise, Inside K-Nyame Building, Off West Fijai Road- Takoradi, </p>
+            <p><i class="fas fa-phone"></i> +233 550 222 888</p>
             
-            <p>Email:Info@ultimatecarrentalsghcarrentalsgh@gmail.com </p>
-         
+            <p><i class="fa-solid fa-envelope"></i> taxinetghana@gmail.com</p>
+
+            <a href="{% url 'contactUs' %}"><i class="fa-solid fa-message"></i>  Contact Us</a>
                 
-          <p>
-            phone:0591447612 // 0203163403
-          </p>
-          <p>
-            Whatsapp:0591447612 // 0203163403
-          </p>
+         
         </div>
         <div class="footer">
             <h5>Company</h5>
         <div class="footer-links">
             <a href="{% url 'termsAndCondition' %}">Terms and Condition</a>
-            <a href="">Terms and Condition</a>
-            <a href="">Terms and Condition</a>
-            <a href="">Terms and Condition</a>
+            <a href="{% url 'aboutUs' %}">About us</a>
+           
+            <a href="{% url 'service' %}">Service</a>
         </div>
         </div>
-        <div class="footer">
-            <h5>Account</h5>
-            <div class="footer-links">
-                <a href="">Terms and Condition</a>
-                <a href="">Terms and Condition</a>
-                <a href="">Terms and Condition</a>
-                <a href="">Terms and Condition</a>
-            </div>
-        </div>
+       
         <div class="footer">
             <h5>Follow Us</h5>
             <div class="social-media">
@@ -171,6 +159,37 @@ setInterval(autoSlide, 3000);
         navlinks.classList.toggle("showNav")
     })
 
+</script>
+<script>
+    let currentSlide = 0;
+
+    // Get all the slides
+    const slides = document.querySelectorAll('.slide');
+
+    // Function to show a specific slide
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'block' : 'none';
+        });
+    }
+
+    // Function for the next slide
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length; // Loop back to the first slide
+        showSlide(currentSlide);
+    }
+
+    // Function for the previous slide
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length; // Loop to the last slide if needed
+        showSlide(currentSlide);
+    }
+
+    // Show the first slide initially
+    showSlide(currentSlide);
+
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 6000);
 </script>
 
 </body>

@@ -109,14 +109,67 @@ nav {
 .slide-text h1 {
     font-size: 6rem;
     font-weight: bolder;
+    animation: slideTop 0.9s;
 
 
 }
+
 
 .slide-text p {
     font-size: 2rem;
     font-weight: bolder;
+    animation: slidebottom 1s;
 }
+
+@keyframes slideTop {
+    0%{
+
+        transform: translateY(-50px);
+    }
+}
+
+@keyframes slidebottom {
+    0%{
+
+        transform: translateY(50px);
+    }
+}
+
+
+    .slide-show-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slide {
+        display: none; /* Hide all slides by default */
+    }
+
+    .slide:first-child {
+        display: block; /* Show the first slide initially */
+    }
+
+    .slide-show-container .prev,
+    .slide-show-container .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        font-size: 2rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .slide-show-container .prev {
+        left: 10px;
+    }
+
+    .slide-show-container .next {
+        right: 10px;
+    }
 
 
 
@@ -187,6 +240,12 @@ nav {
     color: var(--blueColor);
     text-align: center;
 }
+.service-section h2{
+    color: var(--whiteColor);
+    text-align: center;
+    font-size: 2.5rem;
+ padding-top: 2%;
+}
 
 .service-grid {
     display: flex;
@@ -239,12 +298,11 @@ nav {
     width: 100%;
     max-width: 100%;
     min-height: 40vh;
-    padding: 10px;
+ 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     background-color: var(--whiteColor);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -4px -4px 10px rgba(0, 0, 0, 0.1);
 
@@ -257,6 +315,7 @@ nav {
 .car-inf-grid {
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
     padding: 10px 0;
     color: var(--BlackColor);
 }
@@ -503,7 +562,7 @@ padding: 5px;
 
 .d-flex{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
  .about-us-text{
     width: 100%;
@@ -524,8 +583,13 @@ padding: 5px;
     align-items: center;
     justify-content: center;
     padding: 10px;
+    gap: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.15);
 
+}
+.a-service i{
+    font-size: 2rem;
+    padding-bottom: 10px;
 }
 .about-service{
     display: grid;
@@ -669,10 +733,11 @@ footer {
 }
 
 .footer-con {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: flex;
+   align-items: center;
     gap: 2rem;
     justify-content: space-between;
+    
     padding: 2% 10%;
 }
 
@@ -711,11 +776,33 @@ footer {
 }
 
 
+.footer a{
+    color: var(--whiteColor);
+    padding: 10px 0;
+}
 
 
 
 
+.status-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 70vh;
+    gap: 1rem;
+    text-align: center;
+    padding: 10px;
+}
 
+.status-container i{
+    font-size: 3rem;
+
+}
+.status-container p{
+    font-size: 2.5rem;
+}
 
 
 
@@ -855,3 +942,64 @@ footer {
         height: auto;
     }
 }
+
+
+
+
+
+
+
+        .terms-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .terms-container h1 {
+            font-size: 2rem;
+            color: #444;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .terms-container h2 {
+            font-size: 1.5rem;
+            color: #555;
+            margin-top: 1.5rem;
+        }
+
+        .terms-container p {
+            margin: 1rem 0;
+            text-align: justify;
+        }
+
+        .terms-container ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .terms-container ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .terms-container {
+                padding: 1rem;
+            }
+
+            .terms-container h1 {
+                font-size: 1.5rem;
+            }
+
+            .terms-container h2 {
+                font-size: 1.2rem;
+            }
+        }
