@@ -3,203 +3,201 @@
 <!-- bannerr -->
 
 <div class="banner">
-  <img
-    src="{% static 'my_site/img/background2.jpg' %}"
-    alt="background photo"
-  />
-  <div class="banner-text">
-    <h1>Choose from these beautiful cars and ride</h1>
-  </div>
+    <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+    <div class="banner-text">
+        <h1>Choose from these beautiful cars and ride</h1>
+    </div>
 </div>
 
 
 
 <div class="featured-cars">
-  
+
     <div class="featured-cars-grid">
 
-        
-        
 
-       
-           <a href="{% url 'carDetail' %}" class="car">
-            
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+
+
+        {% for car in cars %}
+        <a href="{% url 'carDetail' car.slug %}" class="car">
+
+            <img src="{{ car.image1.url }}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">{{ car.car_name }}</p>
+                    <p class="carModel">Model: {{ car.brand }}</p>
                 </div>
-
-            </a>
-       
-       
-           <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: GH¢{{ car.price_per_day }}</p>
+                    <p class="carFeatures">Features: {{ car.transmission }}</p>
                 </div>
+            </div>
 
-            </a>
-       
-       
-            <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+        </a>
+        {% endfor %}
+
+<!-- 
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
                 </div>
-
-            </a>
-       
-       
-           <a href="{% url 'carDetail' %}" class="car">
-            
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
                 </div>
+            </div>
 
-            </a>
-           <a href="{% url 'carDetail' %}" class="car">
-            
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+        </a>
+
+
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
                 </div>
-
-            </a>
-           <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
                 </div>
+            </div>
 
-            </a>
-           <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+        </a>
+
+
+        <a href="" class="car">
+
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
                 </div>
-
-            </a>
-           <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
                 </div>
+            </div>
 
-            </a>
-           <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+        </a>
+        <a href="" class="car">
+
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
                 </div>
-
-            </a>
-           <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
                 </div>
+            </div>
 
-            </a>
-           <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+        </a>
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
                 </div>
-
-            </a>
-           <a href="{% url 'carDetail' %}" class="car">
-                <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
-                <div class="car-info">
-                    <div class="car-inf-grid">
-                        <p class="carName">Hundai Car</p>
-                        <p class="carModel">Model: 2022 XYZ</p>
-                    </div>
-                    <div class="car-inf-grid">
-                        <p class="carPrice">Price: $45/day</p>
-                        <p class="carFeatures">Features: Air conditioning</p>
-                    </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
                 </div>
+            </div>
 
-            </a>
-       
+        </a>
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
+                </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
+                </div>
+            </div>
+
+        </a>
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
+                </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
+                </div>
+            </div>
+
+        </a>
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
+                </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
+                </div>
+            </div>
+
+        </a>
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
+                </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
+                </div>
+            </div>
+
+        </a>
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
+                </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
+                </div>
+            </div>
+
+        </a>
+        <a href="" class="car">
+            <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">Hundai Car</p>
+                    <p class="carModel">Model: 2022 XYZ</p>
+                </div>
+                <div class="car-inf-grid">
+                    <p class="carPrice">Price: $45/day</p>
+                    <p class="carFeatures">Features: Air conditioning</p>
+                </div>
+            </div>
+
+        </a> -->
+
     </div>
 
 </div>

@@ -1,0 +1,64 @@
+{% extends 'my_site/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<!-- bannerr -->
+
+<div class="banner">
+    <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+    <div class="banner-text">
+        <h1>Book Appointment with us</h1>
+    </div>
+</div>
+
+<div class="contact-us-section booking-container">
+    <div class="contact-img">
+        <img src="{% static 'my_site/img/book.jpg' %}" alt="background photo" />
+
+    </div>
+    <div class="contact-form">
+        <p>Fill out the from below to book an Appointment</p>
+        <form action="">
+
+            <div class="input">
+                <label for="">Name </label> <br>
+                <input type="text" name="customer_name" id="customer_name" required placeholder="Benjamin Ohene Asare">
+            </div>
+
+            <div class="input">
+                <label for="">Email </label> <br>
+                <input type="text" name="customer_email" id="customer_email" placeholder="benjaminoheneasare@gmail.com">
+            </div>
+
+            <div class="input">
+                <label for="">Phone </label> <br>
+                <input type="text" name="customer_phone" id="customer_phone" required placeholder="0558156844">
+            </div>
+            <div class="input">
+                <label for="">With a driver ??</label> <br>
+                <select name="" id="">
+                    <option value=""> With a driver</option>
+                    <option value=""> With a driver</option>
+                </select>
+            </div>
+            <div class="input">
+                <label for="">Appointment Date</label> <br>
+                <input type="date" required>
+            </div>
+            <div class="input">
+                <label for="">Appointment Time</label> <br>
+                <input type="time" required>
+            </div>
+            <div class="input">
+                <label for="">Purpose</label> <br>
+                <textarea name="" id="" required placeholder="e.g., Test drive, Car inspection, etc."></textarea>
+            </div>
+
+            <button>Submit</button>
+
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

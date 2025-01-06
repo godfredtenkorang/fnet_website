@@ -17,9 +17,9 @@
 
 <div class="car-detail-section">
  <div class="car-name">
-  <h2 >2015 Toyota Prado</h2>
+  <h2 >{{ car.car_name }}</h2>
   <p class="price">
-    <strong>Price</strong>  250 gh per day
+    <strong>Price</strong>  GH¢{{ car.price_per_day }} per day
   </p>
  </div>
   <div class="car-detail-image">
@@ -28,25 +28,25 @@
       <div class="car-big-img">
         <img
           id="bigImage"
-          src="{% static 'my_site/img/background.jpg' %}"
+          src="{{ car.image1.url }}"
           alt="Big Image"
         />
       </div>
       <div class="small-img">
-        <img class="small-thumbnail" src="{% static 'my_site/img/car.png' %}" />
+        <img class="small-thumbnail" src="{{ car.image1.url }}" />
         <img
           class="small-thumbnail"
-          src="{% static 'my_site/img/background.jpg' %}"
+          src="{{ car.image2.url }}"
           alt="Thumbnail 2"
         />
         <img
           class="small-thumbnail"
-          src="{% static 'my_site/img/background.jpg' %}"
+          src="{{ car.image3.url }}"
           alt="Thumbnail 3"
         />
         <img
           class="small-thumbnail"
-          src="{% static 'my_site/img/background.jpg' %}"
+          src="{{ car.image4.url }}"
           alt="Thumbnail 4"
         />
       </div>
@@ -54,112 +54,117 @@
       <div class="car-detail">
         <h4>Decription</h4>
         <p>
-          The 2015 Toyota Land Cruiser Prado combines luxury, power, and
-          off-road capability. With its bold design and spacious interior, it
-          comfortably seats up to seven passengers, offering advanced tech like
-          a touchscreen infotainment system and flexible cargo space. Powered by
-          a 4.0-liter V6 engine and equipped with 4WD, it handles both city
-          roads and tough terrains with ease. Safety features like Vehicle
-          Stability Control ensure confidence on every drive. Whether you're
-          exploring off-road or commuting in style, the Prado is built for
-          versatility and performance.
+          {{ car.description }}
         </p>
       </div>
 
       <div class="car-features-container">
         <h4>Car Features</h4>
         <div class="car-features">
-          <li><strong>Fuel Type:</strong> Petrol</li>
-          <li><strong>Seats:</strong> 5</li>
-          <li><strong>Transmission:</strong> Automatic</li>
-          <li><strong>Air Conditioning:</strong> Yes</li>
-          <li><strong>Airbag:</strong> Available</li>
-          <li><strong>Mileage:</strong> 15 km/l</li>
-          <li><strong>GPS Navigation:</strong> Included</li>
-          <li><strong>Bluetooth Connectivity:</strong> Yes</li>
-          <li><strong>Color:</strong> Metallic Grey</li>
+          <li><strong>Fuel Type:</strong> {{car.fuel_type}}</li>
+          <li><strong>Seats:</strong> {{ car.seats }}</li>
+          <li><strong>Transmission:</strong> {{car.transmission}}</li>
+          <li><strong>Air Conditioning:</strong> {{car.air_conditioning}}</li>
+          <li><strong>Airbag:</strong> {{car.airbag}}</li>
+          <li><strong>Mileage:</strong> {{car.mileage}}</li>
+          <li><strong>GPS Navigation:</strong> {{car.gps_navigation}}</li>
+          <li><strong>Bluetooth Connectivity:</strong> {{car.bluetooth_connectivity}}</li>
+          <li><strong>Color:</strong> {{car.color}}</li>
+          <li><strong>Make:</strong> {{car.brand}}</li>
+          <li><strong>Year Manufactured:</strong> {{car.year_manufactured}}</li>
+          <li><strong>Cancellation Terms:</strong> Flexible</li>
         </div>
        
       </div>
     </div>
    
   </div>
-  <div class="car-detail-text">
+  <!-- <div class="car-detail-text">
    
     <ul class="car-details-list">
-        <li><strong>Make:</strong> Toyota</li>
-        <li><strong>Year Manufactured:</strong> 2015</li>
-        <li><strong>Transmission Type:</strong> Automatic</li>
+        <li><strong>Make:</strong> {{car.brand}}</li>
+        <li><strong>Year Manufactured:</strong> {{car.year_manufactured}}</li>
+        <li><strong>Transmission Type:</strong> {{car.transmission}}</li>
         <li><strong>Cancellation Terms:</strong> Flexible</li>
       </ul>
       <div class="book-btn">
-        <a href=""> Book Now</a>
+        
       </div>
-</div>
-</div>
-
-<!-- <div class="suggestion">
-  <div class="heading">
-    <h3>You may also like this</h3>
-  </div>
-
-  <div class="featured-cars-grid">
-    <a href="{% url 'carDetail' %}" class="car">
-      <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car" />
-      <div class="car-info">
-        <div class="car-inf-grid">
-          <p class="carName">Hundai Car</p>
-          <p class="carModel">Model: 2022 XYZ</p>
-        </div>
-        <div class="car-inf-grid">
-          <p class="carPrice">Price: $45/day</p>
-          <p class="carFeatures">Features: Air conditioning</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="{% url 'carDetail' %}" class="car">
-      <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car" />
-      <div class="car-info">
-        <div class="car-inf-grid">
-          <p class="carName">Hundai Car</p>
-          <p class="carModel">Model: 2022 XYZ</p>
-        </div>
-        <div class="car-inf-grid">
-          <p class="carPrice">Price: $45/day</p>
-          <p class="carFeatures">Features: Air conditioning</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="{% url 'carDetail' %}" class="car">
-      <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car" />
-      <div class="car-info">
-        <div class="car-inf-grid">
-          <p class="carName">Hundai Car</p>
-          <p class="carModel">Model: 2022 XYZ</p>
-        </div>
-        <div class="car-inf-grid">
-          <p class="carPrice">Price: $45/day</p>
-          <p class="carFeatures">Features: Air conditioning</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="{% url 'carDetail' %}" class="car">
-      <img src="{% static 'my_site/img/car.png' %}" alt="Hundai Car" />
-      <div class="car-info">
-        <div class="car-inf-grid">
-          <p class="carName">Hundai Car</p>
-          <p class="carModel">Model: 2022 XYZ</p>
-        </div>
-        <div class="car-inf-grid">
-          <p class="carPrice">Price: $45/day</p>
-          <p class="carFeatures">Features: Air conditioning</p>
-        </div>
-      </div>
-    </a>
-  </div>
 </div> -->
+</div>
+
+
+<div class="contact-us-section booking-container">
+  <div class="contact-img">
+    <img src="{% static 'my_site/img/book.jpg' %}" alt="background photo" />
+
+  </div>
+  <div class="contact-form">
+    <p>Fill out the from below to book for your favourite car</p>
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="input">
+        <label for="">Name </label> <br>
+        <input type="text" name="customer_name" id="customer_name" required placeholder="Benjamin Ohene Asare">
+      </div>
+
+      <div class="input">
+        <label for="">Email </label> <br>
+        <input type="text" name="customer_email" id="customer_email" placeholder="benjaminoheneasare@gmail.com">
+      </div>
+      <div class="input">
+        <label for="">Phone </label> <br>
+        <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required
+          placeholder="0558156844">
+      </div>
+
+      <!-- <div class="input">
+                <label for="">With a driver?</label> <br>
+                <select name="" id="">
+                    <option value=""> With a driver</option>
+                    <option value=""> Without a driver</option>
+                </select>
+            </div> -->
+      <div class="input">
+        <label for="">Rental date</label> <br>
+        <input type="date" name="rental_date" id="rental_date" required>
+      </div>
+      <div class="input">
+        <label for="">Return Date</label> <br>
+        <input type="date" name="return_date" id="return_date" required>
+      </div>
+
+      <h3>Total Price: GH¢<span id="total_price">0.00</span></h3>
+      <br>
+      <button type="submit">Book Now</button>
+
+
+    </form>
+  </div>
+</div>
+
+<script>
+  const pricePerDay = "{{ car.price_per_day }}"
+
+  document.getElementById('rental_date').addEventListener('change', updateTotalPrice);
+  document.getElementById('return_date').addEventListener('change', updateTotalPrice);
+
+  function updateTotalPrice() {
+    const rentalDate = new Date(document.getElementById('rental_date').value);
+    const returnDate = new Date(document.getElementById('return_date').value);
+
+    if (rentalDate && returnDate && rentalDate < returnDate) {
+      const timeDiff = returnDate - rentalDate;
+      const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+      const totalPrice = rentalDays * pricePerDay;
+      document.getElementById('total_price').innerHTML = totalPrice.toFixed(2);
+    } else {
+      document.getElementById('total_price').innerHTML = "0.00";
+    }
+  }
+
+</script>
 
 {% endblock %}

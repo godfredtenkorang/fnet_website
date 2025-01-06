@@ -12,3 +12,6 @@ def sendMessage(request):
 
 def bookings(request):
     return render(request, 'dashboard/bookings.html')
+
+def appointments(request):
+    return render(request, 'dashboard/appointments.html')
