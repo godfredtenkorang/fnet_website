@@ -8,7 +8,7 @@ def send_sms(phone_number, customer_name, appointment_date, appointment_time, pu
         "key": apiKey,
         "sender": 'GodeyTech',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, your booking for  on \n" f"Appointment Date: {appointment_date} \n" f"Appointment Time: {appointment_time} \n" f"Purpose: {purpose}",
+        "message": f"Dear {customer_name}, your booking has been confirmed. \n" "Appointment Details: \n" f"Date: {appointment_date} \n" f"Time: {appointment_time} \n" f"Purpose: {purpose} \n\n" "We look forward to serving you!",
         "is_schedule": False,
         "schedule_date": ''
     }
@@ -34,7 +34,7 @@ def receive_sms(customer_name, customer_phone, appointment_date, appointment_tim
         "key": apiKey,
         "sender": 'GodeyTech',
         "recipient[]": '0553912334',
-        "message": f"New Appointment from {customer_name} - {customer_phone}, appointment on \n" f"Rental Date: {appointment_date} \n" f"Return Date: {appointment_time} \n" f"Purpose: {purpose}",
+        "message": f"New Appointment Details: \n" f"Customer Name: {customer_name} \n" f"Phone: {customer_phone} \n" f"Rental Date: {appointment_date} \n" f"Return Date: {appointment_time} \n" f"Purpose: {purpose}",
         "is_schedule": False,
         "schedule_date": ''
     }
