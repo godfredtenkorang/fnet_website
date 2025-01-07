@@ -19,21 +19,33 @@
 
 
         {% for car in cars %}
-        <a href="{% url 'carDetail' car.slug %}" class="car">
+        <div class="car">
+
+       
+       
 
             <img src="{{ car.image1.url }}" alt="Hundai Car">
             <div class="car-info">
                 <div class="car-inf-grid">
-                    <p class="carName">{{ car.car_name }}</p>
-                    <p class="carModel">Model: {{ car.brand }}</p>
+                  <p class="carName">{{ car.car_name }}</p>
+                  
                 </div>
+               
+                
                 <div class="car-inf-grid">
-                    <p class="carPrice">Price: GH¢{{ car.price_per_day }}</p>
-                    <p class="carFeatures">Features: {{ car.transmission }}</p>
+                  <div class="prices">
+                    <p>Pricing starting at</p>
+                 <strong> <p class="carPrice">GH¢{{ car.price_per_day }}/day</p> </strong>
+                  </div>
+                 
+                 <div class="more-details">
+                  <a href="{% url 'carDetail' car.slug %}" >
+                    <button> More detail  </button>
+                  </a>
+                 </div>
                 </div>
-            </div>
-
-        </a>
+              </div>
+        </div>
         {% endfor %}
 
 <!-- 
