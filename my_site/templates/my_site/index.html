@@ -103,7 +103,7 @@
   <div class="service-grid">
     <div class="service">
       <i class="fas fa-briefcase"></i>
-      <!-- Business Rentals icon -->
+     
       <h4>Pay and Drive</h4>
       <p>
         Pay upfront and hit the road with no delays.
@@ -113,7 +113,7 @@
     </div>
     <div class="service">
       <i class="fas fa-sun"></i>
-      <!-- Vacation Rentals icon -->
+    
       <h4>Drive and Pay:</h4>
       <p>
         Enjoy the freedom to pay at the end of your trip.
@@ -141,19 +141,29 @@
   </div>
   <div class="featured-cars-grid">
     {% for car in cars %}
-    <a href="{% url 'carDetail' car.slug %}" class="car">
+   <div class="car">
       <img src="{{ car.image1.url }}" alt="Hundai Car" />
       <div class="car-info">
         <div class="car-inf-grid">
           <p class="carName">{{ car.car_name }}</p>
-          <p class="carModel">{{ car.brand }}</p>
+          
         </div>
+       
+        
         <div class="car-inf-grid">
-          <p class="carPrice">Price: GH¢{{ car.price_per_day }}/day</p>
-          <p class="carFeatures">Features: {{ car.transmission }}</p>
+          <div class="prices">
+            <p>Pricing starting at</p>
+         <strong> <p class="carPrice">GH¢{{ car.price_per_day }}/day</p> </strong>
+          </div>
+         
+         <div class="more-details">
+          <a href="{% url 'carDetail' car.slug %}" >
+            <button> More detail  </button>
+          </a>
+         </div>
         </div>
       </div>
-    </a>
+  </div>
     {% endfor %}
   </div>
 </div>
@@ -192,10 +202,7 @@
     </p>
     <br />
    
-    <p class="ready">
-      Ready to ride with us? <a href="{% url 'appointment' %}">Book now</a> and embark on your journey
-      with confidence and ease!
-    </p>
+    
   </div>
 
   <div class="why-container-img">
