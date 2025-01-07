@@ -12,5 +12,7 @@ urlpatterns = [
     path('signUp/', views.signUp, name='signUp'),
     path('sucessPage/', views.sucessPage, name='sucessPage'),
     path('unsucessPage/', views.unsucessPage, name='unsucessPage'),
+    path('success_page/', views.contact_success_page, name='contact-success'),
     path('terms_and_condition/', views.termsAndCondition, name='termsAndCondition'),
+
 ]

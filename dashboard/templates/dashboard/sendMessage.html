@@ -3,22 +3,52 @@
 
 <div class="send-message-form">
    
-    <form action="">
+    <form method="POST">
+        {% csrf_token %}
 
        <div class="input">
-        <label for="">Recepient Number</label> <br>
-        <input type="number" name="" id="" required placeholder="example 0558156844">
+        <label for="">Recipient Number(s)</label> <br>
+        <input type="text" name="recipients" id="recipients" required placeholder="eg: 0558156844, 0553912334">
        </div> 
        <div class="input">
         <label for="">Message</label> <br>
-       <textarea name="" id="" placeholder="Hi Mr Asare"></textarea>
+       <textarea name="message" id="message" placeholder="Hi Mr Asare"></textarea>
        </div> 
 
-       <button>Send</button>
+       <button type="submit">Send</button>
         
 
     </form>
+    <div class="container">
+        <h1>SMS Table</h1>
+        <div class="responsive-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recipients</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th>Date Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sms in all_sms %}
+                    <tr>
+                        <td>{{ sms.recipients }}</td>
+                        <td>{{ sms.message }}</td>
+                        <td>{{ sms.status }}</td>
+                        <td>{{ sms.created_at }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+
 
 
 

@@ -12,6 +12,9 @@ class Rental(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return f"Rental by {self.customer_name} for {self.car}"
@@ -33,6 +36,10 @@ class Appointment(models.Model):
     purpose = models.TextField(null=True, blank=True)  # e.g., "Test drive", "Car inspection", etc.
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return f"Appointment with {self.customer_name} on {self.appointment_date} at {self.appointment_time}"
@@ -43,6 +50,9 @@ class Contact(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     message = models.TextField()
+    
+    class Meta:
+        ordering = ['-name']
     
     def __str__(self):
         return f"New contact from {self.name} - {self.phone}"
