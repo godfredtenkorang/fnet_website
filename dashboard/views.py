@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rental.models import Contact, Rental, Appointment
 from my_site.models import Car
 from .utils import send_sms
@@ -29,7 +29,7 @@ def sendMessage(request):
             status=response.get('status'), 
             response=response,
         )
-        return JsonResponse(response)
+        return redirect("sendMessage")
     context = {
         'all_sms': all_sms
     }
