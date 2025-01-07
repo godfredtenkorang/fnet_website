@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from rental.models import Contact, Rental, Appointment
 from my_site.models import Car
+from .utils import send_sms
+from .models import SMSLog
+from django.http import JsonResponse
 
 # Create your views here.
 def dashboard(request):
@@ -13,7 +16,24 @@ def contact(request):
     return render(request, 'dashboard/contact.html', {'contacts': contacts})
 
 def sendMessage(request):
-    return render(request, 'dashboard/sendMessage.html')
+    all_sms = SMSLog.objects.all()
+    if request.method == 'POST':
+        recipients = request.POST.get("recipients").split(",")
+        recipients = [recipient.strip() for recipient in recipients]
+        message = request.POST.get('message')
+        response = send_sms(recipients, message)
+        
+        SMSLog.objects.create(
+            recipients=", ".join(recipients),
+            message=message, 
+            status=response.get('status'), 
+            response=response,
+        )
+        return JsonResponse(response)
+    context = {
+        'all_sms': all_sms
+    }
+    return render(request, 'dashboard/sendMessage.html', context)
 
 def bookings(request):
     rentals = Rental.objects.all()

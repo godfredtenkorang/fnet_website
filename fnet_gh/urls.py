@@ -1,4 +1,4 @@
-
+from django.conf.urls import handler404
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -12,3 +12,5 @@ urlpatterns = [
     path('rental/', include('rental.urls')),
     path('account/', include('users.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'my_site.views.custom_404_view'
