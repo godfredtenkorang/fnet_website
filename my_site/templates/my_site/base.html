@@ -68,55 +68,79 @@
 
     
 
-<footer>
-    <div class="footer-con">
-        <div class="footer contact">
-            <h5>Need help?</h5>
-            <p><i class="fas fa-phone"></i> +233 550 222 888</p>
-            
-            <p><i class="fa-solid fa-envelope"></i> taxinetghana@gmail.com</p>
+    <section class="ready">
+        
+        <p>
+            Ready to ride with us? <a href="{% url 'appointment' %}">Book now</a> and embark on your journey
+            with confidence and ease!
+          </p>
 
-            <a href="{% url 'contactUs' %}"><i class="fa-solid fa-message"></i>  Contact Us</a>
-                
-         
-        </div>
-        <div class="footer">
-            <h5>Company</h5>
-        <div class="footer-links">
-            <a href="{% url 'termsAndCondition' %}">Terms and Condition</a>
-            <a href="{% url 'aboutUs' %}">About us</a>
-           
-            <a href="{% url 'service' %}">Service</a>
-            {% if request.user.is_authenticated %}
-            <a href="{% url 'dashboard' %}">Dashboard</a>
-            {% else %}
-            <a href="{% url 'login' %}">Login as Admin</a>
-            {% endif %}
-        </div>
-        </div>
-       
-        <div class="footer">
-            <h5>Follow Us</h5>
-            <div class="social-media">
-                <a href="https://facebook.com" target="_blank" class="social-icon">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://twitter.com" target="_blank" class="social-icon">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://instagram.com" target="_blank" class="social-icon">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="social-icon">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-            
-              
-            </div>
-            
-        </div>
-    </div>
- </footer> 
+
+
+    </section>
+    <footer class="footer-distributed">
+    
+                <div class="footer-left">
+    
+                    <h3>Company<span>logo</span></h3>
+    
+                    <p class="footer-links">
+                        <a href="#" class="link-1">Home</a>
+                        
+                        <a href="#"></a>
+                    
+                        <a href="#">Service</a>
+                    
+                        <a href="#">About</a>
+                        
+                        <a href="#">Terms and condition</a>
+                        
+                        <a href="#">Contact</a>
+                    </p>
+    
+                    <p class="footer-company-name">Taxinet © 2025</p> <br>
+                    <p class="devs">Developed by <a href="https://wa.link/po1ruy ">GodeyTech</a> & <a href="https://wa.link/gjf9ek">BenTech</a></p>
+                </div>
+    
+                <div class="footer-center">
+    
+                    <div>
+                        <i class="fa fa-map-marker"></i>
+                        <p>Kumasi Ghana</p>
+                    </div>
+    
+                    <div>
+                        <i class="fa fa-phone"></i>
+                        <p>+233 550 222 888</p>
+                    </div>
+    
+                    <div>
+                        <i class="fa fa-envelope"></i>
+                        <p><a href="mailto:taxinetghana@gmail.com">taxinetghana@gmail.com</a></p>
+                    </div>
+    
+                </div>
+    
+                <div class="footer-right">
+    
+                    <p class="footer-company-about">
+                        <span>About the company</span>
+                        At Taxinet, we pride ourselves on maintaining a fleet of high-quality vehicles equipped with advanced features such as mileage monitoring, alert systems, and service suspension for balance management.
+                       
+                    </p>
+    
+                    <div class="footer-icons">
+    
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-github"></i></a>
+    
+                    </div>
+    
+                </div>
+    
+            </footer>
 
 
 
