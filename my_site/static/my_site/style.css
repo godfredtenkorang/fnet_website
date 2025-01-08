@@ -1,12 +1,12 @@
 /* color */
 :root {
     --green: #154b59;
-    --red: #ff6600;
+    --red: #9B870C;
     --SeeBlue: #39c0c3;
     --whiteColor: #fff;
     --BlackColor: #000;
     --blueColor:
-        #01133d;
+        #010203;
     font-family: Arial, Helvetica, sans-serif;
     
 }
@@ -58,11 +58,16 @@ nav {
     display: flex;
     align-items: center;
     gap: 2rem;
+    position: relative;
+}
+.nav-links li{
+    position: relative;
 }
 
-.nav-links a {
+.nav-links a , .nav-links p{
     color: var(--blueColor);
     font-size: 1.1rem;
+    cursor: pointer;
 }
 
 .dropdown {
@@ -70,9 +75,21 @@ nav {
         position: absolute;
         left: 0;
         top: 100%;
+        width: 150px;
+        min-height: 10vh;
         background-color: white;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         z-index: 1000;
+        padding: 5px;
+        animation: drop 0.3s;
+    }
+    .showDrop.dropdown{
+        display: block;
+    }
+    @keyframes drop {
+        0%{
+            transform: translateY(10px);
+        }
     }
 
     .nav-links > li:hover .dropdown {
@@ -86,6 +103,7 @@ nav {
 .logo a {
     font-size: 2.5rem;
     color: var(--blueColor);
+    font-weight: bolder;
 }
 
 /* menu icon */
@@ -1069,6 +1087,15 @@ padding: 5px;
         height: 100%;
         animation: slideIn 0.5s;
         z-index: 100;
+    }
+    .dropdown{
+        width: 100%;
+    }
+    .slide-text h1{
+        font-size: 2.5rem;
+    }
+    .slide-text p{
+        font-size: 1rem;
     }
 
     @keyframes slideIn {

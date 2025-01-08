@@ -35,15 +35,17 @@
                 <li><a href="{% url 'service' %}">Service</a></li>
                 <li><a href="{% url 'rentCars' %}">Rent Cars</a></li>
                 <li>
-                    <a href="">Categories</a>
+                    <p class="cat">Categories <i class="fas fa-chevron-down"></i> </p>
                     <ul class="dropdown">
+
+                        <li><a href="">dropdown</a></li>
                         
-                        <li>
+                        <!-- <li>
                             {% for category in categories %}
                             <a href="">{{ category.name }}</a>
                             
                             {% endfor %}
-                        </li>
+                        </li> -->
                         
                     </ul>
                 </li>
@@ -163,6 +165,13 @@
 
 
 
+            <script>
+                const cat = document.querySelector(".cat")
+                const dropdown = document.querySelector(".dropdown")
+                cat.addEventListener("click", () =>{
+                    dropdown.classList.toggle("showDrop")
+                })
+            </script>
 
  <script>
   // Get the big image and all small thumbnails
