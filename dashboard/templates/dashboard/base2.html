@@ -57,7 +57,7 @@
                     <a  href="{% url 'bookings' %}">
     
                         <div class="nav-option option1 button">
-                            <h3><i class="fa-solid fa-chart-simple"></i> Bookings</h3>
+                            <h3><i class="fa-solid fa-book"></i> Bookings</h3>
                         </div>
                     </a>
 
@@ -65,7 +65,7 @@
                     <a href="{% url 'appointments' %}">
                     
                         <div class="nav-option option1 button">
-                            <h3><i class="fa-solid fa-chart-simple"></i> Appointments</h3>
+                            <h3><i class="fa-solid fa-bookmark"></i> Schedules</h3>
                         </div>
                     </a>
     
@@ -87,21 +87,26 @@
                             <h3><i class="fa-solid fa-people-group"></i> Contact</h3>
                         </div>
                     </a>
-    
-                    <div class="nav-option option1 button Settings">
-                        <div class="sett-but">
-                            <h3><i class="fa-solid fa-sliders"></i> Settings </h3>
-                           
+
+                    <a href="{% url 'add_expense' %}">
+                        <div class="nav-option option1 button">
+                            <h3><i class="fa-solid fa-chart-simple"></i> Expenses</h3>
                         </div>
+                    </a>
     
-                       
-                    </div>
+                    <a href="{% url 'index' %}">
+                        <div class="nav-option option1 button">
+                            <h3><i class="fa-solid fa-chevron-left"></i> Go Back</h3>
+                        </div>
+                    </a>
     
                     <!-- logout button -->
     
-                    <div class="nav-option option1 button logout-btn">
-                        <a href="{% url 'logout' %}"><h3 style="color: white;">Logout</h3></a>
-                    </div>
+                    <a href="{% url 'logout' %}">
+                        <div class="nav-option option1 button">
+                            <h3><i class="fa-solid fa-sign-out"></i> Logout</h3>
+                        </div>
+                    </a>
     
     
     
@@ -109,11 +114,6 @@
                 </div>
             </nav>
         </div>
-
-
-
-
-
 
 
     {% block content %}

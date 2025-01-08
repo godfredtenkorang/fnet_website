@@ -1,5 +1,5 @@
-{% extends 'my_site/base.html' %} 
-{% load static %} 
+{% extends 'my_site/base.html' %}
+{% load static %}
 {% block content %}
 
 <!-- bannerr -->
@@ -7,7 +7,7 @@
 <div class="banner">
     <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
     <div class="banner-text">
-        <h1>Book Appointment with us</h1>
+        <h1>Schedule a Ride Now</h1>
     </div>
 </div>
 
@@ -17,7 +17,7 @@
 
     </div>
     <div class="contact-form">
-        <p>Fill out the from below to book an Appointment</p>
+        <p>Fill Out the From Below to Schedule a Ride</p>
         <form method="POST">
             {% csrf_token %}
 
@@ -43,16 +43,28 @@
                 </select>
             </div> -->
             <div class="input">
-                <label for="">Appointment Date</label> <br>
+                <label for="">Schedule Date</label> <br>
                 <input type="date" name="appointment_date" required>
             </div>
             <div class="input">
-                <label for="">Appointment Time</label> <br>
+                <label for="">Schedule Time</label> <br>
                 <input type="time" name="appointment_time" required>
             </div>
             <div class="input">
-                <label for="">Purpose</label> <br>
-                <textarea name="purpose" id="" required placeholder="e.g., Test drive, Car inspection, etc."></textarea>
+                <label for="">Pick up Location</label> <br>
+                <input type="text" name="pick_up_location" required placeholder="school, hotel etc">
+            </div>
+            <div class="input">
+                <label for="">Drop off Location</label> <br>
+                <input type="text" name="drop_off_location" required placeholder="airport, hotel etc">
+            </div>
+            <div class="input">
+                <label for="">GPS Address</label> <br>
+                <input type="text" name="gps_address" required placeholder="AK-XXXX-XXXX">
+            </div>
+            <div class="input">
+                <label for="">Note</label> <br>
+                <textarea name="purpose" id="" required placeholder=""></textarea>
             </div>
 
             <button>Submit</button>

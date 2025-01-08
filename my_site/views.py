@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Car
+from .models import Car, Category
 from rental.models import Rental, Contact
 from django.conf import settings
 from django.core.mail import send_mail
@@ -21,6 +21,10 @@ def rentCars(request):
         'title': 'Cars'
     }
     return render(request, 'my_site/rentCars.html', context)
+
+def categories(request):
+    all_categories = Category.objects.all()
+    return {'all_categories': all_categories}
 
 def carDetail(request,  car_slug):
     car = get_object_or_404(Car, slug=car_slug)

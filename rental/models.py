@@ -28,10 +28,13 @@ class Appointment(models.Model):
         ('Completed', 'Completed'),
     ]
     customer_name = models.CharField(max_length=100)
-    customer_email = models.EmailField()
+    customer_email = models.EmailField(null=True, blank=True)
     customer_phone = models.CharField(max_length=15)
     appointment_date = models.DateField()
     appointment_time = models.TimeField()
+    pick_up_location = models.CharField(max_length=250, null=True)
+    drop_off_location = models.CharField(max_length=250, null=True)
+    gps_address = models.CharField(max_length=100, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     purpose = models.TextField(null=True, blank=True)  # e.g., "Test drive", "Car inspection", etc.
     created_at = models.DateTimeField(auto_now_add=True)

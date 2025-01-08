@@ -1,0 +1,108 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+
+<div class="send-message-form">
+
+    <form method="get" action="">
+        <select name="car" id="">
+            <option value="">Select Car</option>
+            {% for car in cars %}
+            <option value="{{ car.id }}">{{ car.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="month" placeholder="Enter Month (e.g., January)">
+
+        <button type="submit">Filter</button>
+        
+
+
+    </form>
+    
+
+<br><br><br>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Car</th>
+        <th>Amount Received</th>
+        <th>Driver's Commission</th>
+        <th>Other Expenses</th>
+        <th>Amount</th>
+        <th>Month</th>
+    </tr>
+    {% for expense in expenses %}
+    <tr>
+        <td>{{ expense.date }}</td>
+        <td>{{ expense.car.name }}</td>
+        <td>GH¢{{ expense.amount_received }}</td>
+        <td>GH¢{{ expense.drivers_commission }}</td>
+        <td>GH¢{{ expense.other_expenses }}</td>
+        <td>GH¢{{ expense.amount }}</td>
+        <td>{{ expense.month }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="7" style="text-align: center;">No expenses found for the selected filters.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Filtered Totals ({{ month }} - {{ car }})</h3>
+
+<table>
+    <tr>
+        <th>Total Amount Received</th>
+        <td>GH¢{{ totals.total_amount_received|default:"0.00" }}</td>
+    </tr>
+    <tr>
+        <th>Total Driver's Commission</th>
+        <td>GH¢{{ totals.total_drivers_commission|default:"0.00" }}</td>
+    </tr>
+    <tr>
+        <th>Total Other Expenses</th>
+        <td>GH¢{{ totals.total_other_expenses|default:"0.00" }}</td>
+    </tr>
+    <tr>
+        <th>Total Amount</th>
+        <td>GH¢{{ totals.total_amount|default:"0.00" }}</td>
+    </tr>
+</table>
+
+<h3>Overall Totals (All Months - All Cars)</h3>
+
+<table>
+    <tr>
+        <th>Total Amount Received</th>
+        <td>GH¢{{ all_totals.total_amount_received|default:"0.00" }}</td>
+    </tr>
+    <tr>
+        <th>Total Driver's Commission</th>
+        <td>GH¢{{ all_totals.total_drivers_commission|default:"0.00" }}</td>
+    </tr>
+    <tr>
+        <th>Total Other Expenses</th>
+        <td>GH¢{{ all_totals.total_other_expenses|default:"0.00" }}</td>
+    </tr>
+    <tr>
+        <th>Total Amount</th>
+        <td>GH¢{{ all_totals.total_amount|default:"0.00" }}</td>
+    </tr>
+</table>
+
+<p>Total Amount: GH¢{{ total_amount }}</p>
+<a href="{% url 'get_pdf' %}">Get PDF</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
