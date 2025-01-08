@@ -9,6 +9,7 @@
 
     <!-- font awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'my_site/font-awesome-4.7.0 2/css/font-awesome.min.css' %}">
 
 </head>
 <body>
@@ -22,7 +23,7 @@
     </div>
     <nav class="padding">
         <div class="logo">
-            <a href="">FNET</a>
+            <a href="{% url 'index' %}">TAXINET</a>
         </div>
 
         <!-- nav links -->
@@ -33,7 +34,20 @@
                 <li><a href="{% url 'aboutUs' %}">About</a></li>
                 <li><a href="{% url 'service' %}">Service</a></li>
                 <li><a href="{% url 'rentCars' %}">Rent Cars</a></li>
-                <li><a href="{% url 'appointment' %}">Booking</a></li>
+                <li>
+                    <a href="">Categories</a>
+                    <ul class="dropdown">
+                        
+                        <li>
+                            {% for category in categories %}
+                            <a href="">{{ category.name }}</a>
+                            
+                            {% endfor %}
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li><a href="{% url 'appointment' %}">Schedule a Ride</a></li>
                 <li><a href="{% url 'contactUs' %}">Contact</a></li>
                 {% if request.user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -82,36 +96,38 @@
     
                 <div class="footer-left">
     
-                    <h3>Company<span>logo</span></h3>
+                    <h3>Taxi<span>net</span></h3>
     
                     <p class="footer-links">
-                        <a href="#" class="link-1">Home</a>
-                        
-                        <a href="#"></a>
+                        <a href="{% url 'index' %}" class="link-1">Home</a>
+                        <a href="{% url 'service' %}">Service</a>
                     
-                        <a href="#">Service</a>
-                    
-                        <a href="#">About</a>
+                        <a href="{% url 'aboutUs' %}">About</a>
                         
-                        <a href="#">Terms and condition</a>
+                        <a href="{% url 'termsAndCondition' %}">Terms and condition</a>
                         
-                        <a href="#">Contact</a>
+                        <a href="{% url 'contactUs' %}">Contact</a>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'dashboard' %}">Dashboard</a>
+                        {% else %}
+                        <a href="{% url 'login' %}">Login as Admin</a>
+                        {% endif %}
                     </p>
     
                     <p class="footer-company-name">Taxinet © 2025</p> <br>
-                    <p class="devs">Developed by <a href="https://wa.link/po1ruy ">GodeyTech</a> & <a href="https://wa.link/gjf9ek">BenTech</a></p>
+                    <p class="devs">Developed & Designed by <a href="https://godeytech.com">GodeyTech</a> & <a href="https://wa.link/gjf9ek">BenTech</a></p>
                 </div>
     
                 <div class="footer-center">
     
                     <div>
                         <i class="fa fa-map-marker"></i>
-                        <p>Kumasi Ghana</p>
+                        <p>Airport Roundabout - Kumasi, Ghana</p>
                     </div>
     
                     <div>
                         <i class="fa fa-phone"></i>
-                        <p>+233 550 222 888</p>
+                        <p><a href="tel:+233 550 222 888">+233 550 222 888</a></p>
                     </div>
     
                     <div>
@@ -124,15 +140,15 @@
                 <div class="footer-right">
     
                     <p class="footer-company-about">
-                        <span>About the company</span>
+                        <span>About Taxinet</span>
                         At Taxinet, we pride ourselves on maintaining a fleet of high-quality vehicles equipped with advanced features such as mileage monitoring, alert systems, and service suspension for balance management.
                        
                     </p>
     
                     <div class="footer-icons">
     
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-x"></i></a>
                         <a href="#"><i class="fa fa-linkedin"></i></a>
                         <a href="#"><i class="fa fa-github"></i></a>
     

@@ -11,9 +11,12 @@ def appointment(request):
         customer_phone = request.POST['customer_phone']
         appointment_date = request.POST['appointment_date']
         appointment_time = request.POST['appointment_time']
+        pick_up_location = request.POST['pick_up_location']
+        drop_off_location = request.POST['drop_off_location']
+        gps_address = request.POST['gps_address']
         purpose = request.POST['purpose']
         
-        appointments = Appointment(customer_name=customer_name, customer_email=customer_email, customer_phone=customer_phone, appointment_date=appointment_date, appointment_time=appointment_time, purpose=purpose)
+        appointments = Appointment(customer_name=customer_name, customer_email=customer_email, customer_phone=customer_phone, appointment_date=appointment_date, appointment_time=appointment_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, gps_address=gps_address, purpose=purpose)
         appointments.save()
         
         # send_mail(

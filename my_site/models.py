@@ -1,6 +1,16 @@
 from django.db import models
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    
+    class Meta:
+        verbose_name_plural = "Categories"
+        
+    def __str__(self):
+        return self.name
+
 class Car(models.Model):
     CAR_TYPES = [
         ('Sedan', 'Sedan'),
@@ -35,7 +45,7 @@ class Car(models.Model):
         ('Yes', 'Yes'),
         ('No', 'No'),
     ]
-
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='cars', null=True)
     car_name = models.CharField(max_length=100)
     car_type = models.CharField(max_length=20, choices=CAR_TYPES)
     registration_number = models.CharField(max_length=50, unique=True)
