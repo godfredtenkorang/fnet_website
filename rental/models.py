@@ -1,10 +1,10 @@
 from django.db import models
-from my_site.models import Car
+from my_site.models import Car, Driver
 
 
 class Rental(models.Model):
     customer_name = models.CharField(max_length=100)
-    customer_email = models.EmailField()
+    customer_email = models.EmailField(null=True, blank=True)
     customer_phone = models.CharField(max_length=15)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='rentals')
     rental_date = models.DateField()
@@ -27,6 +27,7 @@ class Appointment(models.Model):
         ('Cancelled', 'Cancelled'),
         ('Completed', 'Completed'),
     ]
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True, blank=True, related_name='appointments')
     customer_name = models.CharField(max_length=100)
     customer_email = models.EmailField(null=True, blank=True)
     customer_phone = models.CharField(max_length=15)
@@ -35,6 +36,7 @@ class Appointment(models.Model):
     pick_up_location = models.CharField(max_length=250, null=True)
     drop_off_location = models.CharField(max_length=250, null=True)
     gps_address = models.CharField(max_length=100, null=True)
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='appointments')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     purpose = models.TextField(null=True, blank=True)  # e.g., "Test drive", "Car inspection", etc.
     created_at = models.DateTimeField(auto_now_add=True)

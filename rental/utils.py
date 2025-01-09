@@ -8,7 +8,7 @@ def send_sms(phone_number, customer_name, appointment_date, appointment_time, pu
         "key": apiKey,
         "sender": 'GodeyTech',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, your booking has been confirmed. \n" "Appointment Details: \n" f"Date: {appointment_date} \n" f"Time: {appointment_time} \n" f"Purpose: {purpose} \n\n" "We look forward to serving you!",
+        "message": f"Dear {customer_name}, your booking is on pending. \n" "Appointment Details: \n" f"Date: {appointment_date} \n" f"Time: {appointment_time} \n" f"Purpose: {purpose} \n\n" "We look forward to serving you!",
         "is_schedule": False,
         "schedule_date": ''
     }

@@ -3,7 +3,7 @@
 
 
 <div class="container">
-    <h1>Appointments Table</h1>
+    <h1>Schedules Table</h1>
     <div class="responsive-table">
         <table>
             <thead>
@@ -12,8 +12,9 @@
                     <th>Phone Number</th>
                     <th>Appointment Date</th>
                     <th>Appointment Time</th>
-                    <th>status</th>
-                    <th>purpose</th>
+                    <th>Pick up Location</th>
+                    <th>Drop of Location</th>
+                    <th>Update</th>
                     
                 </tr>
             </thead>
@@ -24,8 +25,9 @@
                     <td>{{ appointment.customer_phone }}</td>
                     <td>{{ appointment.appointment_date }}</td>
                     <td>{{ appointment.appointment_time }}</td>
-                    <td>{{ appointment.status }}</td>
-                    <td>{{ appointment.purpose }}</td>
+                    <td>{{ appointment.pick_up_location }}</td>
+                    <td>{{ appointment.drop_off_location }}</td>
+                    <td><a href="{% url 'create-appointment' appointment.id %}">Link</a></td>
                     
                     
                 </tr>

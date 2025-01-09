@@ -22,6 +22,17 @@ def rentCars(request):
     }
     return render(request, 'my_site/rentCars.html', context)
 
+def list_category(request, category_slug=None):
+    category = get_object_or_404(Category, slug=category_slug)
+    cars = Car.objects.filter(category=category)
+    
+    context = {
+        'category': category,
+        'cars': cars,
+        'title': 'Categories'
+    }
+    return render(request, 'my_site/list_category.html', context)
+
 def categories(request):
     all_categories = Category.objects.all()
     return {'all_categories': all_categories}
