@@ -1,6 +1,16 @@
 from django.db import models
 
 
+class Driver(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    licence_number = models.CharField(max_length=20, unique=True)
+    phone_number = models.CharField(max_length=15, unique=True)
+    is_available = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.licence_number}"
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
@@ -67,6 +77,7 @@ class Car(models.Model):
     image2 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     image3 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     image4 = models.ImageField(upload_to='car_images/', blank=True, null=True)
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)

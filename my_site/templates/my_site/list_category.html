@@ -1,0 +1,63 @@
+{% extends 'my_site/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<!-- bannerr -->
+
+<div class="banner">
+    <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+    <div class="banner-text">
+        <h1>{{ category.name }}</h1>
+    </div>
+</div>
+
+
+
+<div class="featured-cars">
+
+    <div class="featured-cars-grid">
+
+
+
+
+        {% for car in cars %}
+        <div class="car">
+
+
+
+
+            <img src="{{ car.image1.url }}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">{{ car.car_name }}</p>
+
+                </div>
+
+
+                <div class="car-inf-grid">
+                    <div class="prices">
+                        <p>Pricing starting at</p>
+                        <strong>
+                            <p class="carPrice">GH¢{{ car.price_per_day }}/day</p>
+                        </strong>
+                    </div>
+
+                    <div class="more-details">
+                        <a href="{% url 'carDetail' car.slug %}">
+                            <button> More detail </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

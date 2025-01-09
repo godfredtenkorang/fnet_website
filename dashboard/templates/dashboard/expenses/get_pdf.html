@@ -7,13 +7,14 @@
         <select name="car" id="">
             <option value="">Select Car</option>
             {% for car in cars %}
-            <option value="{{ car.id }}" {% if request.GET.car == car.id|stringformat:s %}selected{% endif %}>{{ car.name}}
+            <option value="{{ car.id }}" {% if request.GET.car==car.id|stringformat:s %}selected{% endif %}>{{
+                car.name}}
             </option>
             {% endfor %}
         </select>
         <input type="text" name="month" placeholder="Enter Month (e.g., January)" value="{{ request.GET.month }}">
 
-        
+
         <button type="submit">Download PDF</button>
 
 

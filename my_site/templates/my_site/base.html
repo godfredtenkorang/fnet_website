@@ -33,12 +33,18 @@
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'aboutUs' %}">About</a></li>
                 <li><a href="{% url 'service' %}">Service</a></li>
-                <li><a href="{% url 'rentCars' %}">Rent Cars</a></li>
                 <li>
                     <p class="cat">Categories <i class="fas fa-chevron-down"></i> </p>
                     <ul class="dropdown">
-
-                        <li><a href="">dropdown</a></li>
+                        <li>
+                            <a href="{% url 'rentCars' %}">All Rental Cars</a>
+                        </li>
+                        <li>
+                            {% for category in all_categories %}
+                            <a href="{% url 'list-category' category.slug %}">{{ category.name }}</a>
+                            
+                            {% endfor %}
+                        </li>
                         
                         <!-- <li>
                             {% for category in categories %}

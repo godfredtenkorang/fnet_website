@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment
-from my_site.models import Car
-from .utils import send_sms
+from my_site.models import Car, Driver
+from my_site.forms import DriverForm
+from .utils import send_sms, appointment_update_sms
 from .models import SMSLog
 from django.http import HttpResponse
 
@@ -10,6 +11,9 @@ from expenses.forms import ExpenseForm
 from django.db.models import Sum
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+
+from django.db.models import Q
+from rental.forms import AppointmentUpdateForm
 
 
 # Create your views here.
@@ -156,3 +160,63 @@ def download_pdf(request):
         'all_totals': all_totals,
     }
     return render_to_pdf('dashboard/expenses/pdf_template.html', context)
+
+    
+def register_driver(request):
+    if request.method == 'POST':
+        form = DriverForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('driver-list')
+    else:
+        form = DriverForm()
+    return render(request, 'dashboard/driver/driver_form.html', {'form': form})
+
+def driver_list(request):
+    drivers = Driver.objects.all()
+    return render(request, 'dashboard/driver/driver_list.html', {'drivers': drivers})
+
+def assign_driver(request, car_id):
+    # Fetch the specific car by its ID
+    car = get_object_or_404(Car, id=car_id)
+    
+    # Fetch all available drivers
+    drivers = Driver.objects.filter(is_available=True)
+    
+    if request.method == 'POST':
+        driver_id = request.POST.get('driver_id')
+        driver = get_object_or_404(Driver, id=driver_id)
+        car.driver = driver
+        car.save()
+        driver.is_available = False
+        driver.save()
+        return redirect('dashboard')
+    context = {
+        'car': car,
+        'drivers': drivers,
+    }
+    return render(request, 'dashboard/driver/assign_driver.html', context)
+
+
+def update_appointment(request, appointment_id):
+    # Get the specific appointment by its ID
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    
+    if request.method == 'POST':
+        form = AppointmentUpdateForm(request.POST, instance=appointment)
+        if form.is_valid():
+            update_appointment = form.save()
+            
+            if update_appointment.driver:
+                update_appointment.driver.is_available == False
+                update_appointment.driver.save()
+                
+            appointment_update_sms(appointment.customer_phone, appointment.customer_name, appointment.appointment_date, appointment.appointment_time, appointment.driver)
+            return redirect('appointments')  # Redirect to the appointment list or another relevant page
+    else:
+        form = AppointmentUpdateForm(instance=appointment)
+
+    return render(request, 'dashboard/appointment_forms.html', {
+        'appointment': appointment,
+        'form': form,
+    })
