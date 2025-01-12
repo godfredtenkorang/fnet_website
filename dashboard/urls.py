@@ -7,6 +7,7 @@ urlpatterns = [
     path('sendMessage/', views.sendMessage, name='sendMessage'),
     path('bookings/', views.bookings, name='bookings'),
     path('bookings_payments/', views.booking_payments, name='booking_payments'),
+    path('print_book_receipt/<int:receipt_id>/', views.print_payment_receipt, name='print_payment_receipt'),
     path('appointments/', views.appointments, name='appointments'),
     path('appointments/<int:appointment_id>/assign_driver/', views.update_appointment, name='create-appointment'),
     path('appointments/<int:appointment_id>/complete/', views.complete_appointment, name='complete-appointment'),

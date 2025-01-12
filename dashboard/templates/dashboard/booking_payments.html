@@ -18,6 +18,7 @@
                     <th>Drop off Location</th>
                     <th>Transaction ID</th>
                     <th>Total Price</th>
+                    <th>Receipt</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                     <td>{{ payment.drop_off_location }}</td>
                     <td>{{ payment.transaction_id }}</td>
                     <td>{{ payment.total_price }}</td>
+                    <td><a href="{% url 'print_payment_receipt' payment.id %}">Download</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
