@@ -70,8 +70,8 @@ def process_payment(request, car_slug):
         payments.is_successful = True
         payments.save()
         
-        payment_send_sms(customer_phone, customer_name, car.car_name, rental_date, return_date, pick_up_location, drop_off_location, transaction_id)
-        receive_payment_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, pick_up_location, drop_off_location, transaction_id)
+        payment_send_sms(customer_phone, customer_name, car.car_name, rental_date, return_date, pick_up_location, drop_off_location, transaction_id, total_price)
+        receive_payment_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, pick_up_location, drop_off_location, transaction_id, total_price)
         
         return redirect('index')
     
