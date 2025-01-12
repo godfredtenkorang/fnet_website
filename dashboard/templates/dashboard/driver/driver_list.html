@@ -12,6 +12,8 @@
                 <th>License Number</th>
                 <th>Phone</th>
                 <th>Available</th>
+                <th>Details</th>
+                <th>Commission</th>
             </tr>
             {% for driver in drivers %}
             <tr>
@@ -19,6 +21,8 @@
                 <td>{{ driver.licence_number }}</td>
                 <td>{{ driver.phone_number }}</td>
                 <td>{{ driver.is_available }}</td>
+                <td><a href="">Link</a></td>
+                <td><a href="{% url 'driver-dashboard' driver.id %}">Check Commission</a></td>
             </tr>
             {% endfor %}
         </table>

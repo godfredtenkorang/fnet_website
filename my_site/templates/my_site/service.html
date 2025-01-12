@@ -1,5 +1,15 @@
 {% extends 'my_site/base.html' %} {% load static %} {% block content %}
 
+<style>
+  .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #000;
+}
+</style>
 <!-- bannerr -->
 
 <div class="banner">
@@ -18,38 +28,94 @@
 <div class="servicepage-section">
     
   <div class="about-service">
-      <div class="a-service">
-          <i class="fas fa-briefcase"></i> <!-- Business Rentals icon -->
-          <h4>Pay and Drive</h4>
-          <p>
-            Pay upfront and hit the road with no delays.
-    
-    
-          </p>
-      </div>
-      <div class="a-service">
-          <i class="fas fa-sun"></i> <!-- Vacation Rentals icon -->
-          <h4>Drive and Pay:</h4>
-          <p>
-            Enjoy the freedom to pay at the end of your trip.
-    
-          </p>
-      </div>
-      <div class="a-service">
-          <i class="fas fa-plane-arrival"></i> <!-- Airport Pickup icon -->
-          <h4>Bugger's Drive:</h4>
-      <p>
-        Designed for customers residing outside Ghana, this self-drive service eliminates the need to bring your own car to Ghana. Simply provide a Treasury Bill as a guarantee, and we'll ensure you have a car to use throughout your stay.
+      <button class="open-modal" data-modal="modal1">Pay and Drive <br> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil omnis repellat, temporibus in numquam quo praesentium incidunt voluptates consequuntur delectus dolore velit, iure necessitatibus sed similique maxime, sint a hic!</p></button>
+      <button class="open-modal" data-modal="modal2">Drive and Pay:</button>
+      <button class="open-modal" data-modal="modal3">Bugger's Drive</button>
+      <button class="open-modal" data-modal="modal4">Scheduled Drive</button>
 
-      </p>
+      <div class="modal" id="modal1">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <i class="fas fa-briefcase"></i> <!-- Business Rentals icon -->
+          <h2>Pay and Drive</h2>
+          <br>
+          <p>Pay upfront and hit the road with no delays.</p>
+        </div>
       </div>
+      
+      <div class="modal" id="modal2">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <i class="fas fa-sun"></i> <!-- Vacation Rentals icon -->
+          <h2>Drive and Pay:</h2>
+          <br>
+          <p>Enjoy the freedom to pay at the end of your trip.</p>
+        </div>
+      </div>
+      
+      <div class="modal" id="modal3">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <i class="fas fa-plane-arrival"></i> <!-- Airport Pickup icon -->
+          <h2>Bugger's Drive:</h2>
+          <br>
+          <p>Designed for customers residing outside Ghana, this self-drive service eliminates the need to bring your own car to
+          Ghana. Simply provide a Treasury Bill as a guarantee, and we'll ensure you have a car to use throughout your stay.</p>
+        </div>
+      </div>
+
+      <div class="modal" id="modal4">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <i class="fas fa-plane-arrival"></i> <!-- Airport Pickup icon -->
+          <h2>Scheduled Drive</h2>
+          <br>
+          <p>Designed for customers residing outside Ghana, this self-drive service eliminates the need to bring your own car
+            to
+            Ghana. Simply provide a Treasury Bill as a guarantee, and we'll ensure you have a car to use throughout your stay.
+          </p>
+        </div>
+      </div>
+      
   </div>
 
 </div>
 
 <!-- end  of service -->
 
+<script>
+  // Get all open-modal, close-modal and buttons
+    const openButtons = document.querySelectorAll('.open-modal');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.close');
 
+    // Add event listeners to open buttons
+
+    openButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modalId = button.getAttribute('data-modal');
+        document.getElementById(modalId).style.display = 'flex';
+      });
+    });
+
+    // Add event listeners to close buttons
+
+    closeButtons.forEach(close => {
+      close.addEventListener('click', () => {
+        close.closest('.modal').style.display = 'none';
+      });
+    });
+
+    // Close modal when clicking outside the modal content
+
+    window.addEventListener('click', (e) => {
+      modals.forEach(modal => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      })
+    })
+</script>
 
 
 

@@ -134,13 +134,16 @@
 
       <h3>Total Price: GH¢<span id="total_price">0.00</span></h3>
       <br>
-      <button type="submit">Book Now</button>
+      <h3>NB: Book now if you want to make payments at the office.</h3>
+      <br>
+      <button type="submit">Pay on Arrival</button>
 
 
     </form>
-    <div class="exp-btn">
+    <!-- <div class="exp-btn">
       <a style="color:black;" href="{% url 'assign-driver' car.id %}">View Expenses</a>
-    </div>
+    </div> -->
+    <a style="color:black;" href="{% url 'process-payment' car.slug  %}">Pay before Arrival</a>
   </div>
 </div>
 

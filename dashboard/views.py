@@ -1,19 +1,24 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from rental.models import Contact, Rental, Appointment
+from rental.models import Contact, Rental, Appointment, Payment
 from my_site.models import Car, Driver
 from my_site.forms import DriverForm
-from .utils import send_sms, appointment_update_sms
+from .utils import send_sms, appointment_update_sms, driver_license_sms
 from .models import SMSLog
 from django.http import HttpResponse
 
-from expenses.models import Expense, MyCar
-from expenses.forms import ExpenseForm
+from expenses.models import Expense, MyCar, Receipt
+from expenses.forms import ExpenseForm, ReceiptForm
 from django.db.models import Sum
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from io import BytesIO
+from django.template.loader import render_to_string
 
 from django.db.models import Q
 from rental.forms import AppointmentUpdateForm
+
+from django.conf import settings
+
 
 
 # Create your views here.
@@ -49,6 +54,10 @@ def sendMessage(request):
 def bookings(request):
     rentals = Rental.objects.all()
     return render(request, 'dashboard/bookings.html', {'rentals': rentals})
+
+def booking_payments(request):
+    payments = Payment.objects.all()
+    return render(request, 'dashboard/booking_payments.html', {'payments': payments})
 
 def appointments(request):
     all_appointments = Appointment.objects.all()
@@ -220,3 +229,65 @@ def update_appointment(request, appointment_id):
         'appointment': appointment,
         'form': form,
     })
+    
+    
+def complete_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    
+    if appointment.status != 'Completed':
+        commission = appointment.calculate_commission()
+        
+        if appointment.driver:
+            appointment.driver.commission += commission
+            appointment.driver.save()
+            
+        appointment.status = 'Completed'
+        appointment.save()
+        
+    return redirect('appointments')
+
+
+
+def driver_dashboard(request, driver_id):
+    driver = get_object_or_404(Driver, id=driver_id)
+    appointments = Appointment.objects.filter(driver=driver, status='Completed')
+    total_commission = driver.commission
+    
+    return render(request, 'dashboard/driver/driver_dashboard.html', {
+        'driver': driver,
+        'appointments': appointments,
+        'total_commission': total_commission,
+    })
+
+# message = (
+#                 f"Dear {driver.first_name}, your driver's license "
+#                 f"(License Number: {driver.licence_number}) is expiring on {driver.licence_expiry_date}. "
+#                 "Please renew it as soon as possible to avoid issues."
+#             )
+
+
+def create_receipt(request):
+    if request.method == 'POST':
+        form = ReceiptForm(request.POST)
+        if form.is_valid():
+            receipt = form.save()
+            return redirect('print-receipt', receipt_id=receipt.id)
+    else:
+        form = ReceiptForm()
+    return render(request, 'dashboard/create_receipt.html', {'form': form})
+
+
+def print_receipt(request, receipt_id):
+    receipt = Receipt.objects.get(id=receipt_id)
+    
+    template_path = 'dashboard/receipt_template.html'
+    context = {'receipt': receipt, 'STATIC_URL': settings.STATIC_URL}
+    
+    html = render_to_string(template_path, context)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename"receipt_{receipt.id}.pdf"'
+    pisa_status = pisa.CreatePDF(BytesIO(html.encode("UTF-8")), dest=response, encoding='UTF-8')
+    
+    if pisa_status.err:
+        return HttpResponse('Error generating PDF', content_type='text/plain')
+    return response
