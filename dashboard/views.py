@@ -17,11 +17,7 @@ from django.template.loader import render_to_string
 from django.db.models import Q
 from rental.forms import AppointmentUpdateForm
 
-from django.conf import settings
 
-
-
-# Create your views here.
 def dashboard(request):
     cars_available = Car.objects.count()
     bookings_id = Rental.objects.count()
@@ -58,6 +54,21 @@ def bookings(request):
 def booking_payments(request):
     payments = Payment.objects.all()
     return render(request, 'dashboard/booking_payments.html', {'payments': payments})
+
+def print_payment_receipt(request, receipt_id):
+    payment = Payment.objects.get(id=receipt_id)
+    
+    template_path = 'dashboard/receipt_book_template.html'
+    context = {'payment': payment}
+    
+    html = render_to_string(template_path, context)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename"receipt_{payment.id}.pdf"'
+    pisa_status = pisa.CreatePDF(BytesIO(html.encode("UTF-8")), dest=response, encoding='UTF-8')
+    
+    if pisa_status.err:
+        return HttpResponse('Error generating PDF', content_type='text/plain')
+    return response
 
 def appointments(request):
     all_appointments = Appointment.objects.all()
@@ -281,7 +292,7 @@ def print_receipt(request, receipt_id):
     receipt = Receipt.objects.get(id=receipt_id)
     
     template_path = 'dashboard/receipt_template.html'
-    context = {'receipt': receipt, 'STATIC_URL': settings.STATIC_URL}
+    context = {'receipt': receipt}
     
     html = render_to_string(template_path, context)
     response = HttpResponse(content_type='application/pdf')
