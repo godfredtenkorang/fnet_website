@@ -33,10 +33,11 @@
                
                 
                 <div class="car-inf-grid">
-                  <div class="prices">
-                    <p>Pricing starting at</p>
+                    <div class="prices">
+                        <p>Pricing starting at</p>
                  <strong> <p class="carPrice">GH¢{{ car.price_per_day }}/day</p> </strong>
-                  </div>
+                </div>
+                <p>{{ car.category }}</p>
                  
                  <div class="more-details">
                   <a href="{% url 'carDetail' car.slug %}" >

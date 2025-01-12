@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @page {
+            size: A5;
+            margin: 20mm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{{ STATIC_URL }}img/receipt_bg.png"); /* Path to your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            
+        }
+        .receipt-container {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Light overlay for readability */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details {
+            margin-top: 20px;
+        }
+</style>
+<body>
+    <div class="receipt-container">
+        <div class="header">
+            <h2>Receipt</h2>
+        </div>
+        <div class="details">
+            <p><strong>Name:</strong> {{ receipt.name }}</p>
+            <p><strong>Phone:</strong> {{ receipt.phone_number }}</p>
+            <p><strong>Amount:</strong> GHS {{ receipt.amount }}</p>
+            <p><strong>Description:</strong> {{ receipt.description }}</p>
+            <p><strong>Date:</strong> {{ receipt.issued_date }}</p>
+        </div>
+    </div>
+</body>
+</html>

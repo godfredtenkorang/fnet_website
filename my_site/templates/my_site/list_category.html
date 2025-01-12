@@ -41,6 +41,7 @@
                             <p class="carPrice">GH¢{{ car.price_per_day }}/day</p>
                         </strong>
                     </div>
+                    <p>{{ car.category }}</p>
 
                     <div class="more-details">
                         <a href="{% url 'carDetail' car.slug %}">

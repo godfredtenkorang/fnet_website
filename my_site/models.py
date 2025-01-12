@@ -7,6 +7,9 @@ class Driver(models.Model):
     licence_number = models.CharField(max_length=20, unique=True)
     phone_number = models.CharField(max_length=15, unique=True)
     is_available = models.BooleanField(default=True)
+    commission = models.DecimalField(max_digits=10, decimal_places=2, default=0.00) # commission earned
+    license_issue_date = models.DateField(null=True, blank=True)
+    licence_expiry_date = models.DateField(null=True, blank=True)
     
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.licence_number}"

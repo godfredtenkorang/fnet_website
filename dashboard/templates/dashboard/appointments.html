@@ -15,6 +15,7 @@
                     <th>Pick up Location</th>
                     <th>Drop of Location</th>
                     <th>Update</th>
+                    <th>Status</th>
                     
                 </tr>
             </thead>
@@ -28,6 +29,12 @@
                     <td>{{ appointment.pick_up_location }}</td>
                     <td>{{ appointment.drop_off_location }}</td>
                     <td><a href="{% url 'create-appointment' appointment.id %}">Link</a></td>
+                    {% if appointment.status != 'Completed' %}
+                    <td><a href="{% url 'complete-appointment' appointment.id %}">{{ appointment.status }}</a></td>
+                    {% else %}
+                    <td>completed</td>
+                    {% endif %}
+
                     
                     
                 </tr>

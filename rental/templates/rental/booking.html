@@ -8,7 +8,7 @@
 <div class="banner">
     <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
     <div class="banner-text">
-        <h1>Rent Car Now</h1>
+        <h1>Rent Car - {{ car.car_name }}</h1>
     </div>
 </div>
 
@@ -17,8 +17,12 @@
         <img src="{% static 'my_site/img/book.jpg' %}" alt="background photo" />
 
     </div>
+    
     <div class="contact-form">
-        <p>Fill out the from below to book for your favourite car</p>
+        <h2>Price per day: GH¢{{ car.price_per_day }}</h2>
+        <p>Car: {{ car.car_name }}</p>
+        <br>
+        <p>Fill out the from below to pay and book for your favourite car</p>
         <form method="POST">
             {% csrf_token %}
 
@@ -26,7 +30,7 @@
                 <label for="">Name </label> <br>
                 <input type="text" name="customer_name" id="customer_name" required placeholder="Benjamin Ohene Asare">
             </div>
-
+            
             <div class="input">
                 <label for="">Email </label> <br>
                 <input type="text" name="customer_email" id="customer_email" placeholder="benjaminoheneasare@gmail.com">
@@ -35,33 +39,73 @@
                 <label for="">Phone </label> <br>
                 <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required placeholder="0558156844">
             </div>
-
-            <!-- <div class="input">
-                <label for="">With a driver?</label> <br>
-                <select name="" id="">
-                    <option value=""> With a driver</option>
-                    <option value=""> Without a driver</option>
-                </select>
-            </div> -->
+            
+            
             <div class="input">
-                <label for="">Pick Up date</label> <br>
-                <input type="date" name="rental_date" required>
+                <label for="">Rental date</label> <br>
+                <input type="date" name="rental_date" id="rental_date" required>
             </div>
             <div class="input">
                 <label for="">Return Date</label> <br>
-                <input type="date" name="return_date" required>
+                <input type="date" name="return_date" id="return_date" required>
             </div>
-
             <div class="input">
-                <label for="">Total Price </label> <br>
-                <input type="text" name="total_price" id="total_price">
+                <label for="">Pick up Location</label> <br>
+                <input type="text" name="pick_up_location" id="pick_up_location" required>
             </div>
+            <div class="input">
+                <label for="">Drop off Location</label> <br>
+                <input type="text" name="drop_off_location" id="drop_off_location" required>
+            </div>
+            <div class="input">
+                <label for="">Payment Method</label> <br>
+                <select name="payment_method" id="payment_method">
+                    <option value="Mobile Money"> Mobile Money</option>
+                </select>
+            </div>
+            <div class="input">
+                <label for="">MoMo code</label> <br>
+                <select name="momo_code" id="momo_code">
+                    <option value="123456"> 123456</option>
+                </select>
+            </div>
+            <div class="input">
+                <label for="">Transaction ID</label> <br>
+                <input type="text" name="transaction_id" id="transaction_id" required>
+            </div>
+            
+            <h3>Total Price: GH¢<span id="total_price">0.00</span></h3>
+            <br>
+           
 
-            <button type="submit">Submit</button>
+            <button type="submit">Book Now</button>
 
 
         </form>
     </div>
 </div>
+
+<script>
+    const pricePerDay = "{{ car.price_per_day }}"
+
+    document.getElementById('rental_date').addEventListener('change', updateTotalPrice);
+    document.getElementById('return_date').addEventListener('change', updateTotalPrice);
+
+    function updateTotalPrice() {
+        const rentalDate = new Date(document.getElementById('rental_date').value);
+        const returnDate = new Date(document.getElementById('return_date').value);
+
+        if (rentalDate && returnDate && rentalDate < returnDate) {
+            const timeDiff = returnDate - rentalDate;
+            const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            const totalPrice = rentalDays * pricePerDay;
+            document.getElementById('total_price').innerHTML = totalPrice.toFixed(2);
+        } else {
+            document.getElementById('total_price').innerHTML = "0.00";
+        }
+    }
+
+</script>
 
 {% endblock %}

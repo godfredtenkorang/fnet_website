@@ -1,0 +1,54 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+
+
+<div class="container">
+    <h1>Car Booking Payment Table</h1>
+    <div class="responsive-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Phone Number Name</th>
+                    <th>Car Name</th>
+                    <th>Car Number</th>
+                    <th>Rental Date</th>
+                    <th>Return Date</th>
+                    <th>Pick up Location</th>
+                    <th>Drop off Location</th>
+                    <th>Transaction ID</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.customer_name }}</td>
+                    <td>{{ payment.customer_phone }}</td>
+                    <td>{{ payment.car.car_name }}</td>
+                    <td>{{ payment.car.registration_number }}</td>
+                    <td>{{ payment.rental_date }}</td>
+                    <td>{{ payment.return_date }}</td>
+                    <td>{{ payment.pick_up_location }}</td>
+                    <td>{{ payment.drop_off_location }}</td>
+                    <td>{{ payment.transaction_id }}</td>
+                    <td>{{ payment.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
