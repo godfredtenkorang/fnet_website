@@ -302,3 +302,7 @@ def print_receipt(request, receipt_id):
     if pisa_status.err:
         return HttpResponse('Error generating PDF', content_type='text/plain')
     return response
+
+
+def newReceipt(request):
+    return render(request, 'dashboard/newReceipt.html')

@@ -26,5 +26,7 @@ urlpatterns = [
     
     path('create_receipt/', views.create_receipt, name='create-receipt'),
     path('print_receipt/<int:receipt_id>/', views.print_receipt, name='print-receipt'),
+
+    path('newReceipt/', views.newReceipt, name='newReceipt'),
     
 ]

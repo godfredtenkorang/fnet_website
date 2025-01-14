@@ -1,12 +1,12 @@
 /* color */
 :root {
-    --green: #154b59;
-    --red: #ff6600;
+    --green: #000000;
+    --red:rgba(254,201,17,255) ;
     --SeeBlue: #39c0c3;
     --whiteColor: #fff;
     --BlackColor: #000;
     --blueColor:
-        #01133d;
+    #000000;
     font-family: Arial, Helvetica, sans-serif;
     
 }
@@ -23,8 +23,8 @@
 /* header */
 .contact-info {
     width: 100%;
-    min-height: 6vh;
-    background-color: var(--blueColor);
+    min-height: 4vh;
+    background-color: var(--red);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +36,7 @@
 header {
     position: relative;
     width: 100%;
-    min-height: 7vh;
+    min-height: 6vh;
 
 
 }
@@ -65,16 +65,28 @@ nav {
     font-size: 1.1rem;
 }
 
+.nav-links li{
+    position: relative;
+    cursor: pointer;
+}
+
 .dropdown {
         display: none;
         position: absolute;
         left: 0;
         top: 100%;
+        width: 200px;
+        min-height: 10vh;
         background-color: white;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         z-index: 1000;
+        padding: 10px;
     }
 
+    .cat a{
+        font-weight: bolder;
+        color: var(--blueColor);
+    }
     .nav-links > li:hover .dropdown {
         display: block;
     }
@@ -82,10 +94,15 @@ nav {
     .dropdown li {
         display: block;
     }
+    .showDrop.dropdown{
+        display: block;
+        
+    }
 
-.logo a {
-    font-size: 2.5rem;
-    color: var(--blueColor);
+.logo img {
+   width: 200px;
+   height: 11vh;
+   object-fit: contain;
 }
 
 /* menu icon */
@@ -208,6 +225,7 @@ nav {
     max-width: 45%;
 }
 
+
 .about-us-text p {
     font-size: 1.1rem;
 }
@@ -219,7 +237,7 @@ nav {
 }
 
 .about-us-text h2 {
-    color: var(--blueColor);
+    color: var(--red);
     font-weight: bolder;
     font-size: 2.5rem;
     padding-bottom: 10px;
@@ -351,11 +369,12 @@ nav {
 .more-details button{
     background-color: var(--blueColor);
     color: var(--whiteColor);
- width: 100%;
+ width: 90%;
  min-height: 5vh;
  cursor: pointer;
  outline: none;
  border: none;
+
 }
 .prices{
     padding-top: 10px;
@@ -511,6 +530,10 @@ nav {
     object-fit: cover;
 }
 
+.payOnarrival{
+    background-color: var(--blueColor);
+    color: #007BFF;
+}
 
 
 .car-name{
@@ -672,11 +695,29 @@ button {
   padding: 20px;
   border-radius: 8px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
   width: 50%;
+  min-height: 40vh;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.15);
 }
-
+.open-modal{
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    min-height: 30vh;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.15);  
+}
 .close {
   position: absolute;
   top: 10px;
@@ -1184,6 +1225,12 @@ button {
     .why-choose-us{
         background-color: transparent;
         color: var(--BlackColor);
+    }
+    .logo img{
+        width: 60px;
+    }
+    .modal-content{
+        width: 90%;
     }
 }
 
