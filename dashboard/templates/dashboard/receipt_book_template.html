@@ -1,59 +1,183 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        .receipts {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .receipt-container {
+            width: 100%;
+        }
+
+        .receipt-detail {
+            position: absolute;
+            top: 12%;
+            left: 5%;
+        }
+
+        .receipt-flex {
+            width: 100%;
+
+            color: black;
+            gap: 13rem;
+            display: flex;
+        }
+
+        .receipt-container img {
+            width: 100%;
+            min-height: 100%;
+            max-width: 100%;
+        }
+
+
+        table {
+            margin: 1% 0;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            text-transform: uppercase;
+        }
+
+
+        .sign {
+            margin: 1% 0;
+        }
+
+        .sign span {
+            font-family: 'italic';
+
+            width: 200px;
+        }
+
+
+        .bank-details {
+            display: flex;
+            gap: 9rem;
+            font-size: 13px;
+
+        }
+
+
+
+        body {
+            width: 148mm;
+            height: 210mm;
+            background-color: #fff;
+            line-height: 26px;
+            font-size: 12px;
+        }
+    </style>
 </head>
-<style>
-
-
-  body{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
-      url("{% static 'my_site/img/service-background.jpg' %}");
-      height: 70vh;
-      background-size: cover;
-      background-position: center center;
-  }
-
-    .receipt-container {
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.9);
-        /* Light overlay for readability */
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-      
-  }
-    
-
-    .header {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .details {
-        margin-top: 20px;
-    }
-</style>
 
 <body>
-    <div class="about-us-img">
-        <img src="{% static 'my_site/img/car.png' %}" alt="background photo" />
-      </div>
     <div class="receipt-container">
-        <div class="header">
-            <h2>Receipt</h2>
+        <div class="receipts">
+            <img src="{% static 'my_site/img/receipt-bg.png' %}" alt="background photo" />
         </div>
-        <div class="details">
-            <p><strong>Name:</strong> {{ payment.customer_name }}</p>
-            <p><strong>Phone:</strong> {{ payment.customer_phone }}</p>
-            <p><strong>Amount:</strong> GHS {{ payment.total_price }}</p>
-            <p><strong>Car:</strong> {{ payment.car }}</p>
-            <p><strong>Transaction ID:</strong> {{ payment.transaction_id }}</p>
+        <div class="receipt-detail">
+            <div class="receipt-flex">
+                <div class="receipient-adress">
+                    <p>
+                        Supply <br />
+                        To
+                        <strong>{{ payment.customer_name }} <br />
+                            company limited</strong>
+                    </p>
+                </div>
+                <div class="receipt-date">
+                    <p>Invoice #TL/N/000019</p>
+                    <p>
+                        Customer's TIN: <br />
+                        C0065466x
+                    </p>
+                    <p>Date of Invoice: 16/12/2025</p>
+                    <p>client Tel: 0558156844</p>
+                </div>
+            </div>
+
+            <table>
+                <h2>Invoice</h2>
+                <thead>
+                    <tr>
+                        <th>NO. VEH.</th>
+                        <th>Description</th>
+
+                        <th>Unit Price</th>
+                        <th>GH¢{{ payment.car.price_per_day }}</th>
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>{{ payment.car }} <br>
+                            <span class="from">From {{ payment.rental_date }}</span> <br>
+                            <span class="to"> To {{ payment.return_date }}</span>
+                        </td>
+
+
+                        <td>GH¢{{ payment.car.price_per_day }}</td>
+                        <td>GH¢{{ payment.total_price }}</td>
+                    </tr>
+
+
+                    <td>Total Price</td>
+                    <th> {{ payment.total_price }}</th>
+                </tbody>
+            </table>
+
+            <P class="sign">Sign: Frank Fordjour </P>
+
+
+            <div class="bank-details">
+                <div class="bank underline">
+                    <p><strong>ECOBANK GHANA </strong></p>
+                    <p>TAXINET LOGISTICS </p>
+                    <p>ACCOUNTNUMBER:144100256727</p>
+                </div>
+                <div class="bank">
+                    <p><strong>
+                            MOMO NUMBER
+                        </strong></p>
+                    <p>AGENT NUMBER: 059858486</p>
+                    <p> F- Net Enterprise</p>
+                </div>
+            </div>
+
         </div>
+
     </div>
 </body>
 

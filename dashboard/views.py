@@ -58,17 +58,15 @@ def booking_payments(request):
 def print_payment_receipt(request, receipt_id):
     payment = Payment.objects.get(id=receipt_id)
     
-    template_path = 'dashboard/receipt_book_template.html'
-    context = {'payment': payment}
-    
-    html = render_to_string(template_path, context)
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename"receipt_{payment.id}.pdf"'
-    pisa_status = pisa.CreatePDF(BytesIO(html.encode("UTF-8")), dest=response, encoding='UTF-8')
-    
+    template = get_template('dashboard/receipt_book_template.html')
+    html = template.render({'payment': payment})
+    result = HttpResponse(content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(html, dest=result)
     if pisa_status.err:
-        return HttpResponse('Error generating PDF', content_type='text/plain')
-    return response
+        return HttpResponse(f"We had some errors <pre>{html}</pre>")
+    return result
+    
+
 
 def appointments(request):
     all_appointments = Appointment.objects.all()
