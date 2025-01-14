@@ -1,116 +1,28 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+</head>
+<style>
 
-    <!-- <style>
-        * {
-            margin: 0;
-            padding: 0;
+    @page {
+            size: A5;
+            margin: 20mm;
         }
 
-
-
-        .receipts {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .receipt-container {
-            width: 100%;
-        }
-
-        .receipt-detail {
-            position: absolute;
-            top: 12%;
-            left: 5%;
-        }
-
-        .receipt-flex {
-            width: 100%;
-
-            color: black;
-            gap: 13rem;
-            display: flex;
-        }
-
-        .receipt-container img {
-            width: 100%;
-            min-height: 100%;
-            max-width: 100%;
-        }
-
-
-        table {
-            margin: 1% 0;
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 18px;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            text-transform: uppercase;
-        }
-
-
-        .sign {
-            margin: 1% 0;
-        }
-
-        .sign span {
-            font-family: 'italic';
-
-            width: 200px;
-        }
-
-
-        .bank-details {
-            display: flex;
-            gap: 9rem;
-            font-size: 13px;
-            color: blue;
-
-        }
-
-
-
-        body {
-            width: 148mm;
-            height: 210mm;
-            background-color: #ef0a0a;
-            line-height: 26px;
-            font-size: 12px;
-          
-           
-        }
-    </style> -->
-
-    <style>
-
-body{
-  background: #f1f1f1;
-  width: 100%;
-  height: 100%;
+        body{
+ 
   margin: 0;
   padding: 0;
 }
+[contenteditable="true"]:hover{
+  outline: lightblue auto 5px;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
 .invoice{
   padding: 0;
   font-family: "Avenir", serif;
@@ -148,9 +60,10 @@ body{
 }
 .header--logo{
   order: 1;
-  font-size: 32px;
+  font-size: 12px;
   width: 60%;
   font-weight: 900;
+  
 }
 .logo--address{
   font-size: 12px;
@@ -163,7 +76,14 @@ body{
 .items--table{
   width: 100%;
   padding: 10px;
- 
+
+  }
+  thead{
+    background: #ddd;
+    color: #111;
+    text-align: center;
+    font-weight: 800;
+  }
   tbody{
     text-align: center;
   }
@@ -173,187 +93,104 @@ body{
     font-weight: 800;
     background: lighten(green, 50%);
   }
-}
 
-  
-      
-    </style>
-</head>
+table {
+            margin: 1% 0;
+            width: 100%;
+            border-collapse: collapse;
+        }
+          
 
+        th,
+        td {
+            border: 1px solid black;
+            padding: 3px;
+            text-align: center;
+        }
+        th{
+            text-transform: uppercase;
+        }
+
+
+</style>
 <body>
-    <!-- <div class="receipt-container">
-
-        <div class="receipts">
-            <img src="{% static 'my_site/img/receipt-bg.png' %}" alt="background photo" />
-        </div>
-        <div class="receipt-detail">
-            <div class="receipt-flex">
-                <div class="receipient-adress">
-                    <p>
-                        Supply <br />
-                        To
-                        <strong>{{ payment.customer_name }} <br />
-                            company limited</strong>
-                    </p>
+    <article class="invoice">
+        <header class="header">
+            <h1 class="header--invoice">INVOICE
+                <div class="invoice--date" contenteditable="true">
+                    Jan 14, 2025
                 </div>
-                <div class="receipt-date">
-                    <p>Invoice #TL/N/000019</p>
-                    <p>
-                        Customer's TIN: <br />
-                        C0065466x
-                    </p>
-                    <p>Date of Invoice: 16/12/2025</p>
-                    <p>client Tel: 0558156844</p>
+                <div class="invoice--number">
+                    INVOICE # 
+                    <span contenteditable="true">TL-1</span>
                 </div>
-            </div>
+                <div class="invoice--recipient" contenteditable="true">
+                    to: {{ payment.customer_name }}
+                </div>
+            </h1>
+            <nav class="header--logo">
+                <div class="header--logo-text" contenteditable="true">
+                    Taxinet
+                </div>
+                <div class="logo-address">
+                    Airport Roundabout
+                    <br>
+                    Kumasi, Ghana
+                    <br>
+                    <strong>+233 550 222 888</strong>
+                    <br>
+                    <strong>taxinetghana@gmail.com</strong>
+                </div>
 
-            <table>
-                <h2>Invoice</h2>
+            </nav>
+        </header>
+        <section class="description">
+            <h5>Invoice Notes / Details</h5>
+            <!-- <p contenteditable="true">
+                Hey Ryan, this invoice covers the last few development updates. Many thanks!
+            </p> -->
+        </section>
+        <section class="line-lines">
+            <table class="items--table">
                 <thead>
                     <tr>
-                        <th>NO. VEH.</th>
-                        <th>Description</th>
-
-                        <th>Unit Price</th>
-                        <th>GH¢{{ payment.car.price_per_day }}</th>
-
+                        <td>Description <br> from: {{payment.rental_date}} - to: {{payment.return_date}}</td>
+                        
+                        <td>Unit Price</td>
+                        <td>Amount</td>
                     </tr>
-
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>{{ payment.car }} <br>
-                            <span class="from">From {{ payment.rental_date }}</span> <br>
-                            <span class="to"> To {{ payment.return_date }}</span>
+                        <td>
+                            {{ payment.car }}
                         </td>
-
-
-                        <td>GH¢{{ payment.car.price_per_day }}</td>
-                        <td>GH¢{{ payment.total_price }}</td>
+                        
+                        <td>
+                            GH¢{{payment.car.price_per_day}}
+                        </td>
+                        <td>
+                            GH¢{{payment.total_price}}
+                        </td>
+                        
                     </tr>
-
-
-                    <td>Total Price</td>
-                    <th> {{ payment.total_price }}</th>
                 </tbody>
             </table>
-
-            <P class="sign">Sign: Frank Fordjour </P>
-
-
-            <div class="bank-details">
-                <div class="bank underline">
-                    <p><strong>ECOBANK GHANA </strong></p>
-                    <p>TAXINET LOGISTICS </p>
-                    <p>ACCOUNTNUMBER:144100256727</p>
-                </div>
-                <div class="bank">
-                    <p><strong>
-                            MOMO NUMBER
-                        </strong></p>
-                    <p>AGENT NUMBER: 059858486</p>
-                    <p> F- Net Enterprise</p>
-                </div>
-            </div>
-
-        </div>
-
-    </div> -->
-
-    <article class="invoice">
-        <header class="header">
-          <h1 class="header--invoice">INVOICE
-            <div class="invoice--date" contenteditable="true">
-                MAY 19, 2016
-            </div>
-            <div class="invoice--number">
-              INVOICE #
-              <span  contenteditable="true">MB-5</span>
-            </div>
-            <div class="invoice--recipient" contenteditable="true">
-              Mobile Beat
-            </div>
-          </h1>
-          <nav class="header--logo">
-            <div class="header--logo-text" contenteditable="true">
-              W3BY LLC
-            </div>
-            <div class="logo--address" contenteditable="true">
-              2302 Holly Pine Cir
-              <br>
-              Orlando, FL 32820
-              <br>
-              <strong>(407) 484-3591</strong>
-              <br>
-              <strong>JOEY@W3BY.COM</strong>
-            </div>
-          </nav>
-        </header>
-        <section class="description">
-          <h5>Invoice Notes / Details</h5>
-          <p contenteditable="true">
-            Hey Ryan, this invoice covers the last few development updates.  Many thanks!
-          </p>
-        </section>
-        <section class="line-items">
-          <table class="items--table">
-            <thead>
-              <tr>
-                <td>Item</td>
-                <td>Qty</td>
-                <td>Rate</td>
-                <td>Total USD</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  Development of sub-site templates
-                </td>
-                <td>
-                  2
-                </td>
-                <td>
-                  USD $50/hr
-                </td>
-                <td>
-                  $100
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Code research for aMember Integration
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
-                  USD $50/hr
-                </td>
-                <td>
-                  $50
-                </td>
-              </tr>
-               <tr>
-                <td colspan="3">
-                </td>
-                <td class="total-price">
-                  $150.00
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </section>
         <section class="description">
-          <h5>Payment Details</h5>
-          <p contenteditable="true">
-            Please remit payment within 60 days to address above.  Thanks!
-          </p>
-          <p class="footer-text" contenteditable="true">If you have any questions, please reach out to me at Joey.L@W3BY.com
-          </p>
+            <h5>Total Invoice Amount: GH¢ {{payment.total_price}}</h5>
+            <div>
+                <h4 contenteditable="true">ECOBANK GHANA</h4>
+                <p>TAXINET LOGISTICS</p>
+                <p>ACCOUNTNUMBER: 144100256727</p>
+            </div>
+            <div>
+                <h4 contenteditable="true">MOMO NUMBER</h4>
+                <p>AGENT NUMBER: 059858486</p>
+                <p>F-Net Enterprise</p>
+            </div>
+           
         </section>
-      </article>
+    </article>
 </body>
-
 </html>
