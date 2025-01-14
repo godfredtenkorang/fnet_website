@@ -136,14 +136,16 @@
       <br>
       <h3>NB: Book now if you want to make payments at the office.</h3>
       <br>
-      <button type="submit">Pay on Arrival</button>
+      <button type="submit" >Pay on Arrival</button>
 
 
     </form>
     <!-- <div class="exp-btn">
       <a style="color:black;" href="{% url 'assign-driver' car.id %}">View Expenses</a>
     </div> -->
-    <a style="color:black;" href="{% url 'process-payment' car.slug  %}">Pay before Arrival</a>
+    <a    href="{% url 'process-payment' car.slug  %}">
+      <button class="payOnarrival">Pay before Arrival </button>
+    </a>
   </div>
 </div>
 
