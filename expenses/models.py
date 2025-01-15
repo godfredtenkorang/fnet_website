@@ -1,4 +1,5 @@
 from django.db import models
+from rental.models import Car
 
 class MyCar(models.Model):
     name = models.CharField(max_length=100)
