@@ -791,7 +791,7 @@ button {
     padding: 5px;
 }
 
- button{
+ form button{
     width: 100%;
     min-height: 6vh;
     background-color: var(--blueColor);
