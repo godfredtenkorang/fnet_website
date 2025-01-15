@@ -1,5 +1,6 @@
 from django.db import models
 from my_site.models import Car, Driver
+import uuid
 
 
 class Rental(models.Model):
@@ -75,9 +76,17 @@ class Payment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_successful = models.BooleanField(default=False)
+    invoice_number = models.CharField(max_length=20, unique=True, blank=True)
     
     class Meta:
         ordering = ['-created_at']
+        
+    def save(self, *args, **kwargs):
+        if not self.invoice_number:
+            # Generate a unique invoice number, e.g., INV20250104-XXXX
+            super().save(*args, **kwargs)
+            self.invoice_number = f"TL/IN/{self.updated_at.strftime('%Y%m%d')}-{uuid.uuid4().hex[:4].upper()}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Payment by {self.customer_name} for {self.car} - {self.total_price}"

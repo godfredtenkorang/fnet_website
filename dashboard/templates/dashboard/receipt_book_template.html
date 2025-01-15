@@ -118,7 +118,7 @@ table {
 th,
 td {
     border: 1px solid #ddd; /* Light border for table cells */
-    padding: 8px; /* Increased padding for better spacing */
+    padding: 4px; /* Increased padding for better spacing */
     text-align: center;
 }
 
@@ -140,14 +140,14 @@ h4 {
         <header class="header">
             <h1 class="header--invoice">INVOICE
                 <div class="invoice--date" contenteditable="true">
-                    Jan 14, 2025
+                    {{payment.updated_at}}
                 </div>
                 <div class="invoice--number">
                     INVOICE # 
-                    <span contenteditable="true">TL-1</span>
+                    <span contenteditable="true">{{payment.invoice_number}}</span>
                 </div>
                 <div class="invoice--recipient" contenteditable="true">
-                    to: {{ payment.customer_name }}
+                    to: {{ payment.customer_name }} - {{ payment.customer_phone }}
                 </div>
             </h1>
             <nav class="header--logo">
@@ -201,6 +201,7 @@ h4 {
         </section>
         <section class="description">
             <h5>Total Invoice Amount: GH¢ {{payment.total_price}}</h5>
+            <p>Sign: Frank Fordjour</p>
             <div>
                 <h4 contenteditable="true">ECOBANK GHANA</h4>
                 <p>TAXINET LOGISTICS</p>
