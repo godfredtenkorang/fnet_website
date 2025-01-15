@@ -765,6 +765,12 @@ button {
     width: 100%;
     padding: 10px 0;
 }
+.book-contact{
+    width: 60% !important;
+}
+.book-contact button{
+    width: 100%;
+}
 .input{
     width: 100%;
 }
@@ -784,7 +790,7 @@ button {
     padding: 5px;
 }
 
-.contact-form button{
+ button{
     width: 100%;
     min-height: 6vh;
     background-color: var(--blueColor);
