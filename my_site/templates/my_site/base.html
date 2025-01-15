@@ -41,13 +41,14 @@
                         <li>
                             <a href="{% url 'rentCars' %}">All Rental Cars</a>
                         </li>
-                        <li>
-                            {% for category in all_categories %}
-                            <a href="{% url 'list-category' category.slug %}">{{ category.name }}</a>
+                        {% for category in all_categories %}
+                        <li >
+                           
+                            <a href="{% url 'list-category' category.slug %}">{{ category.name }}</a> 
                             
-                            {% endfor %}
+                           
                         </li>
-                        
+                        {% endfor %}
                         <!-- <li>
                             {% for category in categories %}
                             <a href="">{{ category.name }}</a>
