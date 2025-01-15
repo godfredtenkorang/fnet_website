@@ -82,10 +82,17 @@ nav {
         z-index: 1000;
         padding: 10px;
     }
+    .dropdown li{
+        padding: 10px 0;
+    }
 
     .cat a{
         font-weight: bolder;
         color: var(--blueColor);
+    }
+    .cat-links{
+        display: flex;
+        flex-direction: column;
     }
     .nav-links > li:hover .dropdown {
         display: block;
@@ -758,6 +765,9 @@ button {
     width: 100%;
     padding: 10px 0;
 }
+.input{
+    width: 100%;
+}
 
 .input input{
     width: 100%;
@@ -793,9 +803,12 @@ button {
     cursor: pointer;
 }
 
+.booking-container{
+    width: 100%;
+}
 
-.booking-container img{
-    height: 100vh;
+.booking-form{
+    width: 100%;
 }
 
 .account-container{
@@ -804,8 +817,15 @@ button {
     align-items: center;
     justify-content: center;
 }
+.set-flex{
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
 
-
+.input-flex{
+    width: 100%;
+}
 
 
 
