@@ -20,6 +20,9 @@ class AppointmentUpdateForm(forms.ModelForm):
             self.fields['driver'].queryset = Driver.objects.filter(
                 is_available=True
             ) | Driver.objects.filter(id=appointment.driver.id if appointment.driver else None)
+            
+
+
         
 
 class PaymentForm(forms.ModelForm):

@@ -194,6 +194,12 @@ def driver_list(request):
     drivers = Driver.objects.all()
     return render(request, 'dashboard/driver/driver_list.html', {'drivers': drivers})
 
+def driver_detail(request, driver_id):
+    driver = get_object_or_404(Driver, id=driver_id)
+    if request.method == 'POST':
+        driver_license_sms(driver.phone_number, driver.first_name, driver.licence_number, driver.licence_expiry_date)
+    return render(request, 'dashboard/driver/driver_detail.html', {'driver': driver})
+
 def assign_driver(request, car_id):
     # Fetch the specific car by its ID
     car = get_object_or_404(Car, id=car_id)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 
 class Driver(models.Model):
@@ -10,6 +11,17 @@ class Driver(models.Model):
     commission = models.DecimalField(max_digits=10, decimal_places=2, default=0.00) # commission earned
     license_issue_date = models.DateField(null=True, blank=True)
     licence_expiry_date = models.DateField(null=True, blank=True)
+    
+    
+    def days_of_expiry(self):
+        """
+        Calculate the number of days until the driver's license expires.
+        Returns:
+            int: Number of days until expiry. Negative if already expired.
+        """
+        today = now().date()
+        delta = self.licence_expiry_date - today
+        return delta.days
     
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.licence_number}"

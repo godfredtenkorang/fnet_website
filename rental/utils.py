@@ -8,7 +8,7 @@ def send_sms(phone_number, customer_name, appointment_date, appointment_time, pu
         "key": apiKey,
         "sender": 'GodeyTech',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, your booking is on pending. \n" "Schedule Details: \n" f"Date: {appointment_date} \n" f"Time: {appointment_time} \n" f"Purpose: {purpose} \n\n" "We look forward to serving you!",
+        "message": f"Dear {customer_name}, your booking is on pending. \n" "Schedule Details: \n" f"Date: {appointment_date} \n" f"Time: {appointment_time} \n" f"Note: {purpose} \n\n" "We look forward to serving you!",
         "is_schedule": False,
         "schedule_date": ''
     }
@@ -34,7 +34,7 @@ def receive_sms(customer_name, customer_phone, appointment_date, appointment_tim
         "key": apiKey,
         "sender": 'GodeyTech',
         "recipient[]": '0553912334',
-        "message": f"New Schedule Details: \n" f"Customer Name: {customer_name} \n" f"Phone: {customer_phone} \n" f"Rental Date: {appointment_date} \n" f"Return Date: {appointment_time} \n" f"Purpose: {purpose}",
+        "message": f"New Schedule Details: \n" f"Customer Name: {customer_name} \n" f"Phone: {customer_phone} \n" f"Rental Date: {appointment_date} \n" f"Return Date: {appointment_time} \n" f"Note: {purpose}",
         "is_schedule": False,
         "schedule_date": ''
     }

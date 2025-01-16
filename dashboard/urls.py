@@ -22,6 +22,7 @@ urlpatterns = [
     path('driver/register/', views.register_driver, name='register-driver'),
     path('cars/<int:car_id>/assign_driver/', views.assign_driver, name='assign-driver'),
     path('driver_dashboard/<int:driver_id>/', views.driver_dashboard, name='driver-dashboard'),
+    path('driver_detail/<int:driver_id>/', views.driver_detail, name='driver-detail'),
     
     
     path('create_receipt/', views.create_receipt, name='create-receipt'),
