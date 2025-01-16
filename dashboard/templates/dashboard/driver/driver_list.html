@@ -21,7 +21,7 @@
                 <td>{{ driver.licence_number }}</td>
                 <td>{{ driver.phone_number }}</td>
                 <td>{{ driver.is_available }}</td>
-                <td><a href="">Link</a></td>
+                <td><a href="{% url 'driver-detail' driver.id %}">Check</a></td>
                 <td><a href="{% url 'driver-dashboard' driver.id %}">Check Commission</a></td>
             </tr>
             {% endfor %}

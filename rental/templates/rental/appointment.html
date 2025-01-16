@@ -12,86 +12,84 @@
 </div>
 
 <div class="contact-us-section booking-container">
-   
+
     <div class="booking-form">
         <p>Fill Out the From Below to Schedule a Ride</p>
+        <br>
         <form method="POST">
             {% csrf_token %}
 
-        <div class="set-flex">
+            <div class="set-flex">
 
 
-            <div class="input-flex">
+                <div class="input-flex">
+                    <div class="input">
+                        <label for="">Choose Car</label> <br>
+                        <select name="" id="">
+                            <option value=""> V8</option>
+                            <option value=""> BMW</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">Name </label> <br>
+                        <input type="text" name="customer_name" id="customer_name" required
+                            placeholder="Benjamin Ohene Asare">
+                    </div>
 
-                <div class="input">
-                    <label for="">Name </label> <br>
-                    <input type="text" name="customer_name" id="customer_name" required placeholder="Benjamin Ohene Asare">
+                    <div class="input">
+                        <label for="">Email </label> <br>
+                        <input type="text" name="customer_email" id="customer_email"
+                            placeholder="benjaminoheneasare@gmail.com">
+                    </div>
+
+                    <div class="input">
+                        <label for="">Phone </label> <br>
+                        <input type="text" name="customer_phone" id="customer_phone" required placeholder="0558156844">
+                    </div>
+
+                    <div class="input">
+                        <label for="">Schedule Date</label> <br>
+                        <input type="date" name="appointment_date" required>
+                    </div>
+
                 </div>
-    
-                <div class="input">
-                    <label for="">Email </label> <br>
-                    <input type="text" name="customer_email" id="customer_email" placeholder="benjaminoheneasare@gmail.com">
+
+                <div class="input-flex">
+
+                    <div class="input">
+                        <label for="">Schedule Time</label> <br>
+                        <input type="time" name="appointment_time" required>
+                    </div>
+                    <div class="input">
+                        <label for="">Pick up Location</label> <br>
+                        <input type="text" name="pick_up_location" required placeholder="school, hotel etc">
+                    </div>
+
+
+                    <div class="input">
+                        <label for="">Drop off Location</label> <br>
+                        <input type="text" name="drop_off_location" required placeholder="airport, hotel etc">
+                    </div>
+                    <div class="input">
+                        <label for="">GPS Address</label> <br>
+                        <input type="text" name="gps_address" required placeholder="AK-XXXX-XXXX">
+                    </div>
+
+
+
+
+
+
+
+
+
                 </div>
-    
-                <div class="input">
-                    <label for="">Phone </label> <br>
-                    <input type="text" name="customer_phone" id="customer_phone" required placeholder="0558156844">
-                </div>
-    
-                <div class="input">
-                    <label for="">Schedule Date</label> <br>
-                    <input type="date" name="appointment_date" required>
-                </div>
-                <div class="input">
-                    <label for="">Schedule Time</label> <br>
-                    <input type="time" name="appointment_time" required>
-                </div>
-               </div>
-                <!-- <div class="input">
-                    <label for="">With a driver ??</label> <br>
-                    <select name="" id="">
-                        <option value=""> With a driver</option>
-                        <option value=""> With a driver</option>
-                    </select>
-                </div> -->
-               <div class="input-flex">
-                <div class="input">
-                    <label for="">Schedule Date</label> <br>
-                    <input type="date" name="appointment_date" required>
-                </div>
-                <div class="input">
-                    <label for="">Schedule Time</label> <br>
-                    <input type="time" name="appointment_time" required>
-                </div>
-                <div class="input">
-                    <label for="">Pick up Location</label> <br>
-                    <input type="text" name="pick_up_location" required placeholder="school, hotel etc">
-                </div>
-    
-    
-                <div class="input">
-                    <label for="">Drop off Location</label> <br>
-                    <input type="text" name="drop_off_location" required placeholder="airport, hotel etc">
-                </div>
-                <div class="input">
-                    <label for="">GPS Address</label> <br>
-                    <input type="text" name="gps_address" required placeholder="AK-XXXX-XXXX">
-                </div>
-               
-    
-    
-    
-    
-    
-    
-    
-               </div>  
-        </div>
-            
-        <div class="input">
-            <label for="">Note</label> <br>
-            <textarea name="purpose" id="" required placeholder=""></textarea>
-        </div>
+            </div>
+
+            <div class="input">
+                <label for="">Note</label> <br>
+                <textarea name="purpose" id="" required placeholder=""></textarea>
+            </div>
             <button>Submit</button>
 
 

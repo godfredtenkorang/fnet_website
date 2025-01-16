@@ -54,14 +54,14 @@ def appointment_update_sms(phone_number, customer_name, appointment_date, appoin
         print(f"Error sending SMS: {e}")
         return None
     
-def driver_license_sms(phone_number, message):
+def driver_license_sms(phone_number, first_name, licence_number, licence_expiry_date):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
         "sender": 'GodeyTech',
         "recipient[]": phone_number,
-        "message": message,
+        "message": f"Dear {first_name}, your driver's license " f"(License Number: {licence_number}) is expiring on {licence_expiry_date}. " "Please renew it as soon as possible to avoid issues. \n" "Regards, \n" "Taxinet Ghana." ,
         "is_schedule": False,
         "schedule_date": ''
     }

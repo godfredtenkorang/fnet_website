@@ -94,7 +94,7 @@ class Payment(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(null=True, blank=True)
     phone = models.CharField(max_length=15)
     message = models.TextField()
     

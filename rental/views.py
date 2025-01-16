@@ -7,6 +7,7 @@ from my_site.models import Car
 from .forms import PaymentForm
 
 def appointment(request):
+    
     if request.method == 'POST':
         customer_name = request.POST['customer_name']
         customer_email = request.POST['customer_email']
@@ -18,7 +19,7 @@ def appointment(request):
         gps_address = request.POST['gps_address']
         purpose = request.POST['purpose']
         
-        appointments = Appointment(customer_name=customer_name, customer_email=customer_email, customer_phone=customer_phone, appointment_date=appointment_date, appointment_time=appointment_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, gps_address=gps_address, purpose=purpose)
+        appointments = Appointment( customer_name=customer_name, customer_email=customer_email, customer_phone=customer_phone, appointment_date=appointment_date, appointment_time=appointment_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, gps_address=gps_address, purpose=purpose)
         appointments.save()
         
         # send_mail(
@@ -36,6 +37,7 @@ def appointment(request):
         return redirect('sucess-page')
     
     context = {
+        
         'title': 'Appointment'
     }
     return render(request, 'rental/appointment.html', context)
