@@ -58,7 +58,7 @@
                         
                     </ul>
                 </li>
-                <li><a href="{% url 'appointment' %}">Schedule a Ride</a></li>
+                <li><a href="{% url 'all_schedule_cars' %}">Schedule a Ride</a></li>
                 <li><a href="{% url 'contactUs' %}">Contact</a></li>
                 {% if request.user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -96,7 +96,7 @@
     <section class="ready">
         
         <p>
-            Ready to ride with us? <a href="{% url 'appointment' %}">Book now</a> and embark on your journey
+            Ready to ride with us? <a href="{% url 'all_schedule_cars' %}">Book now</a> and embark on your journey
             with confidence and ease!
           </p>
 

@@ -1,0 +1,67 @@
+{% extends 'my_site/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- bannerr -->
+
+<div class="banner">
+    <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+    <div class="banner-text">
+        <h1>Scheduled Cars</h1>
+    </div>
+</div>
+
+
+
+<div class="featured-cars">
+
+    <div class="featured-cars-grid">
+
+
+
+{% if schedule_cars %}
+        {% for car in schedule_cars %}
+        <div class="car">
+
+
+
+
+            <img src="{{ car.image1.url }}" alt="Hundai Car">
+            <div class="car-info">
+                <div class="car-inf-grid">
+                    <p class="carName">{{ car.car_name }}</p>
+
+                </div>
+
+
+                <div class="car-inf-grid">
+                    <div class="prices">
+                        <p>Pricing starting at</p>
+                        <strong>
+                            <p class="carPrice">GH¢{{ car.price_per_day }}/day</p>
+                        </strong>
+                    </div>
+                    <p>{{ car.category }}</p>
+
+                    <div class="more-details">
+                        <a href="{% url 'appointment' car.id %}">
+                            <button> Schedule a ride </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No car</p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}
