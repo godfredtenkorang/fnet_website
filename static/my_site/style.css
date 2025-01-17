@@ -119,7 +119,11 @@ nav {
     cursor: pointer;
     z-index: 100;
 }
-
+.remove{
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
 
 /* slide show */
 
