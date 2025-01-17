@@ -6,8 +6,20 @@ from .utils import send_sms, receive_sms, payment_send_sms, receive_payment_sms
 from my_site.models import Car
 from .forms import PaymentForm
 
-def appointment(request):
+
+def all_schedule_cars(request):
+    category = request.GET.get('category', 'Scheduled Drive')
+    schedule_cars = Car.objects.filter(category__name=category)
     
+    context = {
+        'schedule_cars': schedule_cars,
+        'title': 'Scheduled Cars'
+    }
+    
+    return render(request, 'rental/schedule_cars.html', context)
+
+def schedule_a_ride(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
     if request.method == 'POST':
         customer_name = request.POST['customer_name']
         customer_email = request.POST['customer_email']
@@ -19,7 +31,7 @@ def appointment(request):
         gps_address = request.POST['gps_address']
         purpose = request.POST['purpose']
         
-        appointments = Appointment( customer_name=customer_name, customer_email=customer_email, customer_phone=customer_phone, appointment_date=appointment_date, appointment_time=appointment_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, gps_address=gps_address, purpose=purpose)
+        appointments = Appointment(car=car, customer_name=customer_name, customer_email=customer_email, customer_phone=customer_phone, appointment_date=appointment_date, appointment_time=appointment_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, gps_address=gps_address, purpose=purpose)
         appointments.save()
         
         # send_mail(

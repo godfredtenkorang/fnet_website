@@ -34,7 +34,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
         
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
 class Car(models.Model):
     CAR_TYPES = [
@@ -87,6 +87,7 @@ class Car(models.Model):
     bluetooth_connectivity = models.CharField(max_length=10, choices=BLUETOOTH_CONNECTTIVITY)
     price_per_day = models.DecimalField(max_digits=10, decimal_places=2)
     availability_status = models.CharField(max_length=20, choices=AVAILABILITY_STATUS, default='Available')
+    year_registered = models.CharField(max_length=10, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     image1 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     image2 = models.ImageField(upload_to='car_images/', blank=True, null=True)
