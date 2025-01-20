@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
+from decimal import Decimal
 
 
 class Driver(models.Model):
@@ -86,6 +87,12 @@ class Car(models.Model):
     airbag = models.CharField(max_length=20, default='Available')
     bluetooth_connectivity = models.CharField(max_length=10, choices=BLUETOOTH_CONNECTTIVITY)
     price_per_day = models.DecimalField(max_digits=10, decimal_places=2)
+    price_per_hour = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    price_within_kumasi = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    price_outside_kumasi_inside_ashanti = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    price_outside_ashanti_to_next_region = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    price_outside_ashanti_to_next_two_regions = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    price_outside_ashanti_to_next_three_regions = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     availability_status = models.CharField(max_length=20, choices=AVAILABILITY_STATUS, default='Available')
     year_registered = models.CharField(max_length=10, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
@@ -94,9 +101,16 @@ class Car(models.Model):
     image3 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     image4 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
+    vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=25.00, help_text="VAT percentage (e.g., 25 for 25%)")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)
+    
+    def calculate_vat(self, price):
+        return (self.vat_percentage / Decimal(100)) * price
+    
+    def calculate_total_with_vat(self, price):
+        return price + self.calculate_vat(price)
 
     def __str__(self):
         return f"{self.brand} {self.car_name} ({self.registration_number})"

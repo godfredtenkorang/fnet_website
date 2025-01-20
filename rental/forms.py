@@ -6,10 +6,11 @@ from my_site.models import Driver
 class AppointmentUpdateForm(forms.ModelForm):
     class Meta:
         model = Appointment
-        fields = ['car','appointment_date', 'appointment_time', 'pick_up_location', 'drop_off_location', 'gps_address', 'driver', 'status', 'commission_rate', 'purpose']
+        fields = ['car', 'customer_name', 'customer_phone', 'schedule_date', 'pick_up_time', 'drop_off_time', 'pick_up_location', 'drop_off_location', 'gps_address', 'driver', 'status', 'commission_rate', 'purpose', 'total_price']
         widgets = {
-            'appointment_date': forms.DateInput(attrs={'type': 'date'}),
-            'appointment_time': forms.TimeInput(attrs={'type': 'time'}),
+            'schedule_date': forms.DateInput(attrs={'type': 'date'}),
+            'pick_up_time': forms.TimeInput(attrs={'type': 'time'}),
+            'drop_off_time': forms.TimeInput(attrs={'type': 'time'}),
         }
         
     def __init__(self, *args, **kwargs):
@@ -28,6 +29,6 @@ class AppointmentUpdateForm(forms.ModelForm):
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ['customer_name', 'customer_email', 'customer_phone', 'rental_date', 'return_date', 'pick_up_location', 'drop_off_location', 'payment_method', 'transaction_id']
+        fields = ['customer_name', 'customer_phone', 'rental_date', 'return_date', 'pick_up_location', 'drop_off_location', 'payment_method', 'transaction_id']
         
         

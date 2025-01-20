@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Car, Category
-from rental.models import Rental, Contact
+from rental.models import Rental, Contact, Region
 from django.conf import settings
 from django.core.mail import send_mail
-from .utils import send_sms, receive_sms, receive_contact
+from .utils import send_sms, receive_sms, receive_contact, get_location_based_price
 from django.http import JsonResponse
 
 # Create your views here.
@@ -40,12 +40,23 @@ def categories(request):
 def carDetail(request,  car_slug):
     car = get_object_or_404(Car, slug=car_slug)
     
+    regions = Region.objects.all()
+    
     if request.method == 'POST':
+        region_id = request.POST.get('region')
         customer_name = request.POST.get('customer_name')
-        customer_email = request.POST.get('customer_email')
         customer_phone = request.POST.get('customer_phone')
+        pick_up_time = request.POST.get('pick_up_time')
+        drop_off_time = request.POST.get('drop_off_time')
         rental_date = request.POST.get('rental_date')
         return_date = request.POST.get('return_date')
+        location_category = request.POST.get('location_category')
+        town = request.POST.get('town')
+        document_type = request.POST.get('document_type')
+        document_number = request.POST.get('document_number')
+        
+        region = get_object_or_404(Region, id=region_id)
+        daily_price = get_location_based_price(car, location_category)
         
         from datetime import datetime
 
@@ -54,9 +65,9 @@ def carDetail(request,  car_slug):
 
         # Calculate total price based on rental days
         rental_days = (return_date - rental_date).days
-        total_price = rental_days * car.price_per_day if rental_days > 0 else 0
+        total_price = rental_days * daily_price if rental_days > 0 else 0
         
-        rentals = Rental(car=car, customer_name=customer_name, customer_email=customer_email, customer_phone=customer_phone, rental_date=rental_date, return_date=return_date, total_price=total_price)
+        rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, region=region, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
         rentals.save()
         
         # send_mail(
@@ -79,6 +90,7 @@ def carDetail(request,  car_slug):
     
     context = {
         'car':car,
+        'regions': regions,
         'title': 'Car Detail'
     }
     return render(request, 'my_site/carDetail.html', context)

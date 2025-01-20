@@ -10,8 +10,8 @@
                 <tr>
                     <th>Customer Name</th>
                     <th>Phone Number</th>
-                    <th>Appointment Date</th>
-                    <th>Appointment Time</th>
+                    <th>Pick up Time</th>
+                    <th>drop_off_time</th>
                     <th>Pick up Location</th>
                     <th>Drop of Location</th>
                     <th>Update</th>
@@ -24,8 +24,8 @@
                 <tr>
                     <td>{{ appointment.customer_name }}</td>
                     <td>{{ appointment.customer_phone }}</td>
-                    <td>{{ appointment.appointment_date }}</td>
-                    <td>{{ appointment.appointment_time }}</td>
+                    <td>{{ appointment.pick_up_time }}</td>
+                    <td>{{ appointment.drop_off_time }}</td>
                     <td>{{ appointment.pick_up_location }}</td>
                     <td>{{ appointment.drop_off_location }}</td>
                     <td><a href="{% url 'create-appointment' appointment.id %}">Link</a></td>

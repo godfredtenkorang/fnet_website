@@ -2,15 +2,50 @@ from django.db import models
 from my_site.models import Car, Driver
 import uuid
 
+    
+class Region(models.Model):
+    REGIONS = [
+        ('⁠Ashanti Region', '⁠Ashanti Region'),
+        ('⁠Greater Accra Region', ' ⁠Greater Accra Region'),
+        ('Western Region', 'Western Region'),
+        ('Western North Region', 'Western North Region'),
+        ('Central Region', 'Central Region'),
+        ('Eastern Region', 'Eastern Region'),
+        ('⁠Volta Region', '⁠Volta Region'),
+        ('Oti Region', 'Oti Region'),
+        ('⁠Northern Region', '⁠Northern Region'),
+        ('⁠Savannah Region', '⁠Savannah Region'),
+        ('North East Region', 'North East Region'),
+        ('Upper East Region', 'Upper East Region'),
+        ('⁠Upper West Region', '⁠Upper West Region'),
+        ('Bono Region', 'Bono Region'),
+        ('Bono East Region', 'Bono East Region'),
+        ('Ahafo Region', 'Ahafo Region'),
+    ]
+    name = models.CharField(max_length=100, choices=REGIONS)
+
+    def __str__(self):
+        return self.name
+
 
 class Rental(models.Model):
+    DOCUMENT_TYPE = [
+        ('Ghana Card', 'Ghana Card'),
+        ('Passport', 'Passport'),
+    ]
     customer_name = models.CharField(max_length=100)
-    customer_email = models.EmailField(null=True, blank=True)
     customer_phone = models.CharField(max_length=15)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='rentals')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='rentals', null=True, blank=True)
+    location_category = models.CharField(max_length=100, default='')
+    town = models.CharField(max_length=250, default='')
+    pick_up_time = models.TimeField(null=True, blank=True)
+    drop_off_time = models.TimeField(null=True, blank=True)
     rental_date = models.DateField()
     return_date = models.DateField()
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    document_type = models.CharField(max_length=100, choices=DOCUMENT_TYPE, default='Ghana Card')
+    document_number = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -30,10 +65,10 @@ class Appointment(models.Model):
     ]
     car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True, blank=True, related_name='appointments')
     customer_name = models.CharField(max_length=100)
-    customer_email = models.EmailField(null=True, blank=True)
     customer_phone = models.CharField(max_length=15)
-    appointment_date = models.DateField()
-    appointment_time = models.TimeField()
+    schedule_date = models.DateField()
+    pick_up_time = models.TimeField(null=True, blank=True)
+    drop_off_time = models.TimeField(null=True, blank=True)
     pick_up_location = models.CharField(max_length=250, null=True)
     drop_off_location = models.CharField(max_length=250, null=True)
     gps_address = models.CharField(max_length=100, null=True)
@@ -43,10 +78,15 @@ class Appointment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=10.00)
-    
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     
     class Meta:
         ordering = ['-created_at']
+        
+    def calculate_total_price(self):
+        # Calculation duration in hours
+        duration = (self.drop_off_time - self.pick_up_time).total_seconds() / 3600
+        return round(self.car.price_per_day * duration, 2)
         
     def calculate_commission(self):
         if self.car and self.driver:
@@ -56,20 +96,31 @@ class Appointment(models.Model):
             
 
     def __str__(self):
-        return f"Appointment with {self.customer_name} on {self.appointment_date} at {self.appointment_time}"
+        return f"Schedule ride with {self.customer_name} on {self.schedule_date} at {self.pick_up_time} - GH¢ {self.total_price:.2f}"
     
 
     
 class Payment(models.Model):
+    DOCUMENT_TYPE = [
+        ('Ghana Card', 'Ghana Card'),
+        ('Passport', 'Passport'),
+    ]
+    
     customer_name = models.CharField(max_length=100)
-    customer_email = models.EmailField(null=True, blank=True)
     customer_phone = models.CharField(max_length=15)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='payments')
     rental_date = models.DateField()
     return_date = models.DateField()
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='payments', null=True, blank=True)
+    location_category = models.CharField(max_length=100, default='')
+    town = models.CharField(max_length=250, default='')
+    pick_up_time = models.TimeField(null=True, blank=True)
+    drop_off_time = models.TimeField(null=True, blank=True)
     pick_up_location = models.CharField(max_length=100, null=True, blank=True)
     drop_off_location = models.CharField(max_length=100, null=True, blank=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    document_type = models.CharField(max_length=100, choices=DOCUMENT_TYPE, default='Ghana Card')
+    document_number = models.CharField(max_length=100, null=True, blank=True)
     payment_method = models.CharField(max_length=50)
     momo_code = models.CharField(max_length=50, null=True, blank=True, choices=[('123456', '123456')])
     transaction_id = models.CharField(max_length=50)

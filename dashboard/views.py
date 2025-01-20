@@ -89,9 +89,9 @@ def view_expenses(request):
     car_name = 'All Cars'
     month_name = 'All Months'
     if car_id:
-        car = get_object_or_404(MyCar, id=car_id)
+        car = get_object_or_404(Car, id=car_id)
         expenses = expenses.filter(car_id=car_id)
-        car_name = car.name
+        car_name = car.car_name
     if month:
         expenses = expenses.filter(month=month)
         month_name = month
@@ -100,21 +100,19 @@ def view_expenses(request):
     
     totals = expenses.aggregate(
         total_amount_received=Sum('amount_received'),
-        total_drivers_commission=Sum('drivers_commission'),
         total_other_expenses=Sum('other_expenses'),
         total_amount=Sum('amount')
     )
     
     all_totals = Expense.objects.aggregate(
         total_amount_received=Sum('amount_received'),
-        total_drivers_commission=Sum('drivers_commission'),
         total_other_expenses=Sum('other_expenses'),
         total_amount=Sum('amount')
     )
     
     return render(request, 'dashboard/expenses/view_expenses.html', {
         'expenses': expenses,
-        'cars': MyCar.objects.all(),
+        'cars': Car.objects.all(),
         'car': car_name,
         'month': month_name,
         'total_amount': total_amount,
@@ -136,7 +134,7 @@ def get_pdf(request):
     
     return render(request, 'dashboard/expenses/get_pdf.html', {
         
-        'cars': MyCar.objects.all(),
+        'cars': Car.objects.all(),
         
         
     })
@@ -149,23 +147,21 @@ def download_pdf(request):
     car_name = 'All Cars'
     month_name = 'All Months'
     if car_id:
-        car = get_object_or_404(MyCar, id=car_id)
+        car = get_object_or_404(Car, id=car_id)
         expenses = expenses.filter(car_id=car_id)
-        car_name = car.name
+        car_name = car.car_name
     if month:
         expenses = expenses.filter(month=month)
         month_name = month
         
     totals = expenses.aggregate(
         total_amount_received=Sum('amount_received'),
-        total_drivers_commission=Sum('drivers_commission'),
         total_other_expenses=Sum('other_expenses'),
         total_amount=Sum('amount')
     )
     
     all_totals = Expense.objects.aggregate(
         total_amount_received=Sum('amount_received'),
-        total_drivers_commission=Sum('drivers_commission'),
         total_other_expenses=Sum('other_expenses'),
         total_amount=Sum('amount')
     )

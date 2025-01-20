@@ -6,15 +6,29 @@ class MyCar(models.Model):
 
     def __str__(self):
         return self.name
+    
+MONTHS = [
+    ('January', 'January'),
+    ('Febuary', 'Febuary'),
+    ('March', 'March'),
+    ('April', 'April'),
+    ('May', 'May'),
+    ('June', 'June'),
+    ('July', 'July'),
+    ('August', 'August'),
+    ('September', 'September'),
+    ('October', 'October'),
+    ('November', 'November'),
+    ('December', 'December'),
+]
 
 class Expense(models.Model):
     date = models.DateField()
-    car = models.ForeignKey(MyCar, on_delete=models.CASCADE, related_name='expenses')
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='expenses')
     amount_received = models.DecimalField(max_digits=10, decimal_places=2)
-    drivers_commission = models.DecimalField(max_digits=10, decimal_places=2)
     other_expenses = models.DecimalField(max_digits=10, decimal_places=2)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    month = models.CharField(max_length=20)
+    month = models.CharField(max_length=20, choices=MONTHS)
 
     def __str__(self):
         return f"{self.car.name} - {self.date}"
