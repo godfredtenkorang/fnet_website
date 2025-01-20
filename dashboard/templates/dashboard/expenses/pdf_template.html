@@ -27,7 +27,6 @@
             <th>Date</th>
             <th>Car</th>
             <th>Amount Received</th>
-            <th>Driver's Commission</th>
             <th>Other Expenses</th>
             <th>Amount</th>
             <th>Month</th>
@@ -37,7 +36,6 @@
             <td>{{ expense.date }}</td>
             <td>{{ expense.car.name }}</td>
             <td>GH¢{{ expense.amount_received }}</td>
-            <td>GH¢{{ expense.drivers_commission }}</td>
             <td>GH¢{{ expense.other_expenses }}</td>
             <td>GH¢{{ expense.amount }}</td>
             <td>{{ expense.month }}</td>
@@ -50,10 +48,6 @@
         <tr>
             <th>Total Amount Received</th>
             <td>GH¢{{ totals.total_amount_received|default:"0.00" }}</td>
-        </tr>
-        <tr>
-            <th>Total Driver's Commission</th>
-            <td>GH¢{{ totals.total_drivers_commission|default:"0.00" }}</td>
         </tr>
         <tr>
             <th>Total Other Expenses</th>
@@ -71,10 +65,6 @@
         <tr>
             <th>Total Amount Received</th>
             <td>GH¢{{ all_totals.total_amount_received|default:"0.00" }}</td>
-        </tr>
-        <tr>
-            <th>Total Driver's Commission</th>
-            <td>GH¢{{ all_totals.total_drivers_commission|default:"0.00" }}</td>
         </tr>
         <tr>
             <th>Total Other Expenses</th>

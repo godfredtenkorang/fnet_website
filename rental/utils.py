@@ -1,14 +1,14 @@
 import requests
 from django.conf import settings
 
-def send_sms(phone_number, customer_name, appointment_date, appointment_time, purpose):
+def send_sms(phone_number, customer_name, schedule_date, pick_up_time, purpose):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
         "sender": 'GodeyTech',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, your booking is on pending. \n" "Schedule Details: \n" f"Date: {appointment_date} \n" f"Time: {appointment_time} \n" f"Note: {purpose} \n\n" "We look forward to serving you!",
+        "message": f"Dear {customer_name}, your booking is on pending. \n" "Schedule Details: \n" f"Date: {schedule_date} \n" f"Time: {pick_up_time} \n" f"Note: {purpose} \n\n" "We look forward to serving you!",
         "is_schedule": False,
         "schedule_date": ''
     }
@@ -27,14 +27,14 @@ def send_sms(phone_number, customer_name, appointment_date, appointment_time, pu
         print(f"Error sending SMS: {e}")
         return None
 
-def receive_sms(customer_name, customer_phone, appointment_date, appointment_time, purpose):
+def receive_sms(customer_name, customer_phone, schedule_date, pick_up_time, purpose):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
         "sender": 'GodeyTech',
         "recipient[]": '0553912334',
-        "message": f"New Schedule Details: \n" f"Customer Name: {customer_name} \n" f"Phone: {customer_phone} \n" f"Rental Date: {appointment_date} \n" f"Return Date: {appointment_time} \n" f"Note: {purpose}",
+        "message": f"New Schedule Details: \n" f"Customer Name: {customer_name} \n" f"Phone: {customer_phone} \n" f"Rental Date: {schedule_date} \n" f"Pick up Time: {pick_up_time} \n" f"Note: {purpose}",
         "is_schedule": False,
         "schedule_date": ''
     }

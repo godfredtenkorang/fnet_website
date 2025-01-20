@@ -1,5 +1,5 @@
-{% extends 'my_site/base.html' %} 
-{% load static %} 
+{% extends 'my_site/base.html' %}
+{% load static %}
 {% block content %}
 
 
@@ -13,96 +13,154 @@
 </div>
 
 <div class="contact-us-section booking-container">
-   
-    
+
+
     <div class="contact-form">
-        <h2>Price per day: GH¢{{ car.price_per_day }}</h2>
+        <h2>Price per day: GH¢{{ car.price_within_kumasi }}</h2>
         <p>Car: {{ car.car_name }}</p>
         <br>
         <p>Fill out the from below to pay and book for your favourite car</p>
         <form method="POST">
             {% csrf_token %}
 
-         <div class="set-flex">
-            <div class="input-flex">
+            <div class="set-flex">
+                <div class="input-flex">
 
-                <div class="input">
-                    <label for="">Name </label> <br>
-                    <input type="text" name="customer_name" id="customer_name" required placeholder="Benjamin Ohene Asare">
-                </div>
-                
-                <div class="input">
-                    <label for="">Email </label> <br>
-                    <input type="text" name="customer_email" id="customer_email" placeholder="benjaminoheneasare@gmail.com">
-                </div>
-                <div class="input">
-                    <label for="">Phone </label> <br>
-                    <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required placeholder="0558156844">
-                </div>
+                    <div class="input">
+                        <label for="">Name </label> <br>
+                        <input type="text" name="customer_name" id="customer_name" required
+                            placeholder="Benjamin Ohene Asare">
+                    </div>
 
-                <div class="input">
-                    <label for="">Rental date</label> <br>
-                    <input type="date" name="rental_date" id="rental_date" required>
-                </div>
+                   
+                    <div class="input">
+                        <label for="">Phone </label> <br>
+                        <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required
+                            placeholder="0558156844">
+                    </div>
 
+                    <div class="input">
+                        <label for="">Rental date</label> <br>
+                        <input type="date" name="rental_date" id="rental_date" required>
+                    </div>
 
 
-                <div class="input">
-                    <label for="">Return Date</label> <br>
-                    <input type="date" name="return_date" id="return_date" required>
+
+                    <div class="input">
+                        <label for="">Return Date</label> <br>
+                        <input type="date" name="return_date" id="return_date" required>
+                    </div>
+                    <div class="input">
+                        <label for="">Region</label> <br>
+                        <select name="region" id="region">
+                            {% for region in regions %}
+                            <option value="{{ region.id }}">{{region.name}}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">Town </label> <br>
+                        <input type="text" name="town" id="town" required
+                            placeholder="eg. Adum, Offinso, Koforidua etc">
+                    </div>
+                    <div class="input">
+                        <label for="">Pick up Time</label> <br>
+                        <input type="time" name="pick_up_time" required>
+                    </div>
+                    <div class="input">
+                        <label for="">Drop off Time</label> <br>
+                        <input type="time" name="drop_off_time" required>
+                    </div>
+
+
                 </div>
+                <!-- Hidden JSON Data for Pricing -->
+                <script type="application/json" id="pricing_data">
+                    {
+                        "within_kumasi": "{{ car.price_within_kumasi }}",
+                        "outside_kumasi_inside_ashanti": "{{ car.price_outside_kumasi_inside_ashanti }}",
+                        "outside_ashanti_to_next_region": "{{ car.price_outside_ashanti_to_next_region }}",
+                        "outside_ashanti_to_next_two_regions": "{{ car.price_outside_ashanti_to_next_two_regions }}",
+                        "outside_ashanti_to_next_three_regions": "{{ car.price_outside_ashanti_to_next_three_regions }}"
+                    }
+                 </script>
+                <div class="input-flex">
+
+                    <div class="input">
+                        <label for="location_category">Location:</label>
+                        <select id="location_category" name="location_category" required>
+
+                            <option value="within_kumasi">Within Kumasi</option>
+                            <option value="outside_kumasi_inside_ashanti">Outside Kumasi (Inside Ashanti Region)
+                            </option>
+                            <option value="outside_ashanti_to_next_region">Outside Ashanti Region (Next Region)</option>
+                            <option value="outside_ashanti_to_next_two_regions">Outside Ashanti Region (Next Two
+                                Regions)</option>
+                            <option value="outside_ashanti_to_next_three_regions">Outside Ashanti Region (Next Three
+                                Regions)</option>
+                        </select>
+                    </div>
+                    <h3>Location Price: GH¢<span id="price_display">0.00</span></h3>
+                    <br>
+                    <div class="input">
+                        <label for="">Pick up Location</label> <br>
+                        <input type="text" name="pick_up_location" id="pick_up_location" required>
+                    </div>
+                    <div class="input">
+                        <label for="">Drop off Location</label> <br>
+                        <input type="text" name="drop_off_location" id="drop_off_location" required>
+                    </div>
+                    <div class="input">
+                        <label for="">Document Type</label> <br>
+                        <select name="document_type" id="document_type">
+                            <option value="Ghana Card">Ghana Card</option>
+                            <option value="Passport">Passport</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">Document No. </label> <br>
+                        <input type="text" name="document_number" id="document_number" required placeholder="GHA-xxxxxxxxxxxx-x">
+                    </div>
+                    <div class="input">
+                        <label for="">Payment Method</label> <br>
+                        <select name="payment_method" id="payment_method">
+                            <option value="Mobile Money"> Mobile Money</option>
+                            <option value="Bank"> Bank</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">MoMo code / Bank Account Number</label> <br>
+                        <select name="momo_code" id="momo_code">
+                            <option value="123456">Momo Code: 123456</option>
+                            <option value="267408965387693">Bank (ECOBANK): 696767267562</option>
+                        </select>
+                    </div>
+                    <div class="input">
+                        <label for="">Transaction ID</label> <br>
+                        <input type="text" name="transaction_id" id="transaction_id" required>
+                    </div>
+
+
+                </div>
+
+
+
+
 
 
             </div>
 
-            <div class="input-flex">
-               
-                <div class="input">
-                    <label for="">Pick up Location</label> <br>
-                    <input type="text" name="pick_up_location" id="pick_up_location" required>
-                </div>
-                <div class="input">
-                    <label for="">Drop off Location</label> <br>
-                    <input type="text" name="drop_off_location" id="drop_off_location" required>
-                </div>
-                <div class="input">
-                    <label for="">Payment Method</label> <br>
-                    <select name="payment_method" id="payment_method">
-                        <option value="Mobile Money"> Mobile Money</option>
-                        <option value="Bank"> Bank</option>
-                    </select>
-                </div>
-                <div class="input">
-                    <label for="">MoMo code / Bank Account Number</label> <br>
-                    <select name="momo_code" id="momo_code">
-                        <option value="123456">Momo Code: 123456</option>
-                        <option value="267408965387693">Bank (ECOBANK): 696767267562</option>
-                    </select>
-                </div>
-                <div class="input">
-                    <label for="">Transaction ID</label> <br>
-                    <input type="text" name="transaction_id" id="transaction_id" required>
-                </div>
-                
-
-            </div>
 
 
 
 
-
-
-         </div>
-            
-            
-            
-            
-           
             <h3>Total Price: GH¢<span id="total_price">0.00</span></h3>
             <br>
-           
-         <p>Please make your payment and ensure you insert the transaction ID in the designated 'Transaction ID' field to complete
-        the process.</p>
+
+            <p>Please make your payment and ensure you insert the transaction ID in the designated 'Transaction ID'
+                field to complete
+                the process.</p>
             <button type="submit">Book Now</button>
 
 
@@ -115,16 +173,32 @@
 
     document.getElementById('rental_date').addEventListener('change', updateTotalPrice);
     document.getElementById('return_date').addEventListener('change', updateTotalPrice);
+    document.getElementById('location_category').addEventListener('change', updateTotalPrice);
 
     function updateTotalPrice() {
         const rentalDate = new Date(document.getElementById('rental_date').value);
         const returnDate = new Date(document.getElementById('return_date').value);
+        const location_category = document.getElementById('location_category').value;
+        const pricing = JSON.parse(document.getElementById('pricing_data').textContent);
+        const priceDisplay = document.getElementById("price_display");
+
+
 
         if (rentalDate && returnDate && rentalDate < returnDate) {
+            if (pricing[location_category]) {
+                priceDisplay.textContent = `GH¢ ${pricing[location_category]}`
+            } else {
+                priceDisplay.textContent = "Select a valid location";
+            }
+
             const timeDiff = returnDate - rentalDate;
             const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-            const totalPrice = rentalDays * pricePerDay;
+
+
+            const totalPrice = rentalDays * (pricing[location_category]);
+
+
             document.getElementById('total_price').innerHTML = totalPrice.toFixed(2);
         } else {
             document.getElementById('total_price').innerHTML = "0.00";

@@ -79,3 +79,24 @@ def receive_contact(name, email, phone, message):
     except requests.exceptions.RequestException as e:
         print(f"Error sending SMS: {e}")
         return None
+
+
+def get_location_based_price(car, location_category):
+    """
+    Calculate the price of the car based on the selected location category.
+    :param car: Car instance
+    :param location_category: Selected location category
+    :return: Decimal price
+    """
+    if location_category == "within_kumasi":
+        return car.price_within_kumasi
+    elif location_category == "outside_kumasi_inside_ashanti":
+        return car.price_outside_kumasi_inside_ashanti
+    elif location_category == "outside_ashanti_to_next_region":
+        return car.price_outside_ashanti_to_next_region
+    elif location_category == "outside_ashanti_to_next_two_regions":
+        return car.price_outside_ashanti_to_next_two_regions
+    elif location_category == "outside_ashanti_to_next_three_regions":
+        return car.price_outside_ashanti_to_next_three_regions
+    else:
+        raise ValueError("Invalid location category")
