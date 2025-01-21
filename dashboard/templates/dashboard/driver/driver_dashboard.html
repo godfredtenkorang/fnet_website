@@ -20,10 +20,60 @@
             <tbody>
                 {% for appointment in appointments %}
                 <tr>
-                    <td>{{ appointment.car.brand }} {{ appointment.car.model }}</td>
-                    <td>{{ appointment.appointment_date }}</td>
-                    <td>{{ appointment.appointment_time }}</td>
-                    <td>GH¢{{ appointment.calculate_commission }}</td>
+                    <td>{{ appointment.car.car_name }} {{ appointment.car.brand }}</td>
+                    <td>{{ appointment.schedule_date }}</td>
+                    <td>{{ appointment.pick_up_time }}</td>
+                    <td>GH¢{{ appointment.commission_rate }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Completed Bookings</h2>
+    <div class="responsive-table">
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Commission</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                <tr>
+                    <td>{{ rental.car.car_name }} - {{ rental.car.brand }}</td>
+                    <td>{{ rental.pick_up_time }}</td>
+                    <td>{{ rental.drop_off_time }}</td>
+                    <td>GH¢{{ rental.commission_rate }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Completed Booking Payments</h2>
+    <div class="responsive-table">
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Commission</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.car.car_name }} - {{ payment.car.brand }}</td>
+                    <td>{{ payment.pick_up_time }}</td>
+                    <td>{{ payment.drop_off_time }}</td>
+                    <td>GH¢{{ payment.commission_rate }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
