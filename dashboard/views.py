@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment, Payment
 from my_site.models import Car, Driver
 from my_site.forms import DriverForm
-from .utils import send_sms, appointment_update_sms, driver_license_sms
+from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms
 from .models import SMSLog
 from django.http import HttpResponse
 
@@ -15,7 +15,7 @@ from io import BytesIO
 from django.template.loader import render_to_string
 
 from django.db.models import Q
-from rental.forms import AppointmentUpdateForm
+from rental.forms import AppointmentUpdateForm, RentalUpdateForm, RentalPaymentUpdateForm
 
 
 def dashboard(request):
@@ -51,9 +51,88 @@ def bookings(request):
     rentals = Rental.objects.all()
     return render(request, 'dashboard/bookings.html', {'rentals': rentals})
 
+def update_rentals(request, rental_id):
+    # Get the specific appointment by its ID
+    rental = get_object_or_404(Rental, id=rental_id)
+    
+    if request.method == 'POST':
+        form = RentalUpdateForm(request.POST, instance=rental)
+        if form.is_valid():
+            update_rentals = form.save()
+            
+            if update_rentals.driver:
+                update_rentals.driver.is_available == False
+                update_rentals.driver.save()
+                
+            rental_update_sms(rental.customer_phone, rental.customer_name, rental.rental_date, rental.rental_date, rental.driver)
+            return redirect('bookings')  # Redirect to the rentals list or another relevant page
+    else:
+        form = RentalUpdateForm(instance=rental)
+
+    return render(request, 'dashboard/booking_forms_update.html', {
+        'rental': rental,
+        'form': form,
+    })
+    
+def complete_rental(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    
+    if rental.status != 'Completed':
+        commission = rental.commission_rate
+        
+        if rental.driver:
+            rental.driver.commission += commission
+            rental.driver.save()
+            
+        rental.status = 'Completed'
+        rental.save()
+        
+    return redirect('bookings')
+
+
 def booking_payments(request):
     payments = Payment.objects.all()
     return render(request, 'dashboard/booking_payments.html', {'payments': payments})
+
+def update_rental_payment(request, rental_id):
+    # Get the specific appointment by its ID
+    rental_payment = get_object_or_404(Payment, id=rental_id)
+    
+    if request.method == 'POST':
+        form = RentalPaymentUpdateForm(request.POST, instance=rental_payment)
+        if form.is_valid():
+            update_rental_payment = form.save()
+            
+            if update_rental_payment.driver:
+                update_rental_payment.driver.is_available == False
+                update_rental_payment.driver.save()
+                
+            rental_payment_update_sms(rental_payment.customer_phone, rental_payment.customer_name, rental_payment.rental_date, rental_payment.rental_date, rental_payment.driver)
+            return redirect('booking_payments')  # Redirect to the rentals list or another relevant page
+    else:
+        form = RentalPaymentUpdateForm(instance=rental_payment)
+
+    return render(request, 'dashboard/booking_forms_update.html', {
+        'rental_rental': rental_payment,
+        'form': form,
+    })
+    
+def complete_rental_payment(request, rental_id):
+    rental_payment = get_object_or_404(Payment, id=rental_id)
+    
+    if rental_payment.status != 'Completed':
+        commission = rental_payment.commission_rate
+        
+        if rental_payment.driver:
+            rental_payment.driver.commission += commission
+            rental_payment.driver.save()
+            
+        rental_payment.status = 'Completed'
+        rental_payment.save()
+        
+    return redirect('booking_payments')
+    
+
 
 def print_payment_receipt(request, receipt_id):
     payment = Payment.objects.get(id=receipt_id)
@@ -231,7 +310,7 @@ def update_appointment(request, appointment_id):
                 update_appointment.driver.is_available == False
                 update_appointment.driver.save()
                 
-            appointment_update_sms(appointment.customer_phone, appointment.customer_name, appointment.appointment_date, appointment.appointment_time, appointment.driver)
+            appointment_update_sms(appointment.customer_phone, appointment.customer_name, appointment.schedule_date, appointment.pick_up_time, appointment.driver)
             return redirect('appointments')  # Redirect to the appointment list or another relevant page
     else:
         form = AppointmentUpdateForm(instance=appointment)
@@ -246,7 +325,7 @@ def complete_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, id=appointment_id)
     
     if appointment.status != 'Completed':
-        commission = appointment.calculate_commission()
+        commission = appointment.commission_rate
         
         if appointment.driver:
             appointment.driver.commission += commission
@@ -262,11 +341,15 @@ def complete_appointment(request, appointment_id):
 def driver_dashboard(request, driver_id):
     driver = get_object_or_404(Driver, id=driver_id)
     appointments = Appointment.objects.filter(driver=driver, status='Completed')
+    rentals = Rental.objects.filter(driver=driver, status='Completed')
+    payments = Payment.objects.filter(driver=driver, status='Completed')
     total_commission = driver.commission
     
     return render(request, 'dashboard/driver/driver_dashboard.html', {
         'driver': driver,
         'appointments': appointments,
+        'rentals': rentals,
+        'payments': payments,
         'total_commission': total_commission,
     })
 

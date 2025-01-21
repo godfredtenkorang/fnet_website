@@ -5,9 +5,18 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('contact/', views.contact, name='contact'),
     path('sendMessage/', views.sendMessage, name='sendMessage'),
+    
     path('bookings/', views.bookings, name='bookings'),
+    path('bookings/<int:rental_id>/update/', views.update_rentals, name='update-rental'),
+    path('bookings/<int:rental_id>/complete/', views.complete_rental, name='complete-rental'),
+    
+    
     path('bookings_payments/', views.booking_payments, name='booking_payments'),
+    path('booking_payment/<int:rental_id>/update/', views.update_rental_payment, name='update-rental-payment'),
+    path('booking/<int:rental_id>/complete/', views.complete_rental_payment, name='complete-rental-payment'),
     path('print_book_receipt/<int:receipt_id>/', views.print_payment_receipt, name='print_payment_receipt'),
+    
+    
     path('appointments/', views.appointments, name='appointments'),
     path('appointments/<int:appointment_id>/assign_driver/', views.update_appointment, name='create-appointment'),
     path('appointments/<int:appointment_id>/complete/', views.complete_appointment, name='complete-appointment'),

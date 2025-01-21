@@ -83,8 +83,8 @@ def carDetail(request,  car_slug):
         #     fail_silently=False,
         # )
         
-        send_sms(customer_phone, customer_name, car.car_name, rental_date, return_date, total_price)
-        receive_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, total_price)
+        send_sms(customer_phone, customer_name, car.car_name, rental_date, return_date, region, location_category, town, pick_up_time, drop_off_time, total_price)
+        receive_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, region, location_category, town, pick_up_time, drop_off_time, total_price)
         
         return redirect('sucessPage')
     

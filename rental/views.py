@@ -60,8 +60,8 @@ def schedule_a_ride(request, car_id):
         #     f'Return Date: {return_date}\n'
         #     f'Total Price: ${total_price}',
         # )
-        send_sms(customer_phone, customer_name, schedule_date, pick_up_time, purpose)
-        receive_sms(customer_name, customer_phone, schedule_date, pick_up_time, purpose)
+        send_sms(customer_phone, customer_name, schedule_date, pick_up_time, drop_off_time, pick_up_location, drop_off_location, gps_address, purpose)
+        receive_sms(customer_name, customer_phone, schedule_date, pick_up_time, drop_off_time, pick_up_location, drop_off_location, gps_address, purpose)
         
         return redirect('sucess-page')
     
@@ -102,12 +102,24 @@ def process_payment(request, car_slug):
 
         rental_date = datetime.strptime(rental_date, '%Y-%m-%d').date()
         return_date = datetime.strptime(return_date, '%Y-%m-%d').date()
+        
+        
 
         # Calculate total price based on rental days
         rental_days = (return_date - rental_date).days
         total_price = rental_days * daily_price if rental_days > 0 else 0
         
-        payments = Payment(car=car, customer_name=customer_name, customer_phone=customer_phone, rental_date=rental_date, return_date=return_date, region=region, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, document_type=document_type, document_number=document_number, payment_method=payment_method, momo_code=momo_code, transaction_id=transaction_id, total_price=total_price)
+        vat_percentage = Decimal(0.25) # 25% VAT
+        print(vat_percentage)
+        vat_amount = total_price * vat_percentage
+        print(vat_amount)
+        base_price = total_price - vat_amount
+        print(base_price)
+        total_price_with_vat = base_price + vat_amount
+        print(total_price_with_vat)
+        
+        
+        payments = Payment(car=car, customer_name=customer_name, customer_phone=customer_phone, rental_date=rental_date, return_date=return_date, region=region, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, document_type=document_type, document_number=document_number, payment_method=payment_method, momo_code=momo_code, transaction_id=transaction_id, base_price=base_price, vat_amount=vat_amount, total_price=total_price_with_vat)
         payments.car = car
         payments.is_successful = True
         payments.save()
@@ -115,7 +127,7 @@ def process_payment(request, car_slug):
         payment_send_sms(customer_phone, customer_name, car.car_name, rental_date, return_date, pick_up_location, drop_off_location, transaction_id, total_price)
         receive_payment_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, pick_up_location, drop_off_location, transaction_id, total_price)
         
-        return redirect('index')
+        return redirect('sucessPage')
     
 
     

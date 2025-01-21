@@ -1,6 +1,7 @@
 from django.db import models
 from my_site.models import Car, Driver
 import uuid
+from decimal import Decimal
 
     
 class Region(models.Model):
@@ -33,6 +34,12 @@ class Rental(models.Model):
         ('Ghana Card', 'Ghana Card'),
         ('Passport', 'Passport'),
     ]
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Confirmed', 'Confirmed'),
+        ('Cancelled', 'Cancelled'),
+        ('Completed', 'Completed'),
+    ]
     customer_name = models.CharField(max_length=100)
     customer_phone = models.CharField(max_length=15)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='rentals')
@@ -46,6 +53,9 @@ class Rental(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     document_type = models.CharField(max_length=100, choices=DOCUMENT_TYPE, default='Ghana Card')
     document_number = models.CharField(max_length=100, null=True, blank=True)
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='rentals')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+    commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -83,16 +93,6 @@ class Appointment(models.Model):
     class Meta:
         ordering = ['-created_at']
         
-    def calculate_total_price(self):
-        # Calculation duration in hours
-        duration = (self.drop_off_time - self.pick_up_time).total_seconds() / 3600
-        return round(self.car.price_per_day * duration, 2)
-        
-    def calculate_commission(self):
-        if self.car and self.driver:
-            rental_fee = self.car.price_per_day
-            return (rental_fee * self.commission_rate) / 100
-        return 0.00
             
 
     def __str__(self):
@@ -105,7 +105,12 @@ class Payment(models.Model):
         ('Ghana Card', 'Ghana Card'),
         ('Passport', 'Passport'),
     ]
-    
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Confirmed', 'Confirmed'),
+        ('Cancelled', 'Cancelled'),
+        ('Completed', 'Completed'),
+    ]
     customer_name = models.CharField(max_length=100)
     customer_phone = models.CharField(max_length=15)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='payments')
@@ -118,12 +123,18 @@ class Payment(models.Model):
     drop_off_time = models.TimeField(null=True, blank=True)
     pick_up_location = models.CharField(max_length=100, null=True, blank=True)
     drop_off_location = models.CharField(max_length=100, null=True, blank=True)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     document_type = models.CharField(max_length=100, choices=DOCUMENT_TYPE, default='Ghana Card')
     document_number = models.CharField(max_length=100, null=True, blank=True)
     payment_method = models.CharField(max_length=50)
     momo_code = models.CharField(max_length=50, null=True, blank=True, choices=[('123456', '123456')])
     transaction_id = models.CharField(max_length=50)
+    driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='payments')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+    commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=25.00)
+    base_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    vat_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_successful = models.BooleanField(default=False)
@@ -138,6 +149,8 @@ class Payment(models.Model):
             super().save(*args, **kwargs)
             self.invoice_number = f"TL/IN/{self.updated_at.strftime('%Y%m%d')}-{uuid.uuid4().hex[:4].upper()}"
         super().save(*args, **kwargs)
+        
+    
 
     def __str__(self):
         return f"Payment by {self.customer_name} for {self.car} - {self.total_price}"

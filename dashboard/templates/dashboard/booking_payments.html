@@ -11,13 +11,15 @@
                     <th>Customer Name</th>
                     <th>Phone Number Name</th>
                     <th>Car Name</th>
-                    <th>Car Number</th>
+                    
                     <th>Rental Date</th>
                     <th>Return Date</th>
                     <th>Pick up Location</th>
                     <th>Drop off Location</th>
-                    <th>Transaction ID</th>
+                    
                     <th>Total Price</th>
+                    <th>Update</th>
+                    <th>Status</th>
                     <th>Receipt</th>
                 </tr>
             </thead>
@@ -27,13 +29,19 @@
                     <td>{{ payment.customer_name }}</td>
                     <td>{{ payment.customer_phone }}</td>
                     <td>{{ payment.car.car_name }}</td>
-                    <td>{{ payment.car.registration_number }}</td>
+                    
                     <td>{{ payment.rental_date }}</td>
                     <td>{{ payment.return_date }}</td>
                     <td>{{ payment.pick_up_location }}</td>
                     <td>{{ payment.drop_off_location }}</td>
-                    <td>{{ payment.transaction_id }}</td>
+                    
                     <td>{{ payment.total_price }}</td>
+                    <td><a href="{% url 'update-rental-payment' payment.id %}">Link</a></td>
+                    {% if payment.status != 'Completed' %}
+                    <td><a href="{% url 'complete-rental-payment' payment.id %}">{{ payment.status }}</a></td>
+                    {% else %}
+                    <td>completed</td>
+                    {% endif %}
                     <td><a href="{% url 'print_payment_receipt' payment.id %}">Download</a></td>
                 </tr>
                 {% endfor %}
