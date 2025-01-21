@@ -33,7 +33,7 @@
     {% for expense in expenses %}
     <tr>
         <td>{{ expense.date }}</td>
-        <td>{{ expense.car.name }}</td>
+        <td>{{ expense.car.car_name }}</td>
         <td>GH¢{{ expense.amount_received }}</td>
         <td>GH¢{{ expense.other_expenses }}</td>
         <td>GH¢{{ expense.amount }}</td>
