@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('contact/', views.contact, name='contact'),
     path('sendMessage/', views.sendMessage, name='sendMessage'),
+    path('send_driver_message/', views.sendDriverMessage, name='sendDriverMessage'),
     
     path('bookings/', views.bookings, name='bookings'),
     path('bookings/<int:rental_id>/update/', views.update_rentals, name='update-rental'),
@@ -38,5 +39,7 @@ urlpatterns = [
     path('print_receipt/<int:receipt_id>/', views.print_receipt, name='print-receipt'),
 
     path('newReceipt/', views.newReceipt, name='newReceipt'),
+    
+    path('customer_list/', views.customer_lists, name='customer-list')
     
 ]

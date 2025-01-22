@@ -5,6 +5,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from .utils import send_sms, receive_sms, receive_contact, get_location_based_price
 from django.http import JsonResponse
+from dashboard.models import Customer
 
 # Create your views here.
 def index(request):
@@ -66,6 +67,11 @@ def carDetail(request,  car_slug):
         # Calculate total price based on rental days
         rental_days = (return_date - rental_date).days
         total_price = rental_days * daily_price if rental_days > 0 else 0
+        
+        customer, created = Customer.objects.get_or_create(
+                name=customer_name,
+                phone_number=customer_phone
+            )
         
         rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, region=region, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
         rentals.save()

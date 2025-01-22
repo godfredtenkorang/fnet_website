@@ -28,6 +28,7 @@
             <th>Car</th>
             <th>Amount Received</th>
             <th>Other Expenses</th>
+            <th>Description</th>
             <th>Amount</th>
             <th>Month</th>
         </tr>
@@ -37,6 +38,7 @@
             <td>{{ expense.car.car_name }}</td>
             <td>GH¢{{ expense.amount_received }}</td>
             <td>GH¢{{ expense.other_expenses }}</td>
+            <td>{{ expense.description }}</td>
             <td>GH¢{{ expense.amount }}</td>
             <td>{{ expense.month }}</td>
         </tr>

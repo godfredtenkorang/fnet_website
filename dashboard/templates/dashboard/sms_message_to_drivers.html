@@ -2,31 +2,25 @@
 
 <div class="send-message-form">
     <br><br>
-<h1>Send Message to all Customers</h1>
-<br>
+    <br><br>
+    <h1>Send Message to all Drivers</h1>
+    <br>
     <form method="POST">
         {% csrf_token %}
 
-       
-       <div class="input">
-        <label for="">Message</label> <br>
-       <textarea name="message" id="message" placeholder="Type your message"></textarea>
-       </div> 
 
-       <button type="submit">Send</button>
-       <br>
-       <br>
-    
-        
+        <div class="input">
+            <label for="">Message</label> <br>
+            <textarea name="messages" id="messages" placeholder="Type your message"></textarea>
+        </div>
+
+        <button type="submit">Send</button>
+
 
     </form>
-        <a href="{% url 'sendDriverMessage'  %}">
-            Send message to Drivers 
-        </a>
-    <br><br>
     
     <div class="container">
-        <h1>Customers SMS Table</h1>
+        <h1>Drivers SMS Table</h1>
         <div class="responsive-table">
             <table>
                 <thead>
@@ -38,22 +32,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for sms in all_sms %}
+                    {% for driver_sms in all_driver_sms %}
                     <tr>
-                        <td>{{ sms.recipients }}</td>
-                        <td>{{ sms.message }}</td>
-                        <td>{{ sms.status }}</td>
-                        <td>{{ sms.created_at }}</td>
-                        
+                        <td>{{ driver_sms.recipients }}</td>
+                        <td>{{ driver_sms.message }}</td>
+                        <td>{{ driver_sms.status }}</td>
+                        <td>{{ driver_sms.created_at }}</td>
+
                     </tr>
                     {% endfor %}
-    
+
                 </tbody>
             </table>
         </div>
     </div>
-    
-    
 </div>
 
 

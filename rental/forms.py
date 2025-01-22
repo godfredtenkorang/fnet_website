@@ -22,6 +22,20 @@ class AppointmentUpdateForm(forms.ModelForm):
                 is_available=True
             ) | Driver.objects.filter(id=appointment.driver.id if appointment.driver else None)
             
+    def __init__(self, *args, **kwargs):
+        super(AppointmentUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['car'].widget.attrs['disabled'] = 'disabled'
+        self.fields['customer_name'].widget.attrs['readonly'] = 'readonly'
+        self.fields['customer_phone'].widget.attrs['readonly'] = 'readonly'
+        self.fields['schedule_date'].widget.attrs['readonly'] = 'readonly'
+        self.fields['pick_up_time'].widget.attrs['readonly'] = 'readonly'
+        self.fields['drop_off_time'].widget.attrs['readonly'] = 'readonly'
+        self.fields['pick_up_location'].widget.attrs['readonly'] = 'readonly'
+        self.fields['drop_off_location'].widget.attrs['readonly'] = 'readonly'
+        self.fields['gps_address'].widget.attrs['readonly'] = 'readonly'
+        self.fields['purpose'].widget.attrs['readonly'] = 'readonly'
+        self.fields['total_price'].widget.attrs['readonly'] = 'readonly'
+            
 
 class RentalUpdateForm(forms.ModelForm):
     class Meta:
@@ -43,6 +57,23 @@ class RentalUpdateForm(forms.ModelForm):
                 is_available=True
             ) | Driver.objects.filter(id=rental.driver.id if rental.driver else None)
             
+    def __init__(self, *args, **kwargs):
+        super(RentalUpdateForm, self).__init__(*args, **kwargs)
+        # self.fields['car'].widget.attrs['disabled'] = 'disabled'
+        self.fields['customer_name'].widget.attrs['readonly'] = 'readonly'
+        self.fields['customer_phone'].widget.attrs['readonly'] = 'readonly'
+        self.fields['pick_up_time'].widget.attrs['readonly'] = 'readonly'
+        self.fields['drop_off_time'].widget.attrs['readonly'] = 'readonly'
+        # self.fields['region'].widget.attrs['disabled'] = 'disabled'
+        self.fields['location_category'].widget.attrs['readonly'] = 'readonly'
+        self.fields['town'].widget.attrs['readonly'] = 'readonly'
+        self.fields['rental_date'].widget.attrs['readonly'] = 'readonly'
+        self.fields['return_date'].widget.attrs['readonly'] = 'readonly'
+        # self.fields['document_type'].widget.attrs['disabled'] = 'disabled'
+        self.fields['document_number'].widget.attrs['readonly'] = 'readonly'
+        self.fields['status'].widget.attrs['readonly'] = 'readonly'
+        self.fields['total_price'].widget.attrs['readonly'] = 'readonly'
+            
 
 class RentalPaymentUpdateForm(forms.ModelForm):
     class Meta:
@@ -63,6 +94,31 @@ class RentalPaymentUpdateForm(forms.ModelForm):
             self.fields['driver'].queryset = Driver.objects.filter(
                 is_available=True
             ) | Driver.objects.filter(id=rental_payment.driver.id if rental_payment.driver else None)
+            
+    def __init__(self, *args, **kwargs):
+        super(RentalPaymentUpdateForm, self).__init__(*args, **kwargs)
+        # self.fields['car'].widget.attrs['disabled'] = 'disabled'
+        self.fields['customer_name'].widget.attrs['readonly'] = 'readonly'
+        self.fields['customer_phone'].widget.attrs['readonly'] = 'readonly'
+        self.fields['pick_up_time'].widget.attrs['readonly'] = 'readonly'
+        self.fields['drop_off_time'].widget.attrs['readonly'] = 'readonly'
+        self.fields['pick_up_location'].widget.attrs['readonly'] = 'readonly'
+        self.fields['drop_off_location'].widget.attrs['readonly'] = 'readonly'
+        # self.fields['region'].widget.attrs['disabled'] = 'disabled'
+        self.fields['location_category'].widget.attrs['readonly'] = 'readonly'
+        self.fields['town'].widget.attrs['readonly'] = 'readonly'
+        self.fields['rental_date'].widget.attrs['readonly'] = 'readonly'
+        self.fields['return_date'].widget.attrs['readonly'] = 'readonly'
+        # self.fields['document_type'].widget.attrs['disabled'] = 'disabled'
+        self.fields['document_number'].widget.attrs['readonly'] = 'readonly'
+        self.fields['status'].widget.attrs['readonly'] = 'readonly'
+        self.fields['payment_method'].widget.attrs['readonly'] = 'readonly'
+        # self.fields['momo_code'].widget.attrs['disabled'] = 'disabled'
+        self.fields['transaction_id'].widget.attrs['readonly'] = 'readonly'
+        self.fields['base_price'].widget.attrs['readonly'] = 'readonly'
+        self.fields['vat_percentage'].widget.attrs['readonly'] = 'readonly'
+        self.fields['vat_amount'].widget.attrs['readonly'] = 'readonly'
+        self.fields['total_price'].widget.attrs['readonly'] = 'readonly'
 
 class PaymentForm(forms.ModelForm):
     class Meta:
