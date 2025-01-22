@@ -46,7 +46,7 @@
                 {% for rental in rentals %}
                 <tr>
                     <td>{{ rental.car.car_name }} - {{ rental.car.brand }}</td>
-                    <td>{{ rental.pick_up_time }}</td>
+                    <td>{{ rental.rental_date }}</td>
                     <td>{{ rental.drop_off_time }}</td>
                     <td>GH¢{{ rental.commission_rate }}</td>
                 </tr>
@@ -71,7 +71,7 @@
                 {% for payment in payments %}
                 <tr>
                     <td>{{ payment.car.car_name }} - {{ payment.car.brand }}</td>
-                    <td>{{ payment.pick_up_time }}</td>
+                    <td>{{ payment.rental_date }}</td>
                     <td>{{ payment.drop_off_time }}</td>
                     <td>GH¢{{ payment.commission_rate }}</td>
                 </tr>
