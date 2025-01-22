@@ -9,6 +9,7 @@ from django.utils.timezone import datetime
 from decimal import Decimal
 from django.contrib import messages
 from my_site.utils import get_location_based_price
+from dashboard.models import Customer
 
 
 def all_schedule_cars(request):
@@ -47,6 +48,11 @@ def schedule_a_ride(request, car_id):
         duration = (drop_off_time - pick_up_time).total_seconds() / 3600
         duration_decimal = Decimal(duration)
         total_price = car.price_per_hour * duration_decimal
+        
+        customer, created = Customer.objects.get_or_create(
+                name=customer_name,
+                phone_number=customer_phone
+            )
         
         appointments = Appointment(car=car, customer_name=customer_name, customer_phone=customer_phone, schedule_date=schedule_date, pick_up_time=pick_up_time, drop_off_time=drop_off_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, gps_address=gps_address, purpose=purpose, total_price=total_price)
         appointments.save()
@@ -118,6 +124,10 @@ def process_payment(request, car_slug):
         total_price_with_vat = base_price + vat_amount
         print(total_price_with_vat)
         
+        customer, created = Customer.objects.get_or_create(
+                name=customer_name,
+                phone_number=customer_phone
+            )
         
         payments = Payment(car=car, customer_name=customer_name, customer_phone=customer_phone, rental_date=rental_date, return_date=return_date, region=region, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, document_type=document_type, document_number=document_number, payment_method=payment_method, momo_code=momo_code, transaction_id=transaction_id, base_price=base_price, vat_amount=vat_amount, total_price=total_price_with_vat)
         payments.car = car

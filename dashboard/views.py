@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment, Payment
 from my_site.models import Car, Driver
 from my_site.forms import DriverForm
-from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms
-from .models import SMSLog
+from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms
+from .models import SMSLog, Customer, DriversSMSLog
 from django.http import HttpResponse
 
 from expenses.models import Expense, MyCar, Receipt
@@ -16,6 +16,7 @@ from django.template.loader import render_to_string
 
 from django.db.models import Q
 from rental.forms import AppointmentUpdateForm, RentalUpdateForm, RentalPaymentUpdateForm
+from decimal import Decimal
 
 
 def dashboard(request):
@@ -30,22 +31,46 @@ def contact(request):
 def sendMessage(request):
     all_sms = SMSLog.objects.all()
     if request.method == 'POST':
-        recipients = request.POST.get("recipients").split(",")
-        recipients = [recipient.strip() for recipient in recipients]
+        recipients = list(Customer.objects.values_list('phone_number', flat=True).distinct())
+        
         message = request.POST.get('message')
         response = send_sms(recipients, message)
         
         SMSLog.objects.create(
-            recipients=", ".join(recipients),
+            recipients=recipients,
             message=message, 
             status=response.get('status'), 
             response=response,
         )
         return redirect("sendMessage")
+        
+    
     context = {
-        'all_sms': all_sms
+        'all_sms': all_sms,
     }
     return render(request, 'dashboard/sendMessage.html', context)
+
+def sendDriverMessage(request):
+    all_driver_sms = DriversSMSLog.objects.all()
+    if request.method == 'POST':
+        phone_numbers = list(Driver.objects.values_list('phone_number', flat=True).distinct())
+        
+        messages = request.POST.get('messages')
+        response = driver_send_sms(phone_numbers, messages)
+        
+        DriversSMSLog.objects.create(
+            recipients=phone_numbers,
+            message=messages, 
+            status=response.get('status'), 
+            response=response,
+        )
+        return redirect("sendDriverMessage")
+    
+    context = {
+        'all_driver_sms': all_driver_sms
+    }
+    return render(request, 'dashboard/sms_message_to_drivers.html', context)
+
 
 def bookings(request):
     rentals = Rental.objects.all()
@@ -112,7 +137,7 @@ def update_rental_payment(request, rental_id):
     else:
         form = RentalPaymentUpdateForm(instance=rental_payment)
 
-    return render(request, 'dashboard/booking_forms_update.html', {
+    return render(request, 'dashboard/booking_payment_form.html', {
         'rental_rental': rental_payment,
         'form': form,
     })
@@ -152,14 +177,36 @@ def appointments(request):
     return render(request, 'dashboard/appointments.html', {'all_appointments': all_appointments})
 
 def add_expenses(request):
+    cars = Car.objects.all()
     if request.method == 'POST':
-        form = ExpenseForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('view_expenses')
-    else:
-        form = ExpenseForm()
-    return render(request, 'dashboard/expenses/add_expense.html', {'form': form})
+        car_id = request.POST.get('car')
+        date = request.POST.get('date')
+        amount_received = request.POST.get('amount_received')
+        other_expenses = request.POST.get('other_expenses')
+        description = request.POST.get('description')
+        month = request.POST.get('month')
+        
+        car = get_object_or_404(Car, id=car_id)
+        
+        get_amount_receiced = Decimal(amount_received)
+        get_other_expenses = Decimal(other_expenses)
+        
+        total_amount = get_amount_receiced - get_other_expenses
+        
+        get_total_amount = Decimal(total_amount)
+        
+        expenses = Expense(car=car, amount_received=amount_received, date=date, description=description, other_expenses=other_expenses, amount=get_total_amount, month=month)
+        expenses.save()
+        return redirect('view_expenses')
+        
+    # if request.method == 'POST':
+    #     form = ExpenseForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('view_expenses')
+    # else:
+    #     form = ExpenseForm()
+    return render(request, 'dashboard/expenses/add_expense.html', {'cars': cars, 'title': 'Add Expense'})
 
 def view_expenses(request):
     car_id = request.GET.get('car', None)
@@ -389,3 +436,8 @@ def print_receipt(request, receipt_id):
 
 def newReceipt(request):
     return render(request, 'dashboard/newReceipt.html')
+
+
+def customer_lists(request):
+    customers_info = Customer.objects.all()
+    return render(request, 'dashboard/customer_list.html', {'customers': customers_info})

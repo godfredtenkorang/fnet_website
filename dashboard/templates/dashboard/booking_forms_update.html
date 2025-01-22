@@ -26,7 +26,55 @@
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{form.car.label_tag}}
+        {{form.car}}
+        <br><br>
+        {{form.customer_name.label_tag}}
+        {{form.customer_name}}
+
+        {{form.customer_phone.label_tag}}
+        {{form.customer_phone}}
+
+        {{form.pick_up_time.label_tag}}
+        {{form.pick_up_time}}
+
+        {{form.drop_off_time.label_tag}}
+        {{form.drop_off_time}}
+
+        
+        {{form.region.label_tag}}
+        {{form.region}}
+        <br><br>
+
+        {{form.location_category.label_tag}}
+        {{form.location_category}}
+
+        {{form.town.label_tag}}
+        {{form.town}}
+
+        {{form.rental_date.label_tag}}
+        {{form.rental_date}}
+
+        {{form.return_date.label_tag}}
+        {{form.return_date}}
+
+        {{form.document_type.label_tag}}
+        {{form.document_type}}
+        <br><br>
+        {{form.document_number.label_tag}}
+        {{form.document_number}}
+
+        {{form.driver.label_tag}}
+        {{form.driver}}
+        <br><br>
+        {{form.status.label_tag}}
+        {{form.status}}
+        <br><br>
+        {{form.commission_rate.label_tag}}
+        {{form.commission_rate}}
+       
+        {{form.total_price.label_tag}}
+        {{form.total_price}}
         <br><br>
         <button type="submit">Update Booking</button>
     </form>

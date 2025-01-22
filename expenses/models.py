@@ -27,11 +27,12 @@ class Expense(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='expenses')
     amount_received = models.DecimalField(max_digits=10, decimal_places=2)
     other_expenses = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField(null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     month = models.CharField(max_length=20, choices=MONTHS)
 
     def __str__(self):
-        return f"{self.car.name} - {self.date}"
+        return f"{self.car.car_name} - {self.date}"
     
 
 class Receipt(models.Model):
