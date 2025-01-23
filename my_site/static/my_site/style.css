@@ -101,9 +101,9 @@ nav {
 }
 
 .logo img {
-  width: 200px;
-  height: 11vh;
-  object-fit: contain;
+  width: 230px;
+  height: 7vh;
+  object-fit: cover;
 }
 
 /* menu icon */
