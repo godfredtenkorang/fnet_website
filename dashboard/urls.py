@@ -40,6 +40,15 @@ urlpatterns = [
 
     path('newReceipt/', views.newReceipt, name='newReceipt'),
     
-    path('customer_list/', views.customer_lists, name='customer-list')
+    path('customer_list/', views.customer_lists, name='customer-list'),
+
+    path('agreementForm/', views.agreementForm, name='agreementForm'),
+
+    path('driveAndPay/', views.driveAndPay, name='driveAndPay'),
+
+
+    path('driverAgreement/', views.driverAgreement, name='driverAgreement'),
+
+    path('newContact/', views.newContact, name='newContact'),
     
 ]
