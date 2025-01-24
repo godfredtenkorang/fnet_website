@@ -1,0 +1,202 @@
+
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 210mm;
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table th, table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .signature div {
+            text-align: center;
+        }
+        .attention {
+            background-color: #ffefc7;
+            padding: 10px;
+            border: 1px solid #ffc107;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">CONTACT FORM</h1>
+
+        <div class="section">
+            <h2>Customer Information</h2>
+            <p>Full Name: ____________________________</p>
+            <p>Phone Number: ____________________________</p>
+            <p>WhatsApp Number: ____________________________</p>
+            <p>Digital Address: ____________________________</p>
+            <p>Ghana Card Number: ____________________________</p>
+        </div>
+
+        <div class="section">
+            <h2>Guarantor Information (for Self-Drive)</h2>
+            <p>Full Name: ____________________________</p>
+            <p>Phone Number: ____________________________</p>
+            <p>Digital Address: ____________________________</p>
+            <p>Relationship to Customer: ____________________________</p>
+            <p>Ghana Card Number: ____________________________</p>
+        </div>
+
+        <div class="section">
+            <h2>Emergency Contact Information (for Pay and Drive)</h2>
+            <p>Full Name: ____________________________</p>
+            <p>Phone Number: ____________________________</p>
+            <p>Relationship to Customer: ____________________________</p>
+        </div>
+
+        <div class="section">
+            <h2>Vehicle Details</h2>
+            <p>Type: ____________________________</p>
+            <p>Registration: ____________________________</p>
+            <p>Condition: Good</p>
+        </div>
+
+        <div class="section">
+            <h2>Vehicle Rental Details</h2>
+            <p>Service Type: 
+                <label><input type="checkbox"> Drive and Pay (Self-Drive)</label>
+                <label><input type="checkbox"> Pay and Drive (Company Driver)</label>
+            </p>
+            <p>Rental Duration (Number of Days): ____________________________</p>
+            <p>Start Date & Time: ____________________________</p>
+            <p>End Date & Time: ____________________________</p>
+        </div>
+
+        <div class="section">
+            <h2>Payment Information</h2>
+            <p>Daily Charge (Self-Drive): GHC ____________________________ for ____________________________ km in ____________________________</p>
+            <p>Fuel Charge: GHC 1000</p>
+            <p>Cash Lock (Self-Drive Only): GHC ____________________________</p>
+            <p>Total Payment Due: ____________________________</p>
+
+            <p>Daily Charge (Pay and Drive): GHC ____________________________ for ____________________________ km in ____________________________</p>
+            <p>Driver Accommodation Fee: GHC 200 per day (for rentals longer than 1 day, Pay and Drive)</p>
+            <p>Total Payment Due: ____________________________</p>
+
+            <p>Payment Method: 
+                <label><input type="checkbox"> Cash</label>
+                <label><input type="checkbox"> Mobile Money (MoMo)</label>
+                <label><input type="checkbox"> Bank Transfer</label>
+            </p>
+            <p>Mileage Billing: Mileage updates will be sent to your WhatsApp line at the end of each day.</p>
+        </div>
+
+        <div class="section">
+            <h2>Rules and Regulations</h2>
+            <p><strong>1. Eligibility:</strong> 
+                <ul>
+                    <li>All customers must provide a valid Ghana Card.</li>
+                    <li>Self-Drive: Guarantor information is required, and drivers must be at least 35 years old with a valid Ghanaian driving license for at least one year.</li>
+                    <li>Pay and Drive: Emergency contact information is required.</li>
+                </ul>
+            </p>
+
+            <p><strong>2. Payment Terms:</strong></p>
+            <p>Self-Drive: A daily charge of GHC ____________________________ for ____________________________ km, with an additional charge of GHC 3 per kilometer for any extra kilometers. A GHC ____________________________ refundable cash lock will be held for the duration of the rental. The cash lock will be returned after the trip, provided there are no issues.</p>
+            <p>Pay and Drive: Daily charge: GHC ____________________________ for ____________________________ km in ____________________________. Any additional kilometers will be charged at GHC 3 per kilometer. Driver accommodation fee: GHC 200 per day for rentals longer than 1 day.</p>
+
+            <p><strong>3. Fuel Policy:</strong> The vehicle will be provided with a full tank at the beginning of the trip. At the end of all trips, the vehicle's fuel tank will be refilled, and any remaining balance will be refunded to the customer via cash or MoMo account.</p>
+
+            <p><strong>4. Mileage Policy:</strong> The mileage charge is GHC 3 per kilometer for extra kilometers assigned to be used beyond the initial ____________________________ km. Mileage used will be sent to your WhatsApp line at the end of each day.</p>
+
+            <p><strong>5. Cash Lock Return (Self-Drive Only):</strong> After the trip, if the vehicle is returned in the same condition, the GHC ____________________________ cash lock will be returned to the customer. If there are any damages or issues, the repair costs will be deducted from the cash lock. If the repair cost exceeds the cash lock amount, the customer will be liable for the difference.</p>
+
+            <p><strong>6. Vehicle Condition:</strong> The vehicle must be returned in the same condition as it was provided. Any damages or excessive wear and tear will be charged to the customer.</p>
+
+            <p><strong>7. Insurance:</strong> The vehicle is insured, but the customer is liable for any deductible or damages not covered by insurance if it is on self-drive.</p>
+
+            <p><strong>8. Use of Vehicle:</strong> The vehicle must be driven solely by the customer or a pre-authorized driver (for Self-Drive). The vehicle must not be used for illegal activities, towing, or carrying hazardous materials.</p>
+
+            <p><strong>9. Termination of Contract:</strong> The customer can terminate the contract up to 24 hours before the scheduled start time with no penalty. If the contract is terminated less than 24 hours before the trip, the customer will lose 40% of the daily charge.</p>
+
+            <p><strong>10. Refund Policy:</strong> No refunds will be given for early returns or unused kilometers. Any remaining fuel balance will be refunded after the tank is refilled via cash or MoMo account.</p>
+
+            <p><strong>11. Dispute Resolution:</strong> Any disputes arising from this contract will be resolved through mutual negotiation. If necessary, disputes will be settled in accordance with the laws of Ghana.</p>
+        </div>
+
+        <div class="signature">
+            <div>
+                <p>Customer Signature:</p>
+                <p>Date: ____________________________</p>
+            </div>
+            <div>
+                <p>TAXINET LOGISTICS</p>
+                <p>Signature:</p>
+                <p>Date: ____________________________</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
