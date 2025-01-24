@@ -1,0 +1,179 @@
+
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Agreement Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 210mm;
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table th, table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .signature div {
+            text-align: center;
+        }
+        .attention {
+            background-color: #ffefc7;
+            padding: 10px;
+            border: 1px solid #ffc107;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">RENTAL AGREEMENT</h1>
+
+        <div class="section">
+            <p>This Agreement is made on <span>________________________</span> by and between:</p>
+            <p><strong>Taxinet Logistics</strong> (hereinafter referred to as the "Rental Company")</p>
+            <p>Digital Address: AIRPORT ROUNDABOUT opposite Jefel<br>Phone Number: 0550 222 888<br>Email Address: taxinetghana@gmail.com</p>
+            <p><strong>Customer:</strong> ________________________________________</p>
+            <p>Digital Address: ________________________________________<br> Ghana Card #: ________________________________________<br>Phone Number: ________________________________________<br>WhatsApp Number: ________________________________________</p>
+        </div>
+
+        <div class="section">
+            <h2>1. Vehicle Details</h2>
+            <p>Vehicle Make & Model: _______________________________<br>Registration Number: _______________________________<br>Colour: ____________________________<br>Mileage at Pickup: ____________________________</p>
+        </div>
+
+        <div class="section">
+            <h2>2. Rental Period</h2>
+            <p>Start Date & Time: _______________________________<br>End Date & Time: _______________________________<br>Pickup Location: _______________________________<br>Return Location: _______________________________</p>
+        </div>
+
+        <div class="section">
+            <h2>3. Rental Charges</h2>
+            <p>The rental charges are based on the service location and car you choose as follows:</p>
+            <table>
+                <tr>
+                    <th>Location</th>
+                    <th>Charges (GHC)</th>
+                </tr>
+                <tr>
+                    <td>Within Kumasi</td>
+                    <td>800 / 900 / 1000</td>
+                </tr>
+                <tr>
+                    <td>Outside Kumasi within the Ashanti Region</td>
+                    <td>1000 / 1200 / 1300</td>
+                </tr>
+                <tr>
+                    <td>Outside Ashanti Region to the next region</td>
+                    <td>1300 / 1400</td>
+                </tr>
+                <tr>
+                    <td>Outside Ashanti Region to the next two regions</td>
+                    <td>1400 / 1500 / 1600</td>
+                </tr>
+                <tr>
+                    <td>Outside Ashanti Region to the next three regions</td>
+                    <td>1500 / 1600 / 1800</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>4. Additional Charges</h2>
+            <p>Driver Accommodation Fee: GHC 200 to 350 per day<br>Fuel Charges: The vehicle will always come with a full tank of fuel (valued at GHC 1,000).<br>Upfront Payment: The Customer must pay the full tank charge (GHC 1,000) before the trip.<br>Balance Refund: After the trip, the driver will refill the tank, and any unused amount from the GHC 1,000 will be refunded.</p>
+        </div>
+
+        <div class="section">
+            <h2>5. Customer Responsibilities</h2>
+            <ul>
+                <li>Return the vehicle in the same condition as received, barring normal wear and tear.</li>
+                <li>Use the vehicle for lawful purposes only and within the agreed rental period.</li>
+                <li>Ensure the vehicle is not driven by unauthorized persons.</li>
+                <li>Report damages, accidents, or theft immediately to the Rental Company and law enforcement.</li>
+            </ul>
+        </div>
+
+        <div class="signature">
+            <div>
+                <p>For Taxinet Logistics</p>
+                <p>Name: Taxinet Logistics</p>
+                <p>Signature: ____________________________</p>
+                <p>Date: _______________________________</p>
+            </div>
+            <div>
+                <p>For the Customer</p>
+                <p>Name: ____________________________</p>
+                <p>Signature: ____________________________</p>
+                <p>Date: _______________________________</p>
+            </div>
+        </div>
+
+        <div class="attention">
+            <h3>Attention:</h3>
+            <p>3–5 Days: A 10% discount will apply to the total rental charge.<br>6 Days or More: A 15% discount will apply to the total rental charge.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
