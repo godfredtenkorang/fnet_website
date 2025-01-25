@@ -32,7 +32,10 @@
                 <img src="{% static 'my_site/img/tlghana.png' %}" alt="background photo" />
             </a>
         </div>
-
+        <div class="menu-icon">
+            <i class="fas fa-bars menu-icon"></i>
+            
+        </div>
         <!-- nav links -->
         <div class="nav">
             <ul class="nav-links">
@@ -78,10 +81,14 @@
         </div>
 
         <!-- menu icon -->
-        <div class="menu-icon">
-            <i class="fas fa-bars menu-icon"></i>
-
-        </div>
+       
+            
+            <div class="logo-right">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'my_site/img/tlghana.png' %}" alt="background photo" />
+                </a>
+            </div>
+       
     </nav>
 </header>
 

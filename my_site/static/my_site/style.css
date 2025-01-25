@@ -106,12 +106,32 @@ nav {
   object-fit: cover;
 }
 
+
+.new-logo-menu{
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 /* menu icon */
 .menu-icon {
   display: none;
+  align-items: center;
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.logo-right{
+  display: none;
+}
+.logo-right img{
+  width: 100px;
+ 
+}
+
+
 .remove {
   display: none;
   position: absolute;
@@ -1068,6 +1088,13 @@ form button {
     z-index: 100;
   }
 
+  .logo{
+    display: none;
+  }
+
+  .logo-right{
+    display: block !important;
+  }
   .nav.showNav {
     display: block;
   }
