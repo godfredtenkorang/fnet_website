@@ -47,6 +47,7 @@ class Rental(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='rentals')
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='rentals', null=True, blank=True)
     location_category = models.CharField(max_length=100, default='')
+    city = models.CharField(max_length=100, default='')
     town = models.CharField(max_length=250, default='')
     pick_up_time = models.TimeField(null=True, blank=True)
     drop_off_time = models.TimeField(null=True, blank=True)
