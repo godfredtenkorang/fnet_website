@@ -476,6 +476,34 @@ header {
   color: white;
 }
 
+.agreementContainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+  gap: 2rem;
+  width: 100%;
+  padding: 5%;
+}
+
+
+.agreeLink{
+  width: 100%;
+  height: 40vh;
+  max-width: 100%;
+  background-color:var(--whiteColor);
+     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -4px -4px 10px rgba(0, 0, 0, 0.1);
+     padding: 10px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     border-radius: 10px;
+     gap: 2rem;
+     color: #000;
+     font-size: 1.2rem;
+}
+
+
+
 
 /*  admin-welcome*/
 .admin-welcome{
