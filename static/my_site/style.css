@@ -1166,9 +1166,12 @@ button {
         padding: 0 10px;
         color: var(--BlackColor);
     }
+    .logo{
+        display: none !important;
+    }
 
     .menu-icon {
-        display: block;
+        display: flex;
     }
 
     .showNav.nav {
@@ -1261,9 +1264,10 @@ button {
         background-color: transparent;
         color: var(--BlackColor);
     }
-    .logo img{
-        width: 80px;
+    .logo{
+        display: none !important;
     }
+   
     .modal-content{
         width: 90%;
     }
