@@ -442,6 +442,9 @@ def customer_lists(request):
     customers_info = Customer.objects.all()
     return render(request, 'dashboard/customer_list.html', {'customers': customers_info})
 
+
+
+
 def agreementForm(request):
    
     return render(request, 'dashboard/agreementForm.html')
