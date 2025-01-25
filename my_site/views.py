@@ -52,6 +52,7 @@ def carDetail(request,  car_slug):
         rental_date = request.POST.get('rental_date')
         return_date = request.POST.get('return_date')
         location_category = request.POST.get('location_category')
+        city = request.POST.get('city')
         town = request.POST.get('town')
         document_type = request.POST.get('document_type')
         document_number = request.POST.get('document_number')
@@ -73,7 +74,7 @@ def carDetail(request,  car_slug):
                 phone_number=customer_phone
             )
         
-        rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, region=region, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
+        rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, region=region, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
         rentals.save()
         
         # send_mail(
