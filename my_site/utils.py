@@ -1,14 +1,14 @@
 import requests
 from django.conf import settings
 
-def send_sms(phone_number, customer_name, car_name, rental_date, return_date, region, location_category, town, pick_up_time, drop_off_time, total_price):
+def send_sms(phone_number, customer_name, car_name, rental_date, return_date, location_category, town, pick_up_time, drop_off_time, total_price):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, your car booking for {car_name} is on pending. \n" "Rental Details: \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {region} \n" f"Location: {location_category} \n" f"Town: {town} \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time: {drop_off_time} \n" f"Total Price: GH¢{total_price}.",
+        "message": f"Dear {customer_name}, your car booking for {car_name} is on pending. \n" "Rental Details: \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {location_category} \n" f"Town: {town} \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time: {drop_off_time} \n" f"Total Price: GH¢{total_price}.",
         "is_schedule": False,
         "schedule_date": ''
     }
@@ -27,14 +27,14 @@ def send_sms(phone_number, customer_name, car_name, rental_date, return_date, re
         print(f"Error sending SMS: {e}")
         return None
 
-def receive_sms(customer_name, customer_phone, car_name, rental_date, return_date, region, location_category, town, pick_up_time, drop_off_time, total_price):
+def receive_sms(customer_name, customer_phone, car_name, rental_date, return_date, location_category, town, pick_up_time, drop_off_time, total_price):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": '0244529353',
-        "message": f"New Car Booking Details: \n" f"Customer Name: {customer_name} \n"  f"Phone Number: {customer_phone} \n"  f"Car Booked: {car_name} \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {region} \n" f"Location: {location_category} \n" f"Town: {town} \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time: {drop_off_time} \n" f"Total Price: GH¢{total_price}",
+        "message": f"New Car Booking Details: \n" f"Customer Name: {customer_name} \n"  f"Phone Number: {customer_phone} \n"  f"Car Booked: {car_name} \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {location_category} \n" f"Town: {town} \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time: {drop_off_time} \n" f"Total Price: GH¢{total_price}",
         "is_schedule": False,
         "schedule_date": ''
     }
@@ -90,13 +90,37 @@ def get_location_based_price(car, location_category):
     """
     if location_category == "within_kumasi":
         return car.price_within_kumasi
-    elif location_category == "outside_kumasi_inside_ashanti":
-        return car.price_outside_kumasi_inside_ashanti
-    elif location_category == "outside_ashanti_to_next_region":
-        return car.price_outside_ashanti_to_next_region
-    elif location_category == "outside_ashanti_to_next_two_regions":
-        return car.price_outside_ashanti_to_next_two_regions
-    elif location_category == "outside_ashanti_to_next_three_regions":
-        return car.price_outside_ashanti_to_next_three_regions
+    elif location_category == "ahafo_region":
+        return car.ahafo_region_price
+    elif location_category == "ashanti_region":
+        return car.ashanti_region_price
+    elif location_category == "bono_region":
+        return car.bono_region_price
+    elif location_category == "bono_east_region":
+        return car.bono_east_region_price
+    elif location_category == "central_region":
+        return car.central_region_price
+    elif location_category == "eastern_region":
+        return car.eastern_region_price
+    elif location_category == "greater_accra_region":
+        return car.greater_accra_region_price
+    elif location_category == "northern_region":
+        return car.northern_region_price
+    elif location_category == "north_east_region":
+        return car.north_east_region_price
+    elif location_category == "oti_region":
+        return car.oti_region_price
+    elif location_category == "savannah_region":
+        return car.savannah_region_price
+    elif location_category == "upper_east_region":
+        return car.upper_east_region_price
+    elif location_category == "upper_west_region":
+        return car.upper_west_region_price
+    elif location_category == "volta_region":
+        return car.volta_region_price
+    elif location_category == "western_region":
+        return car.western_region_price
+    elif location_category == "western_north_region":
+        return car.western_north_region_price
     else:
         raise ValueError("Invalid location category")

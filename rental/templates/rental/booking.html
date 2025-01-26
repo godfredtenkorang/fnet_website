@@ -32,7 +32,7 @@
                             placeholder="Benjamin Ohene Asare">
                     </div>
 
-                   
+
                     <div class="input">
                         <label for="">Phone </label> <br>
                         <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required
@@ -50,14 +50,11 @@
                         <label for="">Return Date</label> <br>
                         <input type="date" name="return_date" id="return_date" required>
                     </div>
-                    <div class="input">
-                        <label for="">Region</label> <br>
-                        <select name="region" id="region">
-                            {% for region in regions %}
-                            <option value="{{ region.id }}">{{region.name}}</option>
-                            {% endfor %}
 
-                        </select>
+                    <div class="input">
+                        <label for="">City </label> <br>
+                        <input type="text" name="city" id="city" required
+                            placeholder="eg. Koforidua, Sunyani, Kumasi etc">
                     </div>
                     <div class="input">
                         <label for="">Town </label> <br>
@@ -79,10 +76,22 @@
                 <script type="application/json" id="pricing_data">
                     {
                         "within_kumasi": "{{ car.price_within_kumasi }}",
-                        "outside_kumasi_inside_ashanti": "{{ car.price_outside_kumasi_inside_ashanti }}",
-                        "outside_ashanti_to_next_region": "{{ car.price_outside_ashanti_to_next_region }}",
-                        "outside_ashanti_to_next_two_regions": "{{ car.price_outside_ashanti_to_next_two_regions }}",
-                        "outside_ashanti_to_next_three_regions": "{{ car.price_outside_ashanti_to_next_three_regions }}"
+                        "ahafo_region": "{{ car.ahafo_region_price }}",
+                        "ashanti_region": "{{ car.ashanti_region_price }}",
+                        "bono_region": "{{ car.bono_region_price }}",
+                        "bono_east_region": "{{ car.bono_east_region_price }}",
+                        "central_region": "{{ car.central_region_price }}",
+                        "eastern_region": "{{ car.eastern_region_price }}",
+                        "greater_accra_region": "{{ car.greater_accra_region_price }}",
+                        "northern_region": "{{ car.northern_region_price }}",
+                        "north_east_region": "{{ car.north_east_region_price }}",
+                        "oti_region": "{{ car.oti_region_price }}",
+                        "savannah_region": "{{ car.savannah_region_price }}",
+                        "upper_east_region": "{{ car.upper_east_region_price }}",
+                        "upper_west_region": "{{ car.upper_west_region_price }}",
+                        "volta_region": "{{ car.volta_region_price }}",
+                        "western_region": "{{ car.western_region_price }}",
+                        "western_north_region": "{{ car.western_north_region_price }}"
                     }
                  </script>
                 <div class="input-flex">
@@ -92,13 +101,22 @@
                         <select id="location_category" name="location_category" required>
 
                             <option value="within_kumasi">Within Kumasi</option>
-                            <option value="outside_kumasi_inside_ashanti">Outside Kumasi (Inside Ashanti Region)
-                            </option>
-                            <option value="outside_ashanti_to_next_region">Outside Ashanti Region (Next Region)</option>
-                            <option value="outside_ashanti_to_next_two_regions">Outside Ashanti Region (Next Two
-                                Regions)</option>
-                            <option value="outside_ashanti_to_next_three_regions">Outside Ashanti Region (Next Three
-                                Regions)</option>
+                            <option value="ahafo_region">Ahafo Region</option>
+                            <option value="ashanti_region">Ashanti Region</option>
+                            <option value="bono_region">Bono Region</option>
+                            <option value="bono_east_region">Bono East Region</option>
+                            <option value="central_region">Central Region</option>
+                            <option value="eastern_region">Eastern Region</option>
+                            <option value="greater_accra_region">Greater Accra Region</option>
+                            <option value="northern_region">Northern Region</option>
+                            <option value="north_east_region">North East Region</option>
+                            <option value="oti_region">Oti Region</option>
+                            <option value="savannah_region">Savannah Region</option>
+                            <option value="upper_east_region">Upper East Region</option>
+                            <option value="upper_west_region">Upper West Region</option>
+                            <option value="volta_region">Volta Region</option>
+                            <option value="western_region">Western Region</option>
+                            <option value="western_north_region">Western North Region</option>
                         </select>
                     </div>
                     <h3>Location Price: GH¢<span id="price_display">0.00</span></h3>
@@ -120,7 +138,8 @@
                     </div>
                     <div class="input">
                         <label for="">Document No. </label> <br>
-                        <input type="text" name="document_number" id="document_number" required placeholder="GHA-xxxxxxxxxxxx-x">
+                        <input type="text" name="document_number" id="document_number" required
+                            placeholder="GHA-xxxxxxxxxxxx-x">
                     </div>
                     <div class="input">
                         <label for="">Payment Method</label> <br>
@@ -155,7 +174,8 @@
 
 
 
-            <h3>Total Price: GH¢<span id="total_price">0.00</span></h3>
+            <h3>Total Price: GH¢<span id="total_price">0.00</span><p class="negotiable_message" id="negotiable_message"></p></h3>
+            
             <br>
 
             <p>Please make your payment and ensure you insert the transaction ID in the designated 'Transaction ID'
@@ -181,6 +201,7 @@
         const location_category = document.getElementById('location_category').value;
         const pricing = JSON.parse(document.getElementById('pricing_data').textContent);
         const priceDisplay = document.getElementById("price_display");
+        const negotiableMessage = document.getElementById('negotiable_message');
 
 
 
@@ -202,6 +223,16 @@
             document.getElementById('total_price').innerHTML = totalPrice.toFixed(2);
         } else {
             document.getElementById('total_price').innerHTML = "0.00";
+        }
+
+        if (rentalDate && returnDate) {
+            const difference = (returnDate - rentalDate) / (1000 * 60 * 45 * 24);
+            if (difference > 3) {
+                negotiableMessage.textContent = "(Negotiable)";
+                negotiableMessage.style.color = "red";
+            } else {
+                negotiableMessage.textContent = "";
+            }
         }
     }
 

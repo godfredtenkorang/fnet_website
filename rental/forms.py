@@ -40,7 +40,7 @@ class AppointmentUpdateForm(forms.ModelForm):
 class RentalUpdateForm(forms.ModelForm):
     class Meta:
         model = Rental
-        fields = ['car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'region', 'location_category', 'town', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'status', 'commission_rate', 'total_price']
+        fields = ['car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'location_category', 'town', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'status', 'commission_rate', 'total_price']
         widgets = {
             'rental_date': forms.DateInput(attrs={'type': 'date'}),
             'return_date': forms.DateInput(attrs={'type': 'date'}),
@@ -64,7 +64,6 @@ class RentalUpdateForm(forms.ModelForm):
         self.fields['customer_phone'].widget.attrs['readonly'] = 'readonly'
         self.fields['pick_up_time'].widget.attrs['readonly'] = 'readonly'
         self.fields['drop_off_time'].widget.attrs['readonly'] = 'readonly'
-        # self.fields['region'].widget.attrs['disabled'] = 'disabled'
         self.fields['location_category'].widget.attrs['readonly'] = 'readonly'
         self.fields['town'].widget.attrs['readonly'] = 'readonly'
         self.fields['rental_date'].widget.attrs['readonly'] = 'readonly'
@@ -78,7 +77,7 @@ class RentalUpdateForm(forms.ModelForm):
 class RentalPaymentUpdateForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ['car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'pick_up_location', 'drop_off_location', 'region', 'location_category', 'town', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'status', 'commission_rate', 'payment_method', 'momo_code', 'transaction_id', 'base_price', 'vat_percentage', 'vat_amount', 'total_price']
+        fields = ['car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'pick_up_location', 'drop_off_location', 'location_category', 'town', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'status', 'commission_rate', 'payment_method', 'momo_code', 'transaction_id', 'base_price', 'vat_percentage', 'vat_amount', 'total_price']
         widgets = {
             'rental_date': forms.DateInput(attrs={'type': 'date'}),
             'return_date': forms.DateInput(attrs={'type': 'date'}),
@@ -104,7 +103,6 @@ class RentalPaymentUpdateForm(forms.ModelForm):
         self.fields['drop_off_time'].widget.attrs['readonly'] = 'readonly'
         self.fields['pick_up_location'].widget.attrs['readonly'] = 'readonly'
         self.fields['drop_off_location'].widget.attrs['readonly'] = 'readonly'
-        # self.fields['region'].widget.attrs['disabled'] = 'disabled'
         self.fields['location_category'].widget.attrs['readonly'] = 'readonly'
         self.fields['town'].widget.attrs['readonly'] = 'readonly'
         self.fields['rental_date'].widget.attrs['readonly'] = 'readonly'

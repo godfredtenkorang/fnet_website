@@ -854,7 +854,7 @@ form button {
 }
 
 .footer-distributed h3 span {
-  color: lightseagreen;
+  color: limegreen;
 }
 
 /* Footer links */
@@ -923,7 +923,7 @@ form button {
 }
 
 .footer-distributed .footer-center p a {
-  color: lightseagreen;
+  color: limegreen;
   text-decoration: none;
 }
 
@@ -1400,3 +1400,23 @@ form button {
   }
 }
 
+
+
+.negotiable_message {
+  color: red;
+}
+
+.center {
+  width: 400px; 
+  margin: auto; 
+  text-align: center;
+ 
+  
+  /* Optional Styling */
+  padding: 20px;
+  border-style: solid;
+  border-color: #B6C7D6;
+  border-radius: 20px;
+  background-color: #EAF0F6;
+ 
+}
