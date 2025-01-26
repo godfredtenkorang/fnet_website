@@ -13,8 +13,9 @@ from dashboard.models import Customer
 
 
 def all_schedule_cars(request):
-    category = request.GET.get('category', 'Scheduled Drive')
-    schedule_cars = Car.objects.filter(category__name=category)
+    # category = request.GET.get('category', 'Scheduled Drive')
+    # schedule_cars = Car.objects.filter(category__name=category)
+    schedule_cars = Car.objects.all()
     
     context = {
         'schedule_cars': schedule_cars,
@@ -80,16 +81,14 @@ def schedule_a_ride(request, car_id):
 
 def process_payment(request, car_slug):
     car = get_object_or_404(Car, slug=car_slug)
-    
-    regions = Region.objects.all()
-    
+
     if request.method == 'POST':
-        region_id = request.POST.get('region')
         customer_name = request.POST.get('customer_name')
         customer_phone = request.POST.get('customer_phone')
         rental_date = request.POST.get('rental_date')
         return_date = request.POST.get('return_date')
         location_category = request.POST.get('location_category')
+        city = request.POST.get('city')
         town = request.POST.get('town')
         pick_up_time = request.POST.get('pick_up_time')
         drop_off_time = request.POST.get('drop_off_time')
@@ -101,7 +100,6 @@ def process_payment(request, car_slug):
         momo_code = request.POST.get('momo_code')
         transaction_id = request.POST.get('transaction_id')
         
-        region = get_object_or_404(Region, id=region_id)
         daily_price = get_location_based_price(car, location_category)
         
         from datetime import datetime
@@ -129,7 +127,7 @@ def process_payment(request, car_slug):
                 phone_number=customer_phone
             )
         
-        payments = Payment(car=car, customer_name=customer_name, customer_phone=customer_phone, rental_date=rental_date, return_date=return_date, region=region, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, document_type=document_type, document_number=document_number, payment_method=payment_method, momo_code=momo_code, transaction_id=transaction_id, base_price=base_price, vat_amount=vat_amount, total_price=total_price_with_vat)
+        payments = Payment(car=car, customer_name=customer_name, customer_phone=customer_phone, rental_date=rental_date, return_date=return_date, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, pick_up_location=pick_up_location, drop_off_location=drop_off_location, document_type=document_type, document_number=document_number, payment_method=payment_method, momo_code=momo_code, transaction_id=transaction_id, base_price=base_price, vat_amount=vat_amount, total_price=total_price_with_vat)
         payments.car = car
         payments.is_successful = True
         payments.save()
@@ -141,7 +139,7 @@ def process_payment(request, car_slug):
     
 
     
-    return render(request, 'rental/booking.html', {'car': car, 'regions': regions})
+    return render(request, 'rental/booking.html', {'car': car})
 
 def sucessPage(request):
     return render(request, 'rental/sucessPage.html')

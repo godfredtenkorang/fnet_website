@@ -45,7 +45,6 @@ class Rental(models.Model):
     customer_name = models.CharField(max_length=100)
     customer_phone = models.CharField(max_length=15)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='rentals')
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='rentals', null=True, blank=True)
     location_category = models.CharField(max_length=100, default='')
     city = models.CharField(max_length=100, default='')
     town = models.CharField(max_length=250, default='')
@@ -64,6 +63,13 @@ class Rental(models.Model):
     
     class Meta:
         ordering = ['-created_at']
+        
+    def is_negotiable(self):
+        """Returns True if the rental period is more than 3 days, otherwise False."""
+        if self.return_date and self.rental_date:
+            duration = (self.return_date - self.rental_date).days
+            return duration > 3
+        return False
 
     def __str__(self):
         return f"Rental by {self.customer_name} for {self.car}"
@@ -121,8 +127,8 @@ class Payment(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='payments')
     rental_date = models.DateField()
     return_date = models.DateField()
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='payments', null=True, blank=True)
     location_category = models.CharField(max_length=100, default='')
+    city = models.CharField(max_length=100, default='')
     town = models.CharField(max_length=250, default='')
     pick_up_time = models.TimeField(null=True, blank=True)
     drop_off_time = models.TimeField(null=True, blank=True)

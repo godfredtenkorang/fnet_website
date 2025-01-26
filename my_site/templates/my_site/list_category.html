@@ -19,7 +19,7 @@
 
 
 
-
+{% if cars %}
         {% for car in cars %}
         <div class="car">
 
@@ -52,6 +52,11 @@
             </div>
         </div>
         {% endfor %}
+        {% else %}
+            <div class="center">
+                <p>No Cars<br>Added Yet</p>
+            </div>
+        {% endif %}
 
     </div>
 
