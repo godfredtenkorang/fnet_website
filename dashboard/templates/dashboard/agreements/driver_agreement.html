@@ -1,0 +1,79 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+<div class="send-message-form">
+    <br><br>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p style="font-weight: bold; font-size:20px;">Driver Details</p>
+        <br>
+        {{form.driver_full_name.label_tag}}
+        {{form.driver_full_name}}
+
+        {{form.ghana_card_number.label_tag}}
+        {{form.ghana_card_number}}
+
+        {{form.driving_license_number.label_tag}}
+        {{form.driving_license_number}}
+
+        {{form.license_expiration_date.label_tag}}
+        {{form.license_expiration_date}}
+
+        <p style="font-weight: bold; font-size:20px;">Guarantor Details</p>
+        <br>
+        {{form.guarantor_full_name.label_tag}}
+        {{form.guarantor_full_name}}
+
+        {{form.guarantor_ghana_card_number.label_tag}}
+        {{form.guarantor_ghana_card_number}}
+
+        {{form.date_of_birth.label_tag}}
+        {{form.date_of_birth}}
+
+        {{form.contact_number.label_tag}}
+        {{form.contact_number}}
+
+
+        {{form.residential_address.label_tag}}
+        {{form.residential_address}}
+
+        {{form.digital_address.label_tag}}
+        {{form.digital_address}}
+
+        {{form.relationship_to_driver.label_tag}}
+        {{form.relationship_to_driver}}
+
+        {{form.emergency_contact_number.label_tag}}
+        {{form.emergency_contact_number}}
+
+
+        {{form.representative_name.label_tag}}
+        {{form.representative_name}}
+
+
+        <button type="submit">Submit</button>
+
+
+    </form>
+    <br>
+    <a href="{% url 'driver_agreement_lists'  %}">
+        View Lists
+    </a>
+
+    <br><br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

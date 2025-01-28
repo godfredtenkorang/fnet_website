@@ -1,0 +1,46 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+
+
+<div class="container">
+    <h2>Pay and Move Agreement Form Lists</h2>
+    <br>
+    <div class="responsive-table">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Digital Address</th>
+                    <th>Ghana Card Number</th>
+                    <th>Phone Number</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in lists %}
+                <tr>
+                    <td>{{ list.customer_name }}</td>
+                    <td>{{ list.digital_address }}</td>
+                    <td>{{ list.ghana_card_number }}</td>
+                    <td>GH¢{{ list.phone_number }}</td>
+                    <td><a href="{% url 'driveAndPay' list.pk %}">pdf</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

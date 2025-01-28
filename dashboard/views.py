@@ -18,6 +18,9 @@ from django.db.models import Q
 from rental.forms import AppointmentUpdateForm, RentalUpdateForm, RentalPaymentUpdateForm
 from decimal import Decimal
 
+from agreements.models import *
+from agreements.forms import *
+
 
 def dashboard(request):
     cars_available = Car.objects.count()
@@ -447,17 +450,66 @@ def customer_lists(request):
 
 def agreementForm(request):
    
-    return render(request, 'dashboard/agreementForm.html')
-
-def driveAndPay(request):
-   
-    return render(request, 'dashboard/driveAndPay.html')
-
-def driverAgreement(request):
-   
-    return render(request, 'dashboard/driverAgreement.html')
+    return render(request, 'dashboard/agreements/agreementForm.html')
 
 
-def newContact(request):
-   
-    return render(request, 'dashboard/newContact.html')
+def pay_and_move_form(request):
+    if request.method == 'POST':
+        form = PayAndMoveAgreementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pay_and_move_lists')
+    else:
+        form = PayAndMoveAgreementForm()
+    return render(request, 'dashboard/agreements/pay_and_drive_form.html', {'form': form})
+
+def pay_and_move_lists(request):
+    lists = PayAndDriveAgreement.objects.all()
+    return render(request, 'dashboard/agreements/pay_and_move_lists.html', {'lists': lists})
+
+def driveAndPay(request, pdf):
+    forms = PayAndDriveAgreement.objects.get(pk=pdf)
+    
+    template = get_template('dashboard/agreements/driveAndPay.html')
+    html = template.render({'forms': forms})
+    result = HttpResponse(content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(html, dest=result)
+    if pisa_status.err:
+        return HttpResponse(f"We had some errors <pre>{html}</pre>")
+    return result
+
+
+
+
+def driver_agreement_form(request):
+    if request.method == 'POST':
+        form = DriverAgreementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('driver_agreement_lists')
+    else:
+        form = DriverAgreementForm()
+    return render(request, 'dashboard/agreements/driver_agreement.html', {'form': form})
+
+
+def driver_agreement_lists(request):
+    lists = DriverAgreement.objects.all()
+    return render(request, 'dashboard/agreements/driver_agreement_lists.html', {'lists': lists})
+
+def driverAgreement(request, pdf):
+    forms = DriverAgreement.objects.get(pk=pdf)
+    
+    template = get_template('dashboard/agreements/driverAgreement.html')
+    html = template.render({'forms': forms})
+    result = HttpResponse(content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(html, dest=result)
+    if pisa_status.err:
+        return HttpResponse(f"We had some errors <pre>{html}</pre>")
+    return result
+
+
+def new_contract_form(request):
+    return render(request, 'dashboard/agreements/new_contract.html')
+
+def newContract(request):
+    return render(request, 'dashboard/agreements/newConrtact.html')

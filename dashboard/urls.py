@@ -41,14 +41,19 @@ urlpatterns = [
     path('newReceipt/', views.newReceipt, name='newReceipt'),
     
     path('customer_list/', views.customer_lists, name='customer-list'),
-
+    
+    # Agreements Urls
     path('agreementForm/', views.agreementForm, name='agreementForm'),
-
-    path('driveAndPay/', views.driveAndPay, name='driveAndPay'),
-
-
-    path('driverAgreement/', views.driverAgreement, name='driverAgreement'),
-
-    path('newContact/', views.newContact, name='newContact'),
+    
+    path('pay_and_move_form/', views.pay_and_move_form, name='pay_and_move'),
+    path('pay_and_move_lists/', views.pay_and_move_lists, name='pay_and_move_lists'),
+    path('driveAndPay/<pdf>/', views.driveAndPay, name='driveAndPay'),
+    
+    path('driver_agreement_form/', views.driver_agreement_form, name='driver_agreement'),
+    path('driver_agreement_lists/', views.driver_agreement_lists, name='driver_agreement_lists'),
+    path('driverAgreement/<pdf>/', views.driverAgreement, name='driverAgreement'),
+    
+    path('new_contract_form/', views.new_contract_form, name='new_contract'),
+    path('newContract/', views.newContract, name='newContract'),
     
 ]

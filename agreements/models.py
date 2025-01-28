@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class ContactForm(models.Model):
+class ContractForm(models.Model):
     # Customer information
     customer_title = models.CharField(max_length=100, default="Customer Information")
     customer_full_name = models.CharField(max_length=100)

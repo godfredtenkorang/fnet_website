@@ -1,0 +1,92 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+<div class="send-message-form">
+    <br><br>
+
+    <form method="POST">
+        {% csrf_token %}
+        <p style="font-weight: bold; font-size:20px;">Customer Details</p>
+        <br>
+        {{form.customer_name.label_tag}}
+        {{form.customer_name}}
+
+        {{form.digital_address.label_tag}}
+        {{form.digital_address}}
+
+        {{form.ghana_card_number.label_tag}}
+        {{form.ghana_card_number}}
+
+        {{form.phone_number.label_tag}}
+        {{form.phone_number}}
+
+        {{form.whatsapp_number.label_tag}}
+        {{form.whatsapp_number}}
+
+        <p style="font-weight: bold; font-size:20px;">Vehicle Details</p>
+        <br>
+        {{form.vehicle_make_and_model.label_tag}}
+        {{form.vehicle_make_and_model}}
+
+        {{form.registration_number.label_tag}}
+        {{form.registration_number}}
+
+        {{form.color.label_tag}}
+        {{form.color}}
+
+        {{form.mileage_at_pickup.label_tag}}
+        {{form.mileage_at_pickup}}
+
+        <p style="font-weight: bold; font-size:20px;">Rental Period</p>
+        <br>
+        {{form.start_date_and_time.label_tag}}
+        {{form.start_date_and_time}}
+
+        {{form.end_date_and_time.label_tag}}
+        {{form.end_date_and_time}}
+
+        {{form.pickup_location.label_tag}}
+        {{form.pickup_location}}
+
+        {{form.return_location.label_tag}}
+        {{form.return_location}}
+
+
+        <p style="font-weight: bold; font-size:20px;">Total Payment Breakdown</p>
+        <br>
+        {{form.payment_for.label_tag}}
+        {{form.payment_for}}
+
+        {{form.rental_charge.label_tag}}
+        {{form.rental_charge}}
+
+        {{form.driver_accommodation_fee.label_tag}}
+        {{form.driver_accommodation_fee}}
+
+        {{form.total.label_tag}}
+        {{form.total}}
+
+        <button type="submit">Submit</button>
+        <br><br>
+        
+    </form>
+    <a href="{% url 'pay_and_move_lists'  %}">
+        View Lists
+    </a>
+    
+    <br><br>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
