@@ -21,7 +21,7 @@
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
-            border: 1px solid #ccc;
+            
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .section {
@@ -93,24 +93,22 @@
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center;">RENTAL AGREEMENT</h1>
+        <h1 style="text-align: center; font-size:30px; font-weight:800;">RENTAL AGREEMENT</h1>
 
         <div class="section">
-            <p>This Agreement is made on <span>________________________</span> by and between:</p>
-            <p><strong>Taxinet Logistics</strong> (hereinafter referred to as the "Rental Company")</p>
-            <p>Digital Address: AIRPORT ROUNDABOUT opposite Jefel<br>Phone Number: 0550 222 888<br>Email Address: taxinetghana@gmail.com</p>
-            <p><strong>Customer:</strong> ________________________________________</p>
-            <p>Digital Address: ________________________________________<br> Ghana Card #: ________________________________________<br>Phone Number: ________________________________________<br>WhatsApp Number: ________________________________________</p>
+            <p>This Agreement is made on <span>________________________</span> by and between: <br> TL Ghana</strong> (hereinafter referred to as the "Rental Company") <br> Digital Address: AIRPORT ROUNDABOUT opposite Jefel <br> Phone Number: 0550 222 888<br>Email Address:
+            taxinetghana@gmail.com</p>
+            <p>Customer: <span style="text-decoration: underline;">{{forms.customer_name}}</span> <br> Digital Address: <span style="text-decoration: underline;">{{forms.digital_address}}</span> <br> Ghana Card #: <span style="text-decoration: underline; padding-left: 20px">{{forms.ghana_card_number}}</span><br>Phone Number: <span style="text-decoration: underline;">{{forms.phone_number}}</span>  <br>  WhatsApp Number: <span style="text-decoration: underline;">{{forms.whatsapp_number}}</span></p>
         </div>
 
         <div class="section">
             <h2>1. Vehicle Details</h2>
-            <p>Vehicle Make & Model: _______________________________<br>Registration Number: _______________________________<br>Colour: ____________________________<br>Mileage at Pickup: ____________________________</p>
+            <p>Vehicle Make & Model: <span style="text-decoration: underline;">{{forms.vehicle_make_and_model}}</span><br>Registration Number: <span style="text-decoration: underline;">{{forms.registration_number}}</span><br>Colour: <span style="text-decoration: underline;">{{forms.color}}</span><br>Mileage at Pickup: <span style="text-decoration: underline;">{{forms.mileage_at_pickup}}</span></p>
         </div>
 
         <div class="section">
             <h2>2. Rental Period</h2>
-            <p>Start Date & Time: _______________________________<br>End Date & Time: _______________________________<br>Pickup Location: _______________________________<br>Return Location: _______________________________</p>
+            <p>Start Date & Time: <span style="text-decoration: underline;">{{forms.start_date_and_time}}</span><br>End Date & Time: <span style="text-decoration: underline;">{{forms.end_date_and_time}}</span><br>Pickup Location: <span style="text-decoration: underline;">{{forms.pickup_location}}</span><br>Return Location: <span style="text-decoration: underline;">{{forms.return_location}}</span></p>
         </div>
 
         <div class="section">
@@ -139,11 +137,11 @@
 
         <div class="section">
             <h5> 5. Total Payment Breakdown</h5>
-            <p>Payment for: <span>________________________________________________________________________________</span></p>
-            <p>Rental Charge: GHC <span>____________________________________________________________________________________</span></p>
-            <p>Driver Accommodation Fee: <span>____________________________________________________________________________________</span></p>
+            <p>Payment for: <span style="text-decoration: underline;">{{forms.payment_for}}</span></p>
+            <p>Rental Charge: GHC <span><span style="text-decoration: underline;">{{forms.rental_charge}}</span></span></p>
+            <p>Driver Accommodation Fee: <span><span style="text-decoration: underline;">{{forms.driver_accommodation_fee}}</span></span></p>
             <p>Fuel Charge: GHC 1,000</p>
-            <p>Total: GHC <span>____________________________________________________________________________________</span></p>
+            <p>Total: GHC <span style="text-decoration: underline;">{{forms.total}}</span></p>
         </div>
         
 
@@ -207,7 +205,7 @@
 
 
 
-          <section>
+          <!-- <section>
             <h2>Kumasi Only</h2>
             <table border="1" cellspacing="0" cellpadding="5">
                 <thead>
@@ -587,7 +585,7 @@
               <li>6 Days or More: 15% discount on the total rental charge.</li>
             </ul>
             <p class="note">The discount will be calculated and agreed upon at the time of booking.</p>
-          </section>
+          </section> -->
         
 
 

@@ -1,0 +1,46 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+
+
+<div class="container">
+    <h2>Driver Agreement Form Lists</h2>
+    <br>
+    <div class="responsive-table">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Driver Name</th>
+                    <th>Ghana Card Number</th>
+                    <th>License Number</th>
+                    <th>License Expiring Date</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in lists %}
+                <tr>
+                    <td>{{ list.driver_full_name }}</td>
+                    <td>{{ list.ghana_card_number }}</td>
+                    <td>{{ list.driving_license_number }}</td>
+                    <td>{{ list.license_expiration_date }}</td>
+                    <td><a href="{% url 'driverAgreement' list.pk %}">pdf</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
