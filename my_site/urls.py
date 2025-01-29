@@ -15,5 +15,5 @@ urlpatterns = [
     path('unsucessPage/', views.unsucessPage, name='unsucessPage'),
     path('success_page/', views.contact_success_page, name='contact-success'),
     path('terms_and_condition/', views.termsAndCondition, name='termsAndCondition'),
-
+    path('gallery/', views.gallery, name='gallery'),
 ]
