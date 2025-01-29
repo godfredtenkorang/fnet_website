@@ -74,7 +74,6 @@ class Car(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='cars', null=True)
     car_name = models.CharField(max_length=100)
     car_type = models.CharField(max_length=20, choices=CAR_TYPES)
-    registration_number = models.CharField(max_length=50, unique=True)
     brand = models.CharField(max_length=50)
     seats = models.PositiveIntegerField()
     fuel_type = models.CharField(max_length=20, choices=FUEL_TYPE)
@@ -111,7 +110,6 @@ class Car(models.Model):
     image3 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     image4 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
-    vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=25.00, help_text="VAT percentage (e.g., 25 for 25%)")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True)
@@ -123,5 +121,16 @@ class Car(models.Model):
         return price + self.calculate_vat(price)
 
     def __str__(self):
-        return f"{self.brand} {self.car_name} ({self.registration_number})"
+        return f"{self.brand} {self.car_name}"
 
+class Gallery(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='gallery-img/')
+    date_added = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = 'Galleries'
+        ordering = ['-date_added']
+        
+    def __str__(self):
+        return self.name

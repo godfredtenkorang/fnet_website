@@ -3,6 +3,10 @@ from . import views
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
+    
+    path('all_cars/', views.all_cars, name='all-cars'),
+    path('all_cars_form/<slug:car_slug>/', views.all_cars_form, name='all-cars-form'),
+    
     path('contact/', views.contact, name='contact'),
     path('sendMessage/', views.sendMessage, name='sendMessage'),
     path('send_driver_message/', views.sendDriverMessage, name='sendDriverMessage'),
@@ -55,5 +59,8 @@ urlpatterns = [
     
     path('new_contract_form/', views.new_contract_form, name='new_contract'),
     path('newContract/', views.newContract, name='newContract'),
+    
+    
+    path('add_gallery/', views.add_gallery, name='add-gallery'),
     
 ]

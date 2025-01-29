@@ -7,8 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Gallery</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
     <style>
   body {
   font-family: Arial, sans-serif;
@@ -19,7 +17,7 @@
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));  /* Responsive grid */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  /* Responsive grid */
   padding: 16px;
 }
 
@@ -142,21 +140,12 @@
 </head>
 <body>
     
-
     <div class="gallery">
-
-          <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" class="gallery-img">
-          <img src="{% static 'my_site/img/background3.jpg' %}" alt="background photo" class="gallery-img">
-          <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" class="gallery-img">
-          <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" class="gallery-img">
-          <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" class="gallery-img">
-          <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" class="gallery-img">
-          <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" class="gallery-img">
-          <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" class="gallery-img">
-      
+        {% for gallery in galleries %}
+          <img src="{{ gallery.image.url }}" alt="{{gallery.name}}" class="gallery-img">
+        {% endfor %}
         <!-- Add more gallery items here with the same structure -->
       </div>
-    
       <!-- Popup Modal -->
       <div id="popup" class="popup">
         <span id="close-popup" class="close">&times;</span>

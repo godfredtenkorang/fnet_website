@@ -138,11 +138,17 @@ def process_payment(request, car_slug):
         return redirect('sucessPage')
     
 
-    
-    return render(request, 'rental/booking.html', {'car': car})
+    context = {
+        'car': car,
+        'title': 'Booking'
+    }
+    return render(request, 'rental/booking.html', context)
 
 def sucessPage(request):
-    return render(request, 'rental/sucessPage.html')
+    context = {
+        'title': 'Sucess'
+    }
+    return render(request, 'rental/sucessPage.html', context)
 
 def unsucessPage(request):
     return render(request, 'rental/unsucessPage.html')

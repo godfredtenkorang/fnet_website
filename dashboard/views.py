@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment, Payment
 from my_site.models import Car, Driver
-from my_site.forms import DriverForm
+from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm
 from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms
 from .models import SMSLog, Customer, DriversSMSLog
 from django.http import HttpResponse
@@ -25,11 +25,37 @@ from agreements.forms import *
 def dashboard(request):
     cars_available = Car.objects.count()
     bookings_id = Rental.objects.count()
-    return render(request, 'dashboard/dashboard.html', {'cars_available': cars_available, 'bookings_id':bookings_id})
+    return render(request, 'dashboard/dashboard.html', {'title':'Dashboard', 'cars_available': cars_available, 'bookings_id':bookings_id})
+
+def all_cars(request):
+    cars = Car.objects.all()
+    context = {
+        'cars': cars,
+        'title': 'All Cars'
+    }
+    return render(request, 'dashboard/cars/all_cars.html', context)
+
+
+def all_cars_form(request, car_slug):
+    car = get_object_or_404(Car, slug=car_slug)
+    if request.method == 'POST':
+        form = CarUpdateForm(request.POST, request.FILES, instance=car)
+        if form.is_valid():
+            form.save()
+            return redirect('all-cars')
+    else:
+        form = CarUpdateForm(instance=car)
+    context = {
+        'form': form,
+        'car': car,
+        'title': 'Car Detail'
+    }
+    return render(request, 'dashboard/cars/all_cars_form.html', context)
+
 
 def contact(request):
     contacts = Contact.objects.all()
-    return render(request, 'dashboard/contact.html', {'contacts': contacts})
+    return render(request, 'dashboard/contact.html', {'title': 'Contact', 'contacts': contacts})
 
 def sendMessage(request):
     all_sms = SMSLog.objects.all()
@@ -50,6 +76,7 @@ def sendMessage(request):
     
     context = {
         'all_sms': all_sms,
+        'title': 'SMS to Customers'
     }
     return render(request, 'dashboard/sendMessage.html', context)
 
@@ -70,14 +97,15 @@ def sendDriverMessage(request):
         return redirect("sendDriverMessage")
     
     context = {
-        'all_driver_sms': all_driver_sms
+        'all_driver_sms': all_driver_sms,
+        'title': 'SMS to Driver'
     }
     return render(request, 'dashboard/sms_message_to_drivers.html', context)
 
 
 def bookings(request):
     rentals = Rental.objects.all()
-    return render(request, 'dashboard/bookings.html', {'rentals': rentals})
+    return render(request, 'dashboard/bookings.html', {'title': 'Bookings', 'rentals': rentals})
 
 def update_rentals(request, rental_id):
     # Get the specific appointment by its ID
@@ -100,6 +128,7 @@ def update_rentals(request, rental_id):
     return render(request, 'dashboard/booking_forms_update.html', {
         'rental': rental,
         'form': form,
+        'title': 'Bookings',
     })
     
 def complete_rental(request, rental_id):
@@ -120,7 +149,7 @@ def complete_rental(request, rental_id):
 
 def booking_payments(request):
     payments = Payment.objects.all()
-    return render(request, 'dashboard/booking_payments.html', {'payments': payments})
+    return render(request, 'dashboard/booking_payments.html', {'title': 'Bookings', 'payments': payments})
 
 def update_rental_payment(request, rental_id):
     # Get the specific appointment by its ID
@@ -143,6 +172,7 @@ def update_rental_payment(request, rental_id):
     return render(request, 'dashboard/booking_payment_form.html', {
         'rental_rental': rental_payment,
         'form': form,
+        'title': 'Update Bookings',
     })
     
 def complete_rental_payment(request, rental_id):
@@ -177,7 +207,7 @@ def print_payment_receipt(request, receipt_id):
 
 def appointments(request):
     all_appointments = Appointment.objects.all()
-    return render(request, 'dashboard/appointments.html', {'all_appointments': all_appointments})
+    return render(request, 'dashboard/appointments.html', {'title': 'All Schedules', 'all_appointments': all_appointments})
 
 def add_expenses(request):
     cars = Car.objects.all()
@@ -247,6 +277,7 @@ def view_expenses(request):
         'total_amount': total_amount,
         'totals': totals,
         'all_totals': all_totals,
+        'title': 'View Expenses',
     })
     
 def render_to_pdf(template_src, context_dict={}):
@@ -313,17 +344,17 @@ def register_driver(request):
             return redirect('driver-list')
     else:
         form = DriverForm()
-    return render(request, 'dashboard/driver/driver_form.html', {'form': form})
+    return render(request, 'dashboard/driver/driver_form.html', {'title': 'Register Driver', 'form': form})
 
 def driver_list(request):
     drivers = Driver.objects.all()
-    return render(request, 'dashboard/driver/driver_list.html', {'drivers': drivers})
+    return render(request, 'dashboard/driver/driver_list.html', {'title': 'All Drivers', 'drivers': drivers})
 
 def driver_detail(request, driver_id):
     driver = get_object_or_404(Driver, id=driver_id)
     if request.method == 'POST':
         driver_license_sms(driver.phone_number, driver.first_name, driver.licence_number, driver.licence_expiry_date)
-    return render(request, 'dashboard/driver/driver_detail.html', {'driver': driver})
+    return render(request, 'dashboard/driver/driver_detail.html', {'title': 'Driver Detail', 'driver': driver})
 
 def assign_driver(request, car_id):
     # Fetch the specific car by its ID
@@ -368,6 +399,7 @@ def update_appointment(request, appointment_id):
     return render(request, 'dashboard/appointment_forms.html', {
         'appointment': appointment,
         'form': form,
+        'title': 'Update Schedule',
     })
     
     
@@ -401,6 +433,7 @@ def driver_dashboard(request, driver_id):
         'rentals': rentals,
         'payments': payments,
         'total_commission': total_commission,
+        'title': 'Driver Dashboard',
     })
 
 # message = (
@@ -443,7 +476,7 @@ def newReceipt(request):
 
 def customer_lists(request):
     customers_info = Customer.objects.all()
-    return render(request, 'dashboard/customer_list.html', {'customers': customers_info})
+    return render(request, 'dashboard/customer_list.html', {'title': 'All Customers', 'customers': customers_info})
 
 
 
@@ -513,3 +546,20 @@ def new_contract_form(request):
 
 def newContract(request):
     return render(request, 'dashboard/agreements/newConrtact.html')
+
+
+
+def add_gallery(request):
+    if request.method == 'POST':
+        form = AddGalleryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('add-gallery')
+    else:
+        form = AddGalleryForm()
+        
+    context = {
+        'form': form,
+        'title': 'Gallery'
+    }
+    return render(request, 'dashboard/add_gallery.html', context)
