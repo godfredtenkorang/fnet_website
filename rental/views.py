@@ -146,3 +146,4 @@ def sucessPage(request):
 
 def unsucessPage(request):
     return render(request, 'rental/unsucessPage.html')
+
