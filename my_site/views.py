@@ -144,3 +144,5 @@ def custom_404_view(request, exception):
     }
     return render(request, 'my_site/404.html', status=404, context=context)
 
+def gallery(request):
+    return render(request, 'my_site/gallery.html')
