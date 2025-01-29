@@ -26,7 +26,8 @@ def login(request):
                 return redirect("dashboard")
         
     context = {
-        'form': form
+        'form': form,
+        'title': 'Login'
     }
     
     return render(request, 'users/login.html', context)

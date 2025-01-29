@@ -1,35 +1,42 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Car, Category
+from .models import Car, Category, Gallery
 from rental.models import Rental, Contact
 from django.conf import settings
 from django.core.mail import send_mail
 from .utils import send_sms, receive_sms, receive_contact, get_location_based_price
 from django.http import JsonResponse
 from dashboard.models import Customer
+import random
 
 # Create your views here.
 def index(request):
-    cars = Car.objects.filter(availability_status='Available')[:8]
-    return render(request, 'my_site/index.html', {'cars': cars})
+    cars = list(Car.objects.filter(availability_status='Available'))
+    random.shuffle(cars)
+    random_cars = cars[:8]
+    return render(request, 'my_site/index.html', {'cars': random_cars})
 
 
 def rentCars(request):
     
-    cars = Car.objects.all()
+    cars = list(Car.objects.all())
+    random.shuffle(cars)
+    random_cars = cars
     
     context = {
-        'cars': cars,
+        'cars': random_cars,
         'title': 'Cars'
     }
     return render(request, 'my_site/rentCars.html', context)
 
 def list_category(request, category_slug=None):
     category = get_object_or_404(Category, slug=category_slug)
-    cars = Car.objects.filter(category=category)
+    cars = list(Car.objects.filter(category=category))
+    random.shuffle(cars)
+    random_cars = cars
     
     context = {
         'category': category,
-        'cars': cars,
+        'cars': random_cars,
         'title': 'Categories'
     }
     return render(request, 'my_site/list_category.html', context)
@@ -103,10 +110,16 @@ def carDetail(request,  car_slug):
 
 
 def aboutUs(request):
-    return render(request, 'my_site/aboutUs.html')
+    context = {
+        'title': 'About Us'
+    }
+    return render(request, 'my_site/aboutUs.html', context)
 
 def service(request):
-    return render(request, 'my_site/service.html')
+    context = {
+        'title': 'Services'
+    }
+    return render(request, 'my_site/service.html', context)
 
 def contactUs(request):
     if request.method == 'POST':
@@ -119,15 +132,20 @@ def contactUs(request):
         receive_contact(name, email, phone, message)
         return redirect('contact-success')
     
-    
-    return render(request, 'my_site/contactUs.html')
+    context = {
+        'title': 'Contact Us'
+    }
+    return render(request, 'my_site/contactUs.html', context)
 
 
 def signUp(request):
     return render(request, 'my_site/signUp.html')
 
 def termsAndCondition(request):
-    return render(request, 'my_site/termsAndCondition.html')
+    context = {
+        'title': 'T&C'
+    }
+    return render(request, 'my_site/termsAndCondition.html', context)
 
 def sucessPage(request):
     return render(request, 'my_site/sucessPage.html')
@@ -145,4 +163,9 @@ def custom_404_view(request, exception):
     return render(request, 'my_site/404.html', status=404, context=context)
 
 def gallery(request):
-    return render(request, 'my_site/gallery.html')
+    galleries = Gallery.objects.all()
+    context = {
+        'galleries': galleries,
+        'title': 'Gallery'
+    }
+    return render(request, 'my_site/gallery.html', context)
