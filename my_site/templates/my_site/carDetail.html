@@ -96,23 +96,23 @@
         <!-- Hidden JSON Data for Pricing -->
         <script type="application/json" id="pricing_data">
                 {
-                    "within_kumasi": "{{ car.price_within_kumasi }}",
-                    "ahafo_region": "{{ car.ahafo_region_price }}",
-                    "ashanti_region": "{{ car.ashanti_region_price }}",
-                    "bono_region": "{{ car.bono_region_price }}",
-                    "bono_east_region": "{{ car.bono_east_region_price }}",
-                    "central_region": "{{ car.central_region_price }}",
-                    "eastern_region": "{{ car.eastern_region_price }}",
-                    "greater_accra_region": "{{ car.greater_accra_region_price }}",
-                    "northern_region": "{{ car.northern_region_price }}",
-                    "north_east_region": "{{ car.north_east_region_price }}",
-                    "oti_region": "{{ car.oti_region_price }}",
-                    "savannah_region": "{{ car.savannah_region_price }}",
-                    "upper_east_region": "{{ car.upper_east_region_price }}",
-                    "upper_west_region": "{{ car.upper_west_region_price }}",
-                    "volta_region": "{{ car.volta_region_price }}",
-                    "western_region": "{{ car.western_region_price }}",
-                    "western_north_region": "{{ car.western_north_region_price }}"
+                    "within_kumasi": "{{ car.price_within_kumasi }} - {{ car.range_price_within_kumasi }}",
+                    "ahafo_region": "{{ car.ahafo_region_price }} - {{ car.range_price_ahafo_region }}",
+                    "ashanti_region": "{{ car.ashanti_region_price }} - {{ car.range_price_ashanti_region }}",
+                    "bono_region": "{{ car.bono_region_price }} - {{ car.range_price_bono_region }}",
+                    "bono_east_region": "{{ car.bono_east_region_price }} - {{ car.range_price_bono_east_region }}",
+                    "central_region": "{{ car.central_region_price }} - {{ car.range_price_central_region }}",
+                    "eastern_region": "{{ car.eastern_region_price }} - {{ car.range_price_eastern_region }}",
+                    "greater_accra_region": "{{ car.greater_accra_region_price }} - {{ car.range_price_greater_accra_region }}",
+                    "northern_region": "{{ car.northern_region_price }} - {{ car.range_price_northern_region }}",
+                    "north_east_region": "{{ car.north_east_region_price }} - {{ car.range_price_north_east_region }}",
+                    "oti_region": "{{ car.oti_region_price }} - {{ car.range_price_oti_region }}",
+                    "savannah_region": "{{ car.savannah_region_price }} - {{ car.range_price_savannah_region }}",
+                    "upper_east_region": "{{ car.upper_east_region_price }} - {{ car.range_price_upper_east_region }}",
+                    "upper_west_region": "{{ car.upper_west_region_price }} - {{ car.range_price_upper_west_region }}",
+                    "volta_region": "{{ car.volta_region_price }} - {{ car.range_price_volta_region }}",
+                    "western_region": "{{ car.western_region_price }} - {{ car.range_price_western_region }}",
+                    "western_north_region": "{{ car.western_north_region_price }} - {{ car.range_price_western_north_region }}"
                 }
         </script>
         <div class="input">
@@ -166,33 +166,33 @@
           <input type="date" name="return_date" id="return_date" required>
         </div>
         <div class="input">
-          <label for="">Document Type</label> <br>
+          <label for="">ID Type</label> <br>
           <select name="document_type" id="document_type">
             <option value="Ghana Card">Ghana Card</option>
             <option value="Passport">Passport</option>
           </select>
         </div>
         <div class="input">
-          <label for="">Document No. </label> <br>
-          <input type="text" name="document_number" id="document_number" required placeholder="GHA-xxxxxxxxxxxx-x">
+          <label for="">ID No. </label> <br>
+          <input type="text" name="document_number" id="document_number" required placeholder="Type your ID Number">
         </div>
       </div>
 
-      <h3>Total Price: GH¢<span id="total_price">0.00 </span></h3>
+      <h3>Total Price Range: <span id="total_price">0.00 </span></h3>
       <p class="negotiable_message" id="negotiable_message"></p>
       <br>
-      <h3>NB: Book now if you want to make payment at the office.</h3>
+      <!-- <h3>NB: Book now if you want to make payment at the office.</h3> -->
       <br>
-      <button type="submit">Pay on Arrival</button>
+      <button type="submit">Book Now</button>
 
 
     </form>
     <!-- <div class="exp-btn">
       <a style="color:black;" href="{% url 'assign-driver' car.id %}">View Expenses</a>
     </div> -->
-    <a href="{% url 'process-payment' car.slug  %}">
+    <!-- <a href="{% url 'process-payment' car.slug  %}">
       <button class="payOnarrival">Pay before Arrival </button>
-    </a>
+    </a> -->
   </div>
 </div>
 <script>
@@ -212,25 +212,26 @@
 
 
     if (rentalDate && returnDate && rentalDate < returnDate) {
-      if (pricing[location_category]) {
-        priceDisplay.textContent = `GH¢ ${pricing[location_category]}`
-      } else {
-        priceDisplay.textContent = "Select a valid location";
-      }
-      
-
       const timeDiff = returnDate - rentalDate;
       const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
+      if (pricing[location_category] && rentalDays > 0) {
+        priceDisplay.textContent = `${pricing[location_category]}`
+        let [minPrice, maxPrice] = pricing[location_category].split(" - ").map(Number);
+        let totalMinPrice = minPrice * rentalDays;
+        let totalMaxPrice = maxPrice * rentalDays;
+        document.getElementById('total_price').innerHTML = `GH¢ ${totalMinPrice} - GH¢ ${totalMaxPrice}`
+      } else {
+        priceDisplay.textContent = "Select a valid location";
+        document.getElementById('total_price').innerHTML = "0.00";
+      }
+      
+
+     
 
 
-      const totalPrice = rentalDays * (pricing[location_category]);
-
-
-      document.getElementById('total_price').innerHTML = totalPrice.toFixed(2);
-    } else {
-      document.getElementById('total_price').innerHTML = "0.00";
-    }
+     
+    } 
 
     if (rentalDate && returnDate) {
       const difference = (returnDate - rentalDate) / (1000 * 60 * 45 * 24);

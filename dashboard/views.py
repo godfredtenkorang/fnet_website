@@ -542,7 +542,18 @@ def driverAgreement(request, pdf):
 
 
 def new_contract_form(request):
-    return render(request, 'dashboard/agreements/new_contract.html')
+    if request.method == 'POST':
+        form = BoggasAgreementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('driver_agreement_lists')
+    else:
+        form = BoggasAgreementForm()
+        
+    context = {
+        'form': form
+    }
+    return render(request, 'dashboard/agreements/new_contract.html', context)
 
 def newContract(request):
     return render(request, 'dashboard/agreements/newConrtact.html')

@@ -6,13 +6,82 @@
     <form method="POST">
         {% csrf_token %}
 
-        {{form}}
+        <p style="font-weight: bold; font-size:20px;">Customer Details</p>
+        <br>
+        {{form.customer_full_name.label_tag}}
+        {{form.customer_full_name}}
+        
+        {{form.customer_phone_number.label_tag}}
+        {{form.customer_phone_number}}
+        
+        {{form.customer_whatsapp_number.label_tag}}
+        {{form.customer_whatsapp_number}}
+        
+        {{form.customer_digital_address.label_tag}}
+        {{form.customer_digital_address}}
+
+        {{form.customer_ghana_card_number.label_tag}}
+        {{form.customer_ghana_card_number}}
+
+        {{form.customer_passport_number.label_tag}}
+        {{form.customer_passport_number}}
+        
+        <p style="font-weight: bold; font-size:20px;">Guarantor Details</p>
+        <br>
+        {{form.guarantor_full_name.label_tag}}
+        {{form.guarantor_full_name}}
+        
+        {{form.guarantor_phone_number.label_tag}}
+        {{form.guarantor_phone_number}}
+        
+        {{form.guarantor_digital_address.label_tag}}
+        {{form.guarantor_digital_address}}
+        
+        {{form.guarantor_relationship_to_customer.label_tag}}
+        {{form.guarantor_relationship_to_customer}}
+        
+        
+        {{form.guarantor_ghana_card_number.label_tag}}
+        {{form.guarantor_ghana_card_number}}
+
+        <p style="font-weight: bold; font-size:20px;">Vehicle Details</p>
+        <br>
+        {{form.vehicle_type.label_tag}}
+        {{form.vehicle_type}}
+        
+        {{form.vehicle_registration.label_tag}}
+        {{form.vehicle_registration}}
+        
+        <br>
+        {{form.return_duration.label_tag}}
+        {{form.return_duration}}
+        
+        {{form.start_date_and_time.label_tag}}
+        {{form.start_date_and_time}}
+
+        {{form.end_date_and_time.label_tag}}
+        {{form.end_date_and_time}}
+
+        <br>
+        {{form.self_drive_daily_charge.label_tag}}
+        {{form.self_drive_daily_charge}}
+
+        {{form.total_payment_due.label_tag}}
+        {{form.total_payment_due}}
+
+        {{form.payment_method.label_tag}}
+        {{form.payment_method}}
+
+        <br>
+        {{form.staff_name.label_tag}}
+        {{form.staff_name}}
+
 
         <button type="submit">Submit</button>
 
 
     </form>
-
+<br><br>
 </div>
 
 
