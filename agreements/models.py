@@ -1,7 +1,8 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
-class ContractForm(models.Model):
+class BoggasForm(models.Model):
     # Customer information
     customer_title = models.CharField(max_length=100, default="Customer Information")
     customer_full_name = models.CharField(max_length=100)
@@ -9,6 +10,7 @@ class ContractForm(models.Model):
     customer_whatsapp_number = models.CharField(max_length=15, null=True, blank=True)
     customer_digital_address = models.CharField(max_length=100)
     customer_ghana_card_number = models.CharField(max_length=15)
+    customer_passport_number = models.CharField(max_length=100, null=True, blank=True)
     # Guarantor Information (for Self-Drive)
     guarantor_title = models.CharField(max_length=100, default="Guarantor Information (for Self-Drive)")
     guarantor_full_name = models.CharField(max_length=100)
@@ -16,44 +18,22 @@ class ContractForm(models.Model):
     guarantor_digital_address = models.CharField(max_length=100, null=True, blank=True)
     guarantor_relationship_to_customer = models.CharField(max_length=100)
     guarantor_ghana_card_number = models.CharField(max_length=15)
-    # Emergency Contact Information (for Pay and Drive)
-    emergency_title = models.CharField(max_length=100, default="Emergency Contact Information (for Pay and Drive)")
-    emergency_full_name = models.CharField(max_length=100)
-    emergency_phone_number = models.CharField(max_length=15)
-    emergency_relationship_to_customer = models.CharField(max_length=50)
     # Vehicle Details
     vehicle_title = models.CharField(max_length=100, default='Vehicle Details')
     vehicle_type = models.CharField(max_length=100)
     vehicle_registration = models.CharField(max_length=100)
     # Vehicle Rental Details
     rental_title = models.CharField(max_length=100, default='Vehicle Rental Details')
-    service_type = models.CharField(max_length=100, choices=[("Drive and Pay(Self-Drive)", "Drive and Pay(Self-Drive)"), ("Pay and Drive(Company Driver)", "Pay and Drive(Company Driver)")])
     return_duration = models.CharField(max_length=10)
-    start_date_and_time = models.DateTimeField(auto_now_add=True)
-    end_date_and_time = models.DateTimeField(auto_now_add=True)
+    start_date_and_time = models.DateTimeField(timezone.now)
+    end_date_and_time = models.DateTimeField(timezone.now)
     # Payment Information
     payment_title = models.CharField(max_length=100, default='Payment Information')
     self_drive_daily_charge = models.DecimalField(max_digits=10, decimal_places=2)
-    mileage = models.CharField(max_length=10)
-    hours = models.CharField(max_length=20)
-    cash_lock = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     total_payment_due = models.DecimalField(max_digits=10, decimal_places=2)
-    pay_and_drive_daily_charge = models.DecimalField(max_digits=10, decimal_places=2)
-    pay_and_drive_mileage = models.CharField(max_length=10)
-    pay_and_drive_hours = models.CharField(max_length=20)
-    pay_and_drive_total_payment_due = models.CharField(max_length=100)
     payment_method = models.CharField(max_length=100, choices=[("Cash", "Cash"), ("Mobile Money (MoMo)", "Mobile Money (MoMo)"), ("Bank Transfer", "Bank Transfer")])
-    # Payment Terms
-    terms_title = models.CharField(max_length=100, default='Payment Terms')
-    terms_self_drive_daily_charge = models.DecimalField(max_digits=10, decimal_places=2)
-    terms_mileage = models.CharField(max_length=10)
-    refundable_cash = models.DecimalField(max_digits=10, decimal_places=2)
-    terms_pay_and_drive_daily_charge = models.DecimalField(max_digits=10, decimal_places=2)
-    terms_pay_and_drive_mileage = models.CharField(max_length=10)
-    # Mileage Policy
-    mileage_policy = models.CharField(max_length=20)
-    # Cash Lock Return (Self-Drive Only)
-    cash_lock_policy = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    staff_name = models.CharField(max_length=100, default='')
     
     
     def __str__(self):

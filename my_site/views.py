@@ -74,7 +74,18 @@ def carDetail(request,  car_slug):
 
         # Calculate total price based on rental days
         rental_days = (return_date - rental_date).days
-        total_price = rental_days * daily_price if rental_days > 0 else 0
+        # Handle case where price is stored as a range "200 - 300"
+        if isinstance(daily_price, str) and " - " in daily_price:
+            # Split the range and convert to float instead of int
+            min_price, max_price = map(float, daily_price.split(" - "))
+            total_min_price = min_price * rental_days
+            total_max_price = max_price * rental_days
+            total_price = f"{total_min_price:.2f} - {total_max_price:.2f}"  # Keep two decimal places
+            
+        else:
+            # Ensure single price values are treated as float
+            total_price = float(daily_price) * rental_days
+            
         
         customer, created = Customer.objects.get_or_create(
                 name=customer_name,
