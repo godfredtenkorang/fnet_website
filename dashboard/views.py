@@ -541,6 +541,14 @@ def driverAgreement(request, pdf):
     return result
 
 
+def new_contract_list(request):
+    lists = BoggasForm.objects.all()
+    context = {
+        'lists': lists,
+        'title': 'Boggas Drive Form'
+    }
+    return render(request, 'dashboard/agreements/new_contract_list.html', context)
+
 def new_contract_form(request):
     if request.method == 'POST':
         form = BoggasAgreementForm(request.POST)
@@ -555,8 +563,17 @@ def new_contract_form(request):
     }
     return render(request, 'dashboard/agreements/new_contract.html', context)
 
-def newContract(request):
-    return render(request, 'dashboard/agreements/newConrtact.html')
+def newContract(request, pdf):
+    forms = DriverAgreement.objects.get(pk=pdf)
+    
+    template = get_template('dashboard/agreements/newConrtact.html')
+    html = template.render({'forms': forms})
+    result = HttpResponse(content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(html, dest=result)
+    if pisa_status.err:
+        return HttpResponse(f"We had some errors <pre>{html}</pre>")
+    return result
+    
 
 
 

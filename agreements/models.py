@@ -25,8 +25,8 @@ class BoggasForm(models.Model):
     # Vehicle Rental Details
     rental_title = models.CharField(max_length=100, default='Vehicle Rental Details')
     return_duration = models.CharField(max_length=10)
-    start_date_and_time = models.DateTimeField(timezone.now)
-    end_date_and_time = models.DateTimeField(timezone.now)
+    start_date_and_time = models.DateField()
+    end_date_and_time = models.DateField()
     # Payment Information
     payment_title = models.CharField(max_length=100, default='Payment Information')
     self_drive_daily_charge = models.DecimalField(max_digits=10, decimal_places=2)

@@ -57,8 +57,10 @@ urlpatterns = [
     path('driver_agreement_lists/', views.driver_agreement_lists, name='driver_agreement_lists'),
     path('driverAgreement/<pdf>/', views.driverAgreement, name='driverAgreement'),
     
-    path('new_contract_form/', views.new_contract_form, name='new_contract'),
-    path('newContract/', views.newContract, name='newContract'),
+    
+    path('boggas-drive-list/', views.new_contract_list, name='new_contract_list'),
+    path('new-boggas-form/', views.new_contract_form, name='new_contract'),
+    path('boggas-drive/<pdf>/', views.newContract, name='newContract'),
     
     
     path('add_gallery/', views.add_gallery, name='add-gallery'),
