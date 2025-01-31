@@ -3,28 +3,30 @@
 
 
 <div class="container">
-    <h2>Driver Agreement Form Lists</h2>
+    <h2>Bogga's Drive Agreement Form Lists</h2>
     <br>
     <div class="responsive-table">
 
         <table>
             <thead>
                 <tr>
-                    <th>Driver Name</th>
-                    <th>Ghana Card Number</th>
-                    <th>License Number</th>
-                    <th>License Expiring Date</th>
+                    <th>Customer Name</th>
+                    <th>Customer Phone Number</th>
+                    <th>Customer Digital Addrees</th>
+                    <th>Customer Ghana Card</th>
+                    <th>Customer Passport Number</th>
                     <th>Download</th>
                 </tr>
             </thead>
             <tbody>
                 {% for list in lists %}
                 <tr>
-                    <td>{{ list.driver_full_name }}</td>
-                    <td>{{ list.ghana_card_number }}</td>
-                    <td>{{ list.driving_license_number }}</td>
-                    <td>{{ list.license_expiration_date }}</td>
-                    <td><a href="{% url 'driverAgreement' list.pk %}">pdf</a></td>
+                    <td>{{ list.customer_full_name }}</td>
+                    <td>{{ list.customer_phone_number }}</td>
+                    <td>{{ list.customer_digital_address }}</td>
+                    <td>{{ list.customer_ghana_card_number }}</td>
+                    <td>{{ list.customer_passport_number }}</td>
+                    <td><a href="{% url 'newContract' list.pk %}">pdf</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
