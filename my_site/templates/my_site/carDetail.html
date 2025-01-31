@@ -138,7 +138,7 @@
             <option value="western_north_region">Western North Region</option>
           </select>
         </div>
-        <h3>Region Price: GH¢<span id="price_display">0.00</span></h3>
+        <h3>Price: GH¢<span id="price_display">0.00</span></h3>
         <br>
         <div class="input">
           <label for="">City </label> <br>
@@ -213,7 +213,7 @@
 
     if (rentalDate && returnDate && rentalDate < returnDate) {
       const timeDiff = returnDate - rentalDate;
-      const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 12));
+      const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
       if (pricing[location_category] && rentalDays > 0) {
         priceDisplay.textContent = `${pricing[location_category]}`
