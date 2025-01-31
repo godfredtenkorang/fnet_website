@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment, Payment
 from my_site.models import Car, Driver
 from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm
-from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms
+from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms
 from .models import SMSLog, Customer, DriversSMSLog
 from django.http import HttpResponse
 
@@ -340,7 +340,8 @@ def register_driver(request):
     if request.method == 'POST':
         form = DriverForm(request.POST)
         if form.is_valid():
-            form.save()
+            forms = form.save()
+            driver_register_sms(forms.phone_number, forms.first_name)
             return redirect('driver-list')
     else:
         form = DriverForm()
