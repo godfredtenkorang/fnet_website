@@ -139,7 +139,33 @@ def driver_license_sms(phone_number, first_name, licence_number, licence_expiry_
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Dear {first_name}, your driver's license " f"(License Number: {licence_number}) is expiring on {licence_expiry_date}. " "Please renew it as soon as possible to avoid issues. \n" "Regards, \n" "Taxinet Ghana." ,
+        "message": f"Dear {first_name}, your driver's license " f"(License Number: {licence_number}) is expiring on {licence_expiry_date}. " "Please renew it as soon as possible to avoid issues. \n" "Regards, \n" "TL Ghana." ,
+        "is_schedule": False,
+        "schedule_date": ''
+    }
+    
+
+    url = endpoint + '?key=' + apiKey
+    
+   
+    try:
+        response = requests.post(url, data=payload)
+        response.raise_for_status()
+        
+        return response.json()
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error sending SMS: {e}")
+        return None
+    
+def driver_register_sms(phone_number, first_name):
+    endpoint = "https://api.mnotify.com/api/sms/quick"
+    apiKey = settings.MNOTIFY_API_KEY
+    payload = {
+        "key": apiKey,
+        "sender": 'TLGhana',
+        "recipient[]": phone_number,
+        "message": f"Dear {first_name}, thank you for being part of TL Ghana! Keep providing excellent service and enjoy exclusive benefits. Need support? Contact us anytime. Drive safe! - TL Ghana Team" ,
         "is_schedule": False,
         "schedule_date": ''
     }
