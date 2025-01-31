@@ -213,7 +213,7 @@
 
     if (rentalDate && returnDate && rentalDate < returnDate) {
       const timeDiff = returnDate - rentalDate;
-      const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 12));
 
       if (pricing[location_category] && rentalDays > 0) {
         priceDisplay.textContent = `${pricing[location_category]}`
