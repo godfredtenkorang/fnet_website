@@ -33,7 +33,7 @@ def receive_sms(customer_name, customer_phone, schedule_date,  pick_up_time, dro
     payload = {
         "key": apiKey,
         "sender": 'TLGhana',
-        "recipient[]": '0244529353',
+        "recipient[]": '0550222888',
         "message": f"New Schedule Details: \n" f"Customer Name: {customer_name} \n" f"Phone: {customer_phone} \n" f"Schedule Date: {schedule_date} \n" f"Pick up Time: {pick_up_time} \n" f"Drop of Time: {drop_off_time} \n" f"Pick up Location: {pick_up_location} \n" f"Drop off Location: {drop_off_location} \n" f"GPS Address: {gps_address} \n" f"Note: {purpose}",
         "is_schedule": False,
         "schedule_date": ''
@@ -90,7 +90,7 @@ def receive_payment_sms(customer_name, customer_phone, car_name, rental_date, re
     payload = {
         "key": apiKey,
         "sender": 'TLGhana',
-        "recipient[]": '0244529353',
+        "recipient[]": '0550222888',
         "message": f"New Car Booking Details: \n" f"Customer Name: {customer_name} \n"  f"Phone Number: {customer_phone} \n"  f"Car Booked: {car_name} \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Pick up Location: {pick_up_location} \n" f"Drop off Location: {drop_off_location} \n" f"Transaction ID: {transaction_id} \n" f"Total Price: GH¢{total_price}",
         "is_schedule": False,
         "schedule_date": ''
