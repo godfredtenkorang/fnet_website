@@ -57,12 +57,22 @@ class Rental(models.Model):
     document_number = models.CharField(max_length=100, null=True, blank=True)
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='rentals')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
-    commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=12.50)
+    vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=25.00)
+    base_price = models.CharField(max_length=100, blank=True, null=True)
+    vat_amount = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    invoice_number = models.CharField(max_length=20, unique=True, blank=True)
     
     class Meta:
         ordering = ['-created_at']
+        
+    def calculate_commission(self):
+        if self.driver:
+            rental_fee = Decimal(self.total_price)  # Assuming car has a `daily_rate` field
+            return (rental_fee * self.commission_rate) / 100
+        return 0.00
         
     def is_negotiable(self):
         """Returns True if the rental period is more than 3 days, otherwise False."""
@@ -70,6 +80,13 @@ class Rental(models.Model):
             duration = (self.return_date - self.rental_date).days
             return duration > 3
         return False
+    
+    def save(self, *args, **kwargs):
+        if not self.invoice_number:
+            # Generate a unique invoice number, e.g., INV20250104-XXXX
+            super().save(*args, **kwargs)
+            self.invoice_number = f"TL/IN/{self.updated_at.strftime('%Y%m%d')}-{uuid.uuid4().hex[:4].upper()}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Rental by {self.customer_name} for {self.car}"
@@ -97,7 +114,7 @@ class Appointment(models.Model):
     purpose = models.TextField(null=True, blank=True)  # e.g., "Test drive", "Car inspection", etc.
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=10.00)
+    commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=12.50)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     
     class Meta:

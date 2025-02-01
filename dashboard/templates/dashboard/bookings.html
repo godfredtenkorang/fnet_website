@@ -16,6 +16,7 @@
                     <th>Total Price</th>
                     <th>Update</th>
                     <th>Status</th>
+                    <th>Receipt</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                     {% else %}
                     <td>completed</td>
                     {% endif %}
+                    <td><a href="{% url 'print_rental_receipt' rental.id %}">Download</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
