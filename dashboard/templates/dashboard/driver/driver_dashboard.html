@@ -48,7 +48,7 @@
                     <td>{{ rental.car.car_name }} - {{ rental.car.brand }}</td>
                     <td>{{ rental.rental_date }}</td>
                     <td>{{ rental.drop_off_time }}</td>
-                    <td>GH¢{{ rental.commission_rate }}</td>
+                    <td>GH¢{{ rental.calculate_commission }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

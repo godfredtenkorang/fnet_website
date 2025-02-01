@@ -87,6 +87,8 @@ def carDetail(request,  car_slug):
             total_price = float(daily_price) * rental_days
             
         
+
+        
         customer, created = Customer.objects.get_or_create(
                 name=customer_name,
                 phone_number=customer_phone

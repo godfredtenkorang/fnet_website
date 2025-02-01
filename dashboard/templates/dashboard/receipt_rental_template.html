@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @page {
+        size: A5;
+        margin: 20mm;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        /* Changed font for better readability */
+        background-color: #f9f9f9;
+        /* Light background color */
+    }
+
+    [contenteditable="true"]:hover {
+        outline: lightblue auto 5px;
+        outline: -webkit-focus-ring-color auto 5px;
+    }
+
+    .invoice {
+        padding: 0;
+        width: 95%;
+        max-width: 1000px;
+        margin: 2% auto;
+        box-sizing: border-box;
+        padding: 20px;
+        border-radius: 8px;
+        /* Rounded corners */
+        background: #ffffff;
+        /* White background for the invoice */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /* Subtle shadow for depth */
+    }
+
+    .header {
+        display: flex;
+        width: 100%;
+        border-bottom: 2px solid #eee;
+        align-items: center;
+        padding-bottom: 10px;
+        /* Added padding for spacing */
+    }
+
+    .header--invoice {
+        order: 2;
+        text-align: right;
+        width: 40%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .invoice--date,
+    .invoice--number {
+        font-size: 14px;
+        /* Increased font size */
+        color: #333;
+        /* Darker color for better contrast */
+    }
+
+    .invoice--recipient {
+        margin-top: 25px;
+        margin-bottom: 4px;
+        font-weight: bold;
+        /* Bold recipient name */
+    }
+
+    .header--logo {
+        order: 1;
+        font-size: 18px;
+        /* Increased font size for logo */
+        width: 60%;
+        font-weight: 900;
+        color: #007BFF;
+        /* Brand color */
+
+    }
+
+    .logo--address {
+        font-size: 12px;
+        padding: 4px;
+        color: #555;
+        /* Subtle color for address */
+    }
+
+    .description {
+        margin: auto;
+        text-align: justify;
+        margin-top: 20px;
+        /* Added top margin for spacing */
+    }
+
+    .items--table {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        /* Added spacing above the table */
+    }
+
+    thead {
+        background: #007BFF;
+        /* Brand color for the header */
+        color: #000;
+        /* White text for contrast */
+        text-align: center;
+        font-weight: bold;
+    }
+
+    tbody {
+        text-align: center;
+    }
+
+    .total-price {
+        border: 2px solid #444;
+        padding-top: 4px;
+        font-weight: bold;
+        /* Made total price bold */
+        background: #e9f7ef;
+        /* Light green background */
+    }
+
+    table {
+        margin: 1% 0;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        /* Light border for table cells */
+        padding: 4px;
+        /* Increased padding for better spacing */
+        text-align: center;
+    }
+
+    th {
+        text-transform: uppercase;
+    }
+
+    h5 {
+        color: #007BFF;
+        /* Brand color for headings */
+    }
+
+    h4 {
+        margin: 10px 0;
+        /* Added margin for spacing */
+        color: #333;
+        /* Dark color for headings */
+    }
+</style>
+
+<body>
+    <article class="invoice">
+        <header class="header">
+            <h1 class="header--invoice">INVOICE
+                <div class="invoice--date" contenteditable="true">
+                    {{rental.updated_at}}
+                </div>
+                <div class="invoice--number">
+                    INVOICE #
+                    <span contenteditable="true">{{rental.invoice_number}}</span>
+                </div>
+                <div class="invoice--recipient" contenteditable="true">
+                    to: {{ rental.customer_name }} - {{ rental.customer_phone }}
+                </div>
+            </h1>
+            <nav class="header--logo">
+                <div class="header--logo-text" contenteditable="true">
+                    Taxinet
+                </div>
+                <div class="logo-address">
+                    Airport Roundabout,
+                    <br>
+                    Opposite Jofel Catering Services,
+                    <br>
+                    Kumasi, Ghana
+                    <br>
+                    <strong>+233 550 222 888</strong>
+                    <br>
+                    <strong>taxinetghana@gmail.com</strong>
+                </div>
+
+            </nav>
+        </header>
+        <section class="description">
+            <h5>Invoice Notes / Details</h5>
+            <!-- <p contenteditable="true">
+                Hey Ryan, this invoice covers the last few development updates. Many thanks!
+            </p> -->
+        </section>
+        <section class="line-lines">
+            <table class="items--table">
+                <thead>
+                    <tr>
+                        <td>Description <br> from: {{rental.rental_date}} - to: {{rental.return_date}}</td>
+
+                        <td>Unit Price</td>
+                        <td>VAT(25%)</td>
+                        <td>Total</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ rental.car }}
+                        </td>
+
+                        <td>
+                            GH¢{{rental.base_price}}
+                        </td>
+                        <td>
+                            GH¢{{rental.vat_amount}}
+                        </td>
+                        <td>
+                            GH¢{{rental.total_price}}
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="description">
+            <h5>Total Invoice Amount: GH¢ {{rental.total_price}}</h5>
+            <p>Sign: Frank Fordjour</p>
+            <!-- <div>
+                <h4 contenteditable="true">ECOBANK GHANA</h4>
+                <p>TAXINET LOGISTICS</p>
+                <p>ACCOUNTNUMBER: 144100256727</p>
+            </div>
+            <div>
+                <h4 contenteditable="true">MOMO NUMBER</h4>
+                <p>AGENT NUMBER: 059858486</p>
+                <p>F-Net Enterprise</p>
+            </div> -->
+
+        </section>
+    </article>
+</body>
+
+</html>

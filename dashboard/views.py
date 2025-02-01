@@ -120,6 +120,15 @@ def update_rentals(request, rental_id):
                 update_rentals.driver.is_available == False
                 update_rentals.driver.save()
                 
+            # vat_percentage = Decimal(0.25) # 25% VAT
+
+            # form.vat_amount = form.total_price * vat_percentage
+
+            # form.base_price = form.total_price - form.vat_amount
+            
+            # form.total_price = form.base_price + form.vat_amount
+            
+                
             rental_update_sms(rental.customer_phone, rental.customer_name, rental.rental_date, rental.rental_date, rental.driver)
             return redirect('bookings')  # Redirect to the rentals list or another relevant page
     else:
@@ -135,16 +144,31 @@ def complete_rental(request, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     
     if rental.status != 'Completed':
-        commission = rental.commission_rate
+        
+        commission = rental.calculate_commission()
+        
         
         if rental.driver:
             rental.driver.commission += commission
+            rental.driver.is_available = True
             rental.driver.save()
             
         rental.status = 'Completed'
         rental.save()
         
     return redirect('bookings')
+
+
+def print_rental_receipt(request, receipt_id):
+    rental = Rental.objects.get(id=receipt_id)
+    
+    template = get_template('dashboard/receipt_rental_template.html')
+    html = template.render({'rental': rental})
+    result = HttpResponse(content_type='application/pdf')
+    pisa_status = pisa.CreatePDF(html, dest=result)
+    if pisa_status.err:
+        return HttpResponse(f"We had some errors <pre>{html}</pre>")
+    return result
 
 
 def booking_payments(request):
