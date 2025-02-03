@@ -63,6 +63,7 @@ class Rental(models.Model):
     vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=2.5)
     base_price = models.CharField(max_length=100, blank=True, null=True)
     vat_amount = models.CharField(max_length=100, blank=True, null=True)
+    transaction_id = models.CharField(max_length=100, unique=True, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     invoice_number = models.CharField(max_length=20, unique=True, blank=True)
