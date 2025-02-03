@@ -83,7 +83,6 @@ class Car(models.Model):
     year_manufactured = models.CharField(max_length=4)
     engine_capacity = models.CharField(max_length=100, null=True, blank=True)
     airbag = models.CharField(max_length=20, default='Available')
-    price_per_day = models.DecimalField(max_digits=10, decimal_places=2)
     price_per_hour = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     price_within_kumasi = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     range_price_within_kumasi = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
