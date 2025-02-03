@@ -51,9 +51,9 @@
                         </li>
                         {% for category in all_categories %}
                         <li >
-                           
+                           {% if category.name != "Scheduled Drive" %}
                             <a href="{% url 'list-category' category.slug %}">{{ category.name }}</a> 
-                            
+                            {% endif %}
                            
                         </li>
                         {% endfor %}
