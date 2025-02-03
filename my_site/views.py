@@ -54,6 +54,8 @@ def carDetail(request,  car_slug):
         
         customer_name = request.POST.get('customer_name')
         customer_phone = request.POST.get('customer_phone')
+        emergency_name = request.POST.get('emergency_name')
+        emergency_phone = request.POST.get('emergency_phone')
         pick_up_time = request.POST.get('pick_up_time')
         drop_off_time = request.POST.get('drop_off_time')
         rental_date = request.POST.get('rental_date')
@@ -63,6 +65,7 @@ def carDetail(request,  car_slug):
         town = request.POST.get('town')
         document_type = request.POST.get('document_type')
         document_number = request.POST.get('document_number')
+        
         
         
         daily_price = get_location_based_price(car, location_category)
@@ -94,7 +97,7 @@ def carDetail(request,  car_slug):
                 phone_number=customer_phone
             )
         
-        rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
+        rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
         rentals.save()
         
         # send_mail(
@@ -110,7 +113,7 @@ def carDetail(request,  car_slug):
         #     fail_silently=False,
         # )
         
-        send_sms(customer_phone, customer_name, car.car_name, rental_date, return_date, location_category, town, pick_up_time, drop_off_time, total_price)
+        send_sms(customer_phone, customer_name, car.car_name)
         receive_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, location_category, town, pick_up_time, drop_off_time, total_price)
         
         return redirect('sucessPage')

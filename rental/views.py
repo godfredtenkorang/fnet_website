@@ -126,7 +126,7 @@ def process_payment(request, car_slug):
             
         
         
-        vat_percentage = Decimal(0.25) # 25% VAT
+        vat_percentage = Decimal(0.025) # 25% VAT
         print(vat_percentage)
         vat_amount = total_price * vat_percentage
         print(vat_amount)

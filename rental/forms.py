@@ -72,7 +72,7 @@ class RentalUpdateForm(forms.ModelForm):
         self.fields['document_number'].widget.attrs['readonly'] = 'readonly'
         self.fields['status'].widget.attrs['readonly'] = 'readonly'
         # self.fields['total_price'].widget.attrs['readonly'] = 'readonly'
-            
+ 
 
 class RentalPaymentUpdateForm(forms.ModelForm):
     class Meta:

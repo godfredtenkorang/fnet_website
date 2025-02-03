@@ -44,6 +44,8 @@ class Rental(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
     customer_name = models.CharField(max_length=100)
     customer_phone = models.CharField(max_length=15)
+    emergency_name = models.CharField(max_length=100, null=True, blank=True)
+    emergency_phone = models.CharField(max_length=15, null=True, blank=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='rentals')
     location_category = models.CharField(max_length=100, default='')
     city = models.CharField(max_length=100, default='')
@@ -58,13 +60,13 @@ class Rental(models.Model):
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='rentals')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=12.50)
-    vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=25.00)
+    vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=2.5)
     base_price = models.CharField(max_length=100, blank=True, null=True)
     vat_amount = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     invoice_number = models.CharField(max_length=20, unique=True, blank=True)
-    
+
     class Meta:
         ordering = ['-created_at']
         

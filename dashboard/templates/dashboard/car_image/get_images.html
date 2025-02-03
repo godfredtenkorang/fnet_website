@@ -1,0 +1,239 @@
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            /* Responsive grid */
+            padding: 16px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            /* Make it clear the images are clickable */
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.1);
+            /* Zoom in effect on hover */
+            filter: brightness(70%);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            /* Stack content vertically */
+            justify-content: center;
+        }
+
+        .popup-img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            margin: 10px;
+            /* Ensure space between buttons and image */
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: lightgray;
+        }
+
+        /* Media Queries for responsive adjustments */
+        @media (max-width: 1024px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                /* Adjusts grid columns on medium screens */
+            }
+
+            .popup-img {
+                max-width: 80%;
+                /* Adjusts popup image size on smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                /* More compact grid on mobile */
+                padding: 8px;
+            }
+
+            .nav-btn {
+                padding: 8px;
+                font-size: 20px;
+            }
+
+            .popup-img {
+                max-width: none;
+                /* Further adjusts popup image size on small screens */
+            }
+
+            /* Adjust positioning for buttons to be below the image */
+            .popup-content {
+                flex-direction: column;
+                /* Ensure buttons are stacked below the image */
+            }
+
+            .nav-btn {
+                margin-top: 10px;
+                /* Space between buttons and the image */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                /* Stacks images in a single column for very small screens */
+            }
+
+            .popup-img {
+                max-width: 100%;
+                /* Image takes full width on very small screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="gallery">
+        {% for gallery in get_images %}
+            <img src="{{ gallery.image.url }}" alt="" class="gallery-img">
+        {% endfor %}
+        <!-- Add more gallery items here with the same structure -->
+    </div>
+    <!-- Popup Modal -->
+    <div id="popup" class="popup">
+        <span id="close-popup" class="close">&times;</span>
+        <div class="popup-content">
+            <button id="prev" class="nav-btn">←</button>
+            <img id="popup-img" src="" alt="popup image" class="popup-img">
+            <button id="next" class="nav-btn">→</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script>
+        // Get the gallery images
+        const galleryImages = document.querySelectorAll('.gallery-img');
+        const popup = document.getElementById('popup');
+        const popupImg = document.getElementById('popup-img');
+        const closePopup = document.getElementById('close-popup');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+
+        let currentIndex = 0;
+
+        // Open popup with the clicked image
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                popup.style.display = 'flex';
+                popupImg.src = img.src;
+                currentIndex = index;
+            });
+        });
+
+        // Close popup
+        closePopup.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+
+        // Navigate to previous image
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            popupImg.src = galleryImages[currentIndex].src;
+        });
+
+        // Navigate to next image
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            popupImg.src = galleryImages[currentIndex].src;
+        });
+
+        // Close popup when clicking outside the image
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+{% endblock %}
