@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment, Payment
 from my_site.models import Car, Driver
 from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm
-from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images
+from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images, rental_driver_update_sms
 from .models import SMSLog, Customer, DriversSMSLog, LoadCarImagesForCustomer
 from django.http import HttpResponse, JsonResponse
 
@@ -131,6 +131,7 @@ def update_rentals(request, rental_id):
             
                 
             rental_update_sms(rental.customer_phone, rental.customer_name, rental.pick_up_time, rental.drop_off_time, rental.rental_date, rental.rental_date, rental.location_category, rental.town, rental.driver, rental.total_price)
+            rental_driver_update_sms(rental.driver.phone_number, rental.driver.first_name, rental.rental_date, rental.pick_up_time, rental.drop_off_time, rental.town, rental.city, rental.customer_name, rental.customer_phone)
             return redirect('bookings')  # Redirect to the rentals list or another relevant page
     else:
         form = RentalUpdateForm(instance=rental)
