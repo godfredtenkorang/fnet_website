@@ -24,7 +24,7 @@ class AppointmentUpdateForm(forms.ModelForm):
             
     def __init__(self, *args, **kwargs):
         super(AppointmentUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['car'].widget.attrs['disabled'] = 'disabled'
+        # self.fields['car'].widget.attrs['disabled'] = 'disabled'
         self.fields['customer_name'].widget.attrs['readonly'] = 'readonly'
         self.fields['customer_phone'].widget.attrs['readonly'] = 'readonly'
         self.fields['schedule_date'].widget.attrs['readonly'] = 'readonly'
