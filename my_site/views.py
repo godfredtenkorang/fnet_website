@@ -73,11 +73,8 @@ def carDetail(request,  car_slug):
         
         from datetime import datetime
 
-        rental_date = datetime.strptime(rental_date, "%d/%m/%Y").date()
-        return_date = datetime.strptime(return_date, "%d/%m/%Y").date()
-        
-        # pick_up_time = datetime.strptime(pick_up_time, "%I:%M %p")
-        # drop_off_time = datetime.strptime(drop_off_time, "%I:%M %p")
+        rental_date = datetime.strptime(rental_date, '%Y-%m-%d').date()
+        return_date = datetime.strptime(return_date, '%Y-%m-%d').date()
 
         # Calculate total price based on rental days
         rental_days = (return_date - rental_date).days
