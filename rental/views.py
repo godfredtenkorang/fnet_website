@@ -13,9 +13,9 @@ from dashboard.models import Customer
 
 
 def all_schedule_cars(request):
-    # category = request.GET.get('category', 'Scheduled Drive')
-    # schedule_cars = Car.objects.filter(category__name=category)
-    schedule_cars = Car.objects.all()
+    category = request.GET.get('category', 'Scheduled Drive')
+    schedule_cars = Car.objects.filter(category__name=category)
+    # schedule_cars = Car.objects.all()
     
     context = {
         'schedule_cars': schedule_cars,

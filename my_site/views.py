@@ -43,7 +43,7 @@ def list_category(request, category_slug=None):
     return render(request, 'my_site/list_category.html', context)
 
 def categories(request):
-    all_categories = Category.objects.all()
+    all_categories = Category.objects.exclude(name="Scheduled Drive")
     return {'all_categories': all_categories}
 
 def carDetail(request,  car_slug):
