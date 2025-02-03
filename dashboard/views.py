@@ -625,7 +625,7 @@ def add_car_for_customer(request):
         form = LoadImageForCustomerForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return redirect('customers-with-images-lists')
         
     else:
         form = LoadImageForCustomerForm()

@@ -193,7 +193,7 @@ def send_customer_sms_for_images(phone_number, name, customer_id):
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": "Vehicle Condition Confirmation \n" f"Dear {name}, \n ttached are pictures of the car before your rental. Please ensure it is returned in the same condition. Any damages may result in additional charges. \n" f"You can also view the car details here: https://tlghana/dashboard/get_images/{customer_id}/",
+        "message": "Vehicle Condition Confirmation \n\n" f"Dear {name}, \n\n ttached are pictures of the car before your rental. Please ensure it is returned in the same condition. Any damages may result in additional charges. \n\n" f"You can also view the car details here: https://tlghana.com/dashboard/get_images/{customer_id}/ \n\n" "For any questions, contact us at 0550222888. Thank you.",
         "is_schedule": False,
         "schedule_date": ''
     }

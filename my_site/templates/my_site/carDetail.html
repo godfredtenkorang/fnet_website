@@ -17,7 +17,7 @@
     <h2>{{ car.car_name }}</h2>
     <p class="price">
       <strong>Price</strong> GH¢{{ car.price_within_kumasi }} - GH¢{{ car.range_price_within_kumasi }} per day
-      
+
     </p>
   </div>
   <div class="car-detail-image">
@@ -90,7 +90,8 @@
         </div>
         <div class="input">
           <label for="">Phone </label> <br>
-          <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required placeholder="0550222888">
+          <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required
+            placeholder="0550222888">
         </div>
         <div class="input">
           <label for="">Emergency Name </label> <br>
@@ -101,7 +102,7 @@
           <input type="text" name="emergency_phone" id="emergency_phone" required placeholder="0240000000">
         </div>
 
-        
+
         <!-- Hidden JSON Data for Pricing -->
         <script type="application/json" id="pricing_data">
                 {
@@ -127,6 +128,7 @@
         <div class="input">
           <label for="location_category">Region:</label>
           <select id="location_category" name="location_category" required>
+            <option value="">-- Select Region --</option>
             <option value="within_kumasi">Within Kumasi</option>
             <option value="ahafo_region">Ahafo Region</option>
             <option value="ashanti_region">Ashanti Region</option>
@@ -145,6 +147,7 @@
             <option value="western_region">Western Region</option>
             <option value="western_north_region">Western North Region</option>
           </select>
+          <input type="hidden" id="car_category" value="{{ car.category }}">
         </div>
         <h3>Price: GH¢<span id="price_display">0.00</span></h3>
         <br>
@@ -185,7 +188,7 @@
           <label for="">ID No. </label> <br>
           <input type="text" name="document_number" id="document_number" required placeholder="Type your ID Number">
         </div>
-        
+
         <!-- <div class="input">
           <label for="">Is it a Returned Trip?</label> <br>
           <select name="is_returned_trip" id="is_returned_trip" required>
@@ -200,8 +203,11 @@
       <p class="negotiable_message" id="negotiable_message"></p>
       <br>
       <!-- <h3>NB: Book now if you want to make payment at the office.</h3> -->
+      {% if car.availability_status == "Available" %}
       <button type="submit">Book Now</button>
-
+      {% else %}
+      <button disabled>Not Available</button>
+      {% endif %}
 
     </form>
     <!-- <div class="exp-btn">
@@ -242,13 +248,9 @@
         priceDisplay.textContent = "Select a valid location";
         document.getElementById('total_price').innerHTML = "0.00";
       }
-      
-
-     
 
 
-     
-    } 
+    }
 
     if (rentalDate && returnDate) {
       const difference = (returnDate - rentalDate) / (1000 * 60 * 45 * 24);
@@ -261,6 +263,29 @@
     }
   }
 
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const category = document.getElementById("car_category").value;
+    const regionSelect = document.getElementById("location_category");
+
+    if (category === "Bogga's Drive") {
+      regionSelect.innerHTML = `
+            <option value="">-- Select Region --</option>
+            <option value="within_kumasi">Within Kumasi</option>
+            <option value="ashanti_region">Ashanti Region</option>
+        `;
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    document.getElementById("rental_date").setAttribute("min", today); // Set min attribute to today's date
+    document.getElementById("return_date").setAttribute("min", today); // Set min attribute to today's date
+  });
 </script>
 
 {% endblock %}
