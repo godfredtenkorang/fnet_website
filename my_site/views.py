@@ -10,7 +10,8 @@ import random
 
 # Create your views here.
 def index(request):
-    cars = list(Car.objects.filter(availability_status='Available'))
+    # cars = list(Car.objects.filter(availability_status='Available'))
+    cars = list(Car.objects.all())
     random.shuffle(cars)
     random_cars = cars[:8]
     return render(request, 'my_site/index.html', {'cars': random_cars})
