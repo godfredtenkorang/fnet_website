@@ -106,6 +106,33 @@ def rental_update_sms(phone_number, customer_name, pick_up_time, drop_off_time, 
         print(f"Error sending SMS: {e}")
         return None
     
+
+def rental_driver_update_sms(phone_number, first_name, rental_date, pick_up_time, drop_off_time, town, city, customer_name, customer_phone):
+    endpoint = "https://api.mnotify.com/api/sms/quick"
+    apiKey = settings.MNOTIFY_API_KEY
+    payload = {
+        "key": apiKey,
+        "sender": 'TLGhana',
+        "recipient[]": phone_number,
+        "message": "Trip Assignment \n\n" f"Dear {first_name},\n You have been assigned a trip. \n" "Details: \n" f"Date: {rental_date} \n" f"Time: {pick_up_time} - {drop_off_time} \n" f"Location: {town}, {city} \n" f"Client: {customer_name} ({customer_phone}) \n\n" "Please ensure the vehicle is ready and confirm receipt of this message. \n\n" "Thank you.",
+        "is_schedule": False,
+        "schedule_date": ''
+    }
+    
+
+    url = endpoint + '?key=' + apiKey
+    
+   
+    try:
+        response = requests.post(url, data=payload)
+        response.raise_for_status()
+        
+        return response.json()
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error sending SMS: {e}")
+        return None
+    
 def rental_payment_update_sms(phone_number, customer_name, rental_date, return_date, driver):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
