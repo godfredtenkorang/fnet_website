@@ -66,4 +66,10 @@ urlpatterns = [
     
     path('add_gallery/', views.add_gallery, name='add-gallery'),
     
+    
+    path('cars_for_customer/', views.add_car_for_customer, name='add-car-for-customer'),
+    path('customers_with_images_lists/', views.get_customers_with_images_upload, name='customers-with-images-lists'),
+    path('get_images/<int:customer_id>/', views.get_customer_load_images, name='get-customer-load-images'),
+    path('send_sms/', views.send_sms, name='send-sms-to-customer'),
+    
 ]

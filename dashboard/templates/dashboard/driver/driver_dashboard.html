@@ -55,30 +55,6 @@
         </table>
     </div>
 
-    <h2>Completed Booking Payments</h2>
-    <div class="responsive-table">
-    
-        <table>
-            <thead>
-                <tr>
-                    <th>Car</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Commission</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for payment in payments %}
-                <tr>
-                    <td>{{ payment.car.car_name }} - {{ payment.car.brand }}</td>
-                    <td>{{ payment.rental_date }}</td>
-                    <td>{{ payment.drop_off_time }}</td>
-                    <td>GH¢{{ payment.commission_rate }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
 </div>
 
 

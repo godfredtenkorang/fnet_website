@@ -1,14 +1,14 @@
 import requests
 from django.conf import settings
 
-def send_sms(phone_number, customer_name, car_name, rental_date, return_date, location_category, town, pick_up_time, drop_off_time, total_price):
+def send_sms(phone_number, customer_name, car_name):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, your car booking for {car_name} is on pending. \n" "Rental Details: \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {location_category} \n" f"Town: {town} \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time: {drop_off_time} \n" f"Total Price: GH¢{total_price}.",
+        "message": f"Dear {customer_name}, your car booking for {car_name} is on pending. \n",
         "is_schedule": False,
         "schedule_date": ''
     }

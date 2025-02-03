@@ -14,7 +14,7 @@ class DriverForm(forms.ModelForm):
 class CarUpdateForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = ['category', 'car_name', 'car_type', 'brand', 'seats', 'fuel_type', 'color', 'transmission', 'air_conditioning', 'year_manufactured', 'engine_capacity', 'airbag', 'price_per_hour', 'price_within_kumasi', 'ahafo_region_price', 'ashanti_region_price', 'bono_region_price', 'bono_east_region_price', 'central_region_price', 'eastern_region_price', 'greater_accra_region_price', 'northern_region_price', 'north_east_region_price', 'oti_region_price', 'savannah_region_price', 'upper_east_region_price', 'upper_west_region_price', 'volta_region_price', 'western_region_price', 'western_north_region_price', 'availability_status', 'year_registered', 'description', 'image1', 'image2', 'image3', 'image4']
+        fields = ['category', 'car_name', 'car_type', 'brand', 'seats', 'fuel_type', 'color', 'transmission', 'air_conditioning', 'year_manufactured', 'engine_capacity', 'airbag', 'price_per_hour', 'price_within_kumasi', 'range_price_within_kumasi', 'ahafo_region_price', 'ashanti_region_price', 'bono_region_price', 'bono_east_region_price', 'central_region_price', 'eastern_region_price', 'greater_accra_region_price', 'northern_region_price', 'north_east_region_price', 'oti_region_price', 'savannah_region_price', 'upper_east_region_price', 'upper_west_region_price', 'volta_region_price', 'western_region_price', 'western_north_region_price', 'availability_status', 'year_registered', 'description', 'image1', 'image2', 'image3', 'image4']
         
         
     def __init__(self, *args, **kwargs):

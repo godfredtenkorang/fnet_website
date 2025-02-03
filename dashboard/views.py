@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment, Payment
 from my_site.models import Car, Driver
 from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm
-from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms
-from .models import SMSLog, Customer, DriversSMSLog
-from django.http import HttpResponse
+from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images
+from .models import SMSLog, Customer, DriversSMSLog, LoadCarImagesForCustomer
+from django.http import HttpResponse, JsonResponse
 
 from expenses.models import Expense, MyCar, Receipt
 from expenses.forms import ExpenseForm, ReceiptForm
@@ -20,6 +20,7 @@ from decimal import Decimal
 
 from agreements.models import *
 from agreements.forms import *
+from .forms import LoadImageForCustomerForm
 
 
 def dashboard(request):
@@ -129,7 +130,7 @@ def update_rentals(request, rental_id):
             # form.total_price = form.base_price + form.vat_amount
             
                 
-            rental_update_sms(rental.customer_phone, rental.customer_name, rental.rental_date, rental.rental_date, rental.driver)
+            rental_update_sms(rental.customer_phone, rental.customer_name, rental.pick_up_time, rental.drop_off_time, rental.rental_date, rental.rental_date, rental.location_category, rental.town, rental.driver, rental.total_price)
             return redirect('bookings')  # Redirect to the rentals list or another relevant page
     else:
         form = RentalUpdateForm(instance=rental)
@@ -500,7 +501,7 @@ def newReceipt(request):
 
 
 def customer_lists(request):
-    customers_info = Customer.objects.all()
+    customers_info = Customer.objects.values("name", "phone_number").distinct()
     return render(request, 'dashboard/customer_list.html', {'title': 'All Customers', 'customers': customers_info})
 
 
@@ -616,3 +617,52 @@ def add_gallery(request):
         'title': 'Gallery'
     }
     return render(request, 'dashboard/add_gallery.html', context)
+
+
+
+def add_car_for_customer(request):
+    if request.method == 'POST':
+        form = LoadImageForCustomerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+        
+    else:
+        form = LoadImageForCustomerForm()
+    
+    context = {
+        'form': form
+    }
+    return render(request, 'dashboard/car_image/add_car_for_customer.html', context)
+
+
+def get_customers_with_images_upload(request):
+    customer_id = request.GET.get('id', None)
+    customers = Customer.objects.all()
+    if customer_id:
+        customer = get_object_or_404(Customer, id=customer_id)
+        
+        send_customer_sms_for_images(customer.phone_number, customer.name, customer.id)
+        return JsonResponse({"message": "SMS sent successfully!"})  # AJAX response
+
+    
+    context = {
+        'customers': customers
+    }
+    return render(request, 'dashboard/car_image/customers_with_images_list.html', context)
+
+
+def get_customer_load_images(request, customer_id):
+    customer = None
+    get_images = LoadCarImagesForCustomer.objects.all()
+    if customer_id:
+        customer = get_object_or_404(Customer, id=customer_id)
+        get_images = get_images.filter(customer=customer)
+    context = {
+        'customer': customer,
+        'get_images': get_images
+    }
+    return render(request, 'dashboard/car_image/get_images.html', context)
+
+def send_sms_to_customer(request):
+    return render(request, 'dashboard/car_image/send_sms.html')

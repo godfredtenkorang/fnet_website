@@ -80,14 +80,14 @@ def appointment_update_sms(phone_number, customer_name, schedule_date, pick_up_t
         print(f"Error sending SMS: {e}")
         return None
     
-def rental_update_sms(phone_number, customer_name, rental_date, return_date, driver):
+def rental_update_sms(phone_number, customer_name, pick_up_time, drop_off_time, rental_date, return_date, location_category, town, driver, total_price):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, your booking has been confirmed. \n" "Booking Details: \n" f"Rental Date: {rental_date} \n" f"Return DateT: {return_date} \n" f"Driver: {driver} \n\n" "We look forward to serving you!",
+        "message": f"Dear {customer_name}, your booking has been confirmed. \n" "Booking Details: \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time {drop_off_time} \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {location_category} \n" f"Town: {town} \n" f"Driver: {driver} \n" f"Amount: GH¢{total_price} \n\n" "Have a nice trip we are looking forword to serve you again! Thank you.",
         "is_schedule": False,
         "schedule_date": ''
     }
@@ -166,6 +166,34 @@ def driver_register_sms(phone_number, first_name):
         "sender": 'TLGhana',
         "recipient[]": phone_number,
         "message": f"Dear {first_name}, thank you for being part of TL Ghana! Keep providing excellent service and enjoy exclusive benefits. Need support? Contact us anytime. Drive safe! - TL Ghana Team" ,
+        "is_schedule": False,
+        "schedule_date": ''
+    }
+    
+
+    url = endpoint + '?key=' + apiKey
+    
+   
+    try:
+        response = requests.post(url, data=payload)
+        response.raise_for_status()
+        
+        return response.json()
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error sending SMS: {e}")
+        return None
+    
+    
+
+def send_customer_sms_for_images(phone_number, name, customer_id):
+    endpoint = "https://api.mnotify.com/api/sms/quick"
+    apiKey = settings.MNOTIFY_API_KEY
+    payload = {
+        "key": apiKey,
+        "sender": 'TLGhana',
+        "recipient[]": phone_number,
+        "message": "Vehicle Condition Confirmation \n" f"Dear {name}, \n ttached are pictures of the car before your rental. Please ensure it is returned in the same condition. Any damages may result in additional charges. \n" f"You can also view the car details here: https://tlghana/dashboard/get_images/{customer_id}/",
         "is_schedule": False,
         "schedule_date": ''
     }

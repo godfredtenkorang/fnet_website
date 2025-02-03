@@ -88,12 +88,20 @@
           <label for="">Name </label> <br>
           <input type="text" name="customer_name" id="customer_name" required placeholder="TL Ghana">
         </div>
-
         <div class="input">
           <label for="">Phone </label> <br>
-          <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required
-            placeholder="0550222888">
+          <input class="amount-input" type="text" name="customer_phone" id="customer_phone" required placeholder="0550222888">
         </div>
+        <div class="input">
+          <label for="">Emergency Name </label> <br>
+          <input type="text" name="emergency_name" id="emergency_name" required placeholder="John Mensah">
+        </div>
+        <div class="input">
+          <label for="">Emergency Phone </label> <br>
+          <input type="text" name="emergency_phone" id="emergency_phone" required placeholder="0240000000">
+        </div>
+
+        
         <!-- Hidden JSON Data for Pricing -->
         <script type="application/json" id="pricing_data">
                 {
@@ -149,22 +157,22 @@
           <input type="text" name="town" id="town" required placeholder="eg. New Tafo, STU, Adum etc">
         </div>
         <div class="input">
-          <label for="">Pick up Time</label> <br>
-          <input type="time" name="pick_up_time" required>
-        </div>
-        <div class="input">
-          <label for="">Drop off Time</label> <br>
-          <input type="time" name="drop_off_time" required>
-        </div>
-      </div>
-      <div class="input-flex">
-        <div class="input">
           <label for="">Rental date</label> <br>
           <input type="date" name="rental_date" id="rental_date" required>
         </div>
         <div class="input">
+          <label for="">Pick up Time</label> <br>
+          <input type="time" name="pick_up_time" required>
+        </div>
+      </div>
+      <div class="input-flex">
+        <div class="input">
           <label for="">Return Date</label> <br>
           <input type="date" name="return_date" id="return_date" required>
+        </div>
+        <div class="input">
+          <label for="">Drop off Time</label> <br>
+          <input type="time" name="drop_off_time" required>
         </div>
         <div class="input">
           <label for="">ID Type</label> <br>
@@ -177,6 +185,15 @@
           <label for="">ID No. </label> <br>
           <input type="text" name="document_number" id="document_number" required placeholder="Type your ID Number">
         </div>
+        
+        <!-- <div class="input">
+          <label for="">Is it a Returned Trip?</label> <br>
+          <select name="is_returned_trip" id="is_returned_trip" required>
+            <option value="">select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div> -->
       </div>
 
       <h3>Total Price Range: <span id="total_price">0.00 </span></h3>

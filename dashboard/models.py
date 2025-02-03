@@ -30,3 +30,13 @@ class Customer(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.phone_number}"
+    
+
+class LoadCarImagesForCustomer(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='car_images/')
+    date_added = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.customer}"
+    

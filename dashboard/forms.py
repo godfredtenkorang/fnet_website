@@ -1,5 +1,5 @@
 from django import forms
-from .models import Customer
+from .models import Customer, LoadCarImagesForCustomer
 from my_site.models import Driver
 
 
@@ -33,3 +33,10 @@ class SMSForm(forms.Form):
         drivers = Driver.objects.values_list('phone_number', 'first_name')
         all_numbers = [(num, f"{name} ({num})") for num, name in list(customers) + list(drivers)]
         self.fields['phone_numbers'].choices = all_numbers
+        
+
+
+class LoadImageForCustomerForm(forms.ModelForm):
+    class Meta:
+        model = LoadCarImagesForCustomer
+        fields = ['customer', 'image']
