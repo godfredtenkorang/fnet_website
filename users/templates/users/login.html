@@ -3,22 +3,26 @@
 {% block content %}
 <style>
 
-
 </style>
 
 <!-- bannerr -->
 
-<div class="banner">
+<!-- <div class="banner">
   <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
   <div class="banner-text">
     <h1>Login</h1>
   </div>
-</div>
+</div> -->
+
+
 
 <div class="account-container">
 
   <div class="contact-form">
+    <div class="login-img">
+      <img src="{% static 'my_site/img/login.png' %}" alt="background photo" />
 
+    </div>
     <form method="POST" class="form">
       {% csrf_token %}
 
@@ -28,6 +32,8 @@
 
 <p> Create an account? <a href="{% url 'register' %}">Register here</a></p>
     </form>
+
+  
 
   </div>
 </div>
