@@ -5,27 +5,31 @@
 
 <!-- bannerr -->
 
-<div class="banner">
+<!-- <div class="banner">
     <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
     <div class="banner-text">
         <h1>Create an account </h1>
     </div>
-</div>
+</div> -->
 
 <div class="account-container">
 
     <div class="contact-form">
-        <p>Fill out the form below to create an account with us</p>
+        <div class="login-img">
+            <img src="{% static 'my_site/img/login.png' %}" alt="background photo" />
+      
+          </div>
         <form method="POST">
+            <p>Fill out the form below to create an account with us</p>
             {% csrf_token %}
             {{ form.as_p }}
 
 
             <button>Submit</button>
 
-
+            <p>Or do you have an account already? the <a href="{% url 'login' %}">Login</a></p>
         </form>
-        <p>Or do you have an account already? the <a href="{% url 'login' %}">Login</a></p>
+       
     </div>
 </div>
 
