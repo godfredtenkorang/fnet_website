@@ -72,4 +72,7 @@ urlpatterns = [
     path('get_images/<int:customer_id>/', views.get_customer_load_images, name='get-customer-load-images'),
     path('send_sms/', views.send_sms, name='send-sms-to-customer'),
     
+    
+    path('flight-booking/', views.flight_booking, name='flight-booking'),
+    path('update-flight-booking/<int:airline_id>/', views.update_flight_booking, name='update_flight-booking'),
 ]

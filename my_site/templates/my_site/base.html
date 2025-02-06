@@ -66,15 +66,38 @@
                         
                     </ul>
                 </li>
-                <li><a href="{% url 'all_schedule_cars' %}">Schedule a Ride</a></li>
-                <li><a href="{% url 'contactUs' %}">Contact</a></li>
-                {% if request.user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                {% endif %}
+                <li>
+                    <p class="cat">Bookings & Reservations <i class="fas fa-chevron-down"></i> </p>
+                    <ul class="dropdown">
 
+                        <li><a href="{% url 'all_schedule_cars' %}">Schedule a Ride</a></li>
+                        <li><a href="{% url 'flight-list' %}">Book a Flight</a></li>
+                        <li><a href="{% url 'rent-house' %}">Rent a Room</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="{% url 'contactUs' %}">Contact</a></li>
+                <li>
+                    <p class="cat">User <i class="fas fa-chevron-down"></i> </p>
+                    <ul class="dropdown">
+                    {% if user.is_authenticated %}
+                        {% if user.role == 'customer' %}
+                        <li><a href="{% url 'customer_dashboard' %}">Dashboard</a></li>
+                        {% elif user.role == 'driver' %}
+                        <li><a href="{% url 'driver_dashboard' %}">Dashboard</a></li>
+                        {% elif user.role == 'agent' %}
+                        <li><a href="{% url 'agent_dashboard' %}">Dashboard</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                
+                    </ul>
+                </li>
                 <div class="remove">
-                    <i >Hide</i>    
+                    <i >Hide</i> 
                 </div>
             </ul>
            

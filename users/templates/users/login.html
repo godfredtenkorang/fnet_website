@@ -2,18 +2,8 @@
 {% load static %} 
 {% block content %}
 <style>
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
 
-.form-control:focus {
-    border-color: #007bff;
-    outline: none;
-}
+
 </style>
 
 <!-- bannerr -->
@@ -21,7 +11,7 @@
 <div class="banner">
   <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
   <div class="banner-text">
-    <h1>Login as Admin</h1>
+    <h1>Login</h1>
   </div>
 </div>
 
@@ -29,17 +19,14 @@
 
   <div class="contact-form">
 
-    <form method="POST">
-
+    <form method="POST" class="form">
       {% csrf_token %}
 
-      {{ form.username }}
-      {{ form.password }}
+      {{ form.as_p }}
 
+      <button type="submit">Login</button>
 
-      <button type="submit">Submit</button>
-
-
+<p> Create an account? <a href="{% url 'register' %}">Register here</a></p>
     </form>
 
   </div>

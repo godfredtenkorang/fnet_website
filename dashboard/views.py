@@ -22,6 +22,10 @@ from agreements.models import *
 from agreements.forms import *
 from .forms import LoadImageForCustomerForm
 
+from flight.models import Booking
+from flight.forms import UpdateFlightBooking
+from flight.utils import update_flight_sms
+
 
 def dashboard(request):
     cars_available = Car.objects.count()
@@ -667,3 +671,28 @@ def get_customer_load_images(request, customer_id):
 
 def send_sms_to_customer(request):
     return render(request, 'dashboard/car_image/send_sms.html')
+
+
+
+def flight_booking(request):
+    bookings = Booking.objects.all()
+    context = {
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/flight_booking.html', context)
+
+def update_flight_booking(request, airline_id):
+    airline = get_object_or_404(Booking, id=airline_id)
+    if request.method == 'POST':
+        form = UpdateFlightBooking(request.POST, instance=airline)
+        if form.is_valid():
+            forms = form.save()
+            update_flight_sms(forms.phone_number, forms.full_name, forms.status, forms.airline, forms.category, forms.trip_from, forms.trip_to, forms.trip_departure, forms.trip_return, forms.number_of_adults, forms.number_of_children, forms.number_of_infants)
+        return redirect('flight-booking')
+    else:
+        form = UpdateFlightBooking(instance=airline)
+    context = {
+        'airline': airline,
+        'form': form,
+    }
+    return render(request, 'dashboard/update_flight_booking.html', context)

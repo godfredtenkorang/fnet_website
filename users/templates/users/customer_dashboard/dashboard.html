@@ -1,0 +1,129 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, 
+				initial-scale=1.0">
+    {% if title %}
+    <title>Taxinet Customer - {{ title }}</title>
+    {% else %}
+    <title>Taxinet Customer</title>
+    {% endif %}
+    <link rel="icon" href="{% static 'my_site/img/tlghana.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'my_site/admin.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- for header part -->
+    <header>
+
+        <div class="logosec">
+            <div class="logo">
+
+
+
+            </div>
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+                class="icn menuicn" id="menuicn" alt="menu-icon">
+        </div>
+
+
+
+        <div class="message">
+            <h1>Customer Dashboard</h1>
+        </div>
+
+    </header>
+
+    <div class="main-container">
+        <div class="navcontainer sidebar">
+            <nav class="nav">
+                <div class="nav-upper-options">
+
+                    <!-- home button -->
+                    <a href="{% url 'dashboard' %}">
+
+                        <div class="nav-option option1 button active">
+                            <h3><i class="fa-solid fa-house"></i> Home</h3>
+                        </div>
+                    </a>
+                    <!-- acivities button -->
+                    <a href="{% url 'all-cars' %}">
+
+                        <div class="nav-option option1 button">
+                            <h3><i class="fa-solid fa-book"></i> All Cars</h3>
+                        </div>
+                    </a>
+                    <a href="{% url 'bookings' %}">
+
+                        <div class="nav-option option1 button">
+                            <h3><i class="fa-solid fa-book"></i> Bookings</h3>
+                        </div>
+                    </a>
+                    
+
+                    <!-- <a href="{% url 'create-receipt' %}">
+                        <div class="nav-option option1 button">
+                            <h3><i class="fa-solid fa-chart-simple"></i> Receipts</h3>
+                        </div>
+                    </a> -->
+
+                    <a href="{% url 'index' %}">
+                        <div class="nav-option option1 button">
+                            <h3><i class="fa-solid fa-chevron-left"></i> Go Back</h3>
+                        </div>
+                    </a>
+
+                    <!-- logout button -->
+
+                    <a href="{% url 'logout' %}">
+                        <div class="nav-option option1 button">
+                            <h3><i class="fa-solid fa-sign-out"></i> Logout</h3>
+                        </div>
+                    </a>
+
+
+
+
+                </div>
+            </nav>
+        </div>
+
+
+        {% block content %}{% endblock %}
+
+
+
+        <script>
+
+            // menu 
+            let menuicn = document.querySelector(".menuicn");
+            let nav = document.querySelector(".navcontainer");
+
+            menuicn.addEventListener("click", () => {
+                nav.classList.toggle("navclose");
+            })
+
+
+
+
+        </script>
+
+
+
+
+
+
+</body>
+
+</html>
