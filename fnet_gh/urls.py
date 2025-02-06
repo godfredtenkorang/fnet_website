@@ -11,6 +11,8 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('rental/', include('rental.urls')),
     path('account/', include('users.urls')),
+    path('', include('flight.urls')),
+    path('', include('rent.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'my_site.views.custom_404_view'

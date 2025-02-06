@@ -26,52 +26,52 @@
 <body>
     <!-- for header part -->
     <header>
-    
+
         <div class="logosec">
             <div class="logo">
-            
-    
-    
+
+
+
             </div>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
                 class="icn menuicn" id="menuicn" alt="menu-icon">
         </div>
-    
-    
-    
+
+
+
         <div class="message">
             <h1>Admin Dashboard</h1>
         </div>
-    
+
     </header>
-    
+
     <div class="main-container">
         <div class="navcontainer sidebar">
             <nav class="nav">
                 <div class="nav-upper-options">
-    
+
                     <!-- home button -->
-                    <a  href="{% url 'dashboard' %}">
-    
+                    <a href="{% url 'dashboard' %}">
+
                         <div class="nav-option option1 button active">
                             <h3><i class="fa-solid fa-house"></i> Home</h3>
                         </div>
                     </a>
                     <!-- acivities button -->
                     <a href="{% url 'all-cars' %}">
-                    
+
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-book"></i> All Cars</h3>
                         </div>
                     </a>
-                    <a  href="{% url 'bookings' %}">
-    
+                    <a href="{% url 'bookings' %}">
+
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-book"></i> Bookings</h3>
                         </div>
                     </a>
                     <a href="{% url 'flight-booking' %}">
-                    
+
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-book"></i> Flight Bookings</h3>
                         </div>
@@ -85,26 +85,26 @@
 
                     <!-- acivities button -->
                     <a href="{% url 'appointments' %}">
-                    
+
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-bookmark"></i> Schedules</h3>
                         </div>
                     </a>
-    
-    
+
+
                     <!-- registration button -->
-                   
-    
-    
+
+
+
                     <!-- registration button -->
-                    <a  href="{% url 'sendMessage' %}">
+                    <a href="{% url 'sendMessage' %}">
                         <div class="nav-option option1 button">
                             <h3> <i class="fa-solid fa-money-bill"></i> Send Message</h3>
                         </div>
                     </a>
-    
+
                     <!-- team button -->
-                    <a  href="{% url 'contact' %}">
+                    <a href="{% url 'contact' %}">
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-people-group"></i> Contact</h3>
                         </div>
@@ -131,13 +131,13 @@
                         </div>
                     </a>
                     <a href="{% url 'add-gallery' %}">
-                    
+
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-book"></i> Gallery</h3>
                         </div>
                     </a>
                     <a href="{% url 'add-car-for-customer' %}">
-                    
+
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-book"></i> Upload Images for Customers</h3>
                         </div>
@@ -148,67 +148,53 @@
                             <h3><i class="fa-solid fa-chart-simple"></i> Receipts</h3>
                         </div>
                     </a> -->
-    
+
                     <a href="{% url 'index' %}">
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-chevron-left"></i> Go Back</h3>
                         </div>
                     </a>
-    
+
                     <!-- logout button -->
-    
+
                     <a href="{% url 'logout' %}">
                         <div class="nav-option option1 button">
                             <h3><i class="fa-solid fa-sign-out"></i> Logout</h3>
                         </div>
                     </a>
-    
-    
-    
-    
+
+
+
+
                 </div>
             </nav>
         </div>
 
 
-    {% block content %}
-    
-    
-    
-    
-    
-    
-    
-    {% endblock %}
+        {% block content %}{% endblock %}
 
 
 
+        <script>
 
-
-
-    
-
-
-
-    <script>
-
-        // menu 
-        let menuicn = document.querySelector(".menuicn");
+            // menu 
+            let menuicn = document.querySelector(".menuicn");
             let nav = document.querySelector(".navcontainer");
-    
+
             menuicn.addEventListener("click", () => {
                 nav.classList.toggle("navclose");
             })
-    
-    
-    
-    
-    </script>
-       
-    
+
+
+
+
+        </script>
+
+
 
 
 
 
 </body>
+
 </html>

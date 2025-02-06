@@ -1,0 +1,56 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+
+
+<div class="container">
+    <h1>Flight Booking Table</h1>
+    <div class="responsive-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
+                    <th>Category</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Departure</th>
+                    <th>Return</th>
+                    <th>No. of Adult</th>
+                    <th>No. of Children</th>
+                    <th>No. of Infants</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.full_name }}</td>
+                    <td>{{ booking.phone_number }}</td>
+                    <td>{{ booking.category }}</td>
+                    <td>{{ booking.trip_from }}</td>
+                    <td>{{ booking.trip_to }}</td>
+                    <td>{{ booking.trip_departure }}</td>
+                    <td>{{ booking.trip_return }}</td>
+                    <td>{{ booking.number_of_adults }}</td>
+                    <td>{{ booking.number_of_children }}</td>
+                    <td>{{ booking.number_of_infants }}</td>
+                    <td><a href="{% url 'update_flight-booking' booking.id %}">Link</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
