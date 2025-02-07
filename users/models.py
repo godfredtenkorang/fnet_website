@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     email = models.EmailField()
-    phone = models.CharField(unique=True, max_length=15)
+    phone = models.CharField(unique=True, max_length=10)
     ROLE_CHOICES = [
         ("customer", "Customer"),
         ("driver", "Driver"),
