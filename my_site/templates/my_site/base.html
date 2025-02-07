@@ -78,7 +78,11 @@
                 </li>
                 <li><a href="{% url 'contactUs' %}">Contact</a></li>
                 <li>
+                    {% if user.is_authenticated %}
+                    <p class="cat">{{user}} <i class="fas fa-chevron-down"></i> </p>
+                    {% else %}
                     <p class="cat">User <i class="fas fa-chevron-down"></i> </p>
+                    {% endif %}
                     <ul class="dropdown">
                     {% if user.is_authenticated %}
                         {% if user.role == 'admin' %}
