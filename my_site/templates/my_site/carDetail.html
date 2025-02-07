@@ -203,10 +203,14 @@
       <p class="negotiable_message" id="negotiable_message"></p>
       <br>
       <!-- <h3>NB: Book now if you want to make payment at the office.</h3> -->
-      {% if car.availability_status == "Available" %}
-      <button type="submit">Book Now</button>
+      {% if user.is_authenticated %}
+        {% if car.availability_status == "Available" %}
+        <button type="submit">Book Now</button>
+        {% else %}
+        <button disabled>Not Available</button>
+        {% endif %}
       {% else %}
-      <button disabled>Not Available</button>
+      <a href="{% url 'login' %}">Login</a>
       {% endif %}
 
     </form>
