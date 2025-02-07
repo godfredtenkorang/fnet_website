@@ -46,101 +46,106 @@
 
 <br><br>
 <div class="contact-us-section">
-    <div class="contact-img">
-        <img src="{% static 'my_site/img/contactus.jpg' %}" alt="background photo" />
 
-    </div>
     <div class="contact-form">
         <p>Fill out the from below to book your flight</p>
         <form method="POST">
             {% csrf_token %}
+            <div class="input-flex">
 
-            <div class="input">
-                <label for="">Full Name </label> <br>
-                <input type="text" name="full_name" id="full_name" required placeholder="TL Ghana">
+
+                <div class="input">
+                    <label for="">Full Name </label> <br>
+                    <input type="text" name="full_name" id="full_name" required placeholder="TL Ghana">
+                </div>
+                <div class="input">
+                    <label for="">Phone </label> <br>
+                    <input type="number" name="phone_number" id="phone_number" required placeholder="0550222888">
+                </div>
+                <div class="input">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="One Way">One Way</option>
+                        <option value="Roundtrip">Roundtrip</option>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="trip_from">From:</label>
+                    <select id="trip_from" name="trip_from" required>
+                        <option value="">-- Select --</option>
+                        <option value="Accra">Accra</option>
+                        <option value="Kumasi">Kumasi</option>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="trip_to">To:</label>
+                    <select id="trip_to" name="trip_to" required>
+                        <option value="">-- Select --</option>
+                        <option value="Accra">Accra</option>
+                        <option value="Kumasi">Kumasi</option>
+                    </select>
+                </div>
             </div>
-            <div class="input">
-                <label for="">Phone </label> <br>
-                <input type="number" name="phone_number" id="phone_number" required placeholder="0550222888">
-            </div>
-            <div class="input">
-                <label for="category">Category</label>
-                <select id="category" name="category" required>
-                    <option value="One Way">One Way</option>
-                    <option value="Roundtrip">Roundtrip</option>
-                </select>
-            </div>
-            <div class="input">
-                <label for="trip_from">From:</label>
-                <select id="trip_from" name="trip_from" required>
-                    <option value="">-- Select --</option>
-                    <option value="Accra">Accra</option>
-                    <option value="Kumasi">Kumasi</option>
-                </select>
-            </div>
-            <div class="input">
-                <label for="trip_to">To:</label>
-                <select id="trip_to" name="trip_to" required>
-                    <option value="">-- Select --</option>
-                    <option value="Accra">Accra</option>
-                    <option value="Kumasi">Kumasi</option>
-                </select>
-            </div>
-            <div class="input">
-                <label for="trip_departure">Departure </label> <br>
-                <input type="date" name="trip_departure" id="trip_departure" required placeholder="0550222888">
-            </div>
-            <div class="input">
-                <label for="trip_return" id="trip_return_label" style="display: none;">Return </label> <br>
-                <input type="date" name="trip_return" id="trip_return" style="display: none;" required placeholder="0550222888">
-            </div>
-            <div class="input">
-                <label for="trip_to">Adult</label>
-                <select id="number_of_adults" name="number_of_adults" required>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-            </div>
-            <div class="input">
-                <label for="trip_to">Children (2 - 12)</label>
-                <select id="number_of_children" name="number_of_children" required>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-            </div>
-            <div class="input">
-                <label for="trip_to">Infant (0 - 2)</label>
-                <select id="number_of_infants" name="number_of_infants" required>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
+            <div class="input-flex">
+
+
+                <div class="input">
+                    <label for="trip_departure">Departure </label> <br>
+                    <input type="date" name="trip_departure" id="trip_departure" required placeholder="0550222888">
+                </div>
+                <div class="input">
+                    <label for="trip_return" id="trip_return_label" style="display: none;">Return </label> <br>
+                    <input type="date" name="trip_return" id="trip_return" style="display: none;" required
+                        placeholder="0550222888">
+                </div>
+                <div class="input">
+                    <label for="trip_to">Adult</label>
+                    <select id="number_of_adults" name="number_of_adults" required>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="trip_to">Children (2 - 12)</label>
+                    <select id="number_of_children" name="number_of_children" required>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <div class="input">
+                    <label for="trip_to">Infant (0 - 2)</label>
+                    <select id="number_of_infants" name="number_of_infants" required>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
             </div>
 
             <button type="submit">Submit</button>
@@ -151,18 +156,18 @@
 
 <script>
     document.getElementById("category").addEventListener("change", function () {
-            let returnDate = document.getElementById("trip_return");
-            let returnDateLabel = document.getElementById("trip_return_label");
+        let returnDate = document.getElementById("trip_return");
+        let returnDateLabel = document.getElementById("trip_return_label");
 
-            if (this.value === "Roundtrip") {
-                returnDate.style.display = "block";
-                returnDateLabel.style.display = "block";
-            } else {
-                returnDate.style.display = "none";
-                returnDateLabel.style.display = "none";
-                returnDate.value = ""; // Clear return date if switching back to one-way
-            }
-        });
+        if (this.value === "Roundtrip") {
+            returnDate.style.display = "block";
+            returnDateLabel.style.display = "block";
+        } else {
+            returnDate.style.display = "none";
+            returnDateLabel.style.display = "none";
+            returnDate.value = ""; // Clear return date if switching back to one-way
+        }
+    });
 </script>
 
 <script>
