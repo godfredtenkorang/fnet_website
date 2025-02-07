@@ -3,6 +3,7 @@ from my_site.models import Car, Driver
 import uuid
 from decimal import Decimal
 from dashboard.models import Customer
+from users.models import User
 
     
 class Region(models.Model):
@@ -41,7 +42,7 @@ class Rental(models.Model):
         ('Cancelled', 'Cancelled'),
         ('Completed', 'Completed'),
     ]
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     customer_name = models.CharField(max_length=100)
     customer_phone = models.CharField(max_length=15)
     emergency_name = models.CharField(max_length=100, null=True, blank=True)
@@ -102,7 +103,7 @@ class Appointment(models.Model):
         ('Cancelled', 'Cancelled'),
         ('Completed', 'Completed'),
     ]
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True, blank=True, related_name='appointments')
     customer_name = models.CharField(max_length=100)
     customer_phone = models.CharField(max_length=15)
@@ -141,7 +142,7 @@ class Payment(models.Model):
         ('Cancelled', 'Cancelled'),
         ('Completed', 'Completed'),
     ]
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     customer_name = models.CharField(max_length=100)
     customer_phone = models.CharField(max_length=15)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='payments')

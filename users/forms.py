@@ -4,8 +4,10 @@ from .models import User
 
 class RegisterForm(UserCreationForm):
     
-    
-    role = forms.ChoiceField(choices=User.ROLE_CHOICES, required=True)
+    role = forms.ChoiceField(
+        choices=[("customer", "Customer"), ("driver", "Driver"), ("agent", "Agent")],  # Removed "Admin"
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
 
     class Meta:
         model = User

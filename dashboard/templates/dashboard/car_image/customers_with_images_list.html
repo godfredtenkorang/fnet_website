@@ -18,8 +18,8 @@
 
                 {% for customer in customers %}
                 <tr>
-                    <td>{{customer.name}}</td>
-                    <td>{{customer.phone_number}}</td>
+                    <td>{{customer.username}}</td>
+                    <td>{{customer.phone}}</td>
                     <td><a href="{% url 'get-customer-load-images' customer.id %}">Link</a></td>
                     <td>
                         <button onclick="sendSMS({{ customer.id }})">Send SMS</button>

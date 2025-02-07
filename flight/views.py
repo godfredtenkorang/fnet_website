@@ -14,6 +14,7 @@ def flight(request):
 
 def booking(request, flight_slug):
     airline = get_object_or_404(Airline, slug=flight_slug)
+    user = request.user
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
         phone_number = request.POST.get('phone_number')
@@ -26,7 +27,7 @@ def booking(request, flight_slug):
         number_of_children = request.POST.get('number_of_children')
         number_of_infants = request.POST.get('number_of_infants')
 
-        bookings = Booking(airline=airline, full_name=full_name, category=category, phone_number=phone_number, trip_from=trip_from, trip_to=trip_to, trip_departure=trip_departure, trip_return=trip_return, number_of_adults=number_of_adults, number_of_children=number_of_children, number_of_infants=number_of_infants)
+        bookings = Booking(customer=user, airline=airline, full_name=full_name, category=category, phone_number=phone_number, trip_from=trip_from, trip_to=trip_to, trip_departure=trip_departure, trip_return=trip_return, number_of_adults=number_of_adults, number_of_children=number_of_children, number_of_infants=number_of_infants)
         bookings.save()
         send_sms(phone_number, full_name, airline.name)
         receive_sms(full_name, phone_number, category, airline.name, trip_from, trip_to, trip_departure, trip_return, number_of_adults, number_of_children, number_of_infants)
