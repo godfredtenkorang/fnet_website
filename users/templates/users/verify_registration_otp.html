@@ -1,0 +1,42 @@
+{% extends 'my_site/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+</style>
+
+<!-- bannerr -->
+
+<!-- <div class="banner">
+  <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+  <div class="banner-text">
+    <h1>Login</h1>
+  </div>
+</div> -->
+
+
+
+<div class="account-container">
+
+    <div class="contact-form">
+        <div class="login-img">
+            <img src="{% static 'my_site/img/login.png' %}" alt="background photo" />
+
+        </div>
+        <form method="POST" class="form">
+
+            <h2>OTP Verification</h2>
+            {% csrf_token %}
+
+            <input type="text" name="otp" placeholder="Enter OTP" required>
+
+            <button type="submit">Verify OTP</button>
+
+        </form>
+
+
+
+    </div>
+</div>
+
+{% endblock %}

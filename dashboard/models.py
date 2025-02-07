@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 # Create your models here.
 class SMSLog(models.Model):
@@ -33,7 +34,7 @@ class Customer(models.Model):
     
 
 class LoadCarImagesForCustomer(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='car_images/')
     date_added = models.DateTimeField(auto_now_add=True)
     

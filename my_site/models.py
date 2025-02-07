@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils.timezone import now
 from decimal import Decimal
+from users.models import User
 
 
 class Driver(models.Model):
+    driver = models.OneToOneField(User, models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     licence_number = models.CharField(max_length=20, unique=True)

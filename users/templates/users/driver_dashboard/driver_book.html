@@ -1,0 +1,60 @@
+{% extends 'users/driver_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>{{ driver.first_name }}'s Dashboard</h1>
+    <p><strong>Total Commission:</strong> GH¢{{ total_commission }}</p>
+    <h2>Completed Bookings</h2>
+    <div class="responsive-table">
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Commission</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                <tr>
+                    <td>{{ rental.car.car_name }} - {{ rental.car.brand }}</td>
+                    <td>{{ rental.rental_date }}</td>
+                    <td>{{ rental.drop_off_time }}</td>
+                    <td>GH¢{{ rental.calculate_commission }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Completed Schedules</h2>
+    <div class="responsive-table">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Commission</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in schedules %}
+                <tr>
+                    <td>{{ appointment.car.car_name }} {{ appointment.car.brand }}</td>
+                    <td>{{ appointment.schedule_date }}</td>
+                    <td>{{ appointment.pick_up_time }}</td>
+                    <td>GH¢{{ appointment.commission_rate }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+
+</div>
+{% endblock %}

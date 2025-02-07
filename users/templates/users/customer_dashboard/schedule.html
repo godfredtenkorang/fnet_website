@@ -1,0 +1,59 @@
+{% extends 'users/customer_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="responsive-table">
+        {% if schedules %}
+        <h1>Schedules Table</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Phone Number</th>
+                    <th>Pick up Time</th>
+                    <th>drop_off_time</th>
+                    <th>Pick up Location</th>
+                    <th>Drop of Location</th>
+                   
+                    <th>Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                    {% for schedule in schedules %}
+                    <tr>
+                        <td>{{ schedule.customer_name }}</td>
+                        <td>{{ schedule.customer_phone }}</td>
+                        <td>{{ schedule.pick_up_time }}</td>
+                        <td>{{ schedule.drop_off_time }}</td>
+                        <td>{{ schedule.pick_up_location }}</td>
+                        <td>{{ schedule.drop_off_location }}</td>
+                        
+                        <td>{{ schedule.status }}</td>
+
+
+                    </tr>
+                    {% endfor %}
+                
+            </tbody>
+        </table>
+        {% else %}
+        <h2 style="text-align: center;">No Scheduled Trip Ordered Yet.</h2>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

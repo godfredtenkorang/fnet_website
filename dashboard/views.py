@@ -3,7 +3,7 @@ from rental.models import Contact, Rental, Appointment, Payment
 from my_site.models import Car, Driver
 from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm
 from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images, rental_driver_update_sms
-from .models import SMSLog, Customer, DriversSMSLog, LoadCarImagesForCustomer
+from .models import SMSLog, DriversSMSLog, LoadCarImagesForCustomer
 from django.http import HttpResponse, JsonResponse
 
 from expenses.models import Expense, MyCar, Receipt
@@ -26,11 +26,25 @@ from flight.models import Booking
 from flight.forms import UpdateFlightBooking
 from flight.utils import update_flight_sms
 
+from users.models import User
+
 
 def dashboard(request):
     cars_available = Car.objects.count()
     bookings_id = Rental.objects.count()
-    return render(request, 'dashboard/dashboard.html', {'title':'Dashboard', 'cars_available': cars_available, 'bookings_id':bookings_id})
+    schedules_id = Appointment.objects.count()
+    customers_id = User.objects.filter(role='customer').count()
+    driver_id = User.objects.filter(role='driver').count()
+    agent_id = User.objects.filter(role='agent').count()
+    context = {
+        'cars_available': cars_available,
+        'bookings_id': bookings_id + schedules_id,
+        'customers_id': customers_id,
+        'driver_id': driver_id,
+        'agent_id': agent_id,
+        'title':'Dashboard'
+    }
+    return render(request, 'dashboard/dashboard.html', context)
 
 def all_cars(request):
     cars = Car.objects.all()
@@ -65,7 +79,7 @@ def contact(request):
 def sendMessage(request):
     all_sms = SMSLog.objects.all()
     if request.method == 'POST':
-        recipients = list(Customer.objects.values_list('phone_number', flat=True).distinct())
+        recipients = list(User.objects.filter(role='customer').values_list('phone', flat=True).distinct())
         
         message = request.POST.get('message')
         response = send_sms(recipients, message)
@@ -88,7 +102,7 @@ def sendMessage(request):
 def sendDriverMessage(request):
     all_driver_sms = DriversSMSLog.objects.all()
     if request.method == 'POST':
-        phone_numbers = list(Driver.objects.values_list('phone_number', flat=True).distinct())
+        phone_numbers = list(User.objects.filter(role='driver').values_list('phone', flat=True).distinct())
         
         messages = request.POST.get('messages')
         response = driver_send_sms(phone_numbers, messages)
@@ -506,7 +520,7 @@ def newReceipt(request):
 
 
 def customer_lists(request):
-    customers_info = Customer.objects.values("name", "phone_number").distinct()
+    customers_info = User.objects.filter(role="customer").values("username", "phone")
     return render(request, 'dashboard/customer_list.html', {'title': 'All Customers', 'customers': customers_info})
 
 
@@ -643,11 +657,11 @@ def add_car_for_customer(request):
 
 def get_customers_with_images_upload(request):
     customer_id = request.GET.get('id', None)
-    customers = Customer.objects.all()
+    customers = User.objects.filter(role='customer')
     if customer_id:
-        customer = get_object_or_404(Customer, id=customer_id)
+        customer = get_object_or_404(User, id=customer_id)
         
-        send_customer_sms_for_images(customer.phone_number, customer.name, customer.id)
+        send_customer_sms_for_images(customer.phone, customer.username, customer.id)
         return JsonResponse({"message": "SMS sent successfully!"})  # AJAX response
 
     
@@ -661,7 +675,7 @@ def get_customer_load_images(request, customer_id):
     customer = None
     get_images = LoadCarImagesForCustomer.objects.all()
     if customer_id:
-        customer = get_object_or_404(Customer, id=customer_id)
+        customer = get_object_or_404(User, id=customer_id)
         get_images = get_images.filter(customer=customer)
     context = {
         'customer': customer,

@@ -26,6 +26,9 @@
 
     <form method="post">
         {% csrf_token %}
+        {{form.customer.label_tag}}
+        {{form.customer}}
+        <br><br>
         {{form.car.label_tag}}
         {{form.car}}
         <br><br>
@@ -84,7 +87,7 @@
        
         {{form.total_price.label_tag}}
         {{form.total_price}}
-        
+
         {{form.is_returned_trip.label_tag}}
         {{form.is_returned_trip}}
         <br><br>

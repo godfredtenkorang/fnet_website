@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 
 class Airline(models.Model):
@@ -11,6 +12,7 @@ class Airline(models.Model):
 
 
 class Booking(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     airline = models.ForeignKey(Airline, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)

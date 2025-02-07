@@ -48,7 +48,7 @@ def categories(request):
 
 def carDetail(request,  car_slug):
     car = get_object_or_404(Car, slug=car_slug)
-    
+    user = request.user
     
     
     if request.method == 'POST':
@@ -90,15 +90,9 @@ def carDetail(request,  car_slug):
             # Ensure single price values are treated as float
             total_price = float(daily_price) * rental_days
             
+    
         
-
-        
-        customer, created = Customer.objects.get_or_create(
-                name=customer_name,
-                phone_number=customer_phone
-            )
-        
-        rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
+        rentals = Rental(customer=user, car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
         rentals.save()
         
         # send_mail(
