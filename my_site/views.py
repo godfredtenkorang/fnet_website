@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Car, Category, Gallery
+from .models import Car, Category, Gallery, Driver, DriverReview
 from rental.models import Rental, Contact
 from django.conf import settings
 from django.core.mail import send_mail
@@ -7,6 +7,7 @@ from .utils import send_sms, receive_sms, receive_contact, get_location_based_pr
 from django.http import JsonResponse
 from dashboard.models import Customer
 import random
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -180,3 +181,31 @@ def gallery(request):
         'title': 'Gallery'
     }
     return render(request, 'my_site/gallery.html', context)
+
+@login_required
+def review_driver(request, driver_id):
+    driver = get_object_or_404(Driver, id=driver_id)
+    
+    if request.method == "POST":
+        rating = int(request.POST.get("rating"))
+        review_text = request.POST.get("review_text")
+        customer = request.user
+        
+        DriverReview.objects.create(
+            driver=driver,
+            customer=customer,
+            rating=rating,
+            review_text=review_text
+        )
+        
+        return redirect("thank_you_page")
+    
+    context = {
+        'driver': driver,
+        'title': 'Review'
+    }
+    
+    return render(request, "my_site/review_form.html", context)
+
+def thank_you_page(request):
+    return render(request, 'my_site/thank_you_page.html')

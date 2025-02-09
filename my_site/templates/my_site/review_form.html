@@ -1,0 +1,78 @@
+{% extends 'my_site/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    .contact-container {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 2rem;
+        background-color: #fff;
+        margin: 20px 10%;
+        border-radius: 8px;
+        min-height: 10vh;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-item {
+        margin: 0 20px;
+    }
+
+    .contact-item h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .contact-item p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+</style>
+
+<!-- bannerr -->
+
+<div class="banner">
+    <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+    <div class="banner-text">
+        <h1>Review</h1>
+    </div>
+</div>
+<br><br>
+<div class="contact-us-section">
+    <div class="contact-img">
+        <img src="{% static 'my_site/img/contactus.jpg' %}" alt="background photo" />
+
+    </div>
+    <div class="contact-form">
+        <p>Give your feedback about the driver</p>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input">
+                <label for="rating">Rate the driver:</label>
+                
+                <select name="rating" required>
+                    <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ - Very Good</option>
+                    <option value="3">⭐⭐⭐ - Good</option>
+                    <option value="2">⭐⭐ - Fair</option>
+                    <option value="1">⭐ - Poor</option>
+                </select>
+            </div>
+            
+            <div class="input">
+                <label for="review_text">Write a review:</label>
+                <textarea name="review_text" required></textarea>
+            </div>
+            
+
+            <button type="submit">Submit Review</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
