@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment, Payment
-from my_site.models import Car, Driver
+from my_site.models import Car, Driver, DriverReview
 from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm
 from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images, rental_driver_update_sms
 from .models import SMSLog, DriversSMSLog, LoadCarImagesForCustomer
@@ -27,6 +27,8 @@ from flight.forms import UpdateFlightBooking
 from flight.utils import update_flight_sms
 
 from users.models import User, Profile
+
+from my_site.utils import send_review_sms
 
 
 def dashboard(request):
@@ -176,8 +178,28 @@ def complete_rental(request, rental_id):
         rental.status = 'Completed'
         rental.save()
         
+        customer = rental.customer
+        driver = rental.driver
+        review_link = f"https://tlghana.com/review/{driver.id}/"
+        
+        message = {
+            f"Dear {customer.username}, your trip with {driver.first_name} has been completed. "
+            f"We would love to hear your feedback. Please rate your driver: {review_link}"
+        }
+        
+        send_review_sms(customer.phone, message)
+        
     return redirect('bookings')
 
+
+def all_reviews(request):
+    reviews = DriverReview.objects.all()
+    context = {
+        'reviews': reviews,
+        'title': 'Reviews'
+    }
+
+    return render(request, 'dashboard/all_reviews.html', context)
 
 def print_rental_receipt(request, receipt_id):
     rental = Rental.objects.get(id=receipt_id)

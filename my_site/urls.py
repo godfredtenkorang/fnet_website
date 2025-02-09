@@ -16,4 +16,7 @@ urlpatterns = [
     path('success_page/', views.contact_success_page, name='contact-success'),
     path('terms_and_condition/', views.termsAndCondition, name='termsAndCondition'),
     path('gallery/', views.gallery, name='gallery'),
+    
+    path('review/<int:driver_id>/', views.review_driver, name='review_driver'),
+    path('thank_you/', views.thank_you_page, name='thank_you_page'),
 ]

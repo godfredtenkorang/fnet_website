@@ -76,5 +76,7 @@ urlpatterns = [
     path('flight-booking/', views.flight_booking, name='flight-booking'),
     path('update-flight-booking/<int:airline_id>/', views.update_flight_booking, name='update_flight-booking'),
     
-    path('all_profiles/', views.all_profiles, name='all_profiles')
+    path('all_profiles/', views.all_profiles, name='all_profiles'),
+    
+    path('all_reviews/', views.all_reviews, name='all_reviews'),
 ]
