@@ -3,8 +3,11 @@ from . import views
 
 urlpatterns = [
     path('login/', views.login_user, name='login'),
-    path('register/', views.register, name='register'),
+    
     path('verity_registration_otp/', views.verify_registration_otp, name='verify_registration_otp'),
+    path('reset-password/', views.request_reset_otp, name='request_reset_otp'),
+    path('verify-otp/', views.verify_otp_and_reset_password, name='verify_otp_and_reset_password'),
+    
     path('logout/', views.logout, name='logout'),
     # Customer URLS
     path('customer-dashboard/', views.customer_dashboard, name='customer_dashboard'),

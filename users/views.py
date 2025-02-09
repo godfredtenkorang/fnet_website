@@ -4,13 +4,15 @@ from django.contrib.auth.models import auth
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import RegisterForm, LoginForm
-from .models import User
+from .forms import RegisterForm, LoginForm, UserUpdateForm, ProfileUpdateForm
+from .models import User, OTP
 from rental.models import Rental, Appointment
-from .utils import generate_otp, send_otp_sms
+from .utils import generate_otp, send_otp_sms, send_otp
 from django.contrib import messages
 from my_site.models import Driver, Car
 from users.models import User
+from django.http import JsonResponse
+from django.contrib.auth.hashers import make_password
 
 
 def register(request):
@@ -92,6 +94,52 @@ def login_user(request):
     return render(request, 'users/login.html', context)
 
 
+def request_reset_otp(request):
+    if request.method == "POST":
+        phone_number = request.POST.get("phone_number")
+        user = User.objects.filter(phone=phone_number).filter()
+        if user:
+            send_otp(phone_number)
+            return redirect('verify_otp_and_reset_password')
+    return render(request, 'users/request_otp.html')
+    
+
+
+def verify_otp_and_reset_password(request):
+    if request.method == 'POST':
+        phone_number = request.POST.get("phone_number")
+        otp_code = request.POST.get("otp_code")
+        new_password = request.POST.get("new_password")
+        
+        otp = OTP.objects.filter(phone=phone_number, otp_code=otp_code).first()
+        
+        if otp and otp.is_valid():
+            user = get_object_or_404(User, phone=phone_number)
+            user.password = make_password(new_password)
+            user.save()
+            otp.delete() # Remove OTP after successful use
+            return redirect('login')
+    return render(request, 'users/reset_password.html')
+
+
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+    
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    
+    return render(request, 'users/profile.html', context)
 
 def logout(request):
     auth.logout(request)

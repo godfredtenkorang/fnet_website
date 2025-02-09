@@ -28,6 +28,8 @@ class Driver(models.Model):
     
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.phone_number}"
+    
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
