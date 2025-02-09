@@ -26,7 +26,7 @@ from flight.models import Booking
 from flight.forms import UpdateFlightBooking
 from flight.utils import update_flight_sms
 
-from users.models import User
+from users.models import User, Profile
 
 
 def dashboard(request):
@@ -710,3 +710,11 @@ def update_flight_booking(request, airline_id):
         'form': form,
     }
     return render(request, 'dashboard/update_flight_booking.html', context)
+
+def all_profiles(request):
+    profiles = Profile.objects.all()
+    context = {
+        'profiles': profiles,
+        'title': 'Profiles'
+    }
+    return render(request, 'dashboard/all_profiles.html', context)

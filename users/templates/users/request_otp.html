@@ -1,0 +1,42 @@
+{% extends 'my_site/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+</style>
+
+<!-- bannerr -->
+
+<!-- <div class="banner">
+  <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+  <div class="banner-text">
+    <h1>Login</h1>
+  </div>
+</div> -->
+
+
+
+<div class="account-container">
+
+    <div class="contact-form">
+        <div class="login-img">
+            <img src="{% static 'my_site/img/login.PNG' %}" alt="background photo" />
+
+        </div>
+        <form method="POST" class="form" action="{% url 'request_reset_otp' %}">
+
+            <h2>Forgot Password</h2>
+            {% csrf_token %}
+            <br>
+            <label for="">Enter your phone number:</label>
+            <input type="text" name="phone_number" required>
+            <button type="submit">Send OTP</button>
+
+        </form>
+
+
+
+    </div>
+</div>
+
+{% endblock %}

@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from users import views as user_views
 
 
 urlpatterns = [
@@ -12,7 +13,9 @@ urlpatterns = [
     path('rental/', include('rental.urls')),
     path('account/', include('users.urls')),
     path('', include('flight.urls')),
-    path('', include('rent.urls'))
+    path('', include('rent.urls')),
+    path('register/', user_views.register, name='register'),
+    path('profile/', user_views.profile, name='profile'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'my_site.views.custom_404_view'
