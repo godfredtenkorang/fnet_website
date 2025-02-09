@@ -149,7 +149,7 @@ header {
   box-shadow: 1px 1px 10px rgba(198, 189, 248, 0.825);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   overflow-y: scroll;
   padding: 20px;
@@ -199,12 +199,13 @@ header {
   display: flex;
   align-items: center;
   padding: 2px;
-  gap: 10px;
+  gap: 5px;
   transition: all 0.1s ease-in-out;
   border: solid 1px;
   padding: 5px;
   color: var(--whiteColor);
   border-radius: 5px;
+  font-size: 15px;
 }
 
 .Settings {
@@ -329,15 +330,17 @@ header {
 
   .navcontainer {
     width: 100vw;
-    position: absolute;
+    height: 100%;
+    position: fixed;
     transition: all 0.6s ease-in-out;
     top: 0;
     left: -100vw;
+    overflow: scroll;
   }
 
   .nav {
     width: 100%;
-    position: absolute;
+
   }
 
   .navclose {
@@ -446,7 +449,6 @@ header {
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-
   padding: 10px 0;
   font-weight: bold;
   text-align: center;
@@ -475,6 +477,75 @@ header {
   background: rgba(254,201,17,255);
   color: white;
 }
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#saveReminder {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: var(--blueColor);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#saveReminder:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .agreementContainer{
   display: grid;
