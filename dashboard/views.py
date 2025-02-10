@@ -6,8 +6,8 @@ from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_
 from .models import SMSLog, DriversSMSLog, LoadCarImagesForCustomer
 from django.http import HttpResponse, JsonResponse
 
-from expenses.models import Expense, MyCar, Receipt
-from expenses.forms import ExpenseForm, ReceiptForm
+from expenses.models import Expense, Receipt, Service
+from expenses.forms import ReceiptForm
 from django.db.models import Sum
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -432,6 +432,10 @@ def download_pdf(request):
         'all_totals': all_totals,
     }
     return render_to_pdf('dashboard/expenses/pdf_template.html', context)
+
+
+def services(request):
+    return render(request, 'dashboard/all_services.html')
 
     
 def register_driver(request):

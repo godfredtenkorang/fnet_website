@@ -43,3 +43,14 @@ class Receipt(models.Model):
     
     def __str__(self):
         return self.name
+    
+    
+class Service(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    mileage = models.CharField(max_length=100)
+    fuel = models.CharField(max_length=100)
+    expense= models.CharField(max_length=225)
+    date_added = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Services for {self.car} - Mileage {self.mileage}"
