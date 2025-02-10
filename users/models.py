@@ -6,6 +6,7 @@ from PIL import Image
 class User(AbstractUser):
     email = models.EmailField()
     phone = models.CharField(unique=True, max_length=10)
+    is_blocked = models.BooleanField(default=False)
     ROLE_CHOICES = [
         ("customer", "Customer"),
         ("driver", "Driver"),

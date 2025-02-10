@@ -17,6 +17,7 @@
                     <th>Drop of Location</th>
                    
                     <th>Status</th>
+                    <th>Rate Driver</th>
 
                 </tr>
             </thead>
@@ -32,6 +33,7 @@
                         <td>{{ schedule.drop_off_location }}</td>
                         
                         <td>{{ schedule.status }}</td>
+                        <td><a href="{% url 'review_driver' booking.driver.id %}">Rate</a></td>
 
 
                     </tr>

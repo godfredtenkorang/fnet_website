@@ -10,6 +10,7 @@ from rental.models import Rental, Appointment
 from .utils import generate_otp, send_otp_sms, send_otp
 from django.contrib import messages
 from my_site.models import Driver, Car
+from flight.models import Booking
 from users.models import User
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password
@@ -190,6 +191,15 @@ def customer_schedules(request):
     }
     
     return render(request, "users/customer_dashboard/schedule.html", context)
+
+def customer_flight_booking(request):
+    bookings = Booking.objects.filter(customer=request.user)
+    context = {
+        'bookings': bookings,
+        'title': 'Customer Flights'
+    }
+    
+    return render(request, "users/customer_dashboard/flight_booking.html", context)
 
 # ------------------ Customer Dashboard End--------------------------
 

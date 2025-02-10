@@ -1,0 +1,64 @@
+{% extends 'users/customer_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container">
+    <h1>Flight Booking Table</h1>
+    <div class="responsive-table">
+        {% if bookings %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Phone Number</th>
+                    <th>Aitline</th>
+                    <th>Category</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Departure</th>
+                    <th>Return</th>
+                    <th>Adult</th>
+                    <th>Children</th>
+                    <th>Infants</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.full_name }}</td>
+                    <td>{{ booking.phone_number }}</td>
+                    <td>{{ booking.airline }}</td>
+                    <td>{{ booking.category }}</td>
+                    <td>{{ booking.trip_from }}</td>
+                    <td>{{ booking.trip_to }}</td>
+                    <td>{{ booking.trip_departure }}</td>
+                    <td>{{ booking.trip_return }}</td>
+                    <td>{{ booking.number_of_adults }}</td>
+                    <td>{{ booking.number_of_children }}</td>
+                    <td>{{ booking.number_of_infants }}</td>
+                    <td>{{ booking.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h2 style="text-align: center;">No Flight Ordered Yet.</h2>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
