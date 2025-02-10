@@ -79,4 +79,8 @@ urlpatterns = [
     path('all_profiles/', views.all_profiles, name='all_profiles'),
     
     path('all_reviews/', views.all_reviews, name='all_reviews'),
+    
+    path('users/', views.all_users, name='manage_users'),
+    path('admin/block-user/<int:user_id>/', views.block_user, name='block_user'),
+    path('admin/delete-user/<int:user_id>/', views.delete_user, name='delete_user'),
 ]

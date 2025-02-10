@@ -102,6 +102,23 @@
           <input type="text" name="emergency_phone" id="emergency_phone" required placeholder="0240000000">
         </div>
 
+        <div class="input">
+          <label for="">Rental date</label> <br>
+          <input type="date" name="rental_date" id="rental_date" required>
+        </div>
+        <div class="input">
+          <label for="">Pick up Time</label> <br>
+          <input type="time" name="pick_up_time" required>
+        </div>
+        <div class="input">
+          <label for="">Return Date</label> <br>
+          <input type="date" name="return_date" id="return_date" required>
+        </div>
+        <div class="input">
+          <label for="">Drop off Time</label> <br>
+          <input type="time" name="drop_off_time" required>
+        </div>
+
 
         <!-- Hidden JSON Data for Pricing -->
         <script type="application/json" id="pricing_data">
@@ -159,24 +176,10 @@
           <label for="">Town </label> <br>
           <input type="text" name="town" id="town" required placeholder="eg. New Tafo, STU, Adum etc">
         </div>
-        <div class="input">
-          <label for="">Rental date</label> <br>
-          <input type="date" name="rental_date" id="rental_date" required>
-        </div>
-        <div class="input">
-          <label for="">Pick up Time</label> <br>
-          <input type="time" name="pick_up_time" required>
-        </div>
+        
       </div>
       <div class="input-flex">
-        <div class="input">
-          <label for="">Return Date</label> <br>
-          <input type="date" name="return_date" id="return_date" required>
-        </div>
-        <div class="input">
-          <label for="">Drop off Time</label> <br>
-          <input type="time" name="drop_off_time" required>
-        </div>
+        
         <div class="input">
           <label for="">ID Type</label> <br>
           <select name="document_type" id="document_type">
@@ -238,15 +241,16 @@
     const negotiableMessage = document.getElementById('negotiable_message');
 
 
-    if (rentalDate && returnDate && rentalDate < returnDate) {
-      const timeDiff = returnDate - rentalDate;
-      const rentalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    if (rentalDate && returnDate) {
+      let timeDiff = returnDate - rentalDate;
+      let rentalDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 12));
+      rentalDay = rentalDays < 1 ? 1 : rentalDays;
 
-      if (pricing[location_category] && rentalDays > 0) {
+      if (pricing[location_category] && rentalDay > 0) {
         priceDisplay.textContent = `${pricing[location_category]}`
         let [minPrice, maxPrice] = pricing[location_category].split(" - ").map(Number);
-        let totalMinPrice = minPrice * rentalDays;
-        let totalMaxPrice = maxPrice * rentalDays;
+        let totalMinPrice = minPrice * rentalDay;
+        let totalMaxPrice = maxPrice * rentalDay;
         document.getElementById('total_price').innerHTML = `GH¢ ${totalMinPrice} - GH¢ ${totalMaxPrice}`
       } else {
         priceDisplay.textContent = "Select a valid location";
@@ -255,6 +259,8 @@
 
 
     }
+
+
 
     if (rentalDate && returnDate) {
       const difference = (returnDate - rentalDate) / (1000 * 60 * 45 * 24);

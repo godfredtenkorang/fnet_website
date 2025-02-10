@@ -30,6 +30,38 @@ from users.models import User, Profile
 
 from my_site.utils import send_review_sms
 
+from django.contrib.auth import get_user_model
+from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
+
+
+User = get_user_model()
+
+def all_users(request):
+    users = User.objects.all()
+    context = {
+        'users': users,
+        'title': 'Users'
+    }
+    return render(request, "dashboard/all_users.html", context)
+
+@staff_member_required
+def block_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user.is_blocked = not user.is_blocked # Toggle block status
+    user.save()
+    status = "blocked" if user.is_blocked else "unblocked"
+    messages.success(request, f"User {user.username} has been {status}")
+    return redirect("manage_users")
+
+
+def delete_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user.delete()
+    messages.success(request, f"User {user.username} has been deleted.")
+    return redirect("manage_users")
+
+
 
 def dashboard(request):
     cars_available = Car.objects.count()
@@ -458,6 +490,8 @@ def update_appointment(request, appointment_id):
                 update_appointment.driver.is_available == False
                 update_appointment.driver.save()
                 
+                
+                
             appointment_update_sms(appointment.customer_phone, appointment.customer_name, appointment.schedule_date, appointment.pick_up_time, appointment.driver)
             return redirect('appointments')  # Redirect to the appointment list or another relevant page
     else:
@@ -482,6 +516,18 @@ def complete_appointment(request, appointment_id):
             
         appointment.status = 'Completed'
         appointment.save()
+    
+        
+        customer = appointment.customer
+        driver = appointment.driver
+        review_link = f"https://tlghana.com/review/{driver.id}/"
+        
+        message = {
+            f"Dear {customer.username}, your trip with {driver.first_name} has been completed. "
+            f"We would love to hear your feedback. Please rate your driver: {review_link}"
+        }
+        
+        send_review_sms(customer.phone, message)
         
     return redirect('appointments')
 

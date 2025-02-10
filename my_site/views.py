@@ -78,7 +78,11 @@ def carDetail(request,  car_slug):
         return_date = datetime.strptime(return_date, '%Y-%m-%d').date()
 
         # Calculate total price based on rental days
-        rental_days = (return_date - rental_date).days
+        if rental_date == return_date:
+            rental_days = 1
+        else:
+            rental_days = (return_date - rental_date).total_seconds() / (12 * 3600)
+            rental_days = max(1, int(rental_days))
         # Handle case where price is stored as a range "200 - 300"
         if isinstance(daily_price, str) and " - " in daily_price:
             # Split the range and convert to float instead of int
