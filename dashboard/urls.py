@@ -83,4 +83,6 @@ urlpatterns = [
     path('users/', views.all_users, name='manage_users'),
     path('admin/block-user/<int:user_id>/', views.block_user, name='block_user'),
     path('admin/delete-user/<int:user_id>/', views.delete_user, name='delete_user'),
+    
+    path('all_services/', views.services, name='all_services')
 ]
