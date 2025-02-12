@@ -514,6 +514,57 @@ nav {
   text-align: center;
 }
 
+.banner-text h1{
+  font-size: 2rem;
+}
+
+
+.Airbnb-banner img{
+  width: 100%;
+height: 40vh;
+  object-fit: cover;
+}
+.Airbnb-banner {
+ position: relative;
+}
+
+.Airbnb-banner-text {
+  width: 100%;
+  height: 40vh;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+.Airbnb-banner-text h1, .Airbnb-banner-text p{
+  color: var(--whiteColor);
+}
+.Airbnb-banner-text h1{
+  font-size: 3rem;
+  color: var(--whiteColor);
+}
+.Airbnb-banner-text p{
+  font-size: 1.5rem;
+  color: var(--whiteColor);
+}
+
+
+
+
+
+
+
+
+
+.banner-text p {
+  font-size: 1.2rem;
+  padding: 10px 0;
+}
 /*car-detail-section"
 */
 .car-detail-section {
@@ -1256,6 +1307,148 @@ form button {
 
 
 
+/* AIRBNB SECTION */
+.house-to-book-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr ;
+  padding: 2% 10%;
+  gap: 1rem;
+  margin-bottom: 5%;
+}
+
+.house-container{
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 40vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+
+}
+.house-container img{
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  border-radius: 10px;
+
+}
+.house-container video{
+  width: 100%;
+  height: 40vh;
+ 
+
+}
+
+.house-detail{
+  padding: 10px;
+  line-height: 25px;
+}
+
+.add-to-favourite{
+  position: absolute;
+  top: -2%;
+  right: 0;
+}
+.add-to-favourite button{
+  background-color: var(--red);
+  color: var(--blueColor);
+  border: none;
+}
+
+.image-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.image-slider img {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  display: none;
+  border-radius: 10px;
+}
+
+.image-slider img.active {
+  display: block;
+}
+
+.image-slider button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.image-slider .prev {
+  left: 10px;
+}
+
+.image-slider .next {
+  right: 10px;
+}
+
+
+/* house-detail-page */
+.house-detail-page{
+  padding: 3% 10%;
+}
+.house-detail-page h1{
+  font-size: 1.5rem;
+}
+.house-imgs{
+  display: flex;
+  gap: 1rem;
+  padding: 2% 0;
+}
+
+.house-big-img{
+  width: 100%;
+  max-width: 50%;
+}
+
+.house-big-img img{
+  width: 100%;
+  height: 61vh;
+  object-fit: cover;
+}
+
+.house-small-img{
+  width: 100%;
+  max-width: 50%;
+}
+
+.house-col{
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.house-col img{
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* responive */
@@ -1340,6 +1533,11 @@ form button {
     display: none;
   }
 
+  .house-to-book-container{
+    grid-template-columns: 1fr 1fr;
+  }
+
+
   @keyframes slideIn {
     from {
       transform: translateX(-100%);
@@ -1384,6 +1582,12 @@ form button {
   .why-choose-us {
     flex-direction: column;
   }
+
+  .house-to-book-container{
+    grid-template-columns: 1fr;
+    padding: 2%;
+  }
+
 
   .nav-links {
     width: 100%;
@@ -1480,5 +1684,14 @@ form button {
   .login-img {
     max-width: none;
   }
+
+
+  .Airbnb-banner-text h1{
+    font-size: 2rem;
+  }
+  .Airbnb-banner-text p{
+    font-size: 1rem;
+  }
+
 
 }

@@ -1,0 +1,486 @@
+{% extends 'my_site/base.html' %} {% load static %} {% block content %}
+<style>
+    .container {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+   margin-top: -5%;
+   margin-bottom: 2%;
+
+        
+    }
+    .search-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        z-index: 100;
+    }
+    .field {
+        flex: 1;
+        min-width: 150px;
+        position: relative;
+    }
+    .field label {
+        display: block;
+        font-weight: bold;
+    }
+    .field input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        
+    }
+    .dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        list-style: none;
+        padding: 5px;
+        display: none;
+    }
+    .guest-dropdown {
+        background: white;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        position: relative;
+    }
+    .guest-dropdown-content {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 200px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        display: none;
+    }
+    .guest-option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+   
+    }
+   .container button {
+        padding: 5px 10px;
+        background: #000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:disabled {
+        background: #ccc;
+    }
+
+    .guest-option button{
+ width: 40px !important;
+ height: 10px !important;
+    }
+
+    .field input {
+    width: 100%; /* Ensures it takes the full width of the parent container */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Increases text size for better readability */
+}
+
+/* Optional: Set a minimum width for larger inputs */
+.field {
+    min-width: 250px; /* Adjust as needed */
+}
+
+
+</style>
+
+
+<div class="Airbnb-banner">
+    <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+    <div class="Airbnb-banner-text">
+        <h1>Find Your Perfect Stay with our Airbnb</h1>  
+        <p>Discover unique homes, apartments, and experiences in top <br> destinations worldwide. Book your next adventure with comfort and ease.</p>
+     
+        
+    </div>
+  </div>
+
+
+
+  <div class="container">
+  
+
+    <form action="" class="search-container">
+        <div class="field">
+            <label>Where</label>
+            <input type="text" id="location" placeholder="Enter destination">
+            <ul id="locationDropdown" class="dropdown"></ul>
+        </div>
+        <div class="field">
+            <label>Check-in</label>
+            <input type="date" id="checkin">
+        </div>
+        <div class="field">
+            <label>Check-out</label>
+            <input type="date" id="checkout">
+        </div>
+        <div class="field">
+            <label>Guests</label>
+            <div id="guestField" class="guest-dropdown">Number of Guests</div>
+            <div id="guestDropdown" class="guest-dropdown-content">
+                <div class="guest-option">
+                    <span>Guests</span>
+                    <button type="button" class="decrease" data-type="adults">-</button>
+                    <span id="adultCount">0</span>
+                    <button type="button" class="increase" data-type="adults">+</button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" id="searchBtn">Search</button>
+    </form>
+</div>
+
+
+<!-- house for rent  -->
+
+<div class="house-to-book-container">
+
+
+
+<div class="house-container">
+    <div class="image-slider">
+        <button class="prev">&#10094;</button>
+        <img src="{% static 'my_site/img/bg111.jpeg' %}" alt="background photo" />
+        <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+        <img src="{% static 'my_site/img/bg444.jpeg' %}" alt="background photo" />
+        <button class="next">&#10095;</button>
+    </div>
+    
+    <div class="house-detail">
+        <div class="location">
+           
+            <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
+        </div>
+        <div class="kilometer">
+            
+            <p><i class="fas fa-road"></i> 16 Kilometers away</p>
+        </div>
+        <div class="date">
+           
+            <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
+        </div>
+        <div class="price">
+          
+            <p>  <i class="fas fa-money-bill-wave"></i>  <strong>GH 976 </strong> per night</p>
+        </div>
+    </div>
+
+    <!-- add favourite button -->
+     <div class="add-to-favourite">
+      <a href=""> 
+        <button>   <i class="fas fa-heart"></i></button>
+      </a>
+
+     </div>
+    
+    <div class="more-details">
+        <a href="{% url 'AirBnBDetail' %}" >
+          <button> More detail  </button>
+        </a>
+       </div>
+</div>
+
+<div class="house-container">
+    <div class="image-slider">
+        <button class="prev">&#10094;</button>
+        <img src="{% static 'my_site/img/bg111.jpeg' %}" alt="background photo" />
+        <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+        <button class="next">&#10095;</button>
+    </div>
+    
+    <div class="house-detail">
+        <div class="location">
+           
+            <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
+        </div>
+        <div class="kilometer">
+            
+            <p><i class="fas fa-road"></i> 16 Kilometers away</p>
+        </div>
+        <div class="date">
+           
+            <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
+        </div>
+        <div class="price">
+          
+            <p>  <i class="fas fa-money-bill-wave"></i>  <strong>GH 976 </strong> per night</p>
+        </div>
+    </div>
+
+    <!-- add favourite button -->
+     <div class="add-to-favourite">
+      <a href=""> 
+        <button>   <i class="fas fa-heart"></i></button>
+      </a>
+
+     </div>
+    
+    <div class="more-details">
+        <a href="{% url 'AirBnBDetail' %}" >
+          <button> More detail  </button>
+        </a>
+       </div>
+</div>
+
+<div class="house-container">
+    <div class="image-slider">
+        <button class="prev">&#10094;</button>
+        <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+        <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+        <button class="next">&#10095;</button>
+    </div>
+    
+    <div class="house-detail">
+        <div class="location">
+           
+            <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
+        </div>
+        <div class="kilometer">
+            
+            <p><i class="fas fa-road"></i> 16 Kilometers away</p>
+        </div>
+        <div class="date">
+           
+            <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
+        </div>
+        <div class="price">
+          
+            <p>  <i class="fas fa-money-bill-wave"></i>  <strong>GH 976 </strong> per night</p>
+        </div>
+    </div>
+
+    <!-- add favourite button -->
+     <div class="add-to-favourite">
+      <a href=""> 
+        <button>   <i class="fas fa-heart"></i></button>
+      </a>
+
+     </div>
+    
+    <div class="more-details">
+        <a href="{% url 'AirBnBDetail' %}" >
+          <button> More detail  </button>
+        </a>
+       </div>
+</div>
+
+<div class="house-container">
+    <div class="image-slider">
+        <button class="prev">&#10094;</button>
+        <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+        <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+        <button class="next">&#10095;</button>
+    </div>
+    
+    <div class="house-detail">
+        <div class="location">
+           
+            <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
+        </div>
+        <div class="kilometer">
+            
+            <p><i class="fas fa-road"></i> 16 Kilometers away</p>
+        </div>
+        <div class="date">
+           
+            <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
+        </div>
+        <div class="price">
+          
+            <p>  <i class="fas fa-money-bill-wave"></i>  <strong>GH 976 </strong> per night</p>
+        </div>
+    </div>
+
+    <!-- add favourite button -->
+     <div class="add-to-favourite">
+      <a href=""> 
+        <button>   <i class="fas fa-heart"></i></button>
+      </a>
+
+     </div>
+    
+     <div class="more-details">
+        <a href="{% url 'AirBnBDetail' %}">
+            <button> More detail </button>
+        </a>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const guestField = document.getElementById("guestField");
+    const guestDropdown = document.getElementById("guestDropdown");
+    const adultCountElement = document.getElementById("adultCount");
+    const increaseBtn = document.querySelector(".increase");
+    const decreaseBtn = document.querySelector(".decrease");
+
+    // Toggle dropdown visibility
+    guestField.addEventListener("click", function () {
+        guestDropdown.style.display = guestDropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // Function to update guest count
+    function updateGuestCount(action) {
+        let currentCount = parseInt(adultCountElement.textContent);
+
+        if (action === "increase" && currentCount < 15) {
+            currentCount++;
+        } else if (action === "decrease" && currentCount > 0) {
+            currentCount--;
+        }
+
+        adultCountElement.textContent = currentCount;
+        guestField.textContent = currentCount + " Guests";
+
+        // Disable buttons when limit is reached
+        increaseBtn.disabled = currentCount >= 15;
+        decreaseBtn.disabled = currentCount <= 0;
+    }
+
+    // Event listeners for buttons
+    increaseBtn.addEventListener("click", function () {
+        updateGuestCount("increase");
+    });
+
+    decreaseBtn.addEventListener("click", function () {
+        updateGuestCount("decrease");
+    });
+});
+
+</script>
+<script>
+     document.querySelectorAll('.image-slider').forEach(slider => {
+    let images = slider.querySelectorAll('img');
+    let currentIndex = 0;
+    let interval;
+
+    function showImage(index) {
+        images.forEach(img => img.classList.remove('active'));
+        images[index].classList.add('active');
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+    }
+
+    slider.querySelector('.next').addEventListener('click', nextImage);
+    slider.querySelector('.prev').addEventListener('click', prevImage);
+
+    function startAutoSlide() {
+        interval = setInterval(nextImage, 3000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(interval);
+    }
+
+    slider.addEventListener('mouseenter', stopAutoSlide);
+    slider.addEventListener('mouseleave', startAutoSlide);
+
+    showImage(currentIndex);
+    startAutoSlide();
+});
+
+</script>
+
+
+
+
+
+
+{% endblock %}

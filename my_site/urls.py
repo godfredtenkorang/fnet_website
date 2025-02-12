@@ -19,4 +19,8 @@ urlpatterns = [
     
     path('review/<int:driver_id>/', views.review_driver, name='review_driver'),
     path('thank_you/', views.thank_you_page, name='thank_you_page'),
+
+    path('AirBnBDetail/', views.AirBnBDetail, name='AirBnBDetail'),
+    path('AirBnB/', views.AirBnB, name='AirBnB'),
+
 ]
