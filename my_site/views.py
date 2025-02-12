@@ -212,6 +212,7 @@ def review_driver(request, driver_id):
     return render(request, "my_site/review_form.html", context)
 
 def thank_you_page(request):
+
     return render(request, 'my_site/thank_you_page.html')
 
 def AirBnBDetail(request):
@@ -219,3 +220,5 @@ def AirBnBDetail(request):
 
 def AirBnB(request):
     return render(request, 'my_site/AirBnB.html')
+
+

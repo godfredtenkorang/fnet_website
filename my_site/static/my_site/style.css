@@ -513,6 +513,7 @@ nav {
   color: var(--whiteColor);
   text-align: center;
 }
+
 .banner-text h1{
   font-size: 2rem;
 }
@@ -1305,6 +1306,7 @@ form button {
 
 
 
+
 /* AIRBNB SECTION */
 .house-to-book-container{
   display: grid;
@@ -1449,9 +1451,6 @@ form button {
 
 
 
-
-
-
 /* responive */
 @media (max-width: 1080px) {
   .padding {
@@ -1538,6 +1537,7 @@ form button {
     grid-template-columns: 1fr 1fr;
   }
 
+
   @keyframes slideIn {
     from {
       transform: translateX(-100%);
@@ -1582,10 +1582,12 @@ form button {
   .why-choose-us {
     flex-direction: column;
   }
+
   .house-to-book-container{
     grid-template-columns: 1fr;
     padding: 2%;
   }
+
 
   .nav-links {
     width: 100%;
@@ -1683,11 +1685,13 @@ form button {
     max-width: none;
   }
 
+
   .Airbnb-banner-text h1{
     font-size: 2rem;
   }
   .Airbnb-banner-text p{
     font-size: 1rem;
   }
+
 
 }
