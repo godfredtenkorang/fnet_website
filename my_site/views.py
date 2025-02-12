@@ -60,6 +60,7 @@ def carDetail(request,  car_slug):
         emergency_phone = request.POST.get('emergency_phone')
         pick_up_time = request.POST.get('pick_up_time')
         drop_off_time = request.POST.get('drop_off_time')
+        number_of_days = request.POST.get('number_of_days')
         rental_date = request.POST.get('rental_date')
         return_date = request.POST.get('return_date')
         location_category = request.POST.get('location_category')
@@ -76,28 +77,33 @@ def carDetail(request,  car_slug):
 
         rental_date = datetime.strptime(rental_date, '%Y-%m-%d').date()
         return_date = datetime.strptime(return_date, '%Y-%m-%d').date()
+        
+  
 
         # Calculate total price based on rental days
-        if rental_date == return_date:
-            rental_days = 1
-        else:
-            rental_days = (return_date - rental_date).total_seconds() / (12 * 3600)
-            rental_days = max(1, int(rental_days))
+        # if rental_date == return_date:
+        #     rental_days = 1
+        # else:
+        #     rental_days = (return_date - rental_date).total_seconds() / (12 * 3600)
+        #     rental_days = max(1, int(rental_days))
         # Handle case where price is stored as a range "200 - 300"
+        
+        number_of_days = int(number_of_days)
+        
         if isinstance(daily_price, str) and " - " in daily_price:
             # Split the range and convert to float instead of int
             min_price, max_price = map(float, daily_price.split(" - "))
-            total_min_price = min_price * rental_days
-            total_max_price = max_price * rental_days
+            total_min_price = min_price * number_of_days
+            total_max_price = max_price * number_of_days
             total_price = f"{total_min_price:.2f} - {total_max_price:.2f}"  # Keep two decimal places
             
         else:
-            # Ensure single price values are treated as float
-            total_price = float(daily_price) * rental_days
+
+            total_price = float(daily_price) * number_of_days
             
     
         
-        rentals = Rental(customer=user, car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
+        rentals = Rental(customer=user, car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, number_of_days=number_of_days, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
         rentals.save()
         
         # send_mail(
@@ -145,7 +151,7 @@ def contactUs(request):
         message = request.POST['message']
         contacts = Contact(name=name, email=email, phone=phone, message=message)
         contacts.save()
-        receive_contact(name, email, phone, message)
+        # receive_contact(name, email, phone, message)
         return redirect('contact-success')
     
     context = {

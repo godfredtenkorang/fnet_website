@@ -226,6 +226,16 @@ def driver_detail(request):
     }
     return render(request, "users/driver_dashboard/my_detail.html", context)
 
+def driver_trips(request):
+    driver = get_object_or_404(Driver, driver=request.user)
+    rentals = Rental.objects.filter(driver=driver)
+    context = {
+        'rentals': rentals,
+        'title': 'Driver Bookings'
+    }
+    
+    return render(request, "users/driver_dashboard/trips.html", context)
+
 def driver_book(request):
     driver = get_object_or_404(Driver, driver=request.user)
     rentals = Rental.objects.filter(driver=driver, status='Completed')

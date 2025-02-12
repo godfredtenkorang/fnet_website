@@ -18,6 +18,7 @@ urlpatterns = [
     # Driver URLS
     path('driver-dashboard/', views.driver_dashboard, name='driver_dashboard'),
     path('my-detail/', views.driver_detail, name='driver-detail'),
+    path('trips/', views.driver_trips, name='driver-trips'),
     path('assigned_trip/', views.driver_book, name='driver-book'),
     
     

@@ -161,7 +161,10 @@
 
 
 
-
+        <div class="input">
+          <label hidden for="">Days</label> <br>
+          <input type="number" hidden name="number_of_days" id="count_days" readonly required>
+        </div>
 
         <div class="input">
           <label for="">Pick up date</label> <br>
@@ -404,12 +407,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalPriceDisplay = document.getElementById("total_price");
     const locationCategory = document.getElementById("location_category");
     const negotiableMessage = document.getElementById("negotiable_message");
+    const totalNumberOfDays = document.getElementById("count_days");
 
     let count = 0;
 
     function updateTotalPrice() {
         const pricing = JSON.parse(document.getElementById('pricing_data').textContent);
         const location = locationCategory.value;
+
+        totalNumberOfDays.value = count;
 
         if (pricing[location] && count > 0) {
             let [minPrice, maxPrice] = pricing[location].split(" - ").map(Number);

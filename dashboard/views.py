@@ -182,7 +182,7 @@ def update_rentals(request, rental_id):
             # form.total_price = form.base_price + form.vat_amount
             
                 
-            rental_update_sms(rental.customer_phone, rental.customer_name, rental.pick_up_time, rental.drop_off_time, rental.rental_date, rental.rental_date, rental.location_category, rental.town, rental.driver, rental.total_price)
+            rental_update_sms(rental.customer_phone, rental.customer_name, rental.status, rental.pick_up_time, rental.drop_off_time, rental.rental_date, rental.rental_date, rental.location_category, rental.town, rental.driver, rental.total_price)
             rental_driver_update_sms(rental.driver.phone_number, rental.driver.first_name, rental.rental_date, rental.pick_up_time, rental.drop_off_time, rental.town, rental.city, rental.customer_name, rental.customer_phone)
             return redirect('bookings')  # Redirect to the rentals list or another relevant page
     else:
@@ -496,7 +496,7 @@ def update_appointment(request, appointment_id):
                 
                 
                 
-            appointment_update_sms(appointment.customer_phone, appointment.customer_name, appointment.schedule_date, appointment.pick_up_time, appointment.driver)
+            appointment_update_sms(appointment.customer_phone, appointment.customer_name, appointment.status, appointment.schedule_date, appointment.pick_up_time, appointment.driver)
             return redirect('appointments')  # Redirect to the appointment list or another relevant page
     else:
         form = AppointmentUpdateForm(instance=appointment)

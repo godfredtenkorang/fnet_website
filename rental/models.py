@@ -53,6 +53,7 @@ class Rental(models.Model):
     town = models.CharField(max_length=250, default='')
     pick_up_time = models.TimeField(null=True, blank=True)
     drop_off_time = models.TimeField(null=True, blank=True)
+    number_of_days = models.CharField(max_length=250, null=True, blank=True)
     rental_date = models.DateField()
     return_date = models.DateField()
     total_price = models.CharField(max_length=100, blank=True, null=True)
