@@ -920,8 +920,12 @@ form button {
   margin: 0;
 }
 
-.footer-distributed h3 span {
+.footer-distributed h3 span, .footer-co-about {
   color: limegreen;
+}
+ .footer-co-about {
+  color: limegreen;
+  font-size: 12px;
 }
 
 /* Footer links */
