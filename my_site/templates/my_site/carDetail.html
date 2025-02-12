@@ -1,5 +1,52 @@
 {% extends 'my_site/base.html' %} {% load static %} {% block content %}
 
+
+<style>
+ 
+  .counter-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+     margin: 2% 0;
+  }
+  button {
+      padding: 10px 15px;
+      font-size: 18px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+  }
+  button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+  }
+  .count-display {
+      font-size: 18px;
+      font-weight: bold;
+      min-width: 40px;
+      text-align: center;
+  }
+  @media (max-width: 600px) {
+      .counter-container {
+          flex-direction: column;
+      }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
 <!-- bannerr -->
 
 <div class="banner">
@@ -102,16 +149,36 @@
           <input type="text" name="emergency_phone" id="emergency_phone" required placeholder="0240000000">
         </div>
 
+
+
         <div class="input">
-          <label for="">Rental date</label> <br>
+          <label for="">Select number of days</label>
+          <div class="counter-container">
+            <button id="decrease" type="button" disabled>-</button>
+            <span class="count-display" id="count">0</span>
+            <button id="increase" type="button">+</button>
+        </div>
+
+
+
+
+
+        <div class="input">
+          <label for="">Pick up date</label> <br>
           <input type="date" name="rental_date" id="rental_date" required>
         </div>
         <div class="input">
           <label for="">Pick up Time</label> <br>
           <input type="time" name="pick_up_time" required>
         </div>
+
+    
+     </div>
+
+
+
         <div class="input">
-          <label for="">Return Date</label> <br>
+          <label for="">Drop off  Date</label> <br>
           <input type="date" name="return_date" id="return_date" required>
         </div>
         <div class="input">
@@ -226,52 +293,49 @@
   </div>
 </div>
 <script>
-  const pricePerDay = "{{ car.price_per_day }}"
+//  document.addEventListener("DOMContentLoaded", function () {
+//     document.getElementById('rental_date').addEventListener('change', updateTotalPrice);
+//     document.getElementById('return_date').addEventListener('change', updateTotalPrice);
+//     document.getElementById('location_category').addEventListener('change', updateTotalPrice);
 
-  document.getElementById('rental_date').addEventListener('change', updateTotalPrice);
-  document.getElementById('return_date').addEventListener('change', updateTotalPrice);
-  document.getElementById('location_category').addEventListener('change', updateTotalPrice);
+//     function updateTotalPrice() {
+//         const rentalDate = new Date(document.getElementById('rental_date').value);
+//         const returnDate = new Date(document.getElementById('return_date').value);
+//         const location_category = document.getElementById('location_category').value;
+//         const pricing = JSON.parse(document.getElementById('pricing_data').textContent);
+//         const priceDisplay = document.getElementById("price_display");
+//         const negotiableMessage = document.getElementById('negotiable_message');
 
-  function updateTotalPrice() {
-    const rentalDate = new Date(document.getElementById('rental_date').value);
-    const returnDate = new Date(document.getElementById('return_date').value);
-    const location_category = document.getElementById('location_category').value;
-    const pricing = JSON.parse(document.getElementById('pricing_data').textContent);
-    const priceDisplay = document.getElementById("price_display");
-    const negotiableMessage = document.getElementById('negotiable_message');
+//         if (rentalDate && returnDate) {
+//             let timeDiff = returnDate - rentalDate;
+            
+//             // Calculate rental days (each day = 12 hours)
+//             let rentalDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 12));
+//             rentalDays = rentalDays < 1 ? 1 : rentalDays; // Minimum 1 day
 
+//             if (pricing[location_category] && rentalDays > 0) {
+//                 let [minPrice, maxPrice] = pricing[location_category].split(" - ").map(Number);
+//                 let totalMinPrice = minPrice * rentalDays;
+//                 let totalMaxPrice = maxPrice * rentalDays;
+                
+//                 priceDisplay.textContent = `${pricing[location_category]}`;
+//                 document.getElementById('total_price').innerHTML = `GH¢ ${totalMinPrice} - GH¢ ${totalMaxPrice}`;
+//             } else {
+//                 priceDisplay.textContent = "Select a valid location";
+//                 document.getElementById('total_price').innerHTML = "0.00";
+//             }
 
-    if (rentalDate && returnDate) {
-      let timeDiff = returnDate - rentalDate;
-      let rentalDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 12));
-      rentalDay = rentalDays < 1 ? 1 : rentalDays;
+//             // Show Negotiable Message for long-term rentals (above 3 days)
+//             if (rentalDays > 3) {
+//                 negotiableMessage.textContent = "(Negotiable)";
+//                 negotiableMessage.style.color = "red";
+//             } else {
+//                 negotiableMessage.textContent = "";
+//             }
+//         }
+//     }
+// });
 
-      if (pricing[location_category] && rentalDay > 0) {
-        priceDisplay.textContent = `${pricing[location_category]}`
-        let [minPrice, maxPrice] = pricing[location_category].split(" - ").map(Number);
-        let totalMinPrice = minPrice * rentalDay;
-        let totalMaxPrice = maxPrice * rentalDay;
-        document.getElementById('total_price').innerHTML = `GH¢ ${totalMinPrice} - GH¢ ${totalMaxPrice}`
-      } else {
-        priceDisplay.textContent = "Select a valid location";
-        document.getElementById('total_price').innerHTML = "0.00";
-      }
-
-
-    }
-
-
-
-    if (rentalDate && returnDate) {
-      const difference = (returnDate - rentalDate) / (1000 * 60 * 45 * 24);
-      if (difference > 3) {
-        negotiableMessage.textContent = "(Negotiable)";
-        negotiableMessage.style.color = "red";
-      } else {
-        negotiableMessage.textContent = "";
-      }
-    }
-  }
 
 </script>
 
@@ -297,5 +361,104 @@
     document.getElementById("return_date").setAttribute("min", today); // Set min attribute to today's date
   });
 </script>
+
+
+
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const decreaseBtn = document.getElementById("decrease");
+      const increaseBtn = document.getElementById("increase");
+      const countDisplay = document.getElementById("count");
+
+      let count = 0;
+
+      increaseBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          count++;
+          countDisplay.textContent = count;
+          decreaseBtn.disabled = count === 0;
+      });
+
+      decreaseBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          if (count > 0) {
+              count--;
+              countDisplay.textContent = count;
+          }
+          decreaseBtn.disabled = count === 0;
+      });
+  });
+</script>
+ -->
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const decreaseBtn = document.getElementById("decrease");
+    const increaseBtn = document.getElementById("increase");
+    const countDisplay = document.getElementById("count");
+    const priceDisplay = document.getElementById("price_display");
+    const totalPriceDisplay = document.getElementById("total_price");
+    const locationCategory = document.getElementById("location_category");
+    const negotiableMessage = document.getElementById("negotiable_message");
+
+    let count = 0;
+
+    function updateTotalPrice() {
+        const pricing = JSON.parse(document.getElementById('pricing_data').textContent);
+        const location = locationCategory.value;
+
+        if (pricing[location] && count > 0) {
+            let [minPrice, maxPrice] = pricing[location].split(" - ").map(Number);
+            let totalMinPrice = minPrice * count;
+            let totalMaxPrice = maxPrice * count;
+            
+            priceDisplay.textContent = `${pricing[location]}`;
+            totalPriceDisplay.innerHTML = `GH¢ ${totalMinPrice} - GH¢ ${totalMaxPrice}`;
+
+            // Show negotiable message if rental duration is more than 3 days (3 * 12 = 36 hours)
+            if (count > 3) {
+                negotiableMessage.textContent = "(Negotiable)";
+                negotiableMessage.style.color = "red";
+            } else {
+                negotiableMessage.textContent = "";
+            }
+        } else {
+            priceDisplay.textContent = "Select a valid location";
+            totalPriceDisplay.innerHTML = "0.00";
+            negotiableMessage.textContent = "";
+        }
+    }
+
+    increaseBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        count++;
+        countDisplay.textContent = count;
+        decreaseBtn.disabled = count === 0;
+        updateTotalPrice();
+    });
+
+    decreaseBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (count > 0) {
+            count--;
+            countDisplay.textContent = count;
+            updateTotalPrice();
+        }
+        decreaseBtn.disabled = count === 0;
+    });
+
+    locationCategory.addEventListener('change', updateTotalPrice);
+});
+
+
+</script>
+
+
+
+
 
 {% endblock %}
