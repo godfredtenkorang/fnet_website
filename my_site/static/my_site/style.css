@@ -166,7 +166,7 @@ nav {
 
 .slide img {
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   object-fit: cover;
 }
 
@@ -174,8 +174,8 @@ nav {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 80vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+  height: 90vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,6 +196,67 @@ nav {
   font-weight: bolder;
   animation: slidebottom 1s;
 }
+.see {
+  margin: 4% 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+ 
+ 
+}
+.btn-custom {
+  padding: 15px 50px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  background: transparent;
+  outline: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  
+}
+.slide-left{
+  animation: slideleft 1s;
+  transition: all 0.3s ease;
+}
+.slide-right{
+  animation: slideright 1s;
+  transition: all 0.3s ease;
+}
+
+.btn-custom-42 {
+  border: 2px solid rgb(255, 255, 255);
+  z-index: 1;
+  color: white;
+}
+
+.btn-custom-42:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background: var(--red);
+  transition: all 0.3s ease;
+}
+
+.btn-custom-42:hover {
+  color: rgb(0, 0, 0);
+}
+
+.btn-custom-42:hover:after {
+  top: 0;
+  height: 100%;
+}
+
+.btn-custom-42:active {
+  top: 2px;
+}
 
 @keyframes slideTop {
   0% {
@@ -206,6 +267,18 @@ nav {
 @keyframes slidebottom {
   0% {
     transform: translateY(50px);
+  }
+}
+
+@keyframes slideleft {
+  0% {
+    transform: translate(-50px);
+  }
+}
+
+@keyframes slideright {
+  0% {
+    transform: translate(50px);
   }
 }
 
@@ -301,7 +374,37 @@ nav {
   padding-bottom: 20px;
   color: var(--blueColor);
   text-align: center;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
 }
+.btn-see-more {
+  border-radius: 4px;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  padding: 4px 6px;
+  color: var(--BlackColor) !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-see-more::after {
+  max-width: 100%;
+  height: 4px;
+  display: block;
+  content: "";
+  background: linear-gradient(-90deg, #ff9100 0%, #f10366 50%, #6173ff 100%);
+  opacity: 1;
+  margin-bottom: -6px;
+  margin-top: 1px;
+}
+
+.see-more-cars {
+  display: flex;
+}
+
 .service-section h2 {
   color: var(--whiteColor);
   text-align: center;
@@ -1867,6 +1970,13 @@ form button {
 
 .house-detail-book button{
   width: 120px;
+}
+.heading{
+  width: 100%;
+  justify-content: space-between;
+}
+.heading h3 , .btn-see-more{
+font-size: 1rem;
 }
 
 }
