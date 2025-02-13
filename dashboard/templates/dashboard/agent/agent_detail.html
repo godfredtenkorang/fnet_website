@@ -1,0 +1,59 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+<div class="send-message-form">
+    <br><br>
+
+
+    <div class="container">
+        <h1>Agent Detail</h1>
+        <div class="responsive-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Ghana Card</th>
+                        <th>Phone Number</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>{{ agent.first_name }}</td>
+                        <td>{{ agent.last_name }}</td>
+                        <td>{{ agent.ghana_card }}</td>
+                        <td>{{ agent.phone_number }}</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- <form method="POST">
+        {% csrf_token %}
+
+        <p>Click the 'Send' button to deliver an SMS notification to the driver regarding their license expiry date.</p>
+
+        <br>
+        <button type="submit">Send</button>
+
+
+    </form> -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

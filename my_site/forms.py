@@ -1,5 +1,5 @@
 from django import forms
-from .models import Driver, Car, Gallery
+from .models import Driver, Car, Gallery, Agent
 
 class DriverForm(forms.ModelForm):
     class Meta:
@@ -10,6 +10,10 @@ class DriverForm(forms.ModelForm):
             'licence_expiry_date': forms.DateInput(attrs={'type': 'date'}),
         }
         
+class AgentForm(forms.ModelForm):
+    class Meta:
+        model = Agent
+        fields = ['agent', 'first_name', 'last_name', 'ghana_card', 'phone_number', 'is_available']
         
 class CarUpdateForm(forms.ModelForm):
     class Meta:

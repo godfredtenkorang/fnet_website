@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from rental.models import Contact, Rental, Appointment, Payment
-from my_site.models import Car, Driver, DriverReview
-from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm
+from my_site.models import Car, Driver, DriverReview, Agent
+from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm, AgentForm
 from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images, rental_driver_update_sms
 from .models import SMSLog, DriversSMSLog, LoadCarImagesForCustomer
 from django.http import HttpResponse, JsonResponse
@@ -200,12 +200,15 @@ def complete_rental(request, rental_id):
     if rental.status != 'Completed':
         
         commission = rental.calculate_commission()
+        commission = rental.calculate_agent_commission()
         
         
-        if rental.driver:
+        if rental.driver and rental.agent:
             rental.driver.commission += commission
+            rental.agent.commission += commission
             rental.driver.is_available = True
             rental.driver.save()
+            rental.agent.save()
             
         rental.status = 'Completed'
         rental.save()
@@ -278,6 +281,7 @@ def complete_rental_payment(request, rental_id):
     
     if rental_payment.status != 'Completed':
         commission = rental_payment.commission_rate
+        
         
         if rental_payment.driver:
             rental_payment.driver.commission += commission
@@ -437,6 +441,35 @@ def download_pdf(request):
 def services(request):
     return render(request, 'dashboard/all_services.html')
 
+def register_agent(request):
+    if request.method == 'POST':
+        form = AgentForm(request.POST)
+        if form.is_valid():
+            forms = form.save()
+            return redirect('agent-list')
+    else:
+        form = AgentForm()
+    context = {
+        'title': 'Register Agent',
+        'form': form,
+    }
+    return render(request, 'dashboard/agent/register.html', context)
+
+def agent_list(request):
+    agents = Agent.objects.all()
+    context = {
+        'agents': agents,
+        'title': 'Agent Lists',
+    }
+    return render(request, 'dashboard/agent/agent_lists.html', context)
+
+def agent_detail(request, agent_id):
+    agent = get_object_or_404(Agent, id=agent_id)
+    context = {
+        'agent': agent,
+        'title': 'Agent Detail'
+    }
+    return render(request, 'dashboard/agent/agent_detail.html', context)
     
 def register_driver(request):
     if request.method == 'POST':
@@ -453,11 +486,27 @@ def driver_list(request):
     drivers = Driver.objects.all()
     return render(request, 'dashboard/driver/driver_list.html', {'title': 'All Drivers', 'drivers': drivers})
 
-def driver_detail(request, driver_id):
-    driver = get_object_or_404(Driver, id=driver_id)
+def driver_detail(request, agent_id):
+    driver = get_object_or_404(Driver, id=agent_id)
     if request.method == 'POST':
         driver_license_sms(driver.phone_number, driver.first_name, driver.licence_number, driver.licence_expiry_date)
     return render(request, 'dashboard/driver/driver_detail.html', {'title': 'Driver Detail', 'driver': driver})
+
+def agent_dashboard(request, agent_id):
+    agent = get_object_or_404(Agent, id=agent_id)
+    appointments = Appointment.objects.filter(agent=agent, status='Completed')
+    rentals = Rental.objects.filter(agent=agent, status='Completed')
+    payments = Payment.objects.filter(agent=agent, status='Completed')
+    total_commission = agent.commission
+    
+    return render(request, 'dashboard/agent/agent_dashboard.html', {
+        'agent': agent,
+        'appointments': appointments,
+        'rentals': rentals,
+        'payments': payments,
+        'total_commission': total_commission,
+        'title': 'Agent Dashboard',
+    })
 
 def assign_driver(request, car_id):
     # Fetch the specific car by its ID

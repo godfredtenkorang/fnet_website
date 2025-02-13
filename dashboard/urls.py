@@ -32,12 +32,18 @@ urlpatterns = [
     path('get_pdf/', views.get_pdf, name='get_pdf'),
     path('download-pdf/', views.download_pdf, name='download_pdf'),
     
-    
+    # Driver
     path('driver_list/', views.driver_list, name='driver-list'),
     path('driver/register/', views.register_driver, name='register-driver'),
     path('cars/<int:car_id>/assign_driver/', views.assign_driver, name='assign-driver'),
     path('driver_dashboard/<int:driver_id>/', views.driver_dashboard, name='driver-dashboard'),
     path('driver_detail/<int:driver_id>/', views.driver_detail, name='driver-detail'),
+    
+    # Agent
+    path('agent_list/', views.agent_list, name='agent-list'),
+    path('agent/register/', views.register_agent, name='register-agent'),
+    path('agent_detail/<int:agent_id>/', views.agent_detail, name='agent-detail'),
+    path('agent-dashboard<int:agent_id>/', views.agent_dashboard, name='agent-dashboard'),
     
     
     path('create_receipt/', views.create_receipt, name='create-receipt'),

@@ -176,7 +176,7 @@
 <!-- featured-cars -->
 <div class="featured-cars">
   <div class="heading">
-    <h3>Featured Cars</h3>
+    <h3>Featured Cars</h3><span><a href="">More Cars</a></span>
   </div>
   <div class="featured-cars-grid">
     {% for car in cars %}
@@ -252,7 +252,7 @@
 
 <!-- house for rent  -->
 
-<div class="airBnB">
+<!-- <div class="airBnB">
   <div class="heading">
     <h3>Featured Houses</h3>
   </div>   
@@ -291,7 +291,7 @@
             </div>
         </div>
     
-        <!-- add favourite button -->
+
          <div class="add-to-favourite">
           <a href=""> 
             <button>   <i class="fas fa-heart"></i></button>
@@ -333,7 +333,49 @@
             </div>
         </div>
     
-        <!-- add favourite button -->
+    
+         <div class="add-to-favourite">
+          <a href=""> 
+            <button>   <i class="fas fa-heart"></i></button>
+          </a>
+    
+         </div>
+        
+        <div class="more-details">
+            <a href="{% url 'AirBnBDetail' %}" >
+              <button> More detail  </button>
+            </a>
+           </div>
+    </div>
+    
+    <div class="house-container">
+        <div class="image-slider">
+            <button class="prev">&#10094;</button>
+            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
+            <button class="next">&#10095;</button>
+        </div>
+        
+        <div class="house-detail">
+            <div class="location">
+               
+                <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
+            </div>
+            <div class="kilometer">
+                
+                <p><i class="fas fa-road"></i> 16 Kilometers away</p>
+            </div>
+            <div class="date">
+               
+                <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
+            </div>
+            <div class="price">
+              
+                <p>  <i class="fas fa-money-bill-wave"></i>  <strong>GH 976 </strong> per night</p>
+            </div>
+        </div>
+
+       
          <div class="add-to-favourite">
           <a href=""> 
             <button>   <i class="fas fa-heart"></i></button>
@@ -375,49 +417,6 @@
             </div>
         </div>
     
-        <!-- add favourite button -->
-         <div class="add-to-favourite">
-          <a href=""> 
-            <button>   <i class="fas fa-heart"></i></button>
-          </a>
-    
-         </div>
-        
-        <div class="more-details">
-            <a href="{% url 'AirBnBDetail' %}" >
-              <button> More detail  </button>
-            </a>
-           </div>
-    </div>
-    
-    <div class="house-container">
-        <div class="image-slider">
-            <button class="prev">&#10094;</button>
-            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
-            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
-            <button class="next">&#10095;</button>
-        </div>
-        
-        <div class="house-detail">
-            <div class="location">
-               
-                <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
-            </div>
-            <div class="kilometer">
-                
-                <p><i class="fas fa-road"></i> 16 Kilometers away</p>
-            </div>
-            <div class="date">
-               
-                <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
-            </div>
-            <div class="price">
-              
-                <p>  <i class="fas fa-money-bill-wave"></i>  <strong>GH 976 </strong> per night</p>
-            </div>
-        </div>
-    
-        <!-- add favourite button -->
          <div class="add-to-favourite">
           <a href=""> 
             <button>   <i class="fas fa-heart"></i></button>
@@ -446,7 +445,7 @@
     
     </div>
     
-</div>
+</div> -->
   
 
 

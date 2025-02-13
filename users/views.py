@@ -9,7 +9,7 @@ from .models import User, OTP
 from rental.models import Rental, Appointment
 from .utils import generate_otp, send_otp_sms, send_otp
 from django.contrib import messages
-from my_site.models import Driver, Car
+from my_site.models import Driver, Car, Agent
 from flight.models import Booking
 from users.models import User
 from django.http import JsonResponse
@@ -254,3 +254,33 @@ def driver_book(request):
 @user_passes_test(is_agent)
 def agent_dashboard(request):
     return render(request, "users/agent_dashboard/dashboard.html")
+
+
+def agent_trips(request):
+    agent = get_object_or_404(Agent, agent=request.user)
+    rentals = Rental.objects.filter(agent=agent)
+    context = {
+        'rentals': rentals,
+        'title': 'Agent Bookings'
+    }
+    
+    return render(request, "users/agent_dashboard/trips.html", context)
+
+def agent_detail(request):
+    agents = Agent.objects.filter(agent=request.user)
+    context = {
+        'agents': agents
+    }
+    return render(request, "users/agent_dashboard/my_detail.html", context)
+
+def agent_book(request):
+    agent = get_object_or_404(Agent, agent=request.user)
+    rentals = Rental.objects.filter(agent=agent, status='Completed')
+    schedules = Appointment.objects.filter(agent=agent, status='Completed')
+    context = {
+        'agent': agent,
+        'rentals': rentals,
+        'schedules': schedules,
+        'total_commission': agent.commission
+    }
+    return render(request, "users/agent_dashboard/agent_book.html", context)

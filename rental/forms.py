@@ -6,7 +6,7 @@ from my_site.models import Driver
 class AppointmentUpdateForm(forms.ModelForm):
     class Meta:
         model = Appointment
-        fields = ['car', 'customer_name', 'customer_phone', 'schedule_date', 'pick_up_time', 'drop_off_time', 'pick_up_location', 'drop_off_location', 'gps_address', 'driver', 'status', 'commission_rate', 'purpose', 'total_price']
+        fields = ['car', 'customer_name', 'customer_phone', 'schedule_date', 'pick_up_time', 'drop_off_time', 'pick_up_location', 'drop_off_location', 'gps_address', 'driver', 'agent', 'status', 'commission_rate', 'purpose', 'total_price']
         widgets = {
             'schedule_date': forms.DateInput(attrs={'type': 'date'}),
             'pick_up_time': forms.TimeInput(attrs={'type': 'time'}),
@@ -40,7 +40,7 @@ class AppointmentUpdateForm(forms.ModelForm):
 class RentalUpdateForm(forms.ModelForm):
     class Meta:
         model = Rental
-        fields = ['customer', 'car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'location_category', 'town', 'number_of_days', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'status', 'commission_rate', 'vat_percentage', 'base_price', 'vat_amount', 'transaction_id', 'total_price']
+        fields = ['customer', 'car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'location_category', 'town', 'number_of_days', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'agent', 'status', 'commission_rate', 'agent_commission_rate', 'vat_percentage', 'base_price', 'vat_amount', 'transaction_id', 'total_price']
         widgets = {
             'rental_date': forms.DateInput(attrs={'type': 'date'}),
             'return_date': forms.DateInput(attrs={'type': 'date'}),
@@ -77,7 +77,7 @@ class RentalUpdateForm(forms.ModelForm):
 class RentalPaymentUpdateForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ['car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'pick_up_location', 'drop_off_location', 'location_category', 'town', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'status', 'commission_rate', 'payment_method', 'momo_code', 'transaction_id', 'base_price', 'vat_percentage', 'vat_amount', 'total_price']
+        fields = ['car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'pick_up_location', 'drop_off_location', 'location_category', 'town', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'agent', 'status', 'commission_rate', 'payment_method', 'momo_code', 'transaction_id', 'base_price', 'vat_percentage', 'vat_amount', 'total_price']
         widgets = {
             'rental_date': forms.DateInput(attrs={'type': 'date'}),
             'return_date': forms.DateInput(attrs={'type': 'date'}),

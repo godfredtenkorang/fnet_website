@@ -1,0 +1,51 @@
+{% extends 'users/agent_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h1>Car Booking Table</h1>
+    <div class="responsive-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Phone Number Name</th>
+                    <th>Car Name</th>
+                    <th>Days</th>
+                    <th>Rental Date</th>
+                    <th>Return Date</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                <tr>
+                    <td>{{ rental.customer_name }}</td>
+                    <td>{{ rental.customer_phone }}</td>
+                    <td>{{ rental.car.car_name }}</td>
+                    <td>{{ rental.number_of_days }}</td>
+                    <td>{{ rental.rental_date }}</td>
+                    <td>{{ rental.return_date }}</td>
+                    <td>{{ rental.total_price }}</td>
+                    <td>{{ rental.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

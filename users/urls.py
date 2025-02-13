@@ -17,10 +17,13 @@ urlpatterns = [
     
     # Driver URLS
     path('driver-dashboard/', views.driver_dashboard, name='driver_dashboard'),
-    path('my-detail/', views.driver_detail, name='driver-detail'),
+    path('my-details/', views.driver_detail, name='driver-detail'),
     path('trips/', views.driver_trips, name='driver-trips'),
     path('assigned_trip/', views.driver_book, name='driver-book'),
     
     
-    path('agent-dashboard/', views.customer_dashboard, name='agent_dashboard'),
+    path('agent-dashboard/', views.agent_dashboard, name='agent_dashboard'),
+    path('agent-trips/', views.agent_trips, name='agent-trips'),
+    path('my_details/', views.agent_detail, name='agent-detail'),
+    path('agent_assigned_trip/', views.agent_book, name='agent-book'),
 ]

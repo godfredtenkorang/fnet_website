@@ -1,5 +1,5 @@
 from django.db import models
-from my_site.models import Car, Driver
+from my_site.models import Car, Driver, Agent
 import uuid
 from decimal import Decimal
 from dashboard.models import Customer
@@ -60,8 +60,10 @@ class Rental(models.Model):
     document_type = models.CharField(max_length=100, choices=DOCUMENT_TYPE, default='Ghana Card')
     document_number = models.CharField(max_length=100, null=True, blank=True)
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='rentals')
+    agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, blank=True, related_name='rentals')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=12.50)
+    agent_commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=5.00)
     vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=2.5)
     base_price = models.CharField(max_length=100, blank=True, null=True)
     vat_amount = models.CharField(max_length=100, blank=True, null=True)
@@ -77,6 +79,12 @@ class Rental(models.Model):
         if self.driver:
             rental_fee = Decimal(self.total_price)  # Assuming car has a `daily_rate` field
             return (rental_fee * self.commission_rate) / 100
+        return 0.00
+    
+    def calculate_agent_commission(self):
+        if self.agent:
+            rental_fee = Decimal(self.total_price)  # Assuming car has a `daily_rate` field
+            return (rental_fee * self.agent_commission_rate) / 100
         return 0.00
         
     def is_negotiable(self):
@@ -115,6 +123,7 @@ class Appointment(models.Model):
     drop_off_location = models.CharField(max_length=250, null=True)
     gps_address = models.CharField(max_length=100, null=True)
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='appointments')
+    agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, blank=True, related_name='appointments')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     purpose = models.TextField(null=True, blank=True)  # e.g., "Test drive", "Car inspection", etc.
     created_at = models.DateTimeField(auto_now_add=True)
@@ -162,6 +171,7 @@ class Payment(models.Model):
     momo_code = models.CharField(max_length=50, null=True, blank=True, choices=[('123456', '123456')])
     transaction_id = models.CharField(max_length=50)
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='payments')
+    agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, blank=True, related_name='payments')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     commission_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     vat_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=25.00)
