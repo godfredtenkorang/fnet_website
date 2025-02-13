@@ -310,9 +310,10 @@ nav {
 }
 
 .service-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 10px 10%;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
 }
@@ -320,7 +321,7 @@ nav {
 .service {
   width: 100%;
   max-width: 100%;
-  min-height: 35vh;
+  min-height: 25vh;
   color: var(--whiteColor);
   display: flex;
   flex-direction: column;
@@ -1161,7 +1162,7 @@ form button {
 .wrapper-container{
   display: flex;
   flex-direction: column;
-  padding: 5% 10%;
+  padding: 2% 10%;
   align-items: center;
   justify-content: center;
  
@@ -1312,6 +1313,10 @@ form button {
 
 
 /* AIRBNB SECTION */
+.airBnB{
+  padding-top: 4%;
+}
+
 .house-to-book-container{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr ;
@@ -1400,6 +1405,8 @@ form button {
 
 
 /* house-detail-page */
+
+
 .house-detail-page{
   padding: 3% 10%;
 }
@@ -1445,6 +1452,117 @@ form button {
 
 
 
+.house-detail-section{
+  display: flex;
+  gap: 2rem;
+}
+.house-detail{
+  width: 100%;
+  max-width: 60%;
+}
+
+.all-amenities-pop-up {
+  display: none;
+  position: fixed;
+  top: 0;
+ backdrop-filter: blur(10px);
+  width: 100%;
+  height: 100vh;
+}
+
+
+.all-amenities{
+  width: 100%;
+  max-width: 40%;
+  min-height: 70vh;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 30px;
+  overflow-y: scroll;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+.all-amenities li{
+  padding: 20px 0;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.hideBtn{
+  position: absolute;
+  right: 20px;
+  top: 5%;
+  border: none;
+  background-color: var(--red);
+}
+
+
+.detail-col{
+  margin-bottom: 3% ;
+  padding: 2% 0;
+   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+
+}
+
+.seeAllAmenities{
+  width: 100%;
+  min-height: 7vh;
+  max-width: 50%;
+  background-color: var(--red);
+  border: none;
+  cursor: pointer;
+}
+
+.detail-col li{
+  padding: 10px 0;
+}
+
+
+.house-detail-book{
+  width: 100%;
+  max-width: 40%;
+ height: 30vh;
+  background-color: #ffff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 2%;
+
+}
+
+
+.house-detail-book button{
+  width: 100%;
+  height: 7vh;
+  cursor: pointer;
+  border: none;
+  background-color: var(--red);
+  color: var(--BlackColor);
+  border-radius: 10px;
+}
+
+.house-price{
+  font-size: 1.5rem;
+  font-weight: bolder;
+  padding: 5% 0;
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -1457,8 +1575,11 @@ form button {
 
 /* responive */
 @media (max-width: 1080px) {
-  .padding {
+  .padding ,.house-imgs, .house-detail-page h1 {
     padding: 10px 3%;
+  }
+  .house-detail-page{
+    padding: 3% 0;
   }
   .car-detail-section {
     margin: 3%;
@@ -1486,6 +1607,15 @@ form button {
     z-index: 100;
   }
 
+  .house-imgs{
+    flex-direction: column;
+  }
+  .house-small-img, .house-big-img {
+    max-width: none;
+  }
+  .house-col{
+    grid-template-columns: 1fr 1fr;
+  }
   .nav-links li {
     width: 100%;
 
@@ -1502,6 +1632,9 @@ form button {
     padding: 0 10px;
     color: var(--BlackColor);
   }
+  .all-amenities{
+    max-width: none;
+  }
 
   .menu-icon {
     display: block;
@@ -1517,6 +1650,10 @@ form button {
     height: 100%;
     animation: slideIn 0.5s;
     z-index: 100;
+  }
+
+  .seeAllAmenities{
+    max-width: none;
   }
 
   .logo{
@@ -1608,9 +1745,12 @@ form button {
     font-size: 3rem;
   }
 
-  .service-grid,
+  
   .client-say-grid {
     flex-direction: column;
+  }
+  .service-grid{
+    grid-template-columns: 1fr;
   }
 
   .featured-cars-grid {
@@ -1696,6 +1836,37 @@ form button {
   .Airbnb-banner-text p{
     font-size: 1rem;
   }
+  .house-detail-section{
+    flex-direction: column;
+  }
+  .house-detail, .house-detail-book{
+    max-width: none;
+  }
+  .house-detail-book{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: none;
+    position: fixed;
+    bottom: 0;
+    height: 20vh;
+    text-align: center;
+  }
+  .house-detail-book button{
+    width: 200px;
+  }
 
+
+}
+
+
+@media (max-width: 580px) {
+.house-detail-book p{
+  font-size: 1rem;
+}
+
+.house-detail-book button{
+  width: 120px;
+}
 
 }

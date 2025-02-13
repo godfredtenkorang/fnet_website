@@ -1,33 +1,101 @@
 {% extends 'my_site/base.html' %} {% load static %} {% block content %}
 
+<style>
+ 
+
+</style>
 
 <div class="house-detail-page">
-<h1> Modern 3BR w/ best amenities and entire city view
-
-</h1>
-<div class="house-imgs">
-
+  <h1>Modern 3BR w/ best amenities and entire city view</h1>
+  <div class="house-imgs">
     <div class="house-big-img">
-        <img src="{% static 'my_site/img/bg444.jpeg' %}" alt="background photo" />
+      <img src="{% static 'my_site/img/bg444.jpeg' %}" alt="background photo" />
     </div>
 
-
     <div class="house-small-img">
-        <div class="house-col">
-         <img src="{% static 'my_site/img/bg444.jpeg' %}" alt="background photo" />
-         <img src="{% static 'my_site/img/bg444.jpeg' %}" alt="background photo" />
-         <img src="{% static 'my_site/img/bg444.jpeg' %}" alt="background photo" />
-         <img src="{% static 'my_site/img/bg444.jpeg' %}" alt="background photo" />
+      <div class="house-col">
+        <img
+          src="{% static 'my_site/img/bg444.jpeg' %}"
+          alt="background photo"
+        />
+        <img
+          src="{% static 'my_site/img/bg444.jpeg' %}"
+          alt="background photo"
+        />
+        <img
+          src="{% static 'my_site/img/bg444.jpeg' %}"
+          alt="background photo"
+        />
+        <img
+          src="{% static 'my_site/img/bg444.jpeg' %}"
+          alt="background photo"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="house-detail-section">
+    <div class="house-detail">
+      <div class="detail-col">
+        <h2>Entire rental unit in Accra, Ghana</h2>
+        <p>6 guests3 bedrooms3 beds3.5 baths</p>
+      </div>
+
+      <div class="detail-col">
+        <p>
+          Located in Lotus Court, opposite the Embassy of Switzerland, this
+          stylish and spacious apartment offers the perfect central location.
+        </p>
+      
+        <p>
+          Located in Lotus Court, opposite the Embassy of Switzerland, this
+          stylish and spacious apartment offers the perfect central location.
+        </p>
+      </div>
+      <div class="detail-col">
+        <h2>What this place offers</h2>
+
+        <div class="amenities">
+          <li>Kitchen</li>
+          <li>Kitchen</li>
+          <li>Kitchen</li>
+          <li>Kitchen</li>
         </div>
-     </div>
-       
+
+        <button class="seeAllAmenities">See all amenities</button>
+      </div>
+
+     
+
+    </div>
+    <!-- book button -->
+    <div class="house-detail-book">
+        <div class="house-price">
+            <p>500Gh per night</p>
+        </div>
+
+        <button>Book Now</button>
+
+
+    </div>
+
+  </div>
+</div>
+
+<div class="all-amenities-pop-up">
+  <div class="all-amenities">
+    <li>Kitchen</li>
+    <li>Kitchen</li>
+    <li>Kitchen</li>
+    <li>Kitchen</li>
+  </div>
+  <button class="hideBtn">Hide</button>
 </div>
 
 
 
 
 
-</div>
 
 
 
@@ -56,24 +124,25 @@
 
 
 
+<script>
+    const all_Amenities_Popup = document.querySelector(".all-amenities-pop-up")
+
+    const seeAllAmenities = document.querySelector(".seeAllAmenities")
+
+    const hideBtn = document.querySelector(".hideBtn")
+
+    seeAllAmenities.addEventListener("click", ()=>{
+        all_Amenities_Popup.style.display="block"
+    })
+    hideBtn.addEventListener("click", ()=>{
+        all_Amenities_Popup.style.display="none"
+    })
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+</script>
 
 
 
