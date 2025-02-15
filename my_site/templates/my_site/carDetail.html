@@ -276,6 +276,9 @@
       <p class="negotiable_message" id="negotiable_message"></p>
       <br>
       <!-- <h3>NB: Book now if you want to make payment at the office.</h3> -->
+       {% if car.category.name == "Self Drive" %}
+       <h3 style="text-align: center;"><a href="{% url 'termsAndCondition' %}"> Read Terms and Conditions</a></h3>
+       {% endif %}
       {% if user.is_authenticated %}
         {% if car.availability_status == "Available" %}
         <button type="submit">Book Now</button>

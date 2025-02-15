@@ -4,13 +4,14 @@ from django.db import models
 
 class Property(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
     location = models.CharField(max_length=200)
+    description = models.TextField()
     price_per_month = models.DecimalField(max_digits=10, decimal_places=2)
     image1 = models.ImageField(upload_to='properties/')
     image2 = models.ImageField(upload_to='properties/')
     image3 = models.ImageField(upload_to='properties/')
     image4 = models.ImageField(upload_to='properties/')
+    image5 = models.ImageField(upload_to='properties/', default="")
     available = models.BooleanField(default=True)
 
     def __str__(self):
