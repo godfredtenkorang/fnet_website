@@ -37,8 +37,9 @@
                         <p>Pricing starting at</p>
                  <strong> <p class="carPrice">GH¢{{ car.price_within_kumasi }}/day</p> <span>Driving Hours - 5am to 9pm</span> </strong>
                 </div>
-                <p>{{ car.category }} - <span style="color: green;">{{ car.availability_status }}</span></p>
-                 
+                <p>{{ car.category }} <br><span style="color: green;">{{ car.availability_status }} </span> from<span
+                        style="color: red; font-size:15px;">{% if car.availability_status == "Rented" %}
+                        {{car.rental_date|date:"d/m/y"}} - {{car.return_date|date:"d/m/y"}} {% endif %}</span></p>
                  <div class="more-details">
                   <a href="{% url 'carDetail' car.slug %}" >
                     <button> More detail  </button>

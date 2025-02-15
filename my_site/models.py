@@ -143,6 +143,8 @@ class Car(models.Model):
     western_north_region_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     range_price_western_north_region = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     availability_status = models.CharField(max_length=20, choices=AVAILABILITY_STATUS, default='Available')
+    rental_date = models.DateField(null=True, blank=True)
+    return_date = models.DateField(null=True, blank=True)
     year_registered = models.CharField(max_length=10, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     image1 = models.ImageField(upload_to='car_images/', blank=True, null=True)
