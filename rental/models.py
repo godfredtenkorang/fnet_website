@@ -210,3 +210,23 @@ class Contact(models.Model):
     
     def __str__(self):
         return f"New contact from {self.name} - {self.phone}"
+    
+
+class RentalPayment(models.Model):
+    PAYMENT_METHOD = [
+        ('Bank', 'Bank'),
+        ('MoMo', 'MoMo'),
+    ]
+    PAYMENT_CODE = [
+        ('1441002567287', '1441002567287'),
+        ('0550222888', '0550222888'),
+    ]
+    rental = models.ForeignKey(Rental, on_delete=models.CASCADE)
+    payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD)
+    payment_code = models.CharField(max_length=100, choices=PAYMENT_CODE)
+    transaction_id = models.CharField(max_length=20)
+    is_approved = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Payment for {self.rental.customer_name} - {self.transaction_id} for {self.rental.car}"

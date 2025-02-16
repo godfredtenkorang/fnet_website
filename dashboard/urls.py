@@ -90,5 +90,8 @@ urlpatterns = [
     path('admin/block-user/<int:user_id>/', views.block_user, name='block_user'),
     path('admin/delete-user/<int:user_id>/', views.delete_user, name='delete_user'),
     
-    path('all_services/', views.services, name='all_services')
+    path('all_services/', views.services, name='all_services'),
+    
+    path('all_payments/', views.all_payments, name='all_payments'),
+    path('complete_payment/<int:payment_id>/', views.complete_rental_payment, name='complete_rental_payment'),
 ]

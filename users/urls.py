@@ -14,6 +14,8 @@ urlpatterns = [
     path('customer-bookings/', views.customer_bookings, name='customer_bookings'),
     path('customer-schedules/', views.customer_schedules, name='customer_schedules'),
     path('customer-flights/', views.customer_flight_booking, name='customer_flight_booking'),
+    path('customer-payment/', views.payment, name='customer-payment'),
+    path('customer-payment-form/<int:rental_id>/', views.payment_detail, name='customer-payment-form'),
     
     # Driver URLS
     path('driver-dashboard/', views.driver_dashboard, name='driver_dashboard'),

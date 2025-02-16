@@ -1,0 +1,114 @@
+{% extends 'dashboard/base2.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    /* Stretch the dropdowns to fill their container */
+        .input {
+            width: 100%; /* Make the container full width */
+            margin-bottom: 20px; /* Add some spacing between inputs */
+        }
+
+        .input select {
+            width: 100%; /* Stretch the dropdown to fill its container */
+            padding: 10px; /* Add padding for better appearance */
+            font-size: 16px; /* Increase font size for better readability */
+            border: 1px solid #ccc; /* Add a border */
+            border-radius: 5px; /* Add rounded corners */
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+        }
+
+        .input label {
+            font-size: 14px; /* Style the label */
+            margin-bottom: 5px; /* Add spacing below the label */
+            display: block; /* Ensure the label is on its own line */
+        }
+</style>
+
+<div class="send-message-form">
+    <br><br><br>
+
+    <h1>Make Payment of GH¢{{rental.total_price}}</h1>
+
+    <br><br>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="input">
+            <label for="">Payment Method:</label> <br>
+            <select name="payment_method" id="payment_method">
+                <option value="Bank">Bank</option>
+                <option value="MoMo">Mobile Money</option>
+            </select>
+        </div>
+        <br>
+        <div class="input">
+            <label for="">Sent Payment To:</label> <br>
+            <select name="payment_code" id="payment_code">
+                
+            </select>
+        </div>
+        <br>
+        <div class="input">
+            <label for="">Transaction ID: </label> <br>
+            <input type="text" name="transaction_id" id="transaction_id" required placeholder="Enter transaction id">
+        </div>
+        
+        <p style="font-weight: bold;">NOTE: If the Transaction ID does not match our records, your booking will not be approved.</p>
+        
+        
+       
+        <br><br>
+        <button type="submit">Save</button>
+    </form>
+    <br><br>
+   
+</div>
+
+
+<script>
+     // Define the payment codes for Bank and MoMo
+        const paymentCodes = {
+            Bank: ["1441002567287"],
+            MoMo: ["0550222888"]
+        };
+
+        // Get references to the dropdowns
+        const paymentMethodDropdown = document.getElementById('payment_method');
+        const paymentCodeDropdown = document.getElementById('payment_code');
+
+        // Function to update the payment code dropdown
+        function updatePaymentCode() {
+            const selectedMethod = paymentMethodDropdown.value;
+            const codes = paymentCodes[selectedMethod];
+
+            // Clear existing options
+            paymentCodeDropdown.innerHTML = '';
+
+            // Add new options based on the selected payment method
+            codes.forEach(code => {
+                const option = document.createElement('option');
+                option.value = code;
+                option.textContent = code;
+                paymentCodeDropdown.appendChild(option);
+            });
+        }
+
+        // Listen for changes in the payment method dropdown
+        paymentMethodDropdown.addEventListener('change', updatePaymentCode);
+
+        // Initialize the payment code dropdown on page load
+        updatePaymentCode();
+</script>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

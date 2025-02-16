@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import RegisterForm, LoginForm, UserUpdateForm, ProfileUpdateForm
 from .models import User, OTP
-from rental.models import Rental, Appointment
+from rental.models import Rental, Appointment, RentalPayment
 from .utils import generate_otp, send_otp_sms, send_otp
 from django.contrib import messages
 from my_site.models import Driver, Car, Agent
@@ -74,16 +74,24 @@ def login_user(request):
             
             user = authenticate(request, username=username, password=password)
             
-            if user is not None:
-                login(request, user)
-                if user.role == "admin":
-                    return redirect("dashboard")
-                elif user.role == "customer":
-                    return redirect("customer_dashboard")
-                elif user.role == "driver":
-                    return redirect("driver_dashboard")
-                else:
-                    return redirect("agent_dashboard")
+            try:
+                if user:
+                    login(request, user)
+                    next_url = request.GET.get('next', '/')
+                    return redirect(next_url)
+                
+            except:
+                if user is not None:
+                    if user.role == "admin":
+                        return redirect("dashboard")
+                    elif user.role == "customer":
+                        return redirect("customer_dashboard")
+                    elif user.role == "driver":
+                        return redirect("driver_dashboard")
+                    else:
+                        return redirect("agent_dashboard")
+                
+                
     else:
         form = LoginForm()
         
@@ -200,6 +208,34 @@ def customer_flight_booking(request):
     }
     
     return render(request, "users/customer_dashboard/flight_booking.html", context)
+
+@login_required
+def payment(request):
+    bookings = Rental.objects.filter(customer=request.user)
+    context = {
+        'bookings': bookings,
+        'title': 'Customer Bookings'
+    }
+    return render(request, "users/customer_dashboard/payment.html", context)
+
+
+def payment_detail(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment_method')
+        payment_code = request.POST.get('payment_code')
+        transaction_id = request.POST.get('transaction_id')
+        
+        payments = RentalPayment(rental=rental, payment_method=payment_method, payment_code=payment_code, transaction_id=transaction_id)
+        payments.save()
+        
+        return redirect('customer-payment')
+
+    context = {
+        'rental': rental,
+        'title': 'Customer Bookings'
+    }
+    return render(request, "users/customer_dashboard/payment_form.html", context)
 
 # ------------------ Customer Dashboard End--------------------------
 

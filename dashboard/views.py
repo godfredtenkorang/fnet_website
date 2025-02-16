@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from rental.models import Contact, Rental, Appointment, Payment
+from rental.models import Contact, Rental, Appointment, Payment, RentalPayment
 from my_site.models import Car, Driver, DriverReview, Agent
 from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm, AgentForm
 from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images, rental_driver_update_sms
@@ -34,6 +34,8 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 
+from users.utils import send_payment_sms
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
@@ -839,3 +841,25 @@ def all_profiles(request):
         'title': 'Profiles'
     }
     return render(request, 'dashboard/all_profiles.html', context)
+
+def all_payments(request):
+    all_payments = RentalPayment.objects.all()
+    context = {
+        'all_payments': all_payments,
+        'title': 'Payments'
+    }
+    return render(request, 'dashboard/all_payments.html', context)
+
+def complete_rental_payment(request, payment_id):
+    payment = get_object_or_404(RentalPayment, id=payment_id)
+    
+    if payment.is_approved != True:
+        
+        
+        payment.is_approved = True
+        payment.save()
+        
+        send_payment_sms(payment.rental.customer_phone, payment.rental.customer_name, payment.rental.total_price)
+        
+        
+    return redirect('all_payments')
