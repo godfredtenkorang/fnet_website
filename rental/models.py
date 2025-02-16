@@ -219,7 +219,7 @@ class RentalPayment(models.Model):
     ]
     PAYMENT_CODE = [
         ('1441002567287', '1441002567287'),
-        ('0550222888', '0550222888'),
+        ('0597406474', '0597406474'),
     ]
     rental = models.ForeignKey(Rental, on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD)

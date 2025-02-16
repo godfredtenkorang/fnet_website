@@ -38,7 +38,7 @@
         <div class="input">
             <label for="">Payment Method:</label> <br>
             <select name="payment_method" id="payment_method">
-                <option value="Bank">Bank</option>
+                <option value="Bank">Bank (ECOBANK)</option>
                 <option value="MoMo">Mobile Money</option>
             </select>
         </div>
@@ -48,6 +48,9 @@
             <select name="payment_code" id="payment_code">
                 
             </select>
+        </div>
+        <div style="font-weight: bold;" class="account-name" id="account_name">
+            <!-- Account name will be displayed here -->
         </div>
         <br>
         <div class="input">
@@ -68,38 +71,48 @@
 
 
 <script>
-     // Define the payment codes for Bank and MoMo
-        const paymentCodes = {
-            Bank: ["1441002567287"],
-            MoMo: ["0550222888"]
-        };
-
-        // Get references to the dropdowns
-        const paymentMethodDropdown = document.getElementById('payment_method');
-        const paymentCodeDropdown = document.getElementById('payment_code');
-
-        // Function to update the payment code dropdown
-        function updatePaymentCode() {
-            const selectedMethod = paymentMethodDropdown.value;
-            const codes = paymentCodes[selectedMethod];
-
-            // Clear existing options
-            paymentCodeDropdown.innerHTML = '';
-
-            // Add new options based on the selected payment method
-            codes.forEach(code => {
-                const option = document.createElement('option');
-                option.value = code;
-                option.textContent = code;
-                paymentCodeDropdown.appendChild(option);
-            });
+    // Define the payment codes and account names for Bank and MoMo
+    const paymentData = {
+        Bank: {
+            codes: ["1441002567287"],
+            accountName: "Bank Account Name: TAXINET LOGISTICS"
+        },
+        MoMo: {
+            codes: ["0597406474"],
+            accountName: "Mobile Money Account Name: TAXINET LOGISTICS"
         }
+    };
 
-        // Listen for changes in the payment method dropdown
-        paymentMethodDropdown.addEventListener('change', updatePaymentCode);
+    // Get references to the dropdowns and account name container
+    const paymentMethodDropdown = document.getElementById('payment_method');
+    const paymentCodeDropdown = document.getElementById('payment_code');
+    const accountNameContainer = document.getElementById('account_name');
 
-        // Initialize the payment code dropdown on page load
-        updatePaymentCode();
+    // Function to update the payment code dropdown and account name
+    function updatePaymentDetails() {
+        const selectedMethod = paymentMethodDropdown.value;
+        const data = paymentData[selectedMethod];
+
+        // Clear existing options
+        paymentCodeDropdown.innerHTML = '';
+
+        // Add new options based on the selected payment method
+        data.codes.forEach(code => {
+            const option = document.createElement('option');
+            option.value = code;
+            option.textContent = code;
+            paymentCodeDropdown.appendChild(option);
+        });
+
+        // Update the account name
+        accountNameContainer.textContent = data.accountName;
+    }
+
+    // Listen for changes in the payment method dropdown
+    paymentMethodDropdown.addEventListener('change', updatePaymentDetails);
+
+    // Initialize the payment code dropdown and account name on page load
+    updatePaymentDetails();
 </script>
 
 
