@@ -8,7 +8,7 @@ def send_sms(phone_number, customer_name, car_name, pick_up_time, drop_off_time,
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, \n\n Your car booking for {car_name} is on pending. \n\n" "Booking Details \n\n" f"Pick-up Time: {pick_up_time} \n\n" f"Drop-off Time: {drop_off_time} \n\n" f"Rental Dates: {rental_date} - {return_date} \n\n" f"Location: {town}" f"Amount: {total_price} \n\n" "To confirm your booking, please make payment at https://tlghana.com/account/customer-payment/ \n\n" "Full payment is required before the trip starts. \n\n" "Thank you!",
+        "message": f"Dear {customer_name}, \n\n Your car booking for {car_name} is on pending. \n\n" "Booking Details \n" f"Pick-up Time: {pick_up_time} \n" f"Drop-off Time: {drop_off_time} \n" f"Rental Dates: {rental_date} - {return_date} \n" f"Location: {town}\n" f"Amount: {total_price} \n" "To confirm your booking, please make payment at https://tlghana.com/account/customer-payment/ \n" "Full payment is required before the trip starts. \n\n" "Thank you!",
         "is_schedule": False,
         "schedule_date": ''
     }

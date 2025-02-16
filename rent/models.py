@@ -2,6 +2,17 @@ from django.db import models
 
 # Create your models here.
 
+AVAILABILITY_STATUS = [
+        ('Available', 'Available'),
+        ('Rented', 'Rented'),
+        ('Maintenance', 'Maintenance'),
+    ]
+
+CHOICES = [
+        ('Yes', 'Yes'),
+        ('No', 'No'),
+    ]
+
 class Property(models.Model):
     title = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
@@ -12,7 +23,9 @@ class Property(models.Model):
     image3 = models.ImageField(upload_to='properties/')
     image4 = models.ImageField(upload_to='properties/')
     image5 = models.ImageField(upload_to='properties/', default="")
-    available = models.BooleanField(default=True)
+    available = models.CharField(max_length=100, choices=AVAILABILITY_STATUS, default='Available')
+    kitcken = models.CharField(max_length=5, choices=CHOICES, default='Yes')
+    
 
     def __str__(self):
         return self.title
