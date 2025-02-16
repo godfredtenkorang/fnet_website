@@ -218,7 +218,7 @@ def payment(request):
     }
     return render(request, "users/customer_dashboard/payment.html", context)
 
-
+@login_required
 def payment_detail(request, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     if request.method == 'POST':

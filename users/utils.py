@@ -79,7 +79,7 @@ def send_payment_sms(phone_number, customer_name, total_price):
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, \n\n" f"Your payment of GH¢{total_price} has been received. Your booking is confirmed. \n\n" "We will send you a confirmation message on your trip soon. \n\n" "For any inquiries, contact 0550222888 \n\n" "Thank you for choosing us! Safe travels.",
+        "message": f"Dear {customer_name}, \n\n" f"Your payment of GH¢{total_price} has been received. Your booking is confirmed. \n\n" "For any inquiries, contact 0550222888 \n\n" "Thank you for choosing us! Safe travels.",
         "is_schedule": False,
         "schedule_date": ''
     }

@@ -80,14 +80,14 @@ def appointment_update_sms(phone_number, customer_name, status, schedule_date, p
         print(f"Error sending SMS: {e}")
         return None
     
-def rental_update_sms(phone_number, customer_name, status, pick_up_time, drop_off_time, rental_date, return_date, location_category, town, driver, total_price):
+def rental_update_sms(phone_number, customer_name, status, pick_up_time, drop_off_time, rental_date, return_date, location_category, town, driver, total_price, id):
     endpoint = "https://api.mnotify.com/api/sms/quick"
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, \n\n Your booking has been {status}. \n\n" "Booking Details: \n\n" f"Pick up Time: {pick_up_time} \n\n" f"Drop off Time {drop_off_time} \n\n" f"Rental Date: {rental_date} \n\n" f"Return Date: {return_date} \n\n" f"Region: {location_category} \n\n" f"Town: {town} \n\n" f"Driver: {driver} \n\n" f"Amount: GH¢{total_price} \n\n" "Office Number 0550222888. \n\n or click on the link https://tlghana.com to view. \n\n" "Have a nice trip we are looking forword to serve you again! \n\n Thank you!",
+        "message": f"Dear {customer_name}, \n\n Your booking has been {status}. \n" "Booking Details: \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time {drop_off_time} \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {location_category} \n" f"Town: {town} \n\n" f"Driver: {driver} \n" f"Amount: GH¢{total_price} \n\n" f"Please click here for payment.  https://tlghana.com/account/customer-payment/{id} \n\n" "Thank you!",
         "is_schedule": False,
         "schedule_date": ''
     }
