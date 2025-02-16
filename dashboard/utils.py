@@ -87,7 +87,7 @@ def rental_update_sms(phone_number, customer_name, status, pick_up_time, drop_of
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Dear {customer_name}, \n\nYour booking has been {status}. \n" "Booking Details: \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time {drop_off_time} \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {location_category} \n" f"Town: {town} \n" f"Driver: {driver} \n" f"Amount: GH¢{total_price} \n\n" f"Please click here for payment.  https://tlghana.com/account/customer-payment/{id} \n\n" "Thank you!",
+        "message": f"Dear {customer_name}, \n\nYour booking has been {status}. \n" "Booking Details: \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time {drop_off_time} \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {location_category} \n" f"Town: {town} \n" f"Driver: {driver} \n" f"Amount: GH¢{total_price} \n\n" f"Please click here for payment.  https://tlghana.com/account/customer-payment-form/{id} \n\n" "Thank you!",
         "is_schedule": False,
         "schedule_date": ''
     }
