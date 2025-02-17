@@ -94,4 +94,7 @@ urlpatterns = [
     
     path('all_payments/', views.all_payments, name='all_payments'),
     path('complete_payment/<int:payment_id>/', views.complete_rental_payment, name='complete_rental_payment'),
+    
+    path('properties_bookings/', views.property_bookings, name='properties_bookings'),
+    path('properties_bookings/<int:property_id>/', views.approve_property, name='approve_property'),
 ]

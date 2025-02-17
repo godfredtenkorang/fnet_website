@@ -221,14 +221,5 @@ def thank_you_page(request):
 
     return render(request, 'my_site/thank_you_page.html')
 
-def AirBnBDetail(request):
-    return render(request, 'my_site/AirBnBDetail.html')
-
-def AirBnB(request):
-    return render(request, 'my_site/AirBnB.html')
-
-
-def AirBnBbooking(request):
-    return render(request, 'my_site/AirBnBbooking.html')
 
 

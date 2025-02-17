@@ -14,6 +14,7 @@ from flight.models import Booking
 from users.models import User
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password
+from rent.models import PropertyBooking
 
 
 def register(request):
@@ -236,6 +237,16 @@ def payment_detail(request, rental_id):
         'title': 'Customer Bookings'
     }
     return render(request, "users/customer_dashboard/payment_form.html", context)
+
+@login_required
+def all_properies_bookings(request):
+    properties = PropertyBooking.objects.filter(user=request.user)
+    context = {
+        'properties': properties,
+        'title': 'Customer Properties'
+    }
+    return render(request, "users/customer_dashboard/properties.html", context)
+
 
 # ------------------ Customer Dashboard End--------------------------
 

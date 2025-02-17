@@ -1,0 +1,164 @@
+{% extends 'my_site/base.html' %} {% load static %} {% block content %}
+
+<style>
+ 
+
+</style>
+
+<div class="house-detail-page">
+  <h1>{{ rent.title }}</h1>
+  <div class="house-imgs">
+    <div class="house-big-img">
+      <img src="{{rent.image1.url}}" alt="background photo" />
+    </div>
+
+    <div class="house-small-img">
+      <div class="house-col">
+        <img
+          src="{{rent.image2.url}}"
+          alt="background photo"
+        />
+        <img
+          src="{{rent.image3.url}}"
+          alt="background photo"
+        />
+        <img
+          src="{{rent.image4.url}}"
+          alt="background photo"
+        />
+        <img
+          src="{{rent.image5.url}}"
+          alt="background photo"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="house-detail-section">
+    <div class="house-detail">
+      <div class="detail-col">
+        <h2>{{rent.location}}</h2>
+        <p>{{rent.number_of_bathrooms}} bedrooms {{rent.number_of_rooms}} Rooms</p>
+      </div>
+
+      <div class="detail-col">
+        <p>
+          {{rent.description}}
+        </p>
+      
+        
+      </div>
+      <div class="detail-col">
+        <h2>What this place offers</h2>
+
+        <div class="amenities">
+          <li>{{rent.amenity1}}</li>
+          <li>{{rent.amenity2}}</li>
+          <li>{{rent.amenity3}}</li>
+          <li>{{rent.amenity4}}</li>
+        </div>
+
+        <button class="seeAllAmenities">See all amenities</button>
+      </div>
+
+     
+
+    </div>
+    <!-- book button -->
+    <div class="house-detail-book">
+        <div class="house-price">
+            <p>GH¢{{rent.price_per_month}} per month</p>
+        </div>
+      {% if user.is_authenticated %}
+      <a href="{% url 'rent-booking' rent.slug %}">
+        <button>Book Now</button>
+      </a>
+      {% else %}
+      <a href="{% url 'login' %}">
+        <button>Login to Continue</button>
+      </a>
+      {% endif %}
+
+
+    </div>
+
+  </div>
+</div>
+
+<div class="all-amenities-pop-up">
+  <div class="all-amenities">
+    <li>{{rent.amenity1}}</li>
+    <li>{{rent.amenity2}}</li>
+    <li>{{rent.amenity3}}</li>
+    <li>{{rent.amenity4}}</li>
+    <li>{{rent.amenity5}}</li>
+    <li>{{rent.amenity6}}</li>
+    <li>{{rent.amenity7}}</li>
+    <li>{{rent.amenity8}}</li>
+    <li>{{rent.amenity9}}</li>
+    <li>{{rent.amenity10}}</li>
+  </div>
+  <button class="hideBtn">Hide</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    const all_Amenities_Popup = document.querySelector(".all-amenities-pop-up")
+
+    const seeAllAmenities = document.querySelector(".seeAllAmenities")
+
+    const hideBtn = document.querySelector(".hideBtn")
+
+    seeAllAmenities.addEventListener("click", ()=>{
+        all_Amenities_Popup.style.display="block"
+    })
+    hideBtn.addEventListener("click", ()=>{
+        all_Amenities_Popup.style.display="none"
+    })
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,6 +1,7 @@
 
 
 {% extends 'my_site/base.html' %} {% load static %} {% block content %}
+
 <!-- <style>
     .container {
         font-family: Arial, sans-serif;
@@ -112,11 +113,27 @@
 
 </style> -->
 
+<style>
+    #center {
+  width: 400px; 
+  margin: auto; 
+  text-align: center;
+  
+  /* Optional Styling */
+  padding: 20px;
+  border-style: solid;
+  border-color: #B6C7D6;
+  border-radius: 20px;
+  background-color: #EAF0F6;
+ 
+}
+</style>
+
 
 <div class="Airbnb-banner">
     <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
     <div class="Airbnb-banner-text">
-        <h1>Find Your Perfect Stay with our Airbnb</h1>
+        <h1>Find Your Perfect Stay with Us</h1>
         <p>Discover unique homes, apartments, and experiences in top <br> destinations worldwide. Book your next
             adventure with comfort and ease.</p>
 
@@ -162,27 +179,27 @@
 
 <!-- house for rent  -->
 
+{% if properties %}
 <div class="house-to-book-container">
 
-
-
+    {% for property in properties %}
     <div class="house-container">
         <div class="image-slider">
             <button class="prev">&#10094;</button>
-            <img src="{% static 'my_site/img/bg111.jpeg' %}" alt="background photo" />
-            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
-            <img src="{% static 'my_site/img/bg444.jpeg' %}" alt="background photo" />
+            <img src="{{ property.image1.url }}" alt="background photo" />
+            <img src="{{ property.image2.url }}" alt="background photo" />
+            <img src="{{ property.image3.url }}" alt="background photo" />
             <button class="next">&#10095;</button>
         </div>
 
         <div class="house-detail">
             <div class="location">
 
-                <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
+                <p> <i class="fas fa-map-marker-alt"></i> {{ property.location }}</p>
             </div>
             <div class="kilometer">
 
-                <p><i class="fas fa-road"></i> 16 Kilometers away</p>
+                <p><i class="fas fa-road"></i> {{ property.number_of_bathrooms }}</p>
             </div>
             <div class="date">
 
@@ -190,7 +207,7 @@
             </div>
             <div class="price">
 
-                <p> <i class="fas fa-money-bill-wave"></i> <strong>GH 976 </strong> per night</p>
+                <p> <i class="fas fa-money-bill-wave"></i> <strong>GH¢ {{ property.price_per_month }} </strong> per month</p>
             </div>
         </div>
 
@@ -203,151 +220,24 @@
         </div>
 
         <div class="more-details">
-            <a href="{% url 'AirBnBDetail' %}">
+            <a href="{% url 'rent-detail' property.slug %}">
                 <button> More detail </button>
             </a>
         </div>
     </div>
-
-    <div class="house-container">
-        <div class="image-slider">
-            <button class="prev">&#10094;</button>
-            <img src="{% static 'my_site/img/bg111.jpeg' %}" alt="background photo" />
-            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
-            <button class="next">&#10095;</button>
-        </div>
-
-        <div class="house-detail">
-            <div class="location">
-
-                <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
-            </div>
-            <div class="kilometer">
-
-                <p><i class="fas fa-road"></i> 16 Kilometers away</p>
-            </div>
-            <div class="date">
-
-                <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
-            </div>
-            <div class="price">
-
-                <p> <i class="fas fa-money-bill-wave"></i> <strong>GH 976 </strong> per night</p>
-            </div>
-        </div>
-
-        <!-- add favourite button -->
-        <div class="add-to-favourite">
-            <a href="">
-                <button> <i class="fas fa-heart"></i></button>
-            </a>
-
-        </div>
-
-        <div class="more-details">
-            <a href="{% url 'AirBnBDetail' %}">
-                <button> More detail </button>
-            </a>
-        </div>
-    </div>
-
-    <div class="house-container">
-        <div class="image-slider">
-            <button class="prev">&#10094;</button>
-            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
-            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
-            <button class="next">&#10095;</button>
-        </div>
-
-        <div class="house-detail">
-            <div class="location">
-
-                <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
-            </div>
-            <div class="kilometer">
-
-                <p><i class="fas fa-road"></i> 16 Kilometers away</p>
-            </div>
-            <div class="date">
-
-                <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
-            </div>
-            <div class="price">
-
-                <p> <i class="fas fa-money-bill-wave"></i> <strong>GH 976 </strong> per night</p>
-            </div>
-        </div>
-
-        <!-- add favourite button -->
-        <div class="add-to-favourite">
-            <a href="">
-                <button> <i class="fas fa-heart"></i></button>
-            </a>
-
-        </div>
-
-        <div class="more-details">
-            <a href="{% url 'AirBnBDetail' %}">
-                <button> More detail </button>
-            </a>
-        </div>
-    </div>
-
-    <div class="house-container">
-        <div class="image-slider">
-            <button class="prev">&#10094;</button>
-            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
-            <img src="{% static 'my_site/img/banner-house.jpg' %}" alt="background photo" />
-            <button class="next">&#10095;</button>
-        </div>
-
-        <div class="house-detail">
-            <div class="location">
-
-                <p> <i class="fas fa-map-marker-alt"></i> East Legon, Ghana</p>
-            </div>
-            <div class="kilometer">
-
-                <p><i class="fas fa-road"></i> 16 Kilometers away</p>
-            </div>
-            <div class="date">
-
-                <p> <i class="fas fa-calendar-alt"></i> Feb 12-17</p>
-            </div>
-            <div class="price">
-
-                <p> <i class="fas fa-money-bill-wave"></i> <strong>GH 976 </strong> per night</p>
-            </div>
-        </div>
-
-        <!-- add favourite button -->
-        <div class="add-to-favourite">
-            <a href="">
-                <button> <i class="fas fa-heart"></i></button>
-            </a>
-
-        </div>
-
-        <div class="more-details">
-            <a href="{% url 'AirBnBDetail' %}">
-                <button> More detail </button>
-            </a>
-        </div>
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
+    {% endfor %}
 </div>
+{% else %}
+<br><br><br>
+    <div id="center">
+    
+        <h3>No Property <br> Added Yet</h3>
+    
+
+    </div>
+
+ <br><br><br>
+{% endif %}
 
 
 

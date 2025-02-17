@@ -1,0 +1,95 @@
+{% extends 'my_site/base.html' %} {% load static %} {% block content %}
+
+
+
+
+
+
+
+
+<div class="house-booking-form">
+   
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="house">
+           <P>Please you have selected 
+           <!-- house name -->
+           <span >Two bed room apartment</span>
+           <!-- location -->
+           <span>located at east lagon</span>
+           <!-- price -->
+           <span>50gh Per night</span>
+
+           </P>
+           <p class="p">Kindly fill out the form to finalize your booking</p>
+
+        </div>
+       <div class="house-form-input">
+        <div class="house-input" >
+            <label for="">Name</label>
+            <input type="text" name="name" required placeholder="TL Ghana">
+        </div>
+        <div class="house-input" >
+            <label for="">Phone Number</label>
+            <input type="number" name="phone" required placeholder="0550222888">
+        </div>
+        <div class="house-input" >
+          <label for=""> Check in date
+        </label>
+            <input type="date" name="check_in_date" required>
+        </div>
+        <div class="house-input" >
+          <label for=""> Check in Time
+        </label>
+            <input type="time" name="check_in_time" required >
+        </div>
+        <div class="house-input" >
+          <label for=""> Check out date
+        </label>
+            <input type="date" name="check_out_date" required>
+        </div>
+       </div>
+
+        <button>Submit</button>
+    </form>
+</div>
+
+
+
+
+
+<script>
+    // Automatically show date/time picker when clicking the input
+    document.querySelectorAll("input[type='date'], input[type='time']").forEach(input => {
+        input.addEventListener("click", function () {
+            this.showPicker(); // Triggers the default date/time picker
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

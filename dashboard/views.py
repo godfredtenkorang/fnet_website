@@ -37,6 +37,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from users.utils import send_payment_sms
 from django.contrib.auth.decorators import login_required
 
+from rent.models import PropertyBooking
+from rent.utils import send_approve_sms
+
 User = get_user_model()
 
 def all_users(request):
@@ -861,3 +864,24 @@ def complete_rental_payment(request, payment_id):
         send_payment_sms(payment.rental.customer_phone, payment.rental.customer_name, payment.rental.total_price)
         
     return redirect('all_payments')
+
+
+def property_bookings(request):
+    properties = PropertyBooking.objects.all()
+    context = {
+        'properties': properties,
+        'title': 'Properties Bookings'
+    }
+    return render(request, 'dashboard/property/bookings.html', context)
+
+def approve_property(request, property_id):
+    property = get_object_or_404(PropertyBooking, id=property_id)
+    
+    if property.is_approved != True:
+        
+        property.is_approved = True
+        property.save()
+        
+        send_approve_sms(property.phone, property.name, property.property)
+        
+    return redirect('properties_bookings')
