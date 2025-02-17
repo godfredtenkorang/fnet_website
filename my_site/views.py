@@ -228,3 +228,7 @@ def AirBnB(request):
     return render(request, 'my_site/AirBnB.html')
 
 
+def AirBnBbooking(request):
+    return render(request, 'my_site/AirBnBbooking.html')
+
+

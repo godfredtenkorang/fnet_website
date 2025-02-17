@@ -22,5 +22,6 @@ urlpatterns = [
 
     path('AirBnBDetail/', views.AirBnBDetail, name='AirBnBDetail'),
     path('AirBnB/', views.AirBnB, name='AirBnB'),
+    path('AirBnBbooking/', views.AirBnBbooking, name='AirBnBbooking'),
 
 ]

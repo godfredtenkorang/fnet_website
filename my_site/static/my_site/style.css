@@ -1662,6 +1662,89 @@ form button {
 
 
 
+/* house-booking-form */
+
+.house-booking-form{
+  width: 100%;
+  max-width: 100%;
+  padding: 5% 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.house-booking-form form{
+  
+  width: 100%;
+  max-width: 60%;
+  min-height: 50vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  padding: 3%;
+
+}
+
+.house-form-input{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+}
+
+.house-booking-form input{
+  width: 100%;
+  height: 10vh;
+  margin: 4% 0;
+  padding: 10px;
+  border: solid 2px #000000;
+}
+
+.house-booking-form select{
+  width: 100%;
+  height: 10vh;
+  margin: 4% 0;
+  padding: 10px;
+}
+.house-booking-form button{
+  width: 100%;
+  height: 10vh;
+  cursor: pointer;
+  background-color: var(--BlackColor);
+  outline: none;
+  color: var(--whiteColor);
+}
+.house-booking-form form ::placeholder{
+ opacity: 0.5
+}
+
+.house{
+  width: 100%;
+  display: flex;
+flex-direction: column;
+  gap: 5px;
+ 
+  padding-bottom: 1%;
+}
+
+.p{
+ padding-bottom: 5%;
+  font-weight: bolder;
+  color: var(--blueColor);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1678,7 +1761,7 @@ form button {
 
 /* responive */
 @media (max-width: 1080px) {
-  .padding ,.house-imgs, .house-detail-page h1 {
+  .padding ,.house-imgs, .house-detail-page h1, .house-booking-form {
     padding: 10px 3%;
   }
   .house-detail-page{
@@ -1724,6 +1807,10 @@ form button {
 
     padding: 15px 0;
     border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .house-booking-form form{
+    max-width: none;
   }
 
   .nav-links li:hover {
@@ -1846,6 +1933,10 @@ form button {
 
   .slide-text h1 {
     font-size: 3rem;
+  }
+
+  .house-form-input{
+grid-template-columns: 1fr;
   }
 
   
