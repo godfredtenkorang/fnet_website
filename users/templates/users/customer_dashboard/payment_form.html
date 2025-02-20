@@ -1,4 +1,4 @@
-{% extends 'dashboard/base2.html' %}
+{% extends 'users/customer_dashboard/base.html' %}
 {% load static %}
 {% block content %}
 
@@ -40,6 +40,7 @@
             <select name="payment_method" id="payment_method">
                 <option value="Bank">Bank (ECOBANK)</option>
                 <option value="MoMo">Mobile Money</option>
+                <option value="Cash">Cash</option>
             </select>
         </div>
         <br>
@@ -53,6 +54,10 @@
             <!-- Account name will be displayed here -->
         </div>
         <br>
+        <div class="input">
+            <label for="">Amount </label> <br>
+            <input type="text" name="amount" id="amount" required placeholder="Enter amount">
+        </div>
         <div class="input">
             <label for="">Transaction ID: </label> <br>
             <input type="text" name="transaction_id" id="transaction_id" required placeholder="Enter transaction id">
@@ -80,6 +85,10 @@
         MoMo: {
             codes: ["0597406474"],
             accountName: "Mobile Money Account Name: TAXINET LOGISTICS"
+        },
+        Cash: {
+            codes: ["Main Office"],
+            
         }
     };
 
