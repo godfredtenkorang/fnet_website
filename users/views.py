@@ -30,7 +30,7 @@ def register(request):
             request.session['registration_otp'] = otp
             request.session['registration_user_id'] = user.id
             
-            send_otp_sms(user.phone, otp)
+            send_otp_sms(user.phone, otp, user.username, form.cleaned_data['password1'])
             
             
             return redirect("verify_registration_otp")

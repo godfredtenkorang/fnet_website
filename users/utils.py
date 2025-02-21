@@ -8,7 +8,7 @@ def generate_otp(length=6):
     return ''.join(str(random.randint(0, 9)) for _ in range(length))
 
 
-def send_otp_sms(phone_number, otp):
+def send_otp_sms(phone_number, otp, username, password):
     """
     Send OTP to the given phone number.
     Replace the below code with your SMS provider's API integration.
@@ -19,7 +19,7 @@ def send_otp_sms(phone_number, otp):
         "key": apiKey,
         "sender": 'TLGhana',
         "recipient[]": phone_number,
-        "message": f"Your OTP is {otp}",
+        "message": f"Dear {username}, welcome to TLGHANA! \n" f"Use these details to login after entering this OTP: {otp} \n" f"Username: {username} \n" f"Password: {password} \n" "Thank you for choosing TLGHANA!",
         "is_schedule": False,
         "schedule_date": ''
     }
