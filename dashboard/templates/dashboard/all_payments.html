@@ -13,6 +13,7 @@
                     <th>Payment Method</th>
                     <th>Payment Number</th>
                     <th>Transaction ID</th>
+                    <th>Driver / Agent</th>
                     <th>Approved/Not Approved</th>
                 </tr>
             </thead>
@@ -24,6 +25,7 @@
                     <td>{{ payment.payment_method }}</td>
                     <td>{{ payment.payment_code }}</td>
                     <td>{{ payment.transaction_id }}</td>
+                    <td>{{ payment.name }}</td>
                     {% if payment.is_approved %}
                     <td>Approved</td>
                     {% else %}

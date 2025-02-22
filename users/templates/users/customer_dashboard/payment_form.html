@@ -41,8 +41,11 @@
                 <option value="Bank">Bank (ECOBANK)</option>
                 <option value="MoMo">Mobile Money</option>
                 <option value="Cash">Cash</option>
+                <option value="Paid_to_Driver">Paid to Driver</option>
+                <option value="Paid_to_Agent">Paid to Agent</option>
             </select>
         </div>
+        
         <br>
         <div class="input">
             <label for="">Sent Payment To:</label> <br>
@@ -52,6 +55,11 @@
         </div>
         <div style="font-weight: bold;" class="account-name" id="account_name">
             <!-- Account name will be displayed here -->
+        </div>
+        <br>
+        <div class="input">
+            <label for="">Driver / Agent (optional)</label> <br>
+            <input type="text" name="name" id="name" placeholder="Enter Driver / Agent name">
         </div>
         <br>
         <div class="input">
@@ -88,7 +96,12 @@
         },
         Cash: {
             codes: ["Main Office"],
-            
+        },
+        Paid_to_Driver: {
+            codes: ["Cash"],
+        },
+        Paid_to_Agent: {
+            codes: ["Cash"],
         }
     };
 

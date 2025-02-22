@@ -217,15 +217,20 @@ class RentalPayment(models.Model):
         ('Bank', 'Bank'),
         ('MoMo', 'MoMo'),
         ('Cash', 'Cash'),
+        ('Paid to Driver', 'Paid to Driver'),
+        ('Paid to Agent', 'Paid to Agent'),
     ]
     PAYMENT_CODE = [
         ('1441002567287', '1441002567287'),
         ('0597406474', '0597406474'),
-        ('cash', 'cash')
+        ('cash', 'cash'),
+        ('cash', 'cash'),
+        ('cash', 'cash'),
     ]
     rental = models.ForeignKey(Rental, on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD)
     payment_code = models.CharField(max_length=100, choices=PAYMENT_CODE)
+    name = models.CharField(max_length=100, null=True, blank=True)
     amount = models.DecimalField(max_digits=100, decimal_places=2, default=0.00)
     transaction_id = models.CharField(max_length=20)
     is_approved = models.BooleanField(default=False)
