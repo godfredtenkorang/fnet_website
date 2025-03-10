@@ -491,8 +491,8 @@ def driver_list(request):
     drivers = Driver.objects.all()
     return render(request, 'dashboard/driver/driver_list.html', {'title': 'All Drivers', 'drivers': drivers})
 
-def driver_detail(request, agent_id):
-    driver = get_object_or_404(Driver, id=agent_id)
+def driver_detail(request, driver_id):
+    driver = get_object_or_404(Driver, id=driver_id)
     if request.method == 'POST':
         driver_license_sms(driver.phone_number, driver.first_name, driver.licence_number, driver.licence_expiry_date)
     return render(request, 'dashboard/driver/driver_detail.html', {'title': 'Driver Detail', 'driver': driver})
