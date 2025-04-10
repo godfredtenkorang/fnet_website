@@ -22,22 +22,35 @@
 
     <form method="POST">
         {% csrf_token %}
+        <div class="input">
+            <label for="">Select Car</label> <br>
+            <select name="car" id="car" onchange="updatePrice()">
+                <option value="">-- Select --</option>
+                {% for car in cars %}
+                <option value="{{car.id}}" data-price="{{ car.price_per_km }}">{{car.car_name}}</option>
+                {% endfor %}
         
+            </select>
+        </div>
         <br>
         
         <div class="input">
-            <label for="">GH¢ 3.00 / Kilometres</label> <br>
-            <input type="number" name="amount_received" id="amount_received" value="3" readonly required>
+            <label for="">Price per km (GH¢):</label> <br>
+            <input type="text" name="amount_received" id="price_per_km"  readonly>
         </div>
 
         <div class="input">
-            <label for="">Mileage</label> <br>
-            <input type="number" name="other_expenses" id="other_expenses" required>
+            <label for="">Mileage (km):</label> <br>
+            <input type="number" name="distance_km" id="distance_km" oninput="calculateTotal()" required>
         </div>
         
+        <div class="input">
+            <label for="">Total Price (GH¢):</label> <br>
+            <input type="text" name="total_price" id="total_price" readonly>
+        </div>
 
-        <p style="font-size: 30px; text-align: center;"><strong>Total Amount: GH¢</strong><span id="total_amount">0.00</span></p>
-        
+        <!-- <p style="font-size: 30px; text-align: center;"><strong>Total Amount: GH¢</strong><span id="total_price">0.00</span></p>
+         -->
 
 
     
@@ -59,18 +72,21 @@
     document.getElementById('amount_received').addEventListener('change', calculateTotal);
     document.getElementById('other_expenses').addEventListener('change', calculateTotal);
 
+    function updatePrice() {
+        const carSelect = document.getElementById('car');
+        const pricePerKm = document.getElementById('price_per_km');
+        const selectedOption = carSelect.options[carSelect.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+
+        pricePerKm.value = price;
+
+    }
+
     function calculateTotal() {
-
-        const amountReceived = document.getElementById('amount_received').value;
-        const otherExpenses = document.getElementById('other_expenses').value;
-
-
-        const totalAmount = amountReceived * otherExpenses;
-        document.getElementById('total_amount').innerHTML = totalAmount.toFixed(2);
-
-
-
-
+        const price = parseFloat(document.getElementById('price_per_km').value);
+        const distance = parseFloat(document.getElementById('distance_km').value);
+        const total = price * distance;
+        document.getElementById('total_price').value = isNaN(total) ? '' : total.toFixed(2);
     }
 </script>
 

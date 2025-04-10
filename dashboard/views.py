@@ -887,4 +887,9 @@ def approve_property(request, property_id):
     return redirect('properties_bookings')
 
 def calculate_mileage(request):
-    return render(request, 'dashboard/calculate_mileage.html')
+    cars = Car.objects.all()
+        
+    context = {
+        'cars': cars
+    }
+    return render(request, 'dashboard/calculate_mileage.html', context)
