@@ -97,4 +97,6 @@ urlpatterns = [
     
     path('properties_bookings/', views.property_bookings, name='properties_bookings'),
     path('properties_bookings/<int:property_id>/', views.approve_property, name='approve_property'),
+    
+    path('calculate_mileage/', views.calculate_mileage, name='calculate_mileage'),
 ]

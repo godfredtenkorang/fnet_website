@@ -885,3 +885,6 @@ def approve_property(request, property_id):
         send_approve_sms(property.phone, property.name, property.property)
         
     return redirect('properties_bookings')
+
+def calculate_mileage(request):
+    return render(request, 'dashboard/calculate_mileage.html')
