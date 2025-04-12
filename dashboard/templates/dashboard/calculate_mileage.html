@@ -22,7 +22,7 @@
 
     <form method="POST">
         {% csrf_token %}
-        <div class="input">
+        <!-- <div class="input">
             <label for="">Select Car</label> <br>
             <select name="car" id="car" onchange="updatePrice()">
                 <option value="">-- Select --</option>
@@ -31,23 +31,30 @@
                 {% endfor %}
         
             </select>
-        </div>
-        <br>
+        </div> -->
+        <select id="car" name="car" onchange="calculatePrice()">
+            <option value="">-- Select Car --</option>
+            <option value="2">Mitsubishi Outlander Registered 2024</option>
+            <option value="1">Honda CR-V registered 2025</option>
+            <option value="1">Toyota RAV4 Registered 2025</option>
+            <option value="2">Mitsubishi Sports Registered 2024</option>
+            <option value="2">Toyota HiAce 2023</option>
+            <option value="1">Toyota RAV4 Registered 2024</option>
+            <option value="1">Toyota RAV4 Registered 2025</option>
+            <option value="2">2018 Toyota Land Cruiser Prado</option>
+            <option value="1">Toyota RAV4 Registered 2024</option>
+            <option value="1">Toyota Camry Registered 2024</option>
+            <option value="2">2018 Toyota Land Cruiser</option>
+            <option value="2">Toyota Coaster Bus</option>
+        </select>
+        <br><br>
         
-        <div class="input">
-            <label for="">Price per km (GH¢):</label> <br>
-            <input type="text" name="amount_received" id="price_per_km"  readonly>
-        </div>
+        <label>Enter Distance (km):</label>
+        <input type="number" id="distance_km" name="distance_km" oninput="calculatePrice()"><br><br>
+        
+        <label>Total Price (GHS):</label>
+        <input type="text" id="total_price" readonly><br><br>
 
-        <div class="input">
-            <label for="">Mileage (km):</label> <br>
-            <input type="number" name="distance_km" id="distance_km" oninput="calculateTotal()" required>
-        </div>
-        
-        <div class="input">
-            <label for="">Total Price (GH¢):</label> <br>
-            <input type="text" name="total_price" id="total_price" readonly>
-        </div>
 
         <!-- <p style="font-size: 30px; text-align: center;"><strong>Total Amount: GH¢</strong><span id="total_price">0.00</span></p>
          -->
@@ -69,25 +76,41 @@
 
 
 <script>
-    document.getElementById('amount_received').addEventListener('change', calculateTotal);
-    document.getElementById('other_expenses').addEventListener('change', calculateTotal);
 
-    function updatePrice() {
-        const carSelect = document.getElementById('car');
-        const pricePerKm = document.getElementById('price_per_km');
-        const selectedOption = carSelect.options[carSelect.selectedIndex];
-        const price = selectedOption.getAttribute('data-price');
+     // Define mileage ranges PER CAR
+        const carMileagePrices = {
+            1: [  // Car ID 1 (e.g., Toyota Corolla)
+                { start: 1, end: 150, price: 800 },
+                { start: 151, end: 300, price: 1000 },
+                { start: 301, end: 450, price: 1200 },
+                { start: 451, end: 550, price: 1400 },
+                { start: 551, end: 650, price: 1600 },
+                { start: 651, end: 750, price: 1800 }
+            ],
+            2: [  // Car ID 2 (e.g., Honda Civic)
+                { start: 1, end: 150, price: 1000 },
+                { start: 151, end: 300, price: 1200 },
+                { start: 301, end: 450, price: 1300 },
+                { start: 451, end: 550, price: 1400 },
+                { start: 551, end: 650, price: 1500 },
+                { start: 651, end: 750, price: 1600 }
+            ]
+        };
 
-        pricePerKm.value = price;
+    function calculatePrice() {
+            const carId = document.getElementById('car').value;
+            const distance = parseInt(document.getElementById('distance_km').value);
+            const totalOutput = document.getElementById('total_price');
 
-    }
+            const ranges = carMileagePrices[carId];
+                if (!ranges) {
+                    totalOutput.value = "Select a car";
+                    return;
+                }
 
-    function calculateTotal() {
-        const price = parseFloat(document.getElementById('price_per_km').value);
-        const distance = parseFloat(document.getElementById('distance_km').value);
-        const total = price * distance;
-        document.getElementById('total_price').value = isNaN(total) ? '' : total.toFixed(2);
-    }
+            const match = ranges.find(range => distance >= range.start && distance <= range.end);
+            totalOutput.value = match ? match.price.toFixed(2) : "Out of range";
+        }
 </script>
 
 
