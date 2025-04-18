@@ -50,6 +50,10 @@ def verify_registration_otp(request):
             user = get_object_or_404(User, id=user_id)
             user.is_active = True
             user.save()
+            backend = 'users.backends.EmailOrUsernameBackend'  # Replace if needed
+        
+            user.backend = backend
+        
             login(request, user)
             
             # Clean up session data
@@ -71,6 +75,10 @@ def login_user(request):
         password = request.POST.get('password')
         
         user = authenticate(request, username=username_or_phone, password=password)
+        
+        backend = 'users.backends.EmailOrUsernameBackend'  # Replace if needed
+        
+        user.backend = backend
         
         try:
             if user:

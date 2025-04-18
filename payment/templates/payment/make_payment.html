@@ -1,0 +1,119 @@
+{% extends 'my_site/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    .alert {
+        padding: 15px 20px;
+        background-color: #f44336;
+        color: white;
+        border-radius: 5px;
+        position: relative;
+        width: 300px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .close-btn:hover {
+        color: black;
+    }
+
+    .contact-container {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 2rem;
+        background-color: #fff;
+        margin: 20px 10%;
+        border-radius: 8px;
+        min-height: 10vh;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-item {
+        margin: 0 20px;
+    }
+
+    .contact-item h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .contact-item p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+</style>
+
+<!-- bannerr -->
+
+<div class="banner">
+    <img src="{% static 'my_site/img/background2.jpg' %}" alt="background photo" />
+    <div class="banner-text">
+        <h1>Contact Us</h1>
+    </div>
+</div>
+<br><br>
+<div class="contact-container">
+    <div class="contact-item">
+        <h3>Location</h3>
+        <p>Airport Roundabout, <br> Jofel Catering Services - Kumasi, Ghana</p>
+    </div>
+    <div class="contact-item">
+        <h3>Phone</h3>
+        <p>+233 550 222 888</p>
+    </div>
+    <div class="contact-item">
+        <h3>Email</h3>
+        <p>taxinetghana@gmail.com</p>
+    </div>
+</div>
+<br><br>
+<div class="contact-us-section">
+    <div class="contact-img">
+        <img src="{% static 'my_site/img/contactus.jpg' %}" alt="background photo" />
+
+    </div>
+    <div class="contact-form">
+        <p>Fill out the from below to send us a message</p>
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input">
+                <label for="">Name </label> <br>
+                <input type="text" name="name" id="name" required placeholder="TL Ghana">
+            </div>
+
+            <div class="input">
+                <label for="">Email </label> <br>
+                <input type="text" name="email" id="email" required placeholder="tlghana@gmail.com">
+            </div>
+            <div class="input">
+                <label for="">Phone </label> <br>
+                <input type="text" name="phone" id="phone" required placeholder="0550222888">
+            </div>
+
+            <div class="input">
+                <label for="">Your Message</label> <br>
+                <textarea name="message" id="message" required placeholder="Type your message"></textarea>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
