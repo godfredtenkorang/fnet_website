@@ -61,7 +61,7 @@ def verify_registration_otp(request):
             del request.session['registration_user_id']
             
             messages.success(request, "Registration complete! You are now logged in.")
-            return redirect("login")
+            return redirect("index")
         else:
             messages.error(request, "Invalid OTP. Please try again.")
 
