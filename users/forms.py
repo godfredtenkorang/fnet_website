@@ -52,7 +52,7 @@ class RegisterForm(UserCreationForm):
 # Login form
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=TextInput(attrs={
+    username_or_email = forms.CharField(widget=TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Username',
         'required': 'required'

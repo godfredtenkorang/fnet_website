@@ -150,7 +150,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'login'
 
-AUTHENTICATION_BACKENDS = ['users.backends.CustomAuthBackend']
+AUTHENTICATION_BACKENDS = [
+    'users.backends.CustomAuthBackend',
+    'users.backends.EmailOrUsernameBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    ]
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

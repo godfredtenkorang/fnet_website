@@ -26,9 +26,19 @@
     <form method="POST" class="form" action="{% url 'login' %}?next={{request.GET.next}}">
 
       <h2>Login</h2>
+      <br><br>
       {% csrf_token %}
+      {% if error %}
+      <p style="color: red;">{{ error }}</p>
+      {% endif %}
 
-      {{ form.as_p }}
+
+      <label for="">Username or Phone Number:</label>
+      <input type="text" name="username_or_phone" required>
+      
+      <label for="">Password:</label>
+      <input type="text" name="password" required>
+
 
       <button type="submit">Login</button>
 

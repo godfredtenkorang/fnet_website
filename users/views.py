@@ -64,40 +64,36 @@ def verify_registration_otp(request):
     return render(request, 'users/verify_registration_otp.html')
 
 def login_user(request):
-    form = LoginForm()
-    
+
     if request.method == 'POST':
-        form = LoginForm(request, data=request.POST)
         
-        if form.is_valid():
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            
-            user = authenticate(request, username=username, password=password)
-            
-            try:
-                if user:
-                    login(request, user)
-                    next_url = request.GET.get('next', '/')
-                    return redirect(next_url)
-                
-            except:
-                if user is not None:
-                    if user.role == "admin":
-                        return redirect("dashboard")
-                    elif user.role == "customer":
-                        return redirect("customer_dashboard")
-                    elif user.role == "driver":
-                        return redirect("driver_dashboard")
-                    else:
-                        return redirect("agent_dashboard")
-                
-                
-    else:
-        form = LoginForm()
+        username_or_phone = request.POST.get('username_or_phone')
+        password = request.POST.get('password')
         
+        user = authenticate(request, username=username_or_phone, password=password)
+        
+        try:
+            if user:
+                login(request, user)
+                next_url = request.GET.get('next', '/')
+                return redirect(next_url)
+            else:
+                return render(request, "users/login.html", {"error": "Invalid credentials"})
+            
+        except:
+            if user is not None:
+                if user.role == "admin":
+                    return redirect("dashboard")
+                elif user.role == "customer":
+                    return redirect("customer_dashboard")
+                elif user.role == "driver":
+                    return redirect("driver_dashboard")
+                else:
+                    return redirect("agent_dashboard")
+            else:
+                return render(request, "users/login.html", {"error": "Invalid credentials"})
+
     context = {
-        'form': form,
         'title': 'Login'
     }
     
