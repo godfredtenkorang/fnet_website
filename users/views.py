@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import RegisterForm, LoginForm, UserUpdateForm, ProfileUpdateForm
 from .models import User, OTP
 from rental.models import Rental, Appointment, RentalPayment
-from .utils import generate_otp, send_otp_sms, send_otp
+from .utils import generate_otp, send_otp_sms, send_otp, send_otp_whatsapp_mnotify
 from django.contrib import messages
 from my_site.models import Driver, Car, Agent
 from flight.models import Booking
@@ -15,6 +15,9 @@ from users.models import User
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password
 from rent.models import PropertyBooking
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 def register(request):
@@ -30,10 +33,12 @@ def register(request):
             request.session['registration_otp'] = otp
             request.session['registration_user_id'] = user.id
             
-            send_otp_sms(user.phone, otp, user.username, form.cleaned_data['password1'])
-            
-            
-            return redirect("verify_registration_otp")
+            # send_otp_sms(user.phone, otp, user.username, form.cleaned_data['password1'])
+            if send_otp_whatsapp_mnotify(user.phone, otp, user.username, form.cleaned_data['password1']):
+                messages.success(request, 'OTP sent to your WhatsApp.')
+                return redirect("verify_registration_otp")
+            else:
+                messages.error(request, 'Failed to sent OTP')
     else:
         form = RegisterForm()
     return render(request, "users/register.html", {"form": form})
@@ -159,6 +164,28 @@ def logout(request):
     auth.logout(request)
     
     return redirect('login')
+
+
+
+@csrf_exempt
+def mnotify_callback(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+
+            # Example: Log or process the response data
+            print("MNotify Callback Data:", data)
+
+            # You could save this info to your database if needed
+            # For example: message_id, status, recipient, etc.
+
+            return JsonResponse({"message": "Callback received successfully"}, status=200)
+
+        except Exception as e:
+            print("Error processing callback:", e)
+            return JsonResponse({"error": "Invalid data"}, status=400)
+
+    return JsonResponse({"error": "Method not allowed"}, status=405)
 
 
 

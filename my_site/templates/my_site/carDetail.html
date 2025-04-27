@@ -279,15 +279,14 @@
        {% if car.category.name == "Self Drive" %}
        <h3 style="text-align: center;"><a href="{% url 'termsAndCondition' %}"> Read Terms and Conditions</a></h3>
        {% endif %}
-      {% if user.is_authenticated %}
+      
         {% if car.availability_status == "Available" %}
-        <button type="submit">Book Now</button>
+          <button type="submit">Book Now</button>
         {% else %}
-        <button disabled>Not Available</button>
+          <button disabled>Not Available</button>
         {% endif %}
-      {% else %}
-      <p style="text-align: center;"><a href="{% url 'login' %}">Login to continue</a></p>
-      {% endif %}
+      
+      
 
     </form>
     <!-- <div class="exp-btn">

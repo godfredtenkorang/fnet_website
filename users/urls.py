@@ -9,6 +9,8 @@ urlpatterns = [
     path('verify-otp/', views.verify_otp_and_reset_password, name='verify_otp_and_reset_password'),
     
     path('logout/', views.logout, name='logout'),
+    
+    path('mnotify/callback/', views.mnotify_callback, name='mnotify_callback'),
     # Customer URLS
     path('customer-dashboard/', views.customer_dashboard, name='customer_dashboard'),
     path('customer-bookings/', views.customer_bookings, name='customer_bookings'),

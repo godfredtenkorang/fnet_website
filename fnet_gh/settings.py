@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'expenses',
     'agreements',
     'flight',
-    'rent'
+    'rent',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -153,7 +154,6 @@ LOGIN_URL = 'login'
 AUTHENTICATION_BACKENDS = [
     'users.backends.CustomAuthBackend',
     'users.backends.EmailOrUsernameBackend',
-    'django.contrib.auth.backends.ModelBackend',
     ]
 
 
@@ -171,3 +171,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MNOTIFY_API_KEY= config("MNOTIFY_API_KEY")
 
+MNOTIFY_WHATSAPP_API_KEY = config("MNOTIFY_WHATSAPP_API_KEY")
+MNOTIFY_WHATSAPP_URL = "https://api.mnotify.com/api/whatsapp/message"

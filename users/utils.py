@@ -97,3 +97,24 @@ def send_payment_sms(phone_number, customer_name, total_price):
     except requests.exceptions.RequestException as e:
         print(f"Error sending SMS: {e}")
         return None
+    
+    
+
+def send_otp_whatsapp_mnotify(phone_number, otp, username, password):
+    url = settings.MNOTIFY_WHATSAPP_URL
+    headers = {
+        "Authorization": f"Bearer {settings.MNOTIFY_WHATSAPP_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "recipient": phone_number,  # Must be in international format
+        "message": f"Dear {username}, welcome to TLGHANA! \n" f"Use these details to login after entering this OTP: {otp} \n" f"Username: {username} \n" f"Password: {password} \n" "Thank you for choosing TLGHANA!",
+        "type": "text"
+    }
+
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        return response.status_code == 200
+    except Exception as e:
+        print("MNotify WhatsApp error:", e)
+        return False
