@@ -1,0 +1,39 @@
+{% extends 'users/driver_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>View Mileage</h1>
+    
+    <div class="responsive-table">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Date</th>
+                    <th>Start Mileage</th>
+                    <th>Stop Mileage</th>
+                    <th>Mileage Used</th>
+                    <th>Update</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.vehicle.car_name }} - {{ record.vehicle.brand }}</td>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.start_mileage }}</td>
+                    <td>{{ record.end_mileage }}</td>
+                    <td>{{ record.mileage_used }}</td>
+                    <td><a href="{% url 'update-mileage' record.id %}">update</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+{% endblock %}

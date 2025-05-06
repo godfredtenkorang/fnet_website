@@ -1,0 +1,45 @@
+{% extends 'users/driver_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>View Expenses Records</h1>
+
+    <div class="responsive-table">
+
+        <table>
+            <thead>
+                <tr>
+
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Receipt</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.type }}</td>
+                    <td>{{ record.amount }}</td>
+                    <td>{{ record.description }}</td>
+                    {% if record.receipt %}
+                    <td><a href="{{ record.receipt }}">receipt</a></td>
+                    {% else %}
+                    <td>N/A</td>
+                    {% endif %}
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+</div>
+{% endblock %}

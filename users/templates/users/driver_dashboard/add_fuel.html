@@ -1,0 +1,55 @@
+{% extends 'users/driver_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .exp-btn {
+        width: 100%;
+        min-height: 7vh;
+        cursor: pointer;
+        background-color: var(--blueColor);
+        color: var(--whiteColor);
+        border: none;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<div class="send-message-form">
+    <br><br><br>
+
+    <h1>Record Fuel</h1>
+
+    <br><br>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{form.as_p}}
+
+
+
+        <br><br>
+        <button type="submit">Submit</button>
+        <br><br>
+    </form>
+    <a href="{% url 'view-fuel' %}"><button type="submit">View Fuel</button></a>
+    <br><br>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

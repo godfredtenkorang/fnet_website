@@ -26,6 +26,19 @@ urlpatterns = [
     path('trips/', views.driver_trips, name='driver-trips'),
     path('assigned_trip/', views.driver_book, name='driver-book'),
     
+    path('add_mileage/', views.add_mileage, name='add-mileage'),
+    path('view_mileage/', views.view_mileage, name='view-mileage'),
+    path('update_mileage/<int:mileage_id>/', views.update_mileage, name='update-mileage'),
+    path('mileage/', views.mileage, name='mileage'),
+    path('vehicle_maintenance/<int:vehicle_id>/', views.vehicle_maintenance, name='vehicle_maintenance'),
+    path('record_oil_change/<int:vehicle_id>/', views.record_oil_change, name='record_oil_change'),
+    
+    
+    path('add_fuel/', views.add_fuel, name='add-fuel'),
+    path('view_fuel/', views.view_fuel, name='view-fuel'),
+    path('add_expense/', views.add_expenses, name='add-expense'),
+    path('view_expense/', views.view_expenses, name='view-expense'),
+    
     
     path('agent-dashboard/', views.agent_dashboard, name='agent_dashboard'),
     path('agent-trips/', views.agent_trips, name='agent-trips'),

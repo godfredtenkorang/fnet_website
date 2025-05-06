@@ -1,0 +1,42 @@
+{% extends 'users/driver_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h1>Car Booking Table</h1>
+    <div class="responsive-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Customer Name</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle in vehicles %}
+                <tr>
+                    
+                    <td>{{ vehicle.car_name }}</td>
+                    
+                    
+                    <td><a href="{% url 'vehicle_maintenance' vehicle.id %}">detail</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

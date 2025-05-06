@@ -1,0 +1,45 @@
+{% extends 'users/driver_dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>View Fuel Records</h1>
+    
+    <div class="responsive-table">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Date</th>
+                    <th>Liters</th>
+                    <th>Amount</th>
+                    <th>Station Name</th>
+                    <th>Receipt</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.vehicle.car_name }} - {{ record.vehicle.brand }}</td>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.liters }}</td>
+                    <td>{{ record.amount }}</td>
+                    <td>{{ record.station_name }}</td>
+                    {% if record.receipt %}
+                    <td><a href="{{ record.receipt }}">receipt</a></td>
+                    {% else %}
+                    <td>N/A</td>
+                    {% endif %}
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+
+
+
+</div>
+{% endblock %}
