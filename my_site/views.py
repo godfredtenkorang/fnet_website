@@ -51,79 +51,150 @@ def carDetail(request,  car_slug):
     car = get_object_or_404(Car, slug=car_slug)
     user = request.user
     
-    
-    if request.method == 'POST':
-        
-        customer_name = request.POST.get('customer_name')
-        customer_phone = request.POST.get('customer_phone')
-        emergency_name = request.POST.get('emergency_name')
-        emergency_phone = request.POST.get('emergency_phone')
-        pick_up_time = request.POST.get('pick_up_time')
-        drop_off_time = request.POST.get('drop_off_time')
-        number_of_days = request.POST.get('number_of_days')
-        rental_date = request.POST.get('rental_date')
-        return_date = request.POST.get('return_date')
-        location_category = request.POST.get('location_category')
-        city = request.POST.get('city')
-        town = request.POST.get('town')
-        document_type = request.POST.get('document_type')
-        document_number = request.POST.get('document_number')
-        
-        
-        
-        daily_price = get_location_based_price(car, location_category)
-        
-        from datetime import datetime
-
-        rental_date = datetime.strptime(rental_date, '%Y-%m-%d').date()
-        return_date = datetime.strptime(return_date, '%Y-%m-%d').date()
-        
-  
-
-        # Calculate total price based on rental days
-        # if rental_date == return_date:
-        #     rental_days = 1
-        # else:
-        #     rental_days = (return_date - rental_date).total_seconds() / (12 * 3600)
-        #     rental_days = max(1, int(rental_days))
-        # Handle case where price is stored as a range "200 - 300"
-        
-        number_of_days = int(number_of_days)
-        
-        if isinstance(daily_price, str) and " - " in daily_price:
-            # Split the range and convert to float instead of int
-            min_price, max_price = map(float, daily_price.split(" - "))
-            total_min_price = min_price * number_of_days
-            total_max_price = max_price * number_of_days
-            total_price = f"{total_min_price:.2f} - {total_max_price:.2f}"  # Keep two decimal places
+    if request.user.is_authenticated:
+        if request.method == 'POST':
             
-        else:
-
-            total_price = float(daily_price) * number_of_days
+            customer_name = request.POST.get('customer_name')
+            customer_phone = request.POST.get('customer_phone')
+            emergency_name = request.POST.get('emergency_name')
+            emergency_phone = request.POST.get('emergency_phone')
+            pick_up_time = request.POST.get('pick_up_time')
+            drop_off_time = request.POST.get('drop_off_time')
+            number_of_days = request.POST.get('number_of_days')
+            rental_date = request.POST.get('rental_date')
+            return_date = request.POST.get('return_date')
+            location_category = request.POST.get('location_category')
+            city = request.POST.get('city')
+            town = request.POST.get('town')
+            document_type = request.POST.get('document_type')
+            document_number = request.POST.get('document_number')
             
-    
-        
-        rentals = Rental(customer=user, car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, number_of_days=number_of_days, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
-        rentals.save()
-        
-        # send_mail(
-        #     'Booking Confirmation',
-        #     f'Thank you for booking {car.car_name}. Your booking details are as follows:\n\n'
-        #     f'Customer Name: {customer_name}\n'
-        #     f'Car: {car.car_name}\n'
-        #     f'Rental Date: {rental_date}\n'
-        #     f'Return Date: {return_date}\n'
-        #     f'Total Price: ${total_price}',
-        #     settings.EMAIL_HOST_USER,
-        #     [customer_email],
-        #     fail_silently=False,
-        # )
-        
-        send_sms(customer_phone, customer_name, car.car_name)
-        receive_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, location_category, town, pick_up_time, drop_off_time, total_price)
-        
-        return redirect('sucessPage')
-    
+            
+            
+            daily_price = get_location_based_price(car, location_category)
+            
+            from datetime import datetime
+
+            rental_date = datetime.strptime(rental_date, '%Y-%m-%d').date()
+            return_date = datetime.strptime(return_date, '%Y-%m-%d').date()
+            
+
+
+            # Calculate total price based on rental days
+            # if rental_date == return_date:
+            #     rental_days = 1
+            # else:
+            #     rental_days = (return_date - rental_date).total_seconds() / (12 * 3600)
+            #     rental_days = max(1, int(rental_days))
+            # Handle case where price is stored as a range "200 - 300"
+            
+            number_of_days = int(number_of_days)
+            
+            if isinstance(daily_price, str) and " - " in daily_price:
+                # Split the range and convert to float instead of int
+                min_price, max_price = map(float, daily_price.split(" - "))
+                total_min_price = min_price * number_of_days
+                total_max_price = max_price * number_of_days
+                total_price = f"{total_min_price:.2f} - {total_max_price:.2f}"  # Keep two decimal places
+                
+            else:
+
+                total_price = float(daily_price) * number_of_days
+                
+
+            
+            rentals = Rental(customer=user, car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, number_of_days=number_of_days, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
+            rentals.save()
+            
+            # send_mail(
+            #     'Booking Confirmation',
+            #     f'Thank you for booking {car.car_name}. Your booking details are as follows:\n\n'
+            #     f'Customer Name: {customer_name}\n'
+            #     f'Car: {car.car_name}\n'
+            #     f'Rental Date: {rental_date}\n'
+            #     f'Return Date: {return_date}\n'
+            #     f'Total Price: ${total_price}',
+            #     settings.EMAIL_HOST_USER,
+            #     [customer_email],
+            #     fail_silently=False,
+            # )
+            
+            send_sms(customer_phone, customer_name, car.car_name)
+            receive_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, location_category, town, pick_up_time, drop_off_time, total_price)
+            
+            return redirect('sucessPage')
+    else:
+        if request.method == 'POST':
+            
+            customer_name = request.POST.get('customer_name')
+            customer_phone = request.POST.get('customer_phone')
+            emergency_name = request.POST.get('emergency_name')
+            emergency_phone = request.POST.get('emergency_phone')
+            pick_up_time = request.POST.get('pick_up_time')
+            drop_off_time = request.POST.get('drop_off_time')
+            number_of_days = request.POST.get('number_of_days')
+            rental_date = request.POST.get('rental_date')
+            return_date = request.POST.get('return_date')
+            location_category = request.POST.get('location_category')
+            city = request.POST.get('city')
+            town = request.POST.get('town')
+            document_type = request.POST.get('document_type')
+            document_number = request.POST.get('document_number')
+            
+            
+            
+            daily_price = get_location_based_price(car, location_category)
+            
+            from datetime import datetime
+
+            rental_date = datetime.strptime(rental_date, '%Y-%m-%d').date()
+            return_date = datetime.strptime(return_date, '%Y-%m-%d').date()
+            
+
+
+            # Calculate total price based on rental days
+            # if rental_date == return_date:
+            #     rental_days = 1
+            # else:
+            #     rental_days = (return_date - rental_date).total_seconds() / (12 * 3600)
+            #     rental_days = max(1, int(rental_days))
+            # Handle case where price is stored as a range "200 - 300"
+            
+            number_of_days = int(number_of_days)
+            
+            if isinstance(daily_price, str) and " - " in daily_price:
+                # Split the range and convert to float instead of int
+                min_price, max_price = map(float, daily_price.split(" - "))
+                total_min_price = min_price * number_of_days
+                total_max_price = max_price * number_of_days
+                total_price = f"{total_min_price:.2f} - {total_max_price:.2f}"  # Keep two decimal places
+                
+            else:
+
+                total_price = float(daily_price) * number_of_days
+                
+
+            
+            rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, number_of_days=number_of_days, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
+            rentals.save()
+            
+            # send_mail(
+            #     'Booking Confirmation',
+            #     f'Thank you for booking {car.car_name}. Your booking details are as follows:\n\n'
+            #     f'Customer Name: {customer_name}\n'
+            #     f'Car: {car.car_name}\n'
+            #     f'Rental Date: {rental_date}\n'
+            #     f'Return Date: {return_date}\n'
+            #     f'Total Price: ${total_price}',
+            #     settings.EMAIL_HOST_USER,
+            #     [customer_email],
+            #     fail_silently=False,
+            # )
+            
+            send_sms(customer_phone, customer_name, car.car_name)
+            receive_sms(customer_name, customer_phone, car.car_name, rental_date, return_date, location_category, town, pick_up_time, drop_off_time, total_price)
+            
+            return redirect('sucessPage')
     context = {
         'car':car,
         'title': 'Car Detail',
