@@ -6,7 +6,7 @@ def send_sms(phone_number, full_name, airline):
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": phone_number,
         "message": f"Dear {full_name}, your flight booking for {airline} is on pending. \n",
         "is_schedule": False,
@@ -32,7 +32,7 @@ def receive_sms(full_name, phone_number, airline, category, trip_from, trip_to, 
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": '0550222888',
         "message": f"New Flight Booking Details: \n\n" f"Customer Name: {full_name} \n" f"Phone Number: {phone_number} \n"  f"Flight Booked: {airline} \n" f"Category: {category}" f"From: {trip_from} \n" f"To: {trip_to} \n" f"Departure: {trip_departure} \n" f"Return: {trip_return} \n" f"Number of adults: {number_of_adults} \n" f"Number of childfred: {number_of_children} \n" f"Number of infants: {number_of_infants}",
         "is_schedule": False,
@@ -59,7 +59,7 @@ def update_flight_sms(phone_number, full_name, status, airline, category, trip_f
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": phone_number,
         "message": f"Dear {full_name} \n\n" f"Your flight has been {status} \n\n" f"Flight Booked: {airline} \n" f"Category: {category} \n" f"From: {trip_from} \n" f"To: {trip_to} \n" f"Departure: {trip_departure} \n" f"Return: {trip_return} \n" f"Number of adults: {number_of_adults} \n" f"Number of childfred: {number_of_children} \n" f"Number of infants: {number_of_infants} \n\n" "Have a nice trip we are looking forword to serve you again! Thank you.",
         "is_schedule": False,

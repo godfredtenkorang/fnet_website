@@ -17,7 +17,7 @@ def send_otp_sms(phone_number, otp, username, password):
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": phone_number,
         "message": f"Dear {username}, welcome to TLGHANA! \n" f"Use these details to login after entering this OTP: {otp} \n" f"Username: {username} \n" f"Password: {password} \n" "Thank you for choosing TLGHANA!",
         "is_schedule": False,
@@ -50,7 +50,7 @@ def send_otp(phone_number):
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": phone_number,
         "message": f"Your OTP code is {otp}. Valid for 5 minutes.",
         "is_schedule": False,
@@ -77,7 +77,7 @@ def send_payment_sms(phone_number, customer_name, total_price):
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": phone_number,
         "message": f"Dear {customer_name}, \n\n" f"Your payment of GH¢{total_price} has been received. Your booking is confirmed. \n\n" "For any inquiries, contact 0550222888 \n\n" "Thank you for choosing us! Safe travels.",
         "is_schedule": False,

@@ -7,7 +7,7 @@ def property_sms(phone_number, name, property_name):
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": phone_number,
         "message": f"Dear {name}, \n\nYour room booking for {property_name} is on pending. \n\n",
         "is_schedule": False,
@@ -34,7 +34,7 @@ def receive_property_sms(name, phone, rent, check_in_date, check_in_time, check_
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": '0550222888',
         "message": f"New Propety Details: \n" f"Name: {name} \n" f"Phone Number: {phone}" f"Property: {rent} \n"  f"Check in Date: {check_in_date} \n" f"Check in Time: {check_in_time}" f"Check out Date: {check_out_date}",
         "is_schedule": False,
@@ -61,7 +61,7 @@ def send_approve_sms(phone_number, name, property_name):
     apiKey = settings.MNOTIFY_API_KEY
     payload = {
         "key": apiKey,
-        "sender": 'TLGhana',
+        "sender": 'TL GHANA',
         "recipient[]": phone_number,
         "message": f"Dear {name}, \n\nYour room booking for {property_name} is approved. \n\n" "For more info, contact us on 0550222888 \n\nThank you!",
         "is_schedule": False,
