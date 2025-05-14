@@ -38,12 +38,12 @@ def register(request):
             request.session['registration_otp'] = otp
             request.session['registration_user_id'] = user.id
             
-            # send_otp_sms(user.phone, otp, user.username, form.cleaned_data['password1'])
-            if send_otp_whatsapp_mnotify(user.phone, otp, user.username, form.cleaned_data['password1']):
-                messages.success(request, 'OTP sent to your WhatsApp.')
-                return redirect("verify_registration_otp")
-            else:
-                messages.error(request, 'Failed to sent OTP')
+            send_otp_sms(user.phone, otp, user.username, form.cleaned_data['password1'])
+            # if send_otp_whatsapp_mnotify(user.phone, otp, user.username, form.cleaned_data['password1']):
+            #     messages.success(request, 'OTP sent to your WhatsApp.')
+            return redirect("verify_registration_otp")
+            # else:
+            #     messages.error(request, 'Failed to sent OTP')
     else:
         form = RegisterForm()
     return render(request, "users/register.html", {"form": form})
