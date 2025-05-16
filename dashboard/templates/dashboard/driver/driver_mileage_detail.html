@@ -1,0 +1,124 @@
+{% extends 'dashboard/base2.html' %} {% load static %} {% block content %}
+
+<div class="send-message-form">
+    <br><br>
+
+
+    <div class="container">
+        <h1>Driver Detail</h1>
+        <div class="responsive-table">
+            <h2>Mileage Records</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Vehicle</th>
+                        <th>Start Mileage</th>
+                        <th>End Mileage</th>
+                        <th>Mileage Used (km)</th>
+            
+            
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in mileage_records %}
+                    <tr>
+                        <td>{{record.date}}</td>
+                        <td>{{record.vehicle}}</td>
+                        <td>{{record.start_mileage}}</td>
+                        <td>{{record.end_mileage}}</td>
+                        <td>{{record.mileage_used}}</td>
+            
+                    </tr>
+            
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br><br>
+            <h2>Fuel Records</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Liters</th>
+                        <th>amount</th>
+                        <th>Vehicle</th>
+                        <th>Station Name</th>
+            
+                        <th>Receipt</th>
+            
+            
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in fuel_records %}
+                    <tr>
+                        <td>{{record.date}}</td>
+                        <td>{{record.liters}}</td>
+                        <td>{{record.amount}}</td>
+                        <td>{{record.vehicle}}</td>
+                        <td>{{record.station_name}}</td>
+                        {% if record.receipt %}
+                        <td>{{record.receipt}}</td>
+                        {% else %}
+                        <td>N/A</td>
+                        {% endif %}
+            
+                    </tr>
+            
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br><br>
+            <h2>Expenses</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>amount</th>
+                        <th>Description</th>
+                        <th>Receipt</th>
+            
+            
+            
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in expenses %}
+                    <tr>
+                        <td>{{record.date}}</td>
+                        <td>{{record.get_type_display}}</td>
+                        <td>{{record.amount}}</td>
+                        <td>{{record.description}}</td>
+                        {% if record.receipt %}
+                        <td><a href="{{record.receipt}}">receipt</a></td>
+                        {% else %}
+                        <td>N/A</td>
+                        {% endif %}
+                    </tr>
+            
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

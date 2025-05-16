@@ -20,7 +20,7 @@ class Agent(models.Model):
         return f"{self.first_name} {self.last_name} - {self.phone_number}"
 
 class Driver(models.Model):
-    driver = models.OneToOneField(User, models.CASCADE, null=True, blank=True)
+    driver = models.OneToOneField(User, models.CASCADE, null=True, blank=True, related_name='driver')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     licence_number = models.CharField(max_length=20, unique=True)

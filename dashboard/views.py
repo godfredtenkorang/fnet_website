@@ -4,6 +4,7 @@ from my_site.models import Car, Driver, DriverReview, Agent
 from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm, AgentForm
 from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images, rental_driver_update_sms
 from .models import SMSLog, DriversSMSLog, LoadCarImagesForCustomer
+
 from django.http import HttpResponse, JsonResponse
 
 from expenses.models import Expense, Receipt, Service
@@ -39,6 +40,8 @@ from django.contrib.auth.decorators import login_required
 
 from rent.models import PropertyBooking
 from rent.utils import send_approve_sms
+
+from django.db.models import F
 
 User = get_user_model()
 
@@ -491,27 +494,6 @@ def driver_list(request):
     drivers = Driver.objects.all()
     return render(request, 'dashboard/driver/driver_list.html', {'title': 'All Drivers', 'drivers': drivers})
 
-def driver_detail(request, driver_id):
-    driver = get_object_or_404(Driver, id=driver_id)
-    if request.method == 'POST':
-        driver_license_sms(driver.phone_number, driver.first_name, driver.licence_number, driver.licence_expiry_date)
-    return render(request, 'dashboard/driver/driver_detail.html', {'title': 'Driver Detail', 'driver': driver})
-
-def agent_dashboard(request, agent_id):
-    agent = get_object_or_404(Agent, id=agent_id)
-    appointments = Appointment.objects.filter(agent=agent, status='Completed')
-    rentals = Rental.objects.filter(agent=agent, status='Completed')
-    payments = Payment.objects.filter(agent=agent, status='Completed')
-    total_commission = agent.commission
-    
-    return render(request, 'dashboard/agent/agent_dashboard.html', {
-        'agent': agent,
-        'appointments': appointments,
-        'rentals': rentals,
-        'payments': payments,
-        'total_commission': total_commission,
-        'title': 'Agent Dashboard',
-    })
 
 def assign_driver(request, car_id):
     # Fetch the specific car by its ID
@@ -533,6 +515,8 @@ def assign_driver(request, car_id):
         'drivers': drivers,
     }
     return render(request, 'dashboard/driver/assign_driver.html', context)
+
+
 
 
 def update_appointment(request, appointment_id):

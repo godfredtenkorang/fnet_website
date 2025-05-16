@@ -14,6 +14,7 @@
                 <th>Available</th>
                 <th>Details</th>
                 <th>Commission</th>
+                <th>Mileage</th>
             </tr>
             {% for driver in drivers %}
             <tr>
@@ -23,6 +24,7 @@
                 <td>{{ driver.is_available }}</td>
                 <td><a href="{% url 'driver-detail' driver.id %}">Check</a></td>
                 <td><a href="{% url 'driver-dashboard' driver.id %}">Check Commission</a></td>
+                <td><a href="{% url 'driver-mileage-detail' driver.id %}">Tap for view</a></td>
             </tr>
             {% endfor %}
         </table>
