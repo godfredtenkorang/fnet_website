@@ -3,8 +3,8 @@ from rental.models import Contact, Rental, Appointment, Payment, RentalPayment
 from my_site.models import Car, Driver, DriverReview, Agent
 from my_site.forms import DriverForm, CarUpdateForm, AddGalleryForm, AgentForm
 from .utils import send_sms, appointment_update_sms, driver_license_sms, rental_update_sms, rental_payment_update_sms, driver_send_sms, driver_register_sms, send_customer_sms_for_images, rental_driver_update_sms
-from .models import SMSLog, DriversSMSLog, LoadCarImagesForCustomer
-
+from .models import FuelRecord, MileageRecord, SMSLog, DriversSMSLog, LoadCarImagesForCustomer
+from .models import Expense as expense
 from django.http import HttpResponse, JsonResponse
 
 from expenses.models import Expense, Receipt, Service
@@ -494,6 +494,79 @@ def driver_list(request):
     drivers = Driver.objects.all()
     return render(request, 'dashboard/driver/driver_list.html', {'title': 'All Drivers', 'drivers': drivers})
 
+
+# Driver
+
+def driver_mileage_detail(request, driver_id):
+    driver = get_object_or_404(Driver, pk=driver_id)
+    
+    current_month = timezone.now().month
+    current_year = timezone.now().year
+    
+    
+     # Get driver's mileage with calculated mileage
+    mileage_records = MileageRecord.objects.filter(
+        driver=driver,
+        date__month=current_month,
+        date__year=current_year
+    ).annotate(
+        calculated_mileage=F('end_mileage') - F('start_mileage')
+    )
+    total_mileage = mileage_records.aggregate(
+        total=Sum('calculated_mileage')
+    )['total'] or 0
+    
+    # Get driver's fuel records for the current month
+    fuel_records = FuelRecord.objects.filter(
+        driver=driver,
+        date__month=current_month,
+        date__year=current_year
+    )
+    total_fuel = fuel_records.aggregate(total=Sum('amount'))['total'] or 0
+    
+    
+    # Get driver's expenses for the current month
+    expenses = expense.objects.filter(
+        driver=driver,
+        date__month=current_month,
+        date__year=current_year
+    )
+    total_expenses = expenses.aggregate(total=Sum('amount'))['total'] or 0
+    
+    context = {
+        'driver': driver,
+        'mileage_records': mileage_records,
+        'total_mileage': total_mileage,
+        'fuel_records': fuel_records,
+        'total_fuel': total_fuel,
+        'expenses': expenses,
+        'total_expenses': total_expenses,
+    }
+    
+    return render(request, 'dashboard/driver/driver_mileage_detail.html', context)
+
+
+def driver_detail(request, driver_id):
+    driver = get_object_or_404(Driver, id=driver_id)
+    if request.method == 'POST':
+        driver_license_sms(driver.phone_number, driver.first_name, driver.licence_number, driver.licence_expiry_date)
+    return render(request, 'dashboard/driver/driver_detail.html', {'title': 'Driver Detail', 'driver': driver})
+
+def agent_dashboard(request, agent_id):
+    agent = get_object_or_404(Agent, id=agent_id)
+    appointments = Appointment.objects.filter(agent=agent, status='Completed')
+    rentals = Rental.objects.filter(agent=agent, status='Completed')
+    payments = Payment.objects.filter(agent=agent, status='Completed')
+    total_commission = agent.commission
+    
+    return render(request, 'dashboard/agent/agent_dashboard.html', {
+        'agent': agent,
+        'appointments': appointments,
+        'rentals': rentals,
+        'payments': payments,
+        'total_commission': total_commission,
+        'title': 'Agent Dashboard',
+    })
 
 def assign_driver(request, car_id):
     # Fetch the specific car by its ID

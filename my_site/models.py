@@ -42,7 +42,7 @@ class Driver(models.Model):
         return delta.days
     
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.phone_number}"
+        return f"{self.driver}"
     
 class DriverReview(models.Model):
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
@@ -210,11 +210,11 @@ class Car(models.Model):
             return True
         return False
     
-    def calculate_vat(self, price):
-        return (self.vat_percentage / Decimal(100)) * price
+    # def calculate_vat(self, price):
+    #     return (self.vat_percentage / Decimal(100)) * price
     
-    def calculate_total_with_vat(self, price):
-        return price + self.calculate_vat(price)
+    # def calculate_total_with_vat(self, price):
+    #     return price + self.calculate_vat(price)
 
     def __str__(self):
         return f"{self.brand} {self.car_name}"
