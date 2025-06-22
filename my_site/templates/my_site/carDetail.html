@@ -36,6 +36,55 @@
           flex-direction: column;
       }
   }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: black;
+  }
+  
+  #confirmSelfDrive {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  #confirmSelfDrive:hover {
+    background-color: #0056b3;
+  }
 </style>
 
 
@@ -45,7 +94,38 @@
 
 
 
-
+<!-- Add this modal HTML at the top of your content block -->
+<div id="selfDriveModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Important Notice for Self Drive</h2>
+    <br>
+    <p>You are booking a <strong>Buggers Self Drive</strong> vehicle. Please ensure you:</p>
+    <br>
+    <ul>
+      <li>Have a valid driver's license</li>
+      <br>
+      <li>Buggers Drive rentals are only available in Kumasi</li>
+      <br>
+      <li>Are familiar with Ghana's road regulations</li>
+      <br>
+      <li>You must be at least 35 years old and possess a valid Ghanaian driver’s license for more than one year to rent a Buggers
+      Drive vehicle</li>
+      <br>
+      <li>A valid visa passport is required for Buggers Driverentals.</li>
+      <br>
+      <li>For all rentals, a Ghana Card, digital address, and an emergency contact are required.</li>
+      <br>
+      <li>A guarantor is required for the driver’s contract in Buggers Driverentals.</li>
+      <br>
+      <li>Have read and agree to our <a href="{% url 'termsAndCondition' %}" target="_blank">Terms and Conditions</a>
+      </li>
+      <br>
+      <li>Will inspect the vehicle thoroughly before taking possession</li>
+    </ul>
+    <button id="confirmSelfDrive">I Understand</button>
+  </div>
+</div>
 
 <!-- bannerr -->
 
@@ -276,9 +356,9 @@
       <p class="negotiable_message" id="negotiable_message"></p>
       <br>
       <!-- <h3>NB: Book now if you want to make payment at the office.</h3> -->
-       {% if car.category.name == "Buggers Self Drive" %}
+       <!-- {% if car.category.name == "Buggers Self Drive" %}
        <h3 style="text-align: center;"><a href="{% url 'termsAndCondition' %}"> Read Terms and Conditions</a></h3>
-       {% endif %}
+       {% endif %} -->
       
         {% if car.availability_status == "Available" %}
           <button type="submit">Book Now</button>
@@ -367,7 +447,35 @@
   });
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const category = "{{ car.category.name }}";
+    const modal = document.getElementById("selfDriveModal");
+    const closeBtn = document.querySelector(".close");
+    const confirmBtn = document.getElementById("confirmSelfDrive");
 
+    if (category === "Buggers Self Drive") {
+      modal.style.display = "block";
+
+      // Close modal when clicking X
+      closeBtn.onclick = function () {
+        modal.style.display = "none";
+      }
+
+      // Close modal when clicking confirm button
+      confirmBtn.onclick = function () {
+        modal.style.display = "none";
+      }
+
+      // Close modal when clicking outside the modal
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    }
+  });
+</script>
 
 <!-- <script>
   document.addEventListener("DOMContentLoaded", function () {

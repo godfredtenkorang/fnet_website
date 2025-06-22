@@ -12,10 +12,11 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     # cars = list(Car.objects.filter(availability_status='Available'))
+    all_categories = Category.objects.exclude(name="Scheduled Drive")
     cars = list(Car.objects.all())
     random.shuffle(cars)
     random_cars = cars[:8]
-    return render(request, 'my_site/index.html', {'cars': random_cars})
+    return render(request, 'my_site/index.html', {'cars': random_cars, 'all_categories': all_categories})
 
 
 def rentCars(request):

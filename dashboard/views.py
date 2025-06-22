@@ -234,6 +234,11 @@ def complete_rental(request, rental_id):
         
     return redirect('bookings')
 
+def delete_rentals(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    rental.delete()
+    return redirect('bookings')
+
 
 def all_reviews(request):
     reviews = DriverReview.objects.all()
