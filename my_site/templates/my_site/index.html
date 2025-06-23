@@ -28,21 +28,47 @@
 
      <div class="see">
    
-    <a href="{% url 'rentCars' %}" class="slide-left">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-car"></i> View Cars
-  </button>
-</a>
 <a href="{% url 'rent-house' %}" class="slide-right" >
   <button type="button" class="btn-custom btn-custom-42">
     <i class="fas fa-home"></i> View Apartments
   </button>
 </a>
+
+{% for category in all_categories %}
+{% if category.name == "Pay and Move" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Pay and Move
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
+{% for category in all_categories %}
+{% if category.name == "Move and Pay" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Move and Pay
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
+{% for category in all_categories %}
+{% if category.name == "Scheduled Drive" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Scheduled Drive
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
 {% for category in all_categories %}
 {% if category.name == "Buggers Self Drive" %}
 <a href="{% url 'list-category' category.slug %}" class="slide-right">
   <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> Buggers Self Drive
+    <i class="fas fa-key"></i> View Buggers Self Drive
   </button>
 </a>
 {% endif %}
@@ -66,21 +92,47 @@
       <p>EXPERIENCE THE FREEDOM OF HASSLE-FREE TRAVEL.</p>
       <div class="see">
    
-      <a href="{% url 'rentCars' %}" class="slide-left">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-car"></i> View Cars
-  </button>
-</a>
+     
 <a href="{% url 'rent-house' %}" class="slide-right">
   <button type="button" class="btn-custom btn-custom-42">
     <i class="fas fa-home"></i> View Apartments
   </button>
 </a>
 {% for category in all_categories %}
+{% if category.name == "Pay and Move" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Pay and Move
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
+{% for category in all_categories %}
+{% if category.name == "Move and Pay" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Move and Pay
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
+{% for category in all_categories %}
+{% if category.name == "Scheduled Drive" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Scheduled Drive
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
+{% for category in all_categories %}
 {% if category.name == "Buggers Self Drive" %}
 <a href="{% url 'list-category' category.slug %}" class="slide-right">
   <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> Buggers Self Drive
+    <i class="fas fa-key"></i> View Buggers Self Drive
   </button>
 </a>
 {% endif %}
@@ -103,22 +155,47 @@
       </h1>
       <p>WITH US SAFELY</p>
       <div class="see">
-   
-       <a href="{% url 'rentCars' %}" class="slide-left">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-car"></i> View Cars
-  </button>
-</a>
+
 <a href="{% url 'rent-house' %}" class="slide-right">
   <button type="button" class="btn-custom btn-custom-42">
     <i class="fas fa-home"></i> View Apartments
   </button>
 </a>
 {% for category in all_categories %}
+{% if category.name == "Pay and Move" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Pay and Move
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
+{% for category in all_categories %}
+{% if category.name == "Move and Pay" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Move and Pay
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
+{% for category in all_categories %}
+{% if category.name == "Scheduled Drive" %}
+<a href="{% url 'list-category' category.slug %}" class="slide-right">
+  <button type="button" class="btn-custom btn-custom-42">
+    <i class="fas fa-key"></i> View Scheduled Drive
+  </button>
+</a>
+{% endif %}
+{% endfor %}
+
+{% for category in all_categories %}
 {% if category.name == "Buggers Self Drive" %}
 <a href="{% url 'list-category' category.slug %}" class="slide-right">
   <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> Buggers Self Drive
+    <i class="fas fa-key"></i> View Buggers Self Drive
   </button>
 </a>
 {% endif %}
