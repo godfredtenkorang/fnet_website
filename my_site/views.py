@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
     # cars = list(Car.objects.filter(availability_status='Available'))
-    all_categories = Category.objects.exclude(name="Scheduled Drive")
+    all_categories = Category.objects.all()
     cars = list(Car.objects.all())
     random.shuffle(cars)
     random_cars = cars[:8]
