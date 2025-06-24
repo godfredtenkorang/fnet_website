@@ -75,6 +75,7 @@ class Car(models.Model):
 
     AVAILABILITY_STATUS = [
         ('Available', 'Available'),
+        ('Unlimited', 'Unlimited'),
         ('Rented', 'Rented'),
         ('Maintenance', 'Maintenance'),
     ]
