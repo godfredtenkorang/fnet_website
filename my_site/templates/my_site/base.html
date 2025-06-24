@@ -152,6 +152,10 @@
 
 
     </section>
+    <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">
+    ↑
+</button>
+
     <footer class="footer-distributed">
     
                 <div class="footer-left">
@@ -320,6 +324,25 @@ remove.addEventListener("click", () => {
 
     // Change slide every 5 seconds
     setInterval(nextSlide, 6000);
+</script>
+<script>
+// Show button when scrolled down
+window.onscroll = function() {
+    let scrollBtn = document.getElementById("scrollTopBtn");
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollBtn.style.display = "block";
+    } else {
+        scrollBtn.style.display = "none";
+    }
+};
+
+// Scroll to top function
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
 </script>
 
 </body>

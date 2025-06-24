@@ -8,17 +8,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
-      url("{% static 'my_site/img/bg444.jpeg' %}");
+    url("{% static 'my_site/img/bg444.jpeg' %}");
   }
 </style>
 
 <!-- slide show -->
 <div class="slide-show-container">
   <div class="slide">
-    <img
-      src="{% static 'my_site/img/bg555.jpeg' %}"
-      alt="background photo"
-    />
+    <img src="{% static 'my_site/img/bg555.jpeg' %}" alt="background photo" />
     <div class="slide-text">
       <h1>
         <span> WELCOME</span> TO <br />
@@ -26,64 +23,61 @@
       </h1>
       <p>YOUR TRUSTED CAR RENTAL, TICKETING, <br> AND PLACE-TO-STAY PARTNER!</p>
 
-     <div class="see">
-   
-<a href="{% url 'rent-house' %}" class="slide-right" >
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-home"></i> View Apartments
-  </button>
-</a>
+      <div class="see">
 
-{% for category in all_categories %}
-{% if category.name == "Pay and Move" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Pay and Move
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        <a href="{% url 'rent-house' %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-home"></i> View Apartments
+          </button>
+        </a>
 
-{% for category in all_categories %}
-{% if category.name == "Move and Pay" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Move and Pay
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        {% for category in all_categories %}
+        {% if category.name == "Pay and Move" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Pay and Move
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-{% for category in all_categories %}
-{% if category.name == "Scheduled Drive" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Scheduled Drive
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        {% for category in all_categories %}
+        {% if category.name == "Move and Pay" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Move and Pay
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-{% for category in all_categories %}
-{% if category.name == "Buggers Self Drive" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Buggers Self Drive
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        {% for category in all_categories %}
+        {% if category.name == "Scheduled Drive" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Scheduled Drive
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-  
-    
-     </div>
+        {% for category in all_categories %}
+        {% if category.name == "Buggers Self Drive" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Buggers Self Drive
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
+
+
+
+      </div>
     </div>
   </div>
   <div class="slide">
-    <img
-      src="{% static 'my_site/img/background3.jpg' %}"
-      alt="background photo"
-    />
+    <img src="{% static 'my_site/img/background3.jpg' %}" alt="background photo" />
     <div class="slide-text">
       <h1>
         <span> START YOUR </span> JOURNEY <br />
@@ -91,119 +85,116 @@
       </h1>
       <p>EXPERIENCE THE FREEDOM OF HASSLE-FREE TRAVEL.</p>
       <div class="see">
-   
-     
-<a href="{% url 'rent-house' %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-home"></i> View Apartments
-  </button>
-</a>
-{% for category in all_categories %}
-{% if category.name == "Pay and Move" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Pay and Move
-  </button>
-</a>
-{% endif %}
-{% endfor %}
 
-{% for category in all_categories %}
-{% if category.name == "Move and Pay" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Move and Pay
-  </button>
-</a>
-{% endif %}
-{% endfor %}
 
-{% for category in all_categories %}
-{% if category.name == "Scheduled Drive" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Scheduled Drive
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        <a href="{% url 'rent-house' %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-home"></i> View Apartments
+          </button>
+        </a>
+        {% for category in all_categories %}
+        {% if category.name == "Pay and Move" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Pay and Move
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-{% for category in all_categories %}
-{% if category.name == "Buggers Self Drive" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Buggers Self Drive
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        {% for category in all_categories %}
+        {% if category.name == "Move and Pay" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Move and Pay
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-    
-      
-       </div>
+        {% for category in all_categories %}
+        {% if category.name == "Scheduled Drive" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Scheduled Drive
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
+
+        {% for category in all_categories %}
+        {% if category.name == "Buggers Self Drive" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Buggers Self Drive
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
+
+
+
+      </div>
     </div>
   </div>
   <div class="slide">
-    <img
-      src="{% static 'my_site/img/background.jpg' %}"
-      alt="background photo"
-    />
+    <img src="{% static 'my_site/img/background.jpg' %}" alt="background photo" />
     <div class="slide-text">
       <h1>
         <span> RIDE, TRAVEL</span> & STAY <br />
-        
+
       </h1>
       <p>WITH US SAFELY</p>
       <div class="see">
 
-<a href="{% url 'rent-house' %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-home"></i> View Apartments
-  </button>
-</a>
-{% for category in all_categories %}
-{% if category.name == "Pay and Move" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Pay and Move
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        <a href="{% url 'rent-house' %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-home"></i> View Apartments
+          </button>
+        </a>
+        {% for category in all_categories %}
+        {% if category.name == "Pay and Move" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Pay and Move
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-{% for category in all_categories %}
-{% if category.name == "Move and Pay" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Move and Pay
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        {% for category in all_categories %}
+        {% if category.name == "Move and Pay" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Move and Pay
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-{% for category in all_categories %}
-{% if category.name == "Scheduled Drive" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Scheduled Drive
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        {% for category in all_categories %}
+        {% if category.name == "Scheduled Drive" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Scheduled Drive
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-{% for category in all_categories %}
-{% if category.name == "Buggers Self Drive" %}
-<a href="{% url 'list-category' category.slug %}" class="slide-right">
-  <button type="button" class="btn-custom btn-custom-42">
-    <i class="fas fa-key"></i> View Buggers Self Drive
-  </button>
-</a>
-{% endif %}
-{% endfor %}
+        {% for category in all_categories %}
+        {% if category.name == "Buggers Self Drive" %}
+        <a href="{% url 'list-category' category.slug %}" class="slide-right">
+          <button type="button" class="btn-custom btn-custom-42">
+            <i class="fas fa-key"></i> View Buggers Self Drive
+          </button>
+        </a>
+        {% endif %}
+        {% endfor %}
 
-    
-      
-       </div>
+
+
+      </div>
     </div>
   </div>
 
@@ -230,7 +221,7 @@
       To become the leading car rental company, recognized for innovation,
       customer satisfaction, and a commitment to making transportation
       accessible and hassle-free for everyone, everywhere.
-    </p>  <br>
+    </p> <br>
     <p>
       <strong> Mission Statement : </strong>
 
@@ -252,11 +243,11 @@
 
 <!-- service -->
 <div class="service-section">
-    <h2>Our Service</h2>
+  <h2>Our Service</h2>
   <div class="service-grid">
     <div class="service">
       <i class="fas fa-car"></i>
-     
+
       <h4>Pay and Move:</h4>
       <p>
         Pay upfront and hit the road with no delays.
@@ -266,7 +257,7 @@
     </div>
     <div class="service">
       <i class="fas fa-clock-o"></i>
-    
+
       <h4>Move and Pay:</h4>
       <p>
         Enjoy the freedom to pay at the end of your trip.
@@ -335,35 +326,39 @@
         <button class="btn-see-more">View More Cars</button>
       </a>
     </div>
-    
+
   </div>
   <div class="featured-cars-grid">
     {% for car in cars %}
-   <div class="car">
+    <div class="car">
       <img src="{{ car.image1.url }}" alt="Hundai Car" />
       <div class="car-info">
         <div class="car-inf-grid">
           <p class="carName">{{ car.car_name }}</p>
-          
+
         </div>
-       
-        
+
+
         <div class="car-inf-grid">
           <div class="prices">
             <p>Pricing starting at</p>
-            <strong> <p class="carPrice">GH¢{{ car.price_within_kumasi }}/day</p> <span>Driving Hours - 5am to 9pm</span></strong>
+            <strong>
+              <p class="carPrice">GH¢{{ car.price_within_kumasi }}/day</p> <span>Driving Hours - 5am to 9pm</span>
+            </strong>
           </div>
-          <p>{{ car.category }} <br><span style="color: green;">{{ car.availability_status }} </span> <span style="color: red; font-size:15px;">{% if car.availability_status == "Rented" %} from {{car.rental_date|date:"d/m/y"}} - {{car.return_date|date:"d/m/y"}} {% endif %}</span></p>
-          
-         
-         <div class="more-details">
-          <a href="{% url 'carDetail' car.slug %}" >
-            <button> More detail  </button>
-          </a>
-         </div>
+          <p>{{ car.category }} <br><span style="color: green;">{{ car.availability_status }} </span> <span
+              style="color: red; font-size:15px;">{% if car.availability_status == "Rented" %} from
+              {{car.rental_date|date:"d/m/y"}} - {{car.return_date|date:"d/m/y"}} {% endif %}</span></p>
+
+
+          <div class="more-details">
+            <a href="{% url 'carDetail' car.slug %}">
+              <button> More detail </button>
+            </a>
+          </div>
         </div>
       </div>
-  </div>
+    </div>
     {% endfor %}
   </div>
 </div>
@@ -374,8 +369,8 @@
   <div class="why-container">
     <h3>WHY CHOOSE US</h3>
     <p>
-        • Wide Range of Vehicles <br>
-        From sleek sedans to spacious SUVs and vans, we offer a variety of vehicles to suit your travel requirements.
+      • Wide Range of Vehicles <br>
+      From sleek sedans to spacious SUVs and vans, we offer a variety of vehicles to suit your travel requirements.
     </p>
     <br />
     <p>
@@ -393,18 +388,15 @@
       Our dedicated team is always available to assist you with bookings, inquiries, and emergencies.
     </p>
     <br />
-  <p>
-    • Safe and Reliable <br>
-    All our vehicles are regularly serviced and well-maintained to ensure a safe journey.
-  </p>
-    
+    <p>
+      • Safe and Reliable <br>
+      All our vehicles are regularly serviced and well-maintained to ensure a safe journey.
+    </p>
+
   </div>
 
   <div class="why-container-img">
-    <img
-      src="{% static 'my_site/img/service-background.jpg' %}"
-      alt="Hundai Car"
-    />
+    <img src="{% static 'my_site/img/service-background.jpg' %}" alt="Hundai Car" />
   </div>
 </div>
 
@@ -606,7 +598,7 @@
     </div>
     
 </div> -->
-  
+
 
 
 
@@ -678,25 +670,29 @@
       <li class="card">
         <div class="img" draggable="false">
           <h2>Kwame Adom</h2>
-          <blockquote>"The service was exceptional, and the car was in excellent condition. I highly recommend!"</blockquote>
+          <blockquote>"The service was exceptional, and the car was in excellent condition. I highly recommend!"
+          </blockquote>
         </div>
       </li>
       <li class="card">
         <div class="img" draggable="false">
           <h2>Ama Owusu</h2>
-          <blockquote>"I was impressed by the seamless process and the reliability of the car rental service."</blockquote>
+          <blockquote>"I was impressed by the seamless process and the reliability of the car rental service."
+          </blockquote>
         </div>
       </li>
       <li class="card">
         <div class="img" draggable="false">
           <h2>Kofi Mensah</h2>
-          <blockquote>"An excellent choice for anyone looking for dependable transportation. Will definitely use again."</blockquote>
+          <blockquote>"An excellent choice for anyone looking for dependable transportation. Will definitely use again."
+          </blockquote>
         </div>
       </li>
       <li class="card">
         <div class="img" draggable="false">
           <h2>Akosua Afriyie</h2>
-          <blockquote>"The whole experience was very smooth, and the car was well-maintained throughout my trip."</blockquote>
+          <blockquote>"The whole experience was very smooth, and the car was well-maintained throughout my trip."
+          </blockquote>
         </div>
       </li>
       <li class="card">
@@ -708,8 +704,8 @@
     </ul>
     <i id="right" class="fa-solid fa-angle-right"></i>
   </div>
-  
-  
+
+
 </div>
 
 
@@ -721,120 +717,120 @@
 
 
 <script>
-const wrapper = document.querySelector(".wrapper");
-const carousel = document.querySelector(".carousel");
-const firstCardWidth = carousel.querySelector(".card").offsetWidth;
-const arrowBtns = document.querySelectorAll(".wrapper i");
-const carouselChildrens = [...carousel.children];
-let isDragging = false, isAutoPlay = true, startX, startScrollLeft, timeoutId;
-// Get the number of cards that can fit in the carousel at once
-let cardPerView = Math.round(carousel.offsetWidth / firstCardWidth);
-// Insert copies of the last few cards to beginning of carousel for infinite scrolling
-carouselChildrens.slice(-cardPerView).reverse().forEach(card => {
+  const wrapper = document.querySelector(".wrapper");
+  const carousel = document.querySelector(".carousel");
+  const firstCardWidth = carousel.querySelector(".card").offsetWidth;
+  const arrowBtns = document.querySelectorAll(".wrapper i");
+  const carouselChildrens = [...carousel.children];
+  let isDragging = false, isAutoPlay = true, startX, startScrollLeft, timeoutId;
+  // Get the number of cards that can fit in the carousel at once
+  let cardPerView = Math.round(carousel.offsetWidth / firstCardWidth);
+  // Insert copies of the last few cards to beginning of carousel for infinite scrolling
+  carouselChildrens.slice(-cardPerView).reverse().forEach(card => {
     carousel.insertAdjacentHTML("afterbegin", card.outerHTML);
-});
-// Insert copies of the first few cards to end of carousel for infinite scrolling
-carouselChildrens.slice(0, cardPerView).forEach(card => {
+  });
+  // Insert copies of the first few cards to end of carousel for infinite scrolling
+  carouselChildrens.slice(0, cardPerView).forEach(card => {
     carousel.insertAdjacentHTML("beforeend", card.outerHTML);
-});
-// Scroll the carousel at appropriate postition to hide first few duplicate cards on Firefox
-carousel.classList.add("no-transition");
-carousel.scrollLeft = carousel.offsetWidth;
-carousel.classList.remove("no-transition");
-// Add event listeners for the arrow buttons to scroll the carousel left and right
-arrowBtns.forEach(btn => {
+  });
+  // Scroll the carousel at appropriate postition to hide first few duplicate cards on Firefox
+  carousel.classList.add("no-transition");
+  carousel.scrollLeft = carousel.offsetWidth;
+  carousel.classList.remove("no-transition");
+  // Add event listeners for the arrow buttons to scroll the carousel left and right
+  arrowBtns.forEach(btn => {
     btn.addEventListener("click", () => {
-        carousel.scrollLeft += btn.id == "left" ? -firstCardWidth : firstCardWidth;
+      carousel.scrollLeft += btn.id == "left" ? -firstCardWidth : firstCardWidth;
     });
-});
-const dragStart = (e) => {
+  });
+  const dragStart = (e) => {
     isDragging = true;
     carousel.classList.add("dragging");
     // Records the initial cursor and scroll position of the carousel
     startX = e.pageX;
     startScrollLeft = carousel.scrollLeft;
-}
-const dragging = (e) => {
-    if(!isDragging) return; // if isDragging is false return from here
+  }
+  const dragging = (e) => {
+    if (!isDragging) return; // if isDragging is false return from here
     // Updates the scroll position of the carousel based on the cursor movement
     carousel.scrollLeft = startScrollLeft - (e.pageX - startX);
-}
-const dragStop = () => {
+  }
+  const dragStop = () => {
     isDragging = false;
     carousel.classList.remove("dragging");
-}
-const infiniteScroll = () => {
+  }
+  const infiniteScroll = () => {
     // If the carousel is at the beginning, scroll to the end
-    if(carousel.scrollLeft === 0) {
-        carousel.classList.add("no-transition");
-        carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidth);
-        carousel.classList.remove("no-transition");
+    if (carousel.scrollLeft === 0) {
+      carousel.classList.add("no-transition");
+      carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidth);
+      carousel.classList.remove("no-transition");
     }
     // If the carousel is at the end, scroll to the beginning
-    else if(Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
-        carousel.classList.add("no-transition");
-        carousel.scrollLeft = carousel.offsetWidth;
-        carousel.classList.remove("no-transition");
+    else if (Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
+      carousel.classList.add("no-transition");
+      carousel.scrollLeft = carousel.offsetWidth;
+      carousel.classList.remove("no-transition");
     }
     // Clear existing timeout & start autoplay if mouse is not hovering over carousel
     clearTimeout(timeoutId);
-    if(!wrapper.matches(":hover")) autoPlay();
-}
-const autoPlay = () => {
-    if(window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
+    if (!wrapper.matches(":hover")) autoPlay();
+  }
+  const autoPlay = () => {
+    if (window.innerWidth < 800 || !isAutoPlay) return; // Return if window is smaller than 800 or isAutoPlay is false
     // Autoplay the carousel after every 2500 ms
     timeoutId = setTimeout(() => carousel.scrollLeft += firstCardWidth, 2500);
-}
-autoPlay();
-carousel.addEventListener("mousedown", dragStart);
-carousel.addEventListener("mousemove", dragging);
-document.addEventListener("mouseup", dragStop);
-carousel.addEventListener("scroll", infiniteScroll);
-wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
-wrapper.addEventListener("mouseleave", autoPlay);
- </script> 
+  }
+  autoPlay();
+  carousel.addEventListener("mousedown", dragStart);
+  carousel.addEventListener("mousemove", dragging);
+  document.addEventListener("mouseup", dragStop);
+  carousel.addEventListener("scroll", infiniteScroll);
+  wrapper.addEventListener("mouseenter", () => clearTimeout(timeoutId));
+  wrapper.addEventListener("mouseleave", autoPlay);
+</script>
 
 
 
 
 <script>
   document.querySelectorAll('.image-slider').forEach(slider => {
- let images = slider.querySelectorAll('img');
- let currentIndex = 0;
- let interval;
+    let images = slider.querySelectorAll('img');
+    let currentIndex = 0;
+    let interval;
 
- function showImage(index) {
-     images.forEach(img => img.classList.remove('active'));
-     images[index].classList.add('active');
- }
+    function showImage(index) {
+      images.forEach(img => img.classList.remove('active'));
+      images[index].classList.add('active');
+    }
 
- function nextImage() {
-     currentIndex = (currentIndex + 1) % images.length;
-     showImage(currentIndex);
- }
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }
 
- function prevImage() {
-     currentIndex = (currentIndex - 1 + images.length) % images.length;
-     showImage(currentIndex);
- }
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    }
 
- slider.querySelector('.next').addEventListener('click', nextImage);
- slider.querySelector('.prev').addEventListener('click', prevImage);
+    slider.querySelector('.next').addEventListener('click', nextImage);
+    slider.querySelector('.prev').addEventListener('click', prevImage);
 
- function startAutoSlide() {
-     interval = setInterval(nextImage, 3000);
- }
+    function startAutoSlide() {
+      interval = setInterval(nextImage, 3000);
+    }
 
- function stopAutoSlide() {
-     clearInterval(interval);
- }
+    function stopAutoSlide() {
+      clearInterval(interval);
+    }
 
- slider.addEventListener('mouseenter', stopAutoSlide);
- slider.addEventListener('mouseleave', startAutoSlide);
+    slider.addEventListener('mouseenter', stopAutoSlide);
+    slider.addEventListener('mouseleave', startAutoSlide);
 
- showImage(currentIndex);
- startAutoSlide();
-});
+    showImage(currentIndex);
+    startAutoSlide();
+  });
 
 </script>
 
