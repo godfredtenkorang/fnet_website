@@ -151,6 +151,7 @@ class Car(models.Model):
     rental_date = models.DateField(null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)
     year_registered = models.CharField(max_length=10, null=True, blank=True)
+    registration_number = models.CharField(max_length=20, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     image1 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     image2 = models.ImageField(upload_to='car_images/', blank=True, null=True)
