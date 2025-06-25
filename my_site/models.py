@@ -195,6 +195,8 @@ class Car(models.Model):
     @property
     def current_mileage(self):
         """Get the current mileage from the latest record"""
+        if not self.pk:  # If instance isn't saved yet
+            return None
         latest_record = self.mileagerecord_set.order_by('-date').first()
         return latest_record.end_mileage if latest_record else None
     
