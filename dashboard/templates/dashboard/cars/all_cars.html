@@ -16,6 +16,7 @@
                     <th>Year Manufactured</th>
                     <th>Engine Capacity</th>
                     <th>Year Register</th>
+                    <th>Status</th>
                     <th>Update</th>
                 </tr>
             </thead>
@@ -30,6 +31,7 @@
                     <td>{{ car.year_manufactured }}</td>
                     <td>{{ car.engine_capacity }}</td>
                     <td>{{ car.year_registered }}</td>
+                    <td>{{ car.availability_status }}</td>
                     <td><a href="{% url 'all-cars-form' car.slug %}">Link</a></td>
                 </tr>
                 {% endfor %}
