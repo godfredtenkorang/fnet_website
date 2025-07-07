@@ -180,6 +180,11 @@ def update_rentals(request, rental_id):
             if update_rentals.driver:
                 update_rentals.driver.is_available == False
                 update_rentals.driver.save()
+            if update_rentals.car:
+                update_rentals.car.rental_date = update_rentals.rental_date
+                update_rentals.car.return_date = update_rentals.return_date
+                update_rentals.car.availability_status = "Rented"
+                update_rentals.car.save()
                 
             # vat_percentage = Decimal(0.25) # 25% VAT
 
@@ -214,10 +219,16 @@ def complete_rental(request, rental_id):
         if rental.driver and rental.agent:
             rental.driver.commission += commission
             rental.agent.commission += commission
+            
             rental.driver.is_available = True
             rental.driver.save()
             rental.agent.save()
             
+        if rental.car:
+            rental.car.availability_status = 'Available'
+            rental.car.save()
+            
+        
         rental.status = 'Completed'
         rental.save()
         
@@ -226,7 +237,7 @@ def complete_rental(request, rental_id):
         review_link = f"https://tlghana.com/review/{driver.id}/"
         
         message = {
-            f"Dear {customer.username}, your trip with {driver.first_name} has been completed. "
+            f"Dear, your trip with {driver.first_name} has been completed. "
             f"We would love to hear your feedback. Please rate your driver: {review_link}"
         }
         

@@ -314,6 +314,7 @@ def driver_detail(request):
 def driver_trips(request):
     driver = get_object_or_404(Driver, driver=request.user)
     rentals = Rental.objects.filter(driver=driver)
+    
     context = {
         'rentals': rentals,
         'title': 'Driver Bookings'
