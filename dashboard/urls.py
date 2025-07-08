@@ -12,6 +12,7 @@ urlpatterns = [
     path('send_driver_message/', views.sendDriverMessage, name='sendDriverMessage'),
     
     path('bookings/', views.bookings, name='bookings'),
+    path('all_bookings/', views.all_bookings, name='all_bookings'),
     path('bookings/<int:rental_id>/update/', views.update_rentals, name='update-rental'),
     path('bookings/<int:rental_id>/delete/', views.delete_rentals, name='delete-rental'),
     path('bookings/<int:rental_id>/complete/', views.complete_rental, name='complete-rental'),

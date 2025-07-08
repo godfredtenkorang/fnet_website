@@ -165,8 +165,13 @@ def sendDriverMessage(request):
 
 
 def bookings(request):
-    rentals = Rental.objects.all()
+    today = timezone.now().date()
+    rentals = Rental.objects.filter(created_at=today).order_by('-created_at')
     return render(request, 'dashboard/bookings.html', {'title': 'Bookings', 'rentals': rentals})
+
+def all_bookings(request):
+    rentals = Rental.objects.all().order_by('-created_at')
+    return render(request, 'dashboard/all_bookings.html', {'title': 'Bookings', 'rentals': rentals})
 
 def update_rentals(request, rental_id):
     # Get the specific appointment by its ID
