@@ -165,13 +165,21 @@ def sendDriverMessage(request):
 
 
 def bookings(request):
-    
-    rentals = Rental.objects.all().exclude(status='Completed').order_by('-created_at')
-    return render(request, 'dashboard/bookings.html', {'title': 'Bookings', 'rentals': rentals})
+    customer_phone = request.GET.get('customer_phone', None)
+    if customer_phone:
+        rentals = Rental.objects.filter(customer_phone=customer_phone).order_by('-created_at')
+    else:
+        # Get all rentals that are not completed
+        rentals = Rental.objects.all().exclude(status='Completed').order_by('-created_at')
+    return render(request, 'dashboard/bookings.html', {'title': 'Bookings', 'rentals': rentals, 'customer_phone': customer_phone})
 
 def all_bookings(request):
-    rentals = Rental.objects.filter(status='Completed').order_by('-created_at')
-    return render(request, 'dashboard/all_bookings.html', {'title': 'Bookings', 'rentals': rentals})
+    customer_phone = request.GET.get('customer_phone', None)
+    if customer_phone:
+        rentals = Rental.objects.filter(customer_phone=customer_phone).order_by('-created_at')
+    else:
+        rentals = Rental.objects.filter(status='Completed').order_by('-created_at')
+    return render(request, 'dashboard/all_bookings.html', {'title': 'Bookings', 'rentals': rentals, 'customer_phone':customer_phone})
 
 def update_rentals(request, rental_id):
     # Get the specific appointment by its ID

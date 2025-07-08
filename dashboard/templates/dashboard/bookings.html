@@ -3,6 +3,27 @@
 
 
 <div class="container">
+    <div class="send-message-form">
+        <br><br>
+        <h1>Filter Customers</h1>
+        <br>
+        <form method="get">
+            {% csrf_token %}
+    
+    
+            <div class="input">
+                <label for="">Phone Number</label> <br>
+                <input type="text" name="customer_phone" id="customer_phone">
+            </div>
+    
+            <button type="submit">Search</button>
+            <br>
+            <br>
+    
+    
+    
+            </form>
+    </div>
     <h1>Car Booking Table</h1>
     <h3><a href="{% url 'all_bookings' %}">Click Here for Completed Bookings</a></h3>
     <div class="responsive-table">
