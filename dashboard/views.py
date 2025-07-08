@@ -165,8 +165,8 @@ def sendDriverMessage(request):
 
 
 def bookings(request):
-    today = timezone.now().date()
-    rentals = Rental.objects.filter(created_at=today).order_by('-created_at')
+    
+    rentals = Rental.objects.all().exclude(status='Completed').order_by('-created_at')
     return render(request, 'dashboard/bookings.html', {'title': 'Bookings', 'rentals': rentals})
 
 def all_bookings(request):
