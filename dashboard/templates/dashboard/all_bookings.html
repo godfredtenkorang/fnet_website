@@ -15,6 +15,7 @@
                     <th>Rental Date</th>
                     <th>Return Date</th>
                     <th>Total Price</th>
+                    <th>Date Booked</th>
                     <th>Update</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -31,6 +32,7 @@
                     <td>{{ rental.rental_date }}</td>
                     <td>{{ rental.return_date }}</td>
                     <td>{{ rental.total_price }}</td>
+                    <td>{{ rental.created_at }}</td>
                     <td><a href="{% url 'update-rental' rental.id %}">Link</a></td>
                     {% if rental.status != 'Completed' %}
                     <td><a href="{% url 'complete-rental' rental.id %}">{{ rental.status }}</a></td>
