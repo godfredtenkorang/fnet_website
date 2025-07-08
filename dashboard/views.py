@@ -170,7 +170,7 @@ def bookings(request):
     return render(request, 'dashboard/bookings.html', {'title': 'Bookings', 'rentals': rentals})
 
 def all_bookings(request):
-    rentals = Rental.objects.all().order_by('-created_at')
+    rentals = Rental.objects.filter(status='Completed').order_by('-created_at')
     return render(request, 'dashboard/all_bookings.html', {'title': 'Bookings', 'rentals': rentals})
 
 def update_rentals(request, rental_id):
