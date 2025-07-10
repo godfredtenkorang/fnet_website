@@ -205,7 +205,7 @@
                 <thead>
                     <tr>
                         <td>Description <br> from: {{rental.rental_date}} - to: {{rental.return_date}}</td>
-
+                        <td>Location</td>
                         <td>Unit Price</td>
                         <!-- <td>VAT(2.5%)</td> -->
                         <td>Total</td>
@@ -215,6 +215,10 @@
                     <tr>
                         <td>
                             {{ rental.car.registration_number }}
+                        </td>
+
+                        <td>
+                            {{ rental.city }} - {{ rental.town }}
                         </td>
 
                         <td>
