@@ -17,6 +17,7 @@ urlpatterns = [
     path('bookings/<int:rental_id>/delete/', views.delete_rentals, name='delete-rental'),
     path('bookings/<int:rental_id>/complete/', views.complete_rental, name='complete-rental'),
     path('print_book_receipt/<int:receipt_id>/', views.print_rental_receipt, name='print_rental_receipt'),
+    path('make-payment-for-customer/<int:rental_id>/', views.payment_detail, name='make-payment-for-customer'),
     
     
     path('bookings_payments/', views.booking_payments, name='booking_payments'),

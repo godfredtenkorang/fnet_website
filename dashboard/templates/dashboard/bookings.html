@@ -39,6 +39,7 @@
                     <th>Total Price</th>
                     <th>Date Booked</th>
                     <th>Update</th>
+                    <th>Make Payment</th>
                     <th>Status</th>
                     <th>Action</th>
                     <th>Receipt</th>
@@ -56,6 +57,7 @@
                     <td>{{ rental.total_price }}</td>
                     <td>{{ rental.created_at }}</td>
                     <td><a href="{% url 'update-rental' rental.id %}">Link</a></td>
+                    <td><a href="{% url 'make-payment-for-customer' rental.id %}">Click here</a></td>
                     {% if rental.status != 'Completed' %}
                     <td><a href="{% url 'complete-rental' rental.id %}">{{ rental.status }}</a></td>
                     {% else %}

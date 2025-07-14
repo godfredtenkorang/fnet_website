@@ -263,6 +263,27 @@ def delete_rentals(request, rental_id):
     rental.delete()
     return redirect('bookings')
 
+@login_required
+def payment_detail(request, rental_id):
+    rental = get_object_or_404(Rental, id=rental_id)
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment_method')
+        payment_code = request.POST.get('payment_code')
+        name = request.POST.get('name')
+        amount = request.POST.get('amount')
+        transaction_id = request.POST.get('transaction_id')
+        
+        payments = RentalPayment(rental=rental, payment_method=payment_method, payment_code=payment_code, name=name, amount=amount, transaction_id=transaction_id)
+        payments.save()
+        
+        return redirect('bookings')
+
+    context = {
+        'rental': rental,
+        'title': 'Customer Bookings'
+    }
+    return render(request, "dashboard/payment_form.html", context)
+
 
 def all_reviews(request):
     reviews = DriverReview.objects.all()
