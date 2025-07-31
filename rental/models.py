@@ -59,6 +59,9 @@ class Rental(models.Model):
     total_price = models.CharField(max_length=100, blank=True, null=True)
     document_type = models.CharField(max_length=100, choices=DOCUMENT_TYPE, default='Ghana Card')
     document_number = models.CharField(max_length=100, null=True, blank=True)
+    purpose = models.TextField(null=True, blank=True)  # e.g., "Test drive", "Car inspection", etc.
+    accommodation = models.CharField(max_length=100, null=True, blank=True)  # e.g., "Hotel", "Guest house", etc.
+    chop_money = models.CharField(max_length=100, null=True, blank=True)  # e.g., "GH¢ 100.00"
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='rentals')
     agent = models.ForeignKey(Agent, on_delete=models.SET_NULL, null=True, blank=True, related_name='rentals')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')

@@ -210,6 +210,73 @@
 <div class="contact-us-section booking-container">
 
   <div class=" book-contact">
+
+<!-- Add this somewhere in your carDetail.html template -->
+<!-- <div class="rental-bookings-section">
+  <h3>Rental Bookings for this Car</h3>
+
+  {% if active_rentals %}
+  <h4>Current and Upcoming Rentals</h4>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Phone</th>
+          <th>Rental Date</th>
+          <th>Return Date</th>
+          <th>Location</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rental in active_rentals %}
+        <tr>
+          <td>{{ rental.customer_name }}</td>
+          <td>{{ rental.customer_phone }}</td>
+          <td>{{ rental.rental_date }}</td>
+          <td>{{ rental.return_date }}</td>
+          <td>{{ rental.city }}, {{ rental.town }}</td>
+          <td>{{ rental.status }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p>No current or upcoming rentals for this car.</p>
+  {% endif %}
+
+  {% if all_rentals %}
+  <h4>All Rental History</h4>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          
+          <th>Rental Date</th>
+          <th>Return Date</th>
+         
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rental in all_rentals %}
+        <tr>
+          
+          <td>{{ rental.rental_date }}</td>
+          <td>{{ rental.return_date }}</td>
+          
+          <td>{{ rental.status }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div> -->
+
+
     <p>Fill out the from below to book for your favourite car</p>
     <form method="POST">
       {% csrf_token %}
@@ -346,6 +413,10 @@
           <label for="">ID No. </label> <br>
           <input type="text" name="document_number" id="document_number" required placeholder="Type your ID Number">
         </div>
+        <div class="input">
+          <label for="">Purpose </label> <br>
+          <input type="text" name="purpose" id="purpose" required placeholder="Type the purpose of the trip">
+        </div>
 
         <!-- <div class="input">
           <label for="">Is it a Returned Trip?</label> <br>
@@ -364,12 +435,12 @@
        <!-- {% if car.category.name == "Buggers Self Drive" %}
        <h3 style="text-align: center;"><a href="{% url 'termsAndCondition' %}"> Read Terms and Conditions</a></h3>
        {% endif %} -->
-      
-        {% if car.availability_status == "Available" %}
+      <button type="submit">Book Now</button>
+        <!-- {% if car.availability_status == "Available" %}
           <button type="submit">Book Now</button>
         {% else %}
           <button disabled>Not Available</button>
-        {% endif %}
+        {% endif %} -->
       
       
 
@@ -381,6 +452,9 @@
       <button class="payOnarrival">Pay before Arrival </button>
     </a> -->
   </div>
+
+  
+
 </div>
 <script>
 //  document.addEventListener("DOMContentLoaded", function () {

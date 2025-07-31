@@ -40,7 +40,7 @@ class AppointmentUpdateForm(forms.ModelForm):
 class RentalUpdateForm(forms.ModelForm):
     class Meta:
         model = Rental
-        fields = ['customer', 'car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'location_category', 'town', 'number_of_days', 'rental_date', 'return_date', 'document_type', 'document_number', 'driver', 'agent', 'status', 'commission_rate', 'agent_commission_rate', 'base_price', 'transaction_id', 'total_price']
+        fields = ['customer', 'car', 'customer_name', 'customer_phone', 'pick_up_time', 'drop_off_time', 'location_category', 'town', 'number_of_days', 'rental_date', 'return_date', 'document_type', 'document_number', 'purpose', 'accommodation', 'chop_money', 'driver', 'agent', 'status', 'commission_rate', 'agent_commission_rate', 'base_price', 'transaction_id', 'total_price']
         widgets = {
             'rental_date': forms.DateInput(attrs={'type': 'date'}),
             'return_date': forms.DateInput(attrs={'type': 'date'}),

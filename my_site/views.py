@@ -8,6 +8,9 @@ from django.http import JsonResponse
 from dashboard.models import Customer
 import random
 from django.contrib.auth.decorators import login_required
+from datetime import date
+from django.utils import timezone
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -52,6 +55,13 @@ def carDetail(request,  car_slug):
     car = get_object_or_404(Car, slug=car_slug)
     user = request.user
     
+    # Get all rentals for this car, ordered by rental date (newest first)
+    rentals = Rental.objects.filter(car=car).order_by('-rental_date')
+    
+    # Get current active rentals (where return_date is in the future)
+    current_date = timezone.now().date()
+    active_rentals = rentals.filter(return_date__gte=current_date, status__in=['Confirmed', 'Completed'])
+    
     if request.user.is_authenticated:
         if request.method == 'POST':
             
@@ -69,8 +79,19 @@ def carDetail(request,  car_slug):
             town = request.POST.get('town')
             document_type = request.POST.get('document_type')
             document_number = request.POST.get('document_number')
+            purpose = request.POST.get('purpose')
             
+            # Check if the car is available for the selected dates
+            overlapping_rentals = Rental.objects.filter(
+                car=car,
+                rental_date__lte=return_date,
+                return_date__gte=rental_date,
+                status__in=['Confirmed', 'Completed']
+            ).exists()
             
+            if overlapping_rentals:
+                messages.error(request, "This car is already booked for the selected dates. Please choose different dates.")
+                return redirect('carDetail', car_slug=car_slug)
             
             daily_price = get_location_based_price(car, location_category)
             
@@ -104,7 +125,7 @@ def carDetail(request,  car_slug):
                 
 
             
-            rentals = Rental(customer=user, car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, number_of_days=number_of_days, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
+            rentals = Rental(customer=user, car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, number_of_days=number_of_days, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, purpose=purpose, total_price=total_price)
             rentals.save()
             
             # send_mail(
@@ -141,8 +162,19 @@ def carDetail(request,  car_slug):
             town = request.POST.get('town')
             document_type = request.POST.get('document_type')
             document_number = request.POST.get('document_number')
+            purpose = request.POST.get('purpose')
             
+            # Check if the car is available for the selected dates
+            overlapping_rentals = Rental.objects.filter(
+                car=car,
+                rental_date__lte=return_date,
+                return_date__gte=rental_date,
+                status__in=['Confirmed', 'Completed']
+            ).exists()
             
+            if overlapping_rentals:
+                messages.error(request, "This car is already booked for the selected dates. Please choose different dates.")
+                return redirect('carDetail', car_slug=car_slug)
             
             daily_price = get_location_based_price(car, location_category)
             
@@ -176,7 +208,7 @@ def carDetail(request,  car_slug):
                 
 
             
-            rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, number_of_days=number_of_days, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, total_price=total_price)
+            rentals = Rental(car=car, customer_name=customer_name, customer_phone=customer_phone, emergency_name=emergency_name, emergency_phone=emergency_phone, city=city, town=town, location_category=location_category, pick_up_time=pick_up_time, drop_off_time=drop_off_time, number_of_days=number_of_days, rental_date=rental_date, return_date=return_date, document_type=document_type, document_number=document_number, purpose=purpose, total_price=total_price)
             rentals.save()
             
             # send_mail(
@@ -198,6 +230,8 @@ def carDetail(request,  car_slug):
             return redirect('sucessPage')
     context = {
         'car':car,
+        'active_rentals': active_rentals,
+        'all_rentals': rentals,
         'title': 'Car Detail',
     }
     return render(request, 'my_site/carDetail.html', context)
