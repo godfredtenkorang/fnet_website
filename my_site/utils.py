@@ -33,8 +33,8 @@ def receive_sms(customer_name, customer_phone, car_name, rental_date, return_dat
     payload = {
         "key": apiKey,
         "sender": 'TL GHANA',
-        "recipient[]": '0553912334',
-        # "recipient[]": '0550222888',
+        # "recipient[]": '0553912334',
+        "recipient[]": '0550222888',
         "message": f"New Car Booking Details: \n" f"Customer Name: {customer_name} \n"  f"Phone Number: {customer_phone} \n"  f"Car Booked: {car_name} \n" f"Rental Date: {rental_date} \n" f"Return Date: {return_date} \n" f"Region: {location_category} \n" f"Town: {town} \n" f"Pick up Time: {pick_up_time} \n" f"Drop off Time: {drop_off_time} \n" f"Total Price: GH¢{total_price}",
         "is_schedule": False,
         "schedule_date": ''
