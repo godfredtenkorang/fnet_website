@@ -42,7 +42,7 @@ class Driver(models.Model):
         return delta.days
     
     def __str__(self):
-        return f"{self.driver}"
+        return f"{self.driver} - {self.phone_number}"
     
 class DriverReview(models.Model):
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
