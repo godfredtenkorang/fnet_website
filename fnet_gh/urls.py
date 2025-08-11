@@ -17,6 +17,7 @@ urlpatterns = [
     path('payment/', include('payment.urls')),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
+    path('owner/', include('owner.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'my_site.views.custom_404_view'

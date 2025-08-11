@@ -96,6 +96,8 @@
                         <li><a href="{% url 'driver_dashboard' %}">Dashboard</a></li>
                         {% elif user.role == 'agent' %}
                         <li><a href="{% url 'agent_dashboard' %}">Dashboard</a></li>
+                        {% elif user.role == 'owner' %}
+                        <li><a href="{% url 'owner_dashboard' %}">Dashboard</a></li>
                         {% endif %}
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}

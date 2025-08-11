@@ -9,7 +9,7 @@ from .models import User, Profile
 class RegisterForm(UserCreationForm):
     
     role = forms.ChoiceField(
-        choices=[("customer", "Customer"), ("driver", "Driver"), ("agent", "Agent")],  # Removed "Admin"
+        choices=[("customer", "Customer"), ("driver", "Driver"), ("agent", "Agent"), ("owner", "Owner")],  # Removed "Admin"
         widget=forms.Select(attrs={'class': 'form-control'})
     )
 

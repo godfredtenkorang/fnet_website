@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'flight',
     'rent',
     'payment',
+    'owner',
 ]
 
 MIDDLEWARE = [

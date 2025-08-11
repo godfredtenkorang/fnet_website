@@ -3,7 +3,7 @@ from django.forms import ValidationError
 from django.utils.timezone import now
 from decimal import Decimal
 from users.models import User
-
+from owner.models import Owner
 from django.utils import timezone
 
 
@@ -158,6 +158,7 @@ class Car(models.Model):
     image3 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     image4 = models.ImageField(upload_to='car_images/', blank=True, null=True)
     driver = models.ForeignKey(Driver, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True, blank=True, related_name='owned_cars')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -219,6 +220,13 @@ class Car(models.Model):
     
     # def calculate_total_with_vat(self, price):
     #     return price + self.calculate_vat(price)
+    
+    class Meta:
+        ordering = ['-created_at']
+        permissions = [
+            ("view_own_car", "Can view own cars"),
+            ("view_own_rentals", "Can view rentals for own cars"),
+        ]
 
     def __str__(self):
         return f"{self.brand} {self.car_name}"

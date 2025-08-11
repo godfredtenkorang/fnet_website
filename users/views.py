@@ -106,6 +106,8 @@ def login_user(request):
                     return redirect("customer_dashboard")
                 elif user.role == "driver":
                     return redirect("driver_dashboard")
+                elif user.role == "owner":
+                    return redirect("owner_dashboard")
                 else:
                     return redirect("agent_dashboard")
             else:
@@ -203,6 +205,9 @@ def is_driver(user):
 
 def is_agent(user):
     return user.role == "agent"
+
+def is_owner(user):
+    return user.role == "owner"
 
 
 # ------------------ Customer Dashboard Start--------------------------

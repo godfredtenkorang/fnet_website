@@ -263,7 +263,7 @@ def delete_rentals(request, rental_id):
     rental.delete()
     return redirect('bookings')
 
-@login_required
+
 def payment_detail(request, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     if request.method == 'POST':
@@ -953,7 +953,7 @@ def all_profiles(request):
     return render(request, 'dashboard/all_profiles.html', context)
 
 def all_payments(request):
-    all_payments = RentalPayment.objects.all()
+    all_payments = RentalPayment.objects.all().order_by('-date')
     context = {
         'all_payments': all_payments,
         'title': 'Payments'
