@@ -530,16 +530,16 @@
   document.addEventListener("DOMContentLoaded", function () {
     const category = "{{ car.category.name }}";
     const modal = document.getElementById("selfDriveModal");
-    const closeBtn = document.querySelector(".close");
+    //const closeBtn = document.querySelector(".close");
     const confirmBtn = document.getElementById("confirmSelfDrive");
 
     if (category === "Buggers Self Drive") {
       modal.style.display = "block";
 
       // Close modal when clicking X
-      closeBtn.onclick = function () {
-        modal.style.display = "none";
-      }
+      //closeBtn.onclick = function () {
+      //  modal.style.display = "none";
+      //}
 
       // Close modal when clicking confirm button
       confirmBtn.onclick = function () {
