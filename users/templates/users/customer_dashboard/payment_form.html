@@ -1,6 +1,37 @@
-{% extends 'users/customer_dashboard/base.html' %}
+{% extends 'my_site/base.html' %}
 {% load static %}
 {% block content %}
+
+<style>
+    .contact-container {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 2rem;
+        background-color: #fff;
+        margin: 20px 10%;
+        border-radius: 8px;
+        min-height: 10vh;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-item {
+        margin: 0 20px;
+    }
+
+    .contact-item h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .contact-item p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+</style>
 
 <style>
     /* Stretch the dropdowns to fill their container */
@@ -24,13 +55,15 @@
             display: block; /* Ensure the label is on its own line */
         }
 </style>
-
+<div class="contact-us-section">
 <div class="send-message-form">
     <br><br><br>
 
     <h1>Make Payment of GH¢{{rental.total_price}}</h1>
 
     <br><br>
+
+    <div class="contact-form">
 
     <form method="post">
         {% csrf_token %}
@@ -78,8 +111,10 @@
         <br><br>
         <button type="submit">Save</button>
     </form>
+    </div>
     <br><br>
    
+</div>
 </div>
 
 

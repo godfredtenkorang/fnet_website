@@ -251,7 +251,7 @@ def customer_flight_booking(request):
     
     return render(request, "users/customer_dashboard/flight_booking.html", context)
 
-@login_required
+
 def payment(request):
     bookings = Rental.objects.filter(customer=request.user)
     context = {
@@ -260,7 +260,7 @@ def payment(request):
     }
     return render(request, "users/customer_dashboard/payment.html", context)
 
-@login_required
+
 def payment_detail(request, rental_id):
     rental = get_object_or_404(Rental, id=rental_id)
     if request.method == 'POST':
