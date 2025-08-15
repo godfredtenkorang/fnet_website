@@ -245,7 +245,7 @@ def complete_rental(request, rental_id):
         rental.status = 'Completed'
         rental.save()
         
-        customer = rental.customer
+        customer = rental.customer_phone
         driver = rental.driver
         review_link = f"https://tlghana.com/review/{driver.id}/"
         
@@ -254,7 +254,7 @@ def complete_rental(request, rental_id):
             f"We would love to hear your feedback. Please rate your driver: {review_link}"
         }
         
-        send_review_sms(customer.phone, message)
+        send_review_sms(customer, message)
         
     return redirect('bookings')
 
